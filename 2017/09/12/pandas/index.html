@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pandas | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="pandas提供了：  便于操作数据的数据类型，即提供了高效的数据类型 很多的分析函数和分析工具，优雅的数据分析的操作  基于NumPy实现的一个扩展库。 pandas主要提供了两个数据类型：  Series    —— 相当于一个一维的数据类型 DataFrame     — — 相当于一个多维的数据类型     NumPy Pandas     基础数据类型 扩展数据类型   关注数据的结构表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/pandas/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="pandas提供了：  便于操作数据的数据类型，即提供了高效的数据类型 很多的分析函数和分析工具，优雅的数据分析的操作  基于NumPy实现的一个扩展库。 pandas主要提供了两个数据类型：  Series    —— 相当于一个一维的数据类型 DataFrame     — — 相当于一个多维的数据类型     NumPy Pandas     基础数据类型 扩展数据类型   关注数据的结构表">
+<meta property="og:updated_time" content="2017-09-12T12:35:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pandas">
+<meta name="twitter:description" content="pandas提供了：  便于操作数据的数据类型，即提供了高效的数据类型 很多的分析函数和分析工具，优雅的数据分析的操作  基于NumPy实现的一个扩展库。 pandas主要提供了两个数据类型：  Series    —— 相当于一个一维的数据类型 DataFrame     — — 相当于一个多维的数据类型     NumPy Pandas     基础数据类型 扩展数据类型   关注数据的结构表">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-pandas" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/pandas/" class="article-date">
+  <time datetime="2017-09-12T12:09:59.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      pandas
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>pandas提供了：</p>
+<ol>
+<li>便于操作数据的数据类型，即提供了高效的数据类型</li>
+<li>很多的分析函数和分析工具，优雅的数据分析的操作</li>
+</ol>
+<p>基于NumPy实现的一个扩展库。</p>
+<p>pandas主要提供了两个数据类型：</p>
+<ul>
+<li>Series    —— 相当于一个一维的数据类型</li>
+<li>DataFrame     — — 相当于一个多维的数据类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>NumPy</th>
+<th>Pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础数据类型</td>
+<td>扩展数据类型</td>
+</tr>
+<tr>
+<td>关注数据的结构表达</td>
+<td>关注数据的应用表达</td>
+</tr>
+<tr>
+<td>注重维度：数据之间的关系</td>
+<td>注重索引：数据与索引之间的关系</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Series</strong></p>
+<p>Series由一组数据和它的索引组成</p>
+<p>index_0 —&gt; data_a</p>
+<p>index_1 —&gt; data_b</p>
+<p>index_2 —&gt; data_c</p>
+<p>值得类型可以相同，可以不同</p>
+<p>可以接收生成Series对象的值有：array-like，列表，字典，ndarray……</p>
+<p><strong>DataFrame</strong></p>
+<ol>
+<li>一个表格型的数据类型，每列值得类型可以不同</li>
+<li>既有行索引，又有列索引；每一行的索引成为Index，每一列的索引称为column</li>
+<li>可以表达二维或者多维数据</li>
+</ol>
+<p>可由如下类型创建</p>
+<ul>
+<li>二维的ndarray对象</li>
+<li>一维的ndarray，列表，字典，元组或者Series构成的字典</li>
+<li>Series类</li>
+<li>其他的DataFrame类型</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/12/pandas/" data-id="cj7ikop500002u067upvoqv7l" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/13/test-my-site/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          test_my_site
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/13/test-my-site/">test_my_site</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/12/pandas/">pandas</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/17/git 学习手册精简版（傻瓜版）/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
