@@ -367,18 +367,28 @@
 
       
         
-          <h5 id="生成默认已有的分类"><a href="#生成默认已有的分类" class="headerlink" title="生成默认已有的分类"></a>生成默认已有的分类</h5><blockquote>
+          
+            <a id="more"></a>
+<h5 id="生成默认已有的分类"><a href="#生成默认已有的分类" class="headerlink" title="生成默认已有的分类"></a>生成默认已有的分类</h5><blockquote>
 <p>在NexT中，默认的menu有：首页，归档，分类，标签，关于</p>
 </blockquote>
 <p>以标签[^tags]为例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$hexo new page &quot;tags&quot;</div><div class="line">//在 hexo &gt; source 文件夹会出现一个tags文件夹</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/13/Hexo&NexT添加菜单分类并作为文章目录/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>然后：</p>
+<ol>
+<li>在[^tags]文件夹的index.md文档中添加 type: tags</li>
+<li>在 NexT 内的 _config 文档的menu中恢复 tags 的使用</li>
+</ol>
+<h5 id="生成没有的分类"><a href="#生成没有的分类" class="headerlink" title="生成没有的分类"></a>生成没有的分类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$hexo new page &quot;essay&quot;</div></pre></td></tr></table></figure>
+<p>然后：</p>
+<ol>
+<li>在[^essay]文件夹下的 index.md 文档中添加 “type: essay “</li>
+<li>在NexT的config的menu中添加 essay: /categories/essay</li>
+<li>在NexT的languages中修改中文文件，添加essay的中文显示</li>
+<li>在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay</li>
+</ol>
+
+          
         
       
     </div>
@@ -444,7 +454,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/13/石楠小札/" itemprop="url">石楠小札</a></h1>
+                <a class="post-title-link" href="/2017/09/13/石楠小札/" itemprop="url">音乐小札————深夜食堂</a></h1>
         
 
         <div class="post-meta">
@@ -518,7 +528,8 @@
       
         
           
-            <p>特别喜欢张苡唱的石楠小札</p>
+            <a id="more"></a>
+<p>特别喜欢日本版深夜食堂的主题曲：</p>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=22754969&auto=0&height=66"></iframe>
           
         
@@ -567,7 +578,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/如何在hexo添加一个标签云页面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -586,7 +597,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/12/hello-world/" itemprop="url">如何在hexo添加一个标签云页面</a></h1>
+                <a class="post-title-link" href="/2017/09/12/如何在hexo添加一个标签云页面/" itemprop="url">如何在hexo添加一个标签云页面</a></h1>
         
 
         <div class="post-meta">
@@ -621,8 +632,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hero/" itemprop="url" rel="index">
-                    <span itemprop="name">hero</span>
+                  <a href="/categories/NexT/" itemprop="url" rel="index">
+                    <span itemprop="name">NexT</span>
                   </a>
                 </span>
 
@@ -662,7 +673,7 @@
           <p>添加一个标签云页面，并在菜单中显示页面链接。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/12/hello-world/#more" rel="contents">
+            <a class="btn" href="/2017/09/12/如何在hexo添加一个标签云页面/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -732,7 +743,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/17/git 学习手册精简版（傻瓜版）/" itemprop="url">git 学习手册精简版（傻瓜版）不断更新</a></h1>
+                <a class="post-title-link" href="/2017/04/17/git 学习手册精简版（傻瓜版）/" itemprop="url">git 学习手册精简版不断更新</a></h1>
         
 
         <div class="post-meta">
@@ -754,6 +765,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -783,8 +816,7 @@
 
       
         
-          <p>作者：李二花</p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>第一步：首先要进入GitHub注册一下，并记住自己的用户名，邮箱和密码</p>
+          <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p>第一步：首先要进入GitHub注册一下，并记住自己的用户名，邮箱和密码</p>
 <p>第二步：找一个空白的文件夹，打开命令行窗口cd 到此目录下（具体的操作方法见<a href="http://blog.csdn.net/cdqn10086/article/details/53978825）" target="_blank" rel="external">http://blog.csdn.net/cdqn10086/article/details/53978825）</a></p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -882,7 +914,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -893,7 +925,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
