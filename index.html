@@ -375,27 +375,18 @@
 
       
         
-          
-            <h5 id="生成默认已有的分类"><a href="#生成默认已有的分类" class="headerlink" title="生成默认已有的分类"></a>生成默认已有的分类</h5><blockquote>
+          <h5 id="生成默认已有的分类"><a href="#生成默认已有的分类" class="headerlink" title="生成默认已有的分类"></a>生成默认已有的分类</h5><blockquote>
 <p>在NexT中，默认的menu有：首页，归档，分类，标签，关于</p>
 </blockquote>
 <p>以标签[^tags]为例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$hexo new page &quot;tags&quot;</div><div class="line">//在 hexo &gt; source 文件夹会出现一个tags文件夹</div></pre></td></tr></table></figure>
-<p>然后：</p>
-<ol>
-<li>在[^tags]文件夹的index.md文档中添加 type: tags</li>
-<li>在 NexT 内的 _config 文档的menu中恢复 tags 的使用</li>
-</ol>
-<h5 id="生成没有的分类"><a href="#生成没有的分类" class="headerlink" title="生成没有的分类"></a>生成没有的分类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$hexo new page &quot;essay&quot;</div></pre></td></tr></table></figure>
-<p>然后：</p>
-<ol>
-<li>在[^essay]文件夹下的 index.md 文档中添加 “type: essay “</li>
-<li>在NexT的config的menu中添加 essay: /categories/essay</li>
-<li>在NexT的languages中修改中文文件，添加essay的中文显示</li>
-<li>在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/13/Hexo&NexT添加菜单分类并作为文章目录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
