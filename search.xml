@@ -63,7 +63,7 @@
   <entry>
     <title><![CDATA[LaTeX入门之绘制图表]]></title>
     <url>%2F2017%2F03%2F01%2FLaTeX%E7%BB%98%E5%88%B6%E5%9B%BE%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125;]]></content>
+    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -72,9 +72,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -83,9 +83,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
