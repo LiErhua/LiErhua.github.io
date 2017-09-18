@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="matplotlib," />
+  <meta name="keywords" content="夜雨秋灯" />
 
 
 
@@ -99,22 +99,13 @@
 
 
 
-<meta name="description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
-<meta name="keywords" content="matplotlib">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Python数据处理笔记matplotlib篇（一）">
-<meta property="og:url" content="http://yoursite.com/2017/09/01/Python数据处理笔记matplotlib篇（一）/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="夜雨秋灯">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
-<meta property="og:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
-<meta property="og:updated_time" content="2017-09-14T06:38:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python数据处理笔记matplotlib篇（一）">
-<meta name="twitter:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta name="twitter:title" content="夜雨秋灯">
 
 
 
@@ -144,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/01/Python数据处理笔记matplotlib篇（一）/"/>
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
 
 
 
 
-  <title>Python数据处理笔记matplotlib篇（一） | 夜雨秋灯</title>
+  <title>夜雨秋灯</title>
   
 
 
@@ -179,7 +170,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -304,9 +296,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -319,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/Python数据处理笔记matplotlib篇（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/Hexo&NexT添加菜单分类并作为文章目录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -336,7 +328,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python数据处理笔记matplotlib篇（一）</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/01/Hexo&NexT添加菜单分类并作为文章目录/" itemprop="url">Hexo & NexT添加菜单分类并作为文章目录</a></h1>
         
 
         <div class="post-meta">
@@ -348,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T00:00:00+08:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00+08:00">
+                2017-01-01
               </time>
             
 
@@ -371,8 +365,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
                   </a>
                 </span>
 
@@ -408,52 +402,18 @@
       
 
       
-        <p><strong>关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念</strong></p>
-<a id="more"></a>
-<p><strong>简单的小例子</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">path = <span class="string">""</span></div><div class="line">plt.plot([<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">4</span>])</div><div class="line">	<span class="comment">#绘图，如果只有一个list默认其为Y轴，X轴数据为其索引值</span></div><div class="line">plt.ylabel(<span class="string">"grade"</span>)</div><div class="line">plt.axis([<span class="number">-2</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">12</span>])</div><div class="line">	<span class="comment">#axis函数接收一个list，设定横纵坐标尺度，list各个参数分别代表[X初始刻度，X终止刻度，Y起始刻度，Y终止		刻]</span></div><div class="line">plt.savefig(path,dpi = <span class="number">600</span>)</div><div class="line">	<span class="comment">#savefig函数用来保存图片至path地址，dpi值表示每英寸具有的像素点数</span></div><div class="line">plt.show()</div><div class="line">------</div><div class="line">这个例子的关键词：坐标轴尺度、图像保存</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>plt.plot()简介：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">plt.plot(x, y, format_string, **kwargs)</div><div class="line">    <span class="comment">#这个函数是绘图的关键函数</span></div><div class="line">    <span class="comment">#x ： X轴数据，列表或数组，可选</span></div><div class="line">    <span class="comment">#y ： Y轴数据，列表或数组</span></div><div class="line">    <span class="comment">#format_string ： 控制曲线的格式字符串，可选</span></div><div class="line">    <span class="comment">#**kwargs ：第二组或更多(x,y,format_string)</span></div><div class="line">其中要说明的是format_string，包含的主要类型有</div><div class="line">颜色字符：<span class="string">'b'</span>,<span class="string">'k'</span>等</div><div class="line">风格字符：<span class="string">'-'</span>,<span class="string">'--'</span>等</div><div class="line">标记字符：每个数据点的标志方式,<span class="string">'.'</span>,<span class="string">'*'</span>,<span class="string">'o'</span>等</div><div class="line">还要很多其他的参数值，到时候查文档</div></pre></td></tr></table></figure>
-<hr>
-<p><strong>如何处理坐标轴的密度：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#设置密度之前，需要知道关于axis的一些内容</span></div><div class="line">------</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axis</span>.<span class="title">XAxis</span><span class="params">(axes, pickradius=<span class="number">15</span>)</span></span></div><div class="line"><span class="class"><span class="title">Init</span> <span class="title">the</span> <span class="title">axis</span> <span class="title">with</span> <span class="title">the</span> <span class="title">parent</span> <span class="title">Axes</span> <span class="title">instance</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">class</span> <span class="title">matplotlib</span>.<span class="title">axis</span>.<span class="title">YAxis</span><span class="params">(axes, pickradius=<span class="number">15</span>)</span></span></div><div class="line"><span class="class"><span class="title">Init</span> <span class="title">the</span> <span class="title">axis</span> <span class="title">with</span> <span class="title">the</span> <span class="title">parent</span> <span class="title">Axes</span> <span class="title">instance</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class">需要用父类<span class="title">Axes</span>的实例对<span class="title">matplot</span>.<span class="title">axis</span>.<span class="title">XAxis</span>进行初始化为一个<span class="title">axis</span>实例<span class="params">(xaxis和yaxis都是axis的子类)</span></span></div><div class="line"><span class="class">令<span class="title">axis</span>实例为<span class="title">axes_xaxis</span></span></div><div class="line"><span class="class"></span></div><div class="line">fig,ax = plt.subplots()</div><div class="line">axes_xaxis = matplotlib.axis.XAxis(ax)<span class="comment">#ax是matplotlib.axes.Axes的一个实例</span></div><div class="line">现在axes_xaxis就是一个Axis(XAxis)的实例</div></pre></td></tr></table></figure>
-<p><strong>此处见过好多直接ax.xaxis.set_major……的使用方法，我的理解是，ax是一个父类的实例，可以直接调用任何的关于matplotlib.axis下的东西。</strong>有待考证(可用度不高，测试过，有的可，有的不可)</p>
-<p><strong>得出一个结论，能用plt就用plt，尽量不使用axes</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#方法一：设置间隔法</span></div><div class="line">axes_xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(<span class="number">5</span>))<span class="comment">#5代表每隔5个</span></div><div class="line">------</div><div class="line">    <span class="comment">#也可以不进行实例化，直接使用如下的方式</span></div><div class="line">    ax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(<span class="number">5</span>))</div><div class="line">------</div><div class="line"><span class="comment">#方法二：自动线性调整</span></div><div class="line">ax.xaxis.set_major_locator(ticker.LinearLocator(numticks=<span class="keyword">None</span>, presets=<span class="keyword">None</span>))</div><div class="line">------</div><div class="line">    文档里LinearLocator的介绍</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">ticker</span>.<span class="title">LinearLocator</span><span class="params">(numticks=None, presets=None)</span></span></div><div class="line"><span class="class">    <span class="title">Bases</span>:</span> matplotlib.ticker.Locator</div><div class="line">    Determine the tick locations</div><div class="line">    The first time this function <span class="keyword">is</span> called it will <span class="keyword">try</span> to set the number of ticks to make 		a nice tick partitioning. Thereafter the number of ticks will be fixed so that 			interactive navigation will be nice</div><div class="line">	第一次调用的时候就会根据坐标轴的大小，自动的给设置好留几个tick_label合适</div><div class="line">------</div></pre></td></tr></table></figure>
-<p>关键词：坐标轴，密度</p>
-<hr>
-<p><strong>axes自动填充满figure</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mpl.rc(<span class="string">'figure'</span>,autolayout = <span class="keyword">True</span>)</div><div class="line"><span class="comment">#autolyout使axes自适应整个figure框</span></div></pre></td></tr></table></figure>
-<hr>
-<p><strong>如何令图片文件名称与title一致</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先设定了title的内容</span></div><div class="line">ax.set_title(<span class="string">'一程山路'</span>)</div><div class="line"><span class="comment">#然后保存图片是，图片的名称是这个即可</span></div><div class="line">plt.savefig(<span class="string">'%s.png'</span>%(ax.get_title()),dpi = <span class="number">300</span>)<span class="comment">#其中ax.get_title()即获取title</span></div></pre></td></tr></table></figure>
-<p>NOTICE:当使用了twinx()之后，尽量使用如下方式实现图片的保存</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig,ax = plt.subplots()</div><div class="line">fig.savefig(path,**kwargs)<span class="comment">#使用fig实例进行保存操作</span></div></pre></td></tr></table></figure>
-<hr>
-<p>####关于matplotlib的<strong>面向对象</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matplotlib.pyplot.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">1</span>, sharex=<span class="keyword">False</span>, sharey=<span class="keyword">False</span>, squeeze=<span class="keyword">True</span>, subplot_kw=<span class="keyword">None</span>, gridspec_kw=<span class="keyword">None</span>, **fig_kw)</div></pre></td></tr></table></figure>
-<p>上面这个函数有两个返回值，他们分别如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig : matplotlib.figure.Figure object</div><div class="line">ax : matplotlib.axes.Axes object <span class="keyword">or</span> array of Axes objects.</div></pre></td></tr></table></figure>
-<p>他们的关系由下图初见端倪：（fig是一个大面板，ax是这个面板上的区域，fig是由ax和其他一些东西组成的）</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
-<p>这两个类分别如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">figure</span>.<span class="title">Figure</span><span class="params">(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=<span class="number">0.0</span>, frameon=None, subplotpars=None, tight_layout=None)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Figure</span>：这个类的实例有很多的方法，如：</span></div><div class="line"><span class="class"><span class="title">add_axes</span><span class="params">(*args, **kwargs)</span>#添加一个<span class="title">axes</span>，返回值是一个<span class="title">Axes</span>实例</span></div><div class="line"><span class="class"><span class="title">add_subplot</span><span class="params">(*args, **kwargs)</span>#添加一个若干个<span class="title">axes</span>，并返回一个<span class="title">Axes</span>实例数组</span></div><div class="line"><span class="class">------</span></div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axes</span>.<span class="title">Axes</span><span class="params">(fig, rect, facecolor=None, frameon=True, sharex=None, sharey=None, label=<span class="string">''</span>, xscale=None, yscale=None, axisbg=None, **kwargs)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Axes</span>:</span>这个类的方法有：</div><div class="line">plot(*args,**kwargs)<span class="comment">#实例使用此方法即能绘制图像,并且十分强大</span></div><div class="line">scatter(*args,**kwargs)</div><div class="line">还有与pyplot中一一对应的方法：</div><div class="line">plt.xlabel()--&gt;ax.set_xlabel()&amp;ax.get_xlabel()#具体查文档</div><div class="line">------</div></pre></td></tr></table></figure>
-<p>所以，小例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fig,ax = matplotlib.pyplot.subplots()</div><div class="line">fig.set_size_inches((w,h))</div><div class="line">ax.plot(x,y)</div><div class="line">ax.set_xlabel(<span class="string">"hello"</span>)</div></pre></td></tr></table></figure>
-<p>###理论概念</p>
-<hr>
-<p>绘图区域设置</p>
-<p>绘图区域概念如下：</p>
-<p>在matplotlib中，一个独立的图像（不管有多少小图像）是一个Figure对象，一个Figure对象中可以包含一个或者多个Axes对象，每个Axes对象都是一个拥有自己独立坐标系统的绘图区域，如下：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
-<p>因此，可以在全局绘图区域中创建一个分区体系，并定位到一个子绘图区域</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">plt.subplot(nrows,ncols,plot_number)</div><div class="line"><span class="comment">#区域分为nrows行，ncols列，现在绘制第plot_number个子图</span></div><div class="line">plt.subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>)</div><div class="line"><span class="comment">#3行2列，选择第4个绘图区域，然后再使用plt.plot(参数)即可进行绘图了</span></div></pre></td></tr></table></figure>
-<p>一个Figure对应一张图片。Title为标题。Axis为坐标轴，Label为坐标轴标注。Tick为刻度线，Tick Label为刻度注释。</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg" alt=""></p>
-<!-- ![](https://ws4.sinaimg.cn/large/006tNc79ly1fjj0mcjwljj30dm0e2wfi.jpg) -->
-
+        
+          <h5 id="生成默认已有的分类"><a href="#生成默认已有的分类" class="headerlink" title="生成默认已有的分类"></a>生成默认已有的分类</h5><blockquote>
+<p>在NexT中，默认的menu有：首页，归档，分类，标签，关于</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/01/Hexo&NexT添加菜单分类并作为文章目录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -463,74 +423,19 @@
     
 
     
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
 
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/09/01/Python数据处理matplotlib篇（二）——全局设置初始参数/" rel="next" title="设置全局参数——定制matplotlib（部分翻译）">
-                <i class="fa fa-chevron-left"></i> 设置全局参数——定制matplotlib（部分翻译）
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/02/Python数据处理笔记numpy篇（一）/" rel="prev" title="Python数据处理笔记numpy篇(一)">
-                Python数据处理笔记numpy篇(一) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -540,37 +445,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-<span class="jiathis_txt">分享到：</span>
-<a class="jiathis_button_fav">收藏夹</a>
-<a class="jiathis_button_copy">复制网址</a>
-<a class="jiathis_button_email">邮件</a>
-<a class="jiathis_button_weixin">微信</a>
-<a class="jiathis_button_qzone">QQ空间</a>
-<a class="jiathis_button_tqq">腾讯微博</a>
-<a class="jiathis_button_douban">豆瓣</a>
-<a class="jiathis_button_share">一键分享</a>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-  data_track_clickback:true,
-  summary:"",
-  shortUrl:false,
-  hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-      
-    </div>
-  </div>
 
 
           </div>
@@ -578,10 +460,6 @@ var jiathis_config={
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -784,10 +662,6 @@ var jiathis_config={
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
-
-
 
   
 
