@@ -99,21 +99,24 @@
 
 
 
-<meta name="description" content="关键词：单元格合并与分割，">
+<meta name="description" content="[TOC] 关键词：单元格合并与分割，定宽表格">
 <meta name="keywords" content="图表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LaTeX入门系列之图表绘制（二）：进阶">
 <meta property="og:url" content="http://yoursite.com/2017/03/01/LaTeX入门系列之图表绘制（二）：进阶/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
-<meta property="og:description" content="关键词：单元格合并与分割，">
+<meta property="og:description" content="[TOC] 关键词：单元格合并与分割，定宽表格">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fjny8qk84cj313y0abta8.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fjo3uvzcr4j31il0hxn2c.jpg">
-<meta property="og:updated_time" content="2017-09-20T01:15:25.000Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjptqikbkxj31i00a175g.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjpunnee71j31400a4q40.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjpsd3oo6pj31kw0faac0.jpg">
+<meta property="og:updated_time" content="2017-09-20T03:12:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之图表绘制（二）：进阶">
-<meta name="twitter:description" content="关键词：单元格合并与分割，">
+<meta name="twitter:description" content="[TOC] 关键词：单元格合并与分割，定宽表格">
 <meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
 
 
@@ -408,10 +411,11 @@
       
 
       
-        <p>关键词：单元格合并与分割，</p>
+        <p>[TOC]</p>
+<p>关键词：单元格合并与分割，定宽表格</p>
 <a id="more"></a>
-<p>上一节，讨论了绘制表格的最基础的部分，这一节讲关于单元的合并分割。</p>
-<p>有时候我们会遇到要将几个单元格合并为一个单元格的情况，用如下方法</p>
+<p>上一节，讨论了绘制表格的最基础的部分，这一节讲关于单元的合并分割以及定宽表格。</p>
+<h4 id="单元的合并分割"><a href="#单元的合并分割" class="headerlink" title="单元的合并分割"></a>单元的合并分割</h4><p>有时候我们会遇到要将几个单元格合并为一个单元格的情况，用如下方法</p>
 <ul>
 <li>对于<strong>同行不同单元格</strong>之间的合并使用命令 \multicolumn{合并单元格个数}{左对齐，居中，右对齐等选项}{单元格内容}</li>
 <li>对于<strong>同列不同单元格</strong>合并使用宏包 \multirow{行数}<em>{内容}，注意\</em>一定要在</li>
@@ -437,6 +441,20 @@
 <p>练习题（习题来自于刘海洋老师的《LaTeX入门》一书的298页：</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fjo3uvzcr4j31il0hxn2c.jpg" alt=""></p>
 <p>解答请见这里<a href="http://lierhua.top/2017/03/01/LaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88/" target="_blank" rel="external">http://lierhua.top/2017/03/01/LaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88/</a></p>
+<h4 id="科研论文三线表"><a href="#科研论文三线表" class="headerlink" title="科研论文三线表"></a>科研论文三线表</h4><p>一般高校的毕业论文一般会要求把表格设置为三线表，三线表顶部和底部的线比较粗，中间较细，粗细的比例由各机构规定。</p>
+<p>三线表需要使用 booktabs 宏包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\toprule: 顶线，有一个可选参数改变顶线的粗细\toprule[线宽]</div><div class="line">\midrule: 中线</div><div class="line">\bottomrule: 底线</div><div class="line">\cmidrule: 部分中线</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;diagbox&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;tabularx&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabularx&#125;&#123;\textwidth&#125;&#123;c|X|X|X|X|X|X|X&#125;</div><div class="line">\toprule[1mm]</div><div class="line">%不加[1mm]时使用默认的宽度</div><div class="line">\diagbox&#123;项目&#125;&#123;日期&#125;&amp;周一&amp;周二&amp;周三&amp;周四&amp;周五&amp;周六&amp;周天\\</div><div class="line">\midrule</div><div class="line">乒乓球&amp;1&amp;2&amp;4&amp;1&amp;7&amp;3&amp;6\\</div><div class="line">羽毛球&amp;6&amp;0&amp;8&amp;1&amp;2&amp;5&amp;8\\</div><div class="line">\bottomrule[1mm]</div><div class="line">\end&#123;tabularx&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjptqikbkxj31i00a175g.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;diagbox&#125;</div><div class="line">\usepackage&#123;multirow&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;tabularx&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;c|ccccccc&#125;</div><div class="line">\toprule</div><div class="line">\multirow&#123;2&#125;*&#123;\diagbox&#123;项目&#125;&#123;日期&#125;&#125;&amp;\multicolumn&#123;1&#125;&#123;c&#125;&#123;男&#125;&amp;\multicolumn&#123;2&#125;&#123;c&#125;&#123;女&#125;\\</div><div class="line">\cmidrule&#123;2-2&#125;\cmidrule&#123;3-4&#125;</div><div class="line">	&amp;李四&amp;张三&amp;王麻子\\</div><div class="line">\midrule</div><div class="line">乒乓球&amp;1&amp;2&amp;4\\</div><div class="line">羽毛球&amp;6&amp;0&amp;8\\</div><div class="line">\bottomrule</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fjpunnee71j31400a4q40.jpg" alt=""></p>
+<h4 id="定宽表格的使用"><a href="#定宽表格的使用" class="headerlink" title="定宽表格的使用"></a>定宽表格的使用</h4><p>LaTeX的 tabular<em> 环境可以产生固定宽度的表格，我们普遍使用 tabularx 提供的 tabularx 环境来实现与 tabular</em> 环境一样的效果， tabularx 提供的一个称为X的列格式说明符（与 clr 同一位置）。</p>
+<p>宏包环境如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;tabularx&#125;</div><div class="line">\begin&#123;tabularx&#125;&#123;宽度&#125;[垂直对齐]&#123;列格式说明(c,l,r,X,p&#123;宽度&#125;)&#125;</div><div class="line">%\begin&#123;tabularx&#125;&#123;\textwidth&#125;[垂直对齐]&#123;|c|l|r|X|p&#123;10pt&#125;|&#125;</div><div class="line">\end&#123;tabularx&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;diagbox&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;tabularx&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabularx&#125;&#123;\textwidth&#125;&#123;c|X|X|X|X|X|X|X&#125;</div><div class="line">\hline</div><div class="line">\diagbox&#123;项目&#125;&#123;日期&#125;&amp;周一&amp;周二&amp;周三&amp;周四&amp;周五&amp;周六&amp;周天\\</div><div class="line">\hline</div><div class="line">乒乓球&amp;1&amp;2&amp;4&amp;设定一个验证自动换行&amp;7&amp;3&amp;6\\</div><div class="line">羽毛球&amp;6&amp;0&amp;8&amp;1&amp;2&amp;5&amp;8\\</div><div class="line">\hline</div><div class="line">\end&#123;tabularx&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fjpsd3oo6pj31kw0faac0.jpg" alt=""></p>
+<h4 id="长表格的使用"><a href="#长表格的使用" class="headerlink" title="长表格的使用"></a>长表格的使用</h4><p>我们之前讲过，表格其实是一个盒子，因此，不超过一页的表格其实如果他不放到一个浮动体环境中，那么会比较不适合排版的。但是长表格很长，甚至超过了一页，所以，LaTeX有一个用于处理长表格的宏包用于处理这种情况：longtable 宏包。长表格的使用具体见 longtable 宏包。</p>
+<h4 id="小tips"><a href="#小tips" class="headerlink" title="小tips"></a>小tips</h4><p>CTAN论坛提供了一个制作表格的小插件：excel2latex，大家可以去论坛查看，地址如下<a href="https://www.ctan.org/tex-archive/support/excel2latex/" target="_blank" rel="external">https://www.ctan.org/tex-archive/support/excel2latex/</a></p>
 
       
     </div>
@@ -496,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/01/LaTeX习题答案/" rel="next" title="LaTeX习题答案">
-                <i class="fa fa-chevron-left"></i> LaTeX习题答案
+              <a href="/2017/01/01/如何在hexo添加一个标签云页面/" rel="next" title="如何在hexo添加一个标签云页面">
+                <i class="fa fa-chevron-left"></i> 如何在hexo添加一个标签云页面
               </a>
             
           </div>
@@ -506,8 +524,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/17/git 学习手册精简版（傻瓜版）/" rel="prev" title="git 学习手册精简版不断更新">
-                git 学习手册精简版不断更新 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/01/LaTeX习题答案/" rel="prev" title="LaTeX习题答案">
+                LaTeX习题答案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,8 +604,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">LiErhua</p>
@@ -648,6 +675,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单元的合并分割"><span class="nav-number">1.</span> <span class="nav-text">单元的合并分割</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#科研论文三线表"><span class="nav-number">2.</span> <span class="nav-text">科研论文三线表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定宽表格的使用"><span class="nav-number">3.</span> <span class="nav-text">定宽表格的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#长表格的使用"><span class="nav-number">4.</span> <span class="nav-text">长表格的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小tips"><span class="nav-number">5.</span> <span class="nav-text">小tips</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
