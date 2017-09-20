@@ -108,7 +108,8 @@
 <meta property="og:description" content="关键词：插图，变换">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjq39fq4zhj31f80do792.jpg">
-<meta property="og:updated_time" content="2017-09-20T08:05:59.000Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjq3kt44srj31h40gs0xr.jpg">
+<meta property="og:updated_time" content="2017-09-20T12:23:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之插图">
 <meta name="twitter:description" content="关键词：插图，变换">
@@ -434,11 +435,11 @@
 </tr>
 <tr>
 <td><code>angle</code></td>
-<td>设定旋转的角度，以度为单位，顺时钟方向为正。</td>
+<td>设定旋转的角度，以度为单位，逆时针方向为正。</td>
 </tr>
 <tr>
 <td><code>origin</code></td>
-<td><code>origin</code> 指定图形绕那一点旋转，缺省 是图形的参考点（<em>12/95 增加</em>）。初始点有可能与 第 <a href="http://www.ctex.org/documents/latex/graphics/node24.html#sec:rotatebox" target="_blank" rel="external">8.3</a>节的 <code>\rotatebox</code> 命令中的一样。 比如 <code>origin=c</code> 将使图形绕它的中心旋转。</td>
+<td><code>origin</code> 指定图形绕那一点旋转，缺省 是图形的参考点（<em>12/95 增加</em>）。 比如 <code>origin=c</code> 将使图形绕它的中心旋转。可选择的值有（ l,r,c,t,b,B）分别表示（左右中上下基线），可以同时使用一个或者两个值，默认值lb</td>
 </tr>
 <tr>
 <td><code>bb</code></td>
@@ -449,6 +450,11 @@
 <p>插入图片的基础方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;caption,subcaption&#125;</div><div class="line">\usepackage&#123;graphicx&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;figure&#125;</div><div class="line">\centering </div><div class="line">\includegraphics[width = 1cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\includegraphics[height = 2cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\includegraphics[scale = 0.2]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\caption&#123;小波好&#125;</div><div class="line">\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjq39fq4zhj31f80do792.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\includegraphics[width = 1cm,angle = -90]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\includegraphics[height = 2cm,angle = -45,origin = c]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\includegraphics[scale = 0.2]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">%具体的角度设置见上面的表格</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fjq3kt44srj31h40gs0xr.jpg" alt=""></p>
+<p><strong>NOTICE</strong></p>
+<p>由于图片编译费时且文件大小略大，因此在论文初期排版时，可以设定 \includegraphics 使用draft 选项，或者文档类使用全局的 draft 选项，这样编译得到的PDF只会得到一个与图形大小相同的大有文件名的方框。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\documentclass[draft]&#123;article&#125;</div><div class="line">或者使用</div><div class="line">\usepackage[draft]&#123;graphicx&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
