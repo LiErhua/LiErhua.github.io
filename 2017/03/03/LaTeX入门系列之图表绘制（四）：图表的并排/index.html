@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="numpy," />
+  <meta name="keywords" content="图表,浮动体," />
 
 
 
@@ -99,18 +99,23 @@
 
 
 
-<meta name="description" content="关键词：基础数据输入方式，数据选取方式">
-<meta name="keywords" content="numpy">
+<meta name="description" content="关键词：图表，并排">
+<meta name="keywords" content="图表,浮动体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python数据处理笔记numpy篇(一)">
-<meta property="og:url" content="http://yoursite.com/2017/09/02/Python数据处理笔记numpy篇（一）/index.html">
+<meta property="og:title" content="LaTeX入门系列之图表绘制（四）：图表的并排">
+<meta property="og:url" content="http://yoursite.com/2017/03/03/LaTeX入门系列之图表绘制（四）：图表的并排/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
-<meta property="og:description" content="关键词：基础数据输入方式，数据选取方式">
+<meta property="og:description" content="关键词：图表，并排">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-14T06:42:19.000Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjq0pii426j30u4082wge.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjq1gqdi6ej31ii0kkn4w.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjq1suobu6j31hy0f2jw8.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjq20v9bbqj31h60dqtd7.jpg">
+<meta property="og:updated_time" content="2017-09-20T07:22:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python数据处理笔记numpy篇(一)">
-<meta name="twitter:description" content="关键词：基础数据输入方式，数据选取方式">
+<meta name="twitter:title" content="LaTeX入门系列之图表绘制（四）：图表的并排">
+<meta name="twitter:description" content="关键词：图表，并排">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjq0pii426j30u4082wge.jpg">
 
 
 
@@ -140,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/02/Python数据处理笔记numpy篇（一）/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/03/LaTeX入门系列之图表绘制（四）：图表的并排/"/>
 
 
 
 
 
-  <title>Python数据处理笔记numpy篇(一) | 夜雨秋灯</title>
+  <title>LaTeX入门系列之图表绘制（四）：图表的并排 | 夜雨秋灯</title>
   
 
 
@@ -315,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/02/Python数据处理笔记numpy篇（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/03/LaTeX入门系列之图表绘制（四）：图表的并排/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -332,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python数据处理笔记numpy篇(一)</h1>
+          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之图表绘制（四）：图表的并排</h1>
         
 
         <div class="post-meta">
@@ -344,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-02T00:00:00+08:00">
-                2017-09-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T00:00:00+08:00">
+                2017-03-03
               </time>
             
 
@@ -367,8 +372,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/LaTeX/" itemprop="url" rel="index">
+                    <span itemprop="name">LaTeX</span>
                   </a>
                 </span>
 
@@ -404,11 +409,23 @@
       
 
       
-        <p>关键词：基础数据输入方式，数据选取方式</p>
+        <p>关键词：图表，并排</p>
 <a id="more"></a>
-<p>基础数据输入方式</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"><span class="comment">#np中不同数据的输入方式</span></div><div class="line">np.array(object)</div><div class="line">    <span class="comment">#object 是一个array_like,比如list,range</span></div><div class="line">    <span class="comment">#[1,2,3]的类型是list;range(3)的类型是range</span></div><div class="line">    <span class="comment">#但是np.array([1,2,3])和np.array(range(3))的返回值类型都是numpy.ndarray</span></div><div class="line">    ------</div><div class="line">    &gt;&gt;&gt;np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">    array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div><div class="line">    &gt;&gt;&gt;print(np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]))</div><div class="line">    [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</div><div class="line">    <span class="comment">#直接打印出来的没有逗号分隔</span></div><div class="line">    ------</div><div class="line">np.arange([start,]stop,[step,]dtype = <span class="keyword">None</span>)</div><div class="line">    <span class="comment">#返回值也是ndarray类型</span></div><div class="line">    <span class="comment">#输入格式与range相似，都是出入初值、终值、步长,可以用这一点来避免与array混淆</span></div><div class="line">    ------</div><div class="line">    &gt;&gt;&gt;np.arange(<span class="number">1</span>,<span class="number">7</span>,<span class="number">2</span>)</div><div class="line">    array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>])</div><div class="line">    ------</div><div class="line">np.linspace(start,stop,num = <span class="number">50</span>)</div><div class="line">    <span class="comment">#返回值是ndarray</span></div><div class="line">    <span class="comment">#出入为初值，终值，分隔的点数（num是指在初值终值之间平均分为多少点）</span></div><div class="line">np.loadtxt(path)</div><div class="line"><span class="comment">#可打开的格式包含一般的txt,csv,dat等格式</span></div><div class="line"><span class="comment">#返回值是ndarray</span></div></pre></td></tr></table></figure>
-<p>数据选取方式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#数据的选取方式</span></div><div class="line"></div><div class="line"><span class="comment">#第一个例子————一维</span></div><div class="line">data = np.arange(<span class="number">7</span>)</div><div class="line">    <span class="comment">#形式如此data[start:stop:step,]</span></div><div class="line">    <span class="comment">#与list的切片使用方式是一致的</span></div><div class="line">    ------</div><div class="line">    &gt;&gt;&gt;data[<span class="number">1</span>:<span class="number">6</span>:<span class="number">2</span>]</div><div class="line">    array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>])</div><div class="line">    &gt;&gt;&gt;data[::<span class="number">-1</span>][::<span class="number">2</span>]</div><div class="line">    array([<span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">0</span>])</div><div class="line">    ------</div><div class="line"><span class="comment">#例子二————二维</span></div><div class="line">data = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</div><div class="line">                 [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</div><div class="line">                 [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</div><div class="line">    <span class="comment">#形式为data[row,column]</span></div><div class="line">    <span class="comment">#其中row与column的切片方式与一维的是一致的，一定注意二者（row与column）之间有","分隔</span></div><div class="line">    ------</div><div class="line">	&gt;&gt;&gt;data[:,: ]<span class="comment">#data的所有行所有列</span></div><div class="line">    array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</div><div class="line">           [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</div><div class="line">           [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</div><div class="line">    &gt;&gt;&gt;data[<span class="number">0</span>,:]<span class="comment">#所有列的第一行数据(就是第一行数据)</span></div><div class="line">    array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</div><div class="line">    &gt;&gt;&gt;data[<span class="number">1</span>,<span class="number">1</span>:]<span class="comment">#第二列之后所有列的第二行数据</span></div><div class="line">    array([<span class="number">5</span>, <span class="number">6</span>])</div><div class="line">    &gt;&gt;&gt;data[<span class="number">0</span>,<span class="number">0</span>]<span class="comment">#第一行第一列数据，返回值为numpy.int64</span></div><div class="line">    <span class="number">1</span></div><div class="line">    ------</div><div class="line">data = np.arange(<span class="number">24</span>).reshape(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)<span class="comment">#这是一个三维的array，英文表示分别为floor,row,column</span></div><div class="line">data = array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</div><div class="line">               [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</div><div class="line">               [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]],</div><div class="line"></div><div class="line">              [[<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>],</div><div class="line">               [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>],</div><div class="line">               [<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>]]])</div><div class="line">&gt;&gt;&gt;data[:,:,:]<span class="comment">#输出整个data</span></div><div class="line">&gt;&gt;&gt;data[<span class="number">0</span>,:,:]<span class="comment">#等于data[0],第一个floor的所有的行和列</span></div><div class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</div><div class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</div><div class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</div><div class="line">&gt;&gt;&gt;data[:,<span class="number">1</span>,:]<span class="comment">#所有floor的第二行</span></div><div class="line">array([[ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</div><div class="line">       [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]])</div><div class="line">&gt;&gt;&gt;data[:,:,<span class="number">1</span>]<span class="comment">#所有floor的第二列</span></div><div class="line">array([[ <span class="number">1</span>,  <span class="number">5</span>,  <span class="number">9</span>],</div><div class="line">       [<span class="number">13</span>, <span class="number">17</span>, <span class="number">21</span>]])</div></pre></td></tr></table></figure></p>
+<p>LaTeX的浮动环境并不对环境的内容限制，因此，把几个图表放在一个浮动体内即可以实现并排或者混排。一般使用 minipage 环境实现此功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\begin&#123;minipage&#125;[position][height][inner-pos]&#123;width&#125;</div><div class="line">text</div><div class="line">\end&#123;minipage&#125;</div></pre></td></tr></table></figure>
+<h4 id="图表并排"><a href="#图表并排" class="headerlink" title="图表并排"></a>图表并排</h4><p>例子1：两张图片高度一致，caption 可以显示在一行的情况，使用不同的 caption</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;figure&#125;[htp]</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\linewidth&#125;</div><div class="line">\centering</div><div class="line">\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\caption&#123; 小波 &#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\linewidth&#125;  </div><div class="line">\centering</div><div class="line">\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;</div><div class="line">\caption&#123; 夜雨秋灯 &#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjq0pii426j30u4082wge.jpg" alt=""></p>
+<p>例子2：两张图片高度不一致，caption 按上述方法不可以显示在一行的情况，使用不同的 caption</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;graphics&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;figure&#125;[htbp]</div><div class="line"></div><div class="line">\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;</div><div class="line">\centering</div><div class="line">\includegraphics[height = 1.5cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;</div><div class="line">\quad</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;</div><div class="line">\centering</div><div class="line">\includegraphics[height = 6cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\vskip 5mm</div><div class="line">\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;</div><div class="line">\caption&#123;夜雨秋灯&#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\quad</div><div class="line">\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;</div><div class="line">\caption&#123;小波&#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line"></div><div class="line">\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fjq1gqdi6ej31ii0kkn4w.jpg" alt=""></p>
+<p>例子3：图片或者表格自带小标题，公用大标题，如何设置</p>
+<p><strong>使用 caption 以及 subcaption 宏包</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;caption,subcaption&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;figure&#125;[htp]</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;</div><div class="line">\centering</div><div class="line">\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\subcaption&#123; 小波 &#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;  </div><div class="line">\centering</div><div class="line">\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;</div><div class="line">\subcaption&#123; 夜雨秋灯 &#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\centering</div><div class="line">\caption&#123;两张图&#125;</div><div class="line">\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjq1suobu6j31hy0f2jw8.jpg" alt=""></p>
+<p>例子4：一图一表混排</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;caption,subcaption&#125;</div><div class="line">\usepackage&#123;booktabs&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;figure&#125;[htp]</div><div class="line">\centering</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;</div><div class="line">\centering</div><div class="line">\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;</div><div class="line">\subcaption&#123; 小波 &#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;  </div><div class="line">\centering</div><div class="line">\subcaption&#123; 夜雨秋灯 &#125;</div><div class="line">\begin&#123;tabular&#125;&#123;c|c|c&#125;</div><div class="line">\toprule</div><div class="line">锦瑟&amp;无端&amp;五十弦\\</div><div class="line">\midrule</div><div class="line">一弦&amp;一柱&amp;思华年\\</div><div class="line">庄生&amp;晓梦&amp;迷蝴蝶\\</div><div class="line">望帝&amp;春深&amp;托杜鹃\\</div><div class="line">\bottomrule</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\centering</div><div class="line">\caption&#123;一图一表&#125;</div><div class="line">\end&#123;figure&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjq20v9bbqj31h60dqtd7.jpg" alt=""></p>
 
       
     </div>
@@ -455,7 +472,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/numpy/" rel="tag"># numpy</a>
+            <a href="/tags/图表/" rel="tag"># 图表</a>
+          
+            <a href="/tags/浮动体/" rel="tag"># 浮动体</a>
           
         </div>
       
@@ -468,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/01/Python数据处理笔记matplotlib篇（一）/" rel="next" title="Python数据处理笔记matplotlib篇（一）">
-                <i class="fa fa-chevron-left"></i> Python数据处理笔记matplotlib篇（一）
+              <a href="/2017/03/02/LaTeX入门系列之图表绘制（三）：标题控制与浮动体/" rel="next" title="LaTeX入门系列之图表绘制（三）：标题控制与浮动体（基础）">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之图表绘制（三）：标题控制与浮动体（基础）
               </a>
             
           </div>
@@ -478,8 +497,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/10/python数据处理笔记pandas（一）/" rel="prev" title="python 数据处理笔记pandas（一）">
-                python 数据处理笔记pandas（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/17/git 学习手册精简版（傻瓜版）/" rel="prev" title="git 学习手册精简版不断更新">
+                git 学习手册精简版不断更新 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -558,8 +577,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">LiErhua</p>
@@ -620,6 +648,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#图表并排"><span class="nav-number">1.</span> <span class="nav-text">图表并排</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
