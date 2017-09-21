@@ -102,16 +102,19 @@
 <meta name="description" content="关键词：字体，字体族（font family），字体形状（font shape），字体系列（font series）">
 <meta name="keywords" content="字体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LaTeX入门系列之字体">
+<meta property="og:title" content="LaTeX入门系列之字体族">
 <meta property="og:url" content="http://yoursite.com/2017/03/12/LaTeX入门系列之字体/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：字体，字体族（font family），字体形状（font shape），字体系列（font series）">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjr9fi7oq2j31ie02agmi.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjr9qb432aj319u034q3t.jpg">
-<meta property="og:updated_time" content="2017-09-21T08:35:14.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fjrbx1nb95j31fw02ejsm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjrade8yuzj31aw030dgd.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjrc961kgjj316m01ujry.jpg">
+<meta property="og:updated_time" content="2017-09-21T10:01:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LaTeX入门系列之字体">
+<meta name="twitter:title" content="LaTeX入门系列之字体族">
 <meta name="twitter:description" content="关键词：字体，字体族（font family），字体形状（font shape），字体系列（font series）">
 <meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjr9fi7oq2j31ie02agmi.jpg">
 
@@ -149,7 +152,7 @@
 
 
 
-  <title>LaTeX入门系列之字体 | 夜雨秋灯</title>
+  <title>LaTeX入门系列之字体族 | 夜雨秋灯</title>
   
 
 
@@ -335,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之字体</h1>
+          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之字体族</h1>
         
 
         <div class="post-meta">
@@ -429,6 +432,23 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">&#123;\songti 我是宋体&#125;,&#123;\heiti 我是黑体&#125;,&#123;\fangsong 我是仿宋&#125;,&#123;\kaishu 我是楷体&#125;。</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fjr9qb432aj319u034q3t.jpg" alt=""></p>
+<hr>
+<h4 id="基本字体设置"><a href="#基本字体设置" class="headerlink" title="基本字体设置"></a>基本字体设置</h4><p>但是上面的设置还是太落后了，因此，我们现在使用XeLaTeX。使用 fontspec 宏包来调用字体</p>
+<p><strong>对于英文：</strong>设置正文罗马字体族，无衬线字体族和打字机字体族</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">\setmainfont[可选选项]&#123;字体名&#125;</div><div class="line">\setsansfont[可选选项]&#123;字体名&#125;</div><div class="line">\setmonofont[可选选项]&#123;字体名&#125;</div><div class="line">设置好之后，fontspec会自动找到并匹配相应的粗体，斜体等，令我们使用\bfseries和\itshape也有效,若没有，那需要进行如下的设置。</div><div class="line">\setmainfont[</div><div class="line">       BoldFont       = texgyrepagella-bold.otf ,</div><div class="line">       ItalicFont     = texgyrepagella-italic.otf ,</div><div class="line">       BoldItalicFont = texgyrepagella-bolditalic.otf ]&#123;texgyrepagella-regular.otf&#125;</div></pre></td></tr></table></figure>
+<p><strong>对于中文</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\setCJKmainfont[可选选项]&#123;字体名&#125;</div><div class="line">\setCJKsansfont[可选选项]&#123;字体名&#125;</div><div class="line">\setCJKmonofont[可选选项]&#123;字体名&#125;</div><div class="line">\setCJKfamilyfont&#123;中文字体族&#125;&#123;字体名&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\setCJKmainfont[BoldFont = STLibian-SC-Regular,]&#123;TpldKhangXiDictTrial&#125;</div><div class="line">\setCJKsansfont&#123;DFWaWaSC-W5&#125;</div><div class="line">\setCJKmonofont&#123;STXingkai-SC-Light&#125;</div><div class="line">\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\CJKfamily&#123;qingsong&#125;</div><div class="line">锦瑟无端五十弦</div><div class="line">\rmfamily</div><div class="line">一弦一柱\textbf&#123;思华年&#125;</div><div class="line">\sffamily</div><div class="line">庄生晓梦迷蝴蝶</div><div class="line">\ttfamily</div><div class="line">望帝春深托杜鹃</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fjrbx1nb95j31fw02ejsm.jpg" alt=""></p>
+<hr>
+<h4 id="正文局部字体更改"><a href="#正文局部字体更改" class="headerlink" title="正文局部字体更改"></a>正文局部字体更改</h4><p>如何解决在文章内容中局部更换不常用字体</p>
+<p><strong>英文</strong>：</p>
+<p>几个字，几句话：定义一个新的命令即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%重新定义新的字体族命令：</div><div class="line">\newfontfamily&lt;命令&gt;[可选参数]&#123;字体名&#125;</div><div class="line">%例：</div><div class="line">\documentclass&#123;article&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\newfontfamily\fugu&#123;Luminari-Regular&#125;</div><div class="line">\newfontfamily\ptmr&#123;PTMono-Regular&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">hello, &#123;\ptmr everyone&#125;. this is my blog---&#123;\fugu yeyuqiudeng&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fjrade8yuzj31aw030dgd.jpg" alt=""></p>
+<p><strong>中文</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%重新定义新的字体族命令：</div><div class="line">\newCJKfontfamily&lt;命令&gt;[可选参数]&#123;字体名&#125;</div><div class="line">%例：</div><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">锦瑟无端五十弦，\qingsong&#123;一弦一柱思华年&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjrc961kgjj316m01ujry.jpg" alt=""></p>
 
       
     </div>
@@ -578,8 +598,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">LiErhua</p>
@@ -640,6 +669,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本字体设置"><span class="nav-number">1.</span> <span class="nav-text">基本字体设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正文局部字体更改"><span class="nav-number">2.</span> <span class="nav-text">正文局部字体更改</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
