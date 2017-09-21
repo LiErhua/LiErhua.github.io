@@ -66,9 +66,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
+    <title><![CDATA[LaTeX入门系列之字体]]></title>
+    <url>%2F2017%2F03%2F12%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AD%97%E4%BD%93%2F</url>
+    <content type="text"><![CDATA[关键词：字体，字体族（font family），字体形状（font shape），字体系列（font series） 我们生活中所见到的大多数物体，都有一个属性，那就是结构，那结构是什么呢？基本上我们可以认为结构包括三部分：形状，材料，尺寸。 我们用于排版的字体，同样有结构，他们的结构又包含什么呢？字体的类型（宋体，隶书），字体的正体斜体，字体的粗细，字体的大小等。这几个性质也离不开我们所说的结构，因为他们同属于形状和尺寸范畴。 但是，字体因为是一个系列体，因此他可以有更加详细的划分，我们一般从这几个角度去讨论他们： 字体族（font family）：对应一组风格相似，适用于一起使用的成套字体，如罗马字体族，无衬线字体族等 字体形状（font shape）：斜体，直立，小型大写等 字体系列（font series）：中等，加宽加粗等 但是对于中文，没有太多的变体，因此，我们一般使用字体族来区分（宋体，隶书等）。 因此，中文字体的选择与西文字体是分离的，这个要注意 ctex 宏包及其文档类（如ctexart）另外新定义了一些组合字体，可以让中文拥有如同西文一样使用粗体（\bfseries)和意大利体（\itshape) 的功能，并且重新定义了 \rmfamily 使他同时对中文其作用。 这样就默认了中文的字体组为rm，正常字体是宋体，粗体是黑体，意大利体是楷体，符合我们平时使用的习惯。 1234\documentclass[]&#123;ctexart&#125;\begin&#123;document&#125;我是一个人(宋体)，\textbf&#123;你呢（黑体）？&#125;\textit&#123;不是吧，是汪（楷体）！&#125;\end&#123;document&#125; 中文的字体族，在ctex宏包及其文档类下进行了一部分预定义，在win下配置了四种字体族，并提供了如下的简化命令来进行使用 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;&#123;\songti 我是宋体&#125;,&#123;\heiti 我是黑体&#125;,&#123;\fangsong 我是仿宋&#125;,&#123;\kaishu 我是楷体&#125;。\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>字体</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -77,9 +88,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -130,8 +141,8 @@
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>浮动体</tag>
         <tag>图表</tag>
+        <tag>浮动体</tag>
       </tags>
   </entry>
   <entry>
@@ -142,8 +153,8 @@
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>浮动体</tag>
         <tag>图表</tag>
+        <tag>浮动体</tag>
       </tags>
   </entry>
   <entry>
