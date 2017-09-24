@@ -108,9 +108,11 @@
 <meta property="og:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjtkq2h8t0j30it06at90.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
-<meta property="og:updated_time" content="2017-09-14T06:38:55.000Z">
+<meta property="og:updated_time" content="2017-09-23T08:26:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python数据处理笔记matplotlib篇（一）">
 <meta name="twitter:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
@@ -431,7 +433,7 @@
 <p>NOTICE:当使用了twinx()之后，尽量使用如下方式实现图片的保存</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig,ax = plt.subplots()</div><div class="line">fig.savefig(path,**kwargs)<span class="comment">#使用fig实例进行保存操作</span></div></pre></td></tr></table></figure>
 <hr>
-<p>####关于matplotlib的<strong>面向对象</strong></p>
+<p>#####关于matplotlib的<strong>面向对象</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matplotlib.pyplot.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">1</span>, sharex=<span class="keyword">False</span>, sharey=<span class="keyword">False</span>, squeeze=<span class="keyword">True</span>, subplot_kw=<span class="keyword">None</span>, gridspec_kw=<span class="keyword">None</span>, **fig_kw)</div></pre></td></tr></table></figure>
 <p>上面这个函数有两个返回值，他们分别如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig : matplotlib.figure.Figure object</div><div class="line">ax : matplotlib.axes.Axes object <span class="keyword">or</span> array of Axes objects.</div></pre></td></tr></table></figure>
@@ -442,6 +444,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axes</span>.<span class="title">Axes</span><span class="params">(fig, rect, facecolor=None, frameon=True, sharex=None, sharey=None, label=<span class="string">''</span>, xscale=None, yscale=None, axisbg=None, **kwargs)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Axes</span>:</span>这个类的方法有：</div><div class="line">plot(*args,**kwargs)<span class="comment">#实例使用此方法即能绘制图像,并且十分强大</span></div><div class="line">scatter(*args,**kwargs)</div><div class="line">还有与pyplot中一一对应的方法：</div><div class="line">plt.xlabel()--&gt;ax.set_xlabel()&amp;ax.get_xlabel()#具体查文档</div><div class="line">------</div></pre></td></tr></table></figure>
 <p>所以，小例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fig,ax = matplotlib.pyplot.subplots()</div><div class="line">fig.set_size_inches((w,h))</div><div class="line">ax.plot(x,y)</div><div class="line">ax.set_xlabel(<span class="string">"hello"</span>)</div></pre></td></tr></table></figure>
+<h5 id="如何移轴"><a href="#如何移轴" class="headerlink" title="如何移轴"></a>如何移轴</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">将地轴移到中间</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">把这些边框去掉</div><div class="line"></div><div class="line">ax1.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax1.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">把tick移轴</div></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg" alt=""></p>
+<h5 id="添加注释"><a href="#添加注释" class="headerlink" title="添加注释"></a>添加注释</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"></div><div class="line">mpl.rcParams[<span class="string">'font.family'</span>] = <span class="string">'STFangsong'</span></div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line"><span class="comment"># bagua = [乾兑离震巽坎艮坤]</span></div><div class="line">------</div><div class="line">bagua = [<span class="string">'乾'</span>,<span class="string">'坤'</span>,<span class="string">'兑'</span>,<span class="string">'艮'</span>,<span class="string">'离'</span>,<span class="string">'坎'</span>,<span class="string">'震'</span>,<span class="string">'巽'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</div><div class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">0.5</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">-0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">-0.5</span>))</div><div class="line">------</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjtkq2h8t0j30it06at90.jpg" alt=""></p>
 <p>###理论概念</p>
 <hr>
 <p>绘图区域设置</p>
@@ -602,8 +610,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">LiErhua</p>
@@ -664,6 +681,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何移轴"><span class="nav-number">1.</span> <span class="nav-text">如何移轴</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加注释"><span class="nav-number">2.</span> <span class="nav-text">添加注释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
