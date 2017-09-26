@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="字号," />
+  <meta name="keywords" content="盒子," />
 
 
 
@@ -100,7 +100,7 @@
 
 
 <meta name="description" content="关键词：盒子">
-<meta name="keywords" content="字号">
+<meta name="keywords" content="盒子">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LaTeX入门系列之盒子">
 <meta property="og:url" content="http://yoursite.com/2017/03/15/LaTeX入门系列之盒子/index.html">
@@ -108,7 +108,7 @@
 <meta property="og:description" content="关键词：盒子">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fjvtzsqizkj318c0683zv.jpg">
-<meta property="og:updated_time" content="2017-09-26T01:32:38.000Z">
+<meta property="og:updated_time" content="2017-09-26T11:52:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之盒子">
 <meta name="twitter:description" content="关键词：盒子">
@@ -411,9 +411,11 @@
 <p>这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解：</p>
 <p><strong>盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子</strong></p>
 <p>小盒子再构成大盒子，最终成为文章的整体。</p>
-<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><h5 id="不带边框的盒子"><a href="#不带边框的盒子" class="headerlink" title="不带边框的盒子"></a>不带边框的盒子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\mbox&#123;文本内容&#125;</div><div class="line">\makebox[宽度][位置(clrs)]&#123;内容&#125;</div></pre></td></tr></table></figure>
+<h4 id="水平盒子"><a href="#水平盒子" class="headerlink" title="水平盒子"></a>水平盒子</h4><p>水平盒子无法在其中进行段落的划分，即无法分行分段</p>
+<h5 id="不带边框的盒子"><a href="#不带边框的盒子" class="headerlink" title="不带边框的盒子"></a>不带边框的盒子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\mbox&#123;文本内容&#125;</div><div class="line">\makebox[宽度][位置(clrs)]&#123;内容&#125;</div></pre></td></tr></table></figure>
 <h5 id="带边框的盒子"><a href="#带边框的盒子" class="headerlink" title="带边框的盒子"></a>带边框的盒子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\fbox&#123;文本&#125;</div><div class="line">\framebox[宽度][位置]&#123;文本&#125;</div></pre></td></tr></table></figure>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fjvtzsqizkj318c0683zv.jpg" alt=""></p>
+<h4 id="垂直盒子"><a href="#垂直盒子" class="headerlink" title="垂直盒子"></a>垂直盒子</h4><p>垂直盒子就可以有多个段落</p>
 
       
     </div>
@@ -460,7 +462,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/字号/" rel="tag"># 字号</a>
+            <a href="/tags/盒子/" rel="tag"># 盒子</a>
           
         </div>
       
@@ -473,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/13/LaTeX入门系列之文字强调/" rel="next" title="LaTeX入门系列之文字强调">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之文字强调
+              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————列表环境/" rel="next" title="LaTeX入门系列之正文环境（二）———— 列表环境">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（二）———— 列表环境
               </a>
             
           </div>
@@ -483,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————文本环境/" rel="prev" title="LaTeX入门系列之正文环境（一）————文本环境">
-                LaTeX入门系列之正文环境（一）————文本环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/16/LaTeX入门系列之字号/" rel="prev" title="LaTeX入门系列之字号、水平间距与垂直间距">
+                LaTeX入门系列之字号、水平间距与垂直间距 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +589,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -609,7 +611,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -644,7 +646,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-number">1.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不带边框的盒子"><span class="nav-number">1.1.</span> <span class="nav-text">不带边框的盒子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带边框的盒子"><span class="nav-number">1.2.</span> <span class="nav-text">带边框的盒子</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#水平盒子"><span class="nav-number">1.</span> <span class="nav-text">水平盒子</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不带边框的盒子"><span class="nav-number">1.1.</span> <span class="nav-text">不带边框的盒子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带边框的盒子"><span class="nav-number">1.2.</span> <span class="nav-text">带边框的盒子</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垂直盒子"><span class="nav-number">2.</span> <span class="nav-text">垂直盒子</span></a></li></ol></div>
             
 
           </div>

@@ -88,14 +88,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之字号]]></title>
+    <title><![CDATA[LaTeX入门系列之字号、水平间距与垂直间距]]></title>
     <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AD%97%E5%8F%B7%2F</url>
-    <content type="text"><![CDATA[关键词：字号 这一节，我们讨论字号的大小，单位是pt，pt单位是英寸的 1/72 大小 首先我们明确，在LaTeX中，行距和字号是直接相关的，设置字号是，同时会默认设置基本行距（一行文字的基线到下行文字的基线距离）为文字大小的1.2倍. [TOC] 字号的普通的声明式命令英文字号注意：字号命令表示的尺寸和行间距随文档类和其他因素影响，因此并不能准确的表示字号的大小 123\tiny \scriptszie \footnotesize \small \normalsize \large \Large \LARGE\huge \Huge 1234567\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;&#123;\tiny 夜雨秋灯&#125; &#123;\scriptsize 夜雨秋灯&#125; &#123;\footnotesize 夜雨秋灯&#125; &#123;\small 夜雨秋灯&#125;\par夜雨秋灯 &#123;\large 夜雨秋灯&#125; &#123;\Large 夜雨秋灯&#125; &#123;\LARGE 夜雨秋灯&#125;\par&#123;\huge 夜雨秋灯&#125; &#123;\Huge 夜雨秋灯&#125;\end&#123;document&#125; 链接：pt与中国字号的关系 中文字号：中文字号的表示，在我们使用了ctex文档类，或者使用了ctex宏包之后就默认包含了，如下形式： 1234\zihao&#123;1&#125;\zihao&#123;-1&#125;\zihao&#123;3&#125;\zihao&#123;-3&#125; 12345678\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\zihao&#123;1&#125; 夜雨秋灯\par \zihao&#123;-1&#125;夜雨秋灯\par\zihao&#123;3&#125;夜雨秋灯\par\zihao&#123;-3&#125;夜雨秋灯\par \end&#123;document&#125; 竖直间距的设定（行距的设置）基本：中英都使用命令 \linespread{factor} （此命令的生效范围是在\selectfont命令之后） 其中factor指的是基本行距的倍数因子，默认基本行距为文字大小的1.2倍 默认的英文因子是1，默认的中文因子是1.3 即默认条件下，英文的行距是字号的1.2 X 1 = 1.2倍；中文行距是字号的 1.3 X1.2 = 1.56 倍 宏包：setspace 宏包 水平间距的设定先介绍几个常用的LaTeX单位： 单位 中文 大小 备注 pt 磅 1/72英寸 in 英寸 2.54cm em 全身 字号对应的长度 大小等于\quad，大写M的宽度 ex 本意是小写字母 x 的高度 \quad 1em \qquad 2em \hspace{长度} 水平长度的间距（首行不可用） \hspace*{长度} 水平长度的间距（首行可用） \hfill = \hspace{fill} 水平方向上分散均匀排列 例子 12345678910\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;showframe&#125;\begin&#123;document&#125;\setlength&#123;\parindent&#125;&#123;0em&#125;锦瑟无端五十弦\quad 一弦一柱思华年\par庄生晓梦迷蝴蝶\qquad 望帝春深托杜鹃\par沧海月明珠有泪\hspace&#123;3cm&#125;蓝田日暖玉生烟\par此情可待\hfill 成追忆\hfill 只是当时\hfill 已惘然\end&#123;document&#125;]]></content>
+    <content type="text"><![CDATA[关键词：字号,水平间距,垂直间距 这一节，我们讨论字号的大小，单位是pt，pt单位是英寸的 1/72 大小，水平间距与垂直间距 首先我们明确，在LaTeX中，行距和字号是直接相关的，设置字号是，同时会默认设置基本行距（一行文字的基线到下行文字的基线距离）为文字大小的1.2倍. 字号的普通的声明式命令英文字号注意：字号命令表示的尺寸和行间距随文档类和其他因素影响，因此并不能准确的表示字号的大小 123\tiny \scriptszie \footnotesize \small \normalsize \large \Large \LARGE\huge \Huge 1234567\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;&#123;\tiny 夜雨秋灯&#125; &#123;\scriptsize 夜雨秋灯&#125; &#123;\footnotesize 夜雨秋灯&#125; &#123;\small 夜雨秋灯&#125;\par夜雨秋灯 &#123;\large 夜雨秋灯&#125; &#123;\Large 夜雨秋灯&#125; &#123;\LARGE 夜雨秋灯&#125;\par&#123;\huge 夜雨秋灯&#125; &#123;\Huge 夜雨秋灯&#125;\end&#123;document&#125; 链接：pt与中国字号的关系 中文字号：中文字号的表示，在我们使用了ctex文档类，或者使用了ctex宏包之后就默认包含了，如下形式： 1234\zihao&#123;1&#125;\zihao&#123;-1&#125;\zihao&#123;3&#125;\zihao&#123;-3&#125; 12345678\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\zihao&#123;1&#125; 夜雨秋灯\par \zihao&#123;-1&#125;夜雨秋灯\par\zihao&#123;3&#125;夜雨秋灯\par\zihao&#123;-3&#125;夜雨秋灯\par \end&#123;document&#125; 竖直间距的设定基本行距的设置：中英都使用命令 \linespread{factor} （此命令的生效范围是在\selectfont命令之后） 其中factor指的是基本行距的倍数因子，默认基本行距为文字大小的1.2倍 默认的英文因子是1，默认的中文因子是1.3 即默认条件下，英文的行距是字号的1.2 X 1 = 1.2倍；中文行距是字号的 1.3 X1.2 = 1.56 倍 宏包：setspace 宏包 垂直间距： 命令 作用 \vspace{长度} 生成垂直方向间距为“长度”的空白 \vspace*{长度} 生成垂直方向间距为“长度”的空白 \vfill = \vspace{fill} 垂直方向上分散均匀排列 notice：其中长度参数可以是\parskip,\itemsep,\smallskip,\medskip,\bigskip等 水平间距的设定先介绍几个常用的LaTeX单位： 单位 中文 大小 备注 pt 磅 1/72英寸 in 英寸 2.54cm em 全身 字号对应的长度 大小等于\quad，大写M的宽度 ex 本意是小写字母 x 的高度 \quad 1em \qquad 2em \hspace{长度} 生成水平方向大小为“长度”的空白间距（每行的起始处不生效，不会产生缩进效果） \hspace*{长度} 生成水平方向大小为“长度”的空白间距（每行的起始处生效，产生缩进效果） \hfill = \hspace{fill} 水平方向上分散均匀排列 例子 12345678910\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;showframe&#125;\begin&#123;document&#125;\setlength&#123;\parindent&#125;&#123;0em&#125;锦瑟无端五十弦\quad 一弦一柱思华年\par庄生晓梦迷蝴蝶\qquad 望帝春深托杜鹃\par沧海月明珠有泪\hspace&#123;3cm&#125;蓝田日暖玉生烟\par此情可待\hfill 成追忆\hfill 只是当时\hfill 已惘然\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
         <tag>字号</tag>
+        <tag>水平间距</tag>
+        <tag>垂直间距</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之盒子]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>盒子</tag>
       </tags>
   </entry>
   <entry>
@@ -110,6 +123,28 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>代码环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>抄录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
@@ -121,17 +156,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 抄录命令与环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（一）————文本环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：文本环境，引用环境，诗词环境，摘要环境 这一节，我们讨论文本环境 12345678引用环境\begin&#123;quote&#125;首行无缩进的引用内容\end&#123;quote&#125;---\begin&#123;quotation&#125;首行缩进的应用内容\end&#123;quotation&#125; 1234诗歌环境\begin&#123;verse&#125;以\\换行\end&#123;verse&#125; 1234摘要环境\begin&#123;abstract&#125;摘要内容\end&#123;abstract&#125;]]></content>
@@ -140,17 +164,6 @@
       </categories>
       <tags>
         <tag>文本环境</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之盒子]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 基本命令不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>字号</tag>
       </tags>
   </entry>
   <entry>
@@ -222,18 +235,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之初见LaTeX]]></title>
-    <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%88%9D%E8%A7%81LaTeX%2F</url>
-    <content type="text"><![CDATA[关键词：安装，office 比较 介绍下LaTeX最表象的东西 LaTeX是什么TeX作者高德纳，斯坦福大学教授，于1978年开始编写，直到1989年TeX才停止更改。 LaTeX 是用TeX写的，即 LaTeX 是使用 TeX 这种宏语言所编写的宏集，并作为了一种格式固定了下来。 我们用 C 语言做一个类比，就像 C 语言有不同的编译器，实现 TeX 也有不同的程序，不同的实现我们成为不同的 TeX 引擎。我们现在所说的pdfTeX，XeTeX ，pTeX，ApTeX 等都是 TeX 引擎。 LaTeX的优点&amp;LaTeX与office的差异LaTeX的优点 完全开源免费 是论文排版界标准，国外大量期刊提供模板，并推荐使用。 LaTeX制作文档与幻灯片，令作者专注于内容，一切简洁明了。 Word很容易被修改，显得不够严肃，LaTeX生成的PDF正式，美观。 合格的数学软件都可以转LaTeX，合格的文献管理软件都能生成BibTeX。 LaTeX对比office的差异 LaTeX office 公式输入友好，赏心悦目 公式输入糟糕，需要行内公式难看 全部可以使用键盘输入，降低鼠标的利用，效率提高 希腊字母等需要用鼠标去挑 结构优化的算法好，不容易出现行尾断字 段末容易出现断字 参考文献插入十分友好 参考文献插入有点 图表众多的文档依然十分容易排布 图表众多的文档及其容易崩溃 LaTeX的安装——推荐安装TeX LiveMac下： Mac下的TeX Live 称为 MacTeX 下载地址：https://www.tug.org/mactex/mactex-download.html Windows下： Windows 下称为TeX Live 下载地址：https://www.tug.org/texlive/ 还可以直接从https://mirrors.tuna.tsinghua.edu.cn/CTAN/进行下载使用，下列连接分别为MacTeX，TeXLive，MikTeX https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/mac/mactex/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/win32/miktex/ LaTeX编辑器LaTeX有众多的编辑器可以使用 TeXworks WinEdt Texmaker TeXstudio Mac下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Mac版）》 Windows下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Windows版）》]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>安装</tag>
-        <tag>编辑器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之表格绘制（四）：图表的并排]]></title>
     <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%9B%BE%E8%A1%A8%E7%9A%84%E5%B9%B6%E6%8E%92%2F</url>
     <content type="text"><![CDATA[关键词：图表，并排 LaTeX的浮动环境并不对环境的内容限制，因此，把几个图表放在一个浮动体内即可以实现并排或者混排。一般使用 minipage 环境实现此功能。 123\begin&#123;minipage&#125;[position][height][inner-pos]&#123;width&#125;text\end&#123;minipage&#125; 图表并排例子1：两张图片高度一致，caption 可以显示在一行的情况，使用不同的 caption 12345678910111213141516\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\begin&#123;minipage&#125;&#123;0.48\linewidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\caption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\linewidth&#125; \centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\caption&#123; 夜雨秋灯 &#125;\end&#123;minipage&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子2：两张图片高度不一致，caption 按上述方法不可以显示在一行的情况，使用不同的 caption 123456789101112131415161718192021222324252627\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;graphics&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htbp]\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\centering\includegraphics[height = 1.5cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\quad\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\centering\includegraphics[height = 6cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\end&#123;minipage&#125;\vskip 5mm\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\caption&#123;夜雨秋灯&#125;\end&#123;minipage&#125;\quad\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\caption&#123;小波&#125;\end&#123;minipage&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子3：图片或者表格自带小标题，公用大标题，如何设置 使用 caption 以及 subcaption 宏包 12345678910111213141516171819\documentclass[]&#123;article&#125;\usepackage&#123;caption,subcaption&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\subcaption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\textwidth&#125; \centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\subcaption&#123; 夜雨秋灯 &#125;\end&#123;minipage&#125;\centering\caption&#123;两张图&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子4：一图一表混排 1234567891011121314151617181920212223242526272829\documentclass[]&#123;article&#125;\usepackage&#123;caption,subcaption&#125;\usepackage&#123;booktabs&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\centering\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\subcaption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\textwidth&#125; \centering\subcaption&#123; 夜雨秋灯 &#125;\begin&#123;tabular&#125;&#123;c|c|c&#125;\toprule锦瑟&amp;无端&amp;五十弦\\\midrule一弦&amp;一柱&amp;思华年\\庄生&amp;晓梦&amp;迷蝴蝶\\望帝&amp;春深&amp;托杜鹃\\\bottomrule\end&#123;tabular&#125;\end&#123;minipage&#125;\centering\caption&#123;一图一表&#125;\end&#123;figure&#125;\end&#123;document&#125; 参考文章： 并列排图 ​]]></content>
@@ -243,6 +244,18 @@
       <tags>
         <tag>图表</tag>
         <tag>浮动体</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之初见LaTeX]]></title>
+    <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%88%9D%E8%A7%81LaTeX%2F</url>
+    <content type="text"><![CDATA[关键词：安装，office 比较 介绍下LaTeX最表象的东西 LaTeX是什么TeX作者高德纳，斯坦福大学教授，于1978年开始编写，直到1989年TeX才停止更改。 LaTeX 是用TeX写的，即 LaTeX 是使用 TeX 这种宏语言所编写的宏集，并作为了一种格式固定了下来。 我们用 C 语言做一个类比，就像 C 语言有不同的编译器，实现 TeX 也有不同的程序，不同的实现我们成为不同的 TeX 引擎。我们现在所说的pdfTeX，XeTeX ，pTeX，ApTeX 等都是 TeX 引擎。 LaTeX的优点&amp;LaTeX与office的差异LaTeX的优点 完全开源免费 是论文排版界标准，国外大量期刊提供模板，并推荐使用。 LaTeX制作文档与幻灯片，令作者专注于内容，一切简洁明了。 Word很容易被修改，显得不够严肃，LaTeX生成的PDF正式，美观。 合格的数学软件都可以转LaTeX，合格的文献管理软件都能生成BibTeX。 LaTeX对比office的差异 LaTeX office 公式输入友好，赏心悦目 公式输入糟糕，需要行内公式难看 全部可以使用键盘输入，降低鼠标的利用，效率提高 希腊字母等需要用鼠标去挑 结构优化的算法好，不容易出现行尾断字 段末容易出现断字 参考文献插入十分友好 参考文献插入有点 图表众多的文档依然十分容易排布 图表众多的文档及其容易崩溃 LaTeX的安装——推荐安装TeX LiveMac下： Mac下的TeX Live 称为 MacTeX 下载地址：https://www.tug.org/mactex/mactex-download.html Windows下： Windows 下称为TeX Live 下载地址：https://www.tug.org/texlive/ 还可以直接从https://mirrors.tuna.tsinghua.edu.cn/CTAN/进行下载使用，下列连接分别为MacTeX，TeXLive，MikTeX https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/mac/mactex/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/win32/miktex/ LaTeX编辑器LaTeX有众多的编辑器可以使用 TeXworks WinEdt Texmaker TeXstudio Mac下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Mac版）》 Windows下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Windows版）》]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>安装</tag>
+        <tag>编辑器</tag>
       </tags>
   </entry>
   <entry>
@@ -269,17 +282,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX习题答案]]></title>
-    <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
-    <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>table,习题答案</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
     <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
     <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
@@ -288,6 +290,17 @@
       </categories>
       <tags>
         <tag>表格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX习题答案]]></title>
+    <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>table,习题答案</tag>
       </tags>
   </entry>
   <entry>
@@ -315,9 +328,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -326,9 +339,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
