@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="代码环境," />
+  <meta name="keywords" content="命令,环境,定义," />
 
 
 
@@ -99,20 +99,22 @@
 
 
 
-<meta name="description" content="关键词：抄录">
-<meta name="keywords" content="代码环境">
+<meta name="description" content="关键词：命令，环境">
+<meta name="keywords" content="命令,环境,定义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LaTeX入门系列之正文环境（五）———— 代码环境">
-<meta property="og:url" content="http://yoursite.com/2017/03/15/LaTeX入门系列之正文环境（五）————-代码环境/index.html">
+<meta property="og:title" content="LaTeX入门系列之命令与环境的定义">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/LaTeX入门系列之命令与环境的定义/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
-<meta property="og:description" content="关键词：抄录">
+<meta property="og:description" content="关键词：命令，环境">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjwucp936mj316k04umyj.jpg">
-<meta property="og:updated_time" content="2017-09-26T04:15:48.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fjzd22mpvtj30sy04agmc.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjzdrkhdfoj31kw05k75c.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjzj53c33jj31hy02egme.jpg">
+<meta property="og:updated_time" content="2017-09-28T12:05:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LaTeX入门系列之正文环境（五）———— 代码环境">
-<meta name="twitter:description" content="关键词：抄录">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjwucp936mj316k04umyj.jpg">
+<meta name="twitter:title" content="LaTeX入门系列之命令与环境的定义">
+<meta name="twitter:description" content="关键词：命令，环境">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fjzd22mpvtj30sy04agmc.jpg">
 
 
 
@@ -142,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/15/LaTeX入门系列之正文环境（五）————-代码环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/21/LaTeX入门系列之命令与环境的定义/"/>
 
 
 
 
 
-  <title>LaTeX入门系列之正文环境（五）———— 代码环境 | 夜雨秋灯</title>
+  <title>LaTeX入门系列之命令与环境的定义 | 夜雨秋灯</title>
   
 
 
@@ -317,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/LaTeX入门系列之正文环境（五）————-代码环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/LaTeX入门系列之命令与环境的定义/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -334,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之正文环境（五）———— 代码环境</h1>
+          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之命令与环境的定义</h1>
         
 
         <div class="post-meta">
@@ -346,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T00:00:00+08:00">
-                2017-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:00:00+08:00">
+                2017-03-21
               </time>
             
 
@@ -406,12 +408,19 @@
       
 
       
-        <p>关键词：抄录</p>
+        <p>关键词：命令，环境</p>
 <a id="more"></a>
-<p>这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;listings&#125;%使用宏包</div><div class="line">\end&#123;lstlisting&#125;%开始环境</div><div class="line">\begin&#123;lstlisting&#125;[language = Python]</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;listings&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;lstlisting&#125;[language = Python]</div><div class="line">import matplotlib as mpl</div><div class="line">mpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对</div><div class="line">mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;</div><div class="line">\end&#123;lstlisting&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fjwucp936mj316k04umyj.jpg" alt=""></p>
+<p>这一节，我们讨论一下LaTeX中命令与环境的定义</p>
+<p>LaTeX中宏被分为了两类：命令与环境</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="定义新的命令-newcommand"><a href="#定义新的命令-newcommand" class="headerlink" title="定义新的命令:\newcommand"></a>定义新的命令:\newcommand</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\newcommand&lt;新命令（命令是要带\的）&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true</div><div class="line">\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\newcommand\jinse&#123;\qingsong 锦瑟&#125;</div><div class="line">\newcommand\js[3][锦瑟]&#123;#3#1#2&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\jinse \jinse \par</div><div class="line">\js&#123;无端&#125;&#123;五十弦&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fjzd22mpvtj30sy04agmc.jpg" alt=""></p>
+<h4 id="重定义已有的命令-renewcommand"><a href="#重定义已有的命令-renewcommand" class="headerlink" title="重定义已有的命令:\renewcommand"></a>重定义已有的命令:\renewcommand</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\renewcommand&lt;原有命令&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;</div><div class="line">参数个数最多9个，参数的在命令定义中用#1~#9表示</div></pre></td></tr></table></figure>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\newenvironment&#123;环境名称name&#125;[参数个数][首参数默认值]&#123;环境前定义before&#125;&#123;环境后定义after&#125;</div><div class="line">在before 中的内容将在此环境包含的文本之前处理，而在after 中的内容将在遇到\end&#123;name&#125; 命令时处理。</div><div class="line">参数个数最多9个，参数的在命令定义中用#1~#9表示</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">\newenvironment&#123;shengming&#125;[1][声明]&#123;</div><div class="line">	\begin&#123;center&#125;#1\end&#123;center&#125;</div><div class="line">	\begin&#123;center&#125;</div><div class="line">&#125;&#123;\end&#123;center&#125;&#125;</div><div class="line">------</div><div class="line">\begin&#123;shenming&#125;</div><div class="line">锦瑟无端五十弦，一弦一柱思华年</div><div class="line">\end&#123;shenming&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjzdrkhdfoj31kw05k75c.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">after内不能引用参数，因此要在before中通过某种方法实现</div><div class="line">\newenvironment&#123;zhuyi&#125;[1][注意]&#123;</div><div class="line">	\newcommand\zy&#123;#1&#125;</div><div class="line">	\textbf&#123;\zy&#125;\hfill</div><div class="line">&#125;&#123;\hfill \textbf&#123;\zy&#125;&#125;</div><div class="line">------</div><div class="line">\begin&#123;zhuyi&#125;</div><div class="line">锦瑟无端五十弦，一弦一柱思华年</div><div class="line">\end&#123;zhuyi&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fjzj53c33jj31hy02egme.jpg" alt=""></p>
 
       
     </div>
@@ -458,7 +467,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/代码环境/" rel="tag"># 代码环境</a>
+            <a href="/tags/命令/" rel="tag"># 命令</a>
+          
+            <a href="/tags/环境/" rel="tag"># 环境</a>
+          
+            <a href="/tags/定义/" rel="tag"># 定义</a>
           
         </div>
       
@@ -471,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————文本环境/" rel="next" title="LaTeX入门系列之正文环境（一）————文本环境">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（一）————文本环境
+              <a href="/2017/03/20/LaTeX入门系列之多文档编译/" rel="next" title="LaTeX入门系列之多文档编译">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之多文档编译
               </a>
             
           </div>
@@ -481,8 +494,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————列表环境/" rel="prev" title="LaTeX入门系列之正文环境（二）———— 列表环境">
-                LaTeX入门系列之正文环境（二）———— 列表环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/17/git 学习手册精简版（傻瓜版）/" rel="prev" title="git 学习手册精简版不断更新">
+                git 学习手册精简版不断更新 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,8 +574,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <p class="site-author-name" itemprop="name">LiErhua</p>
@@ -623,6 +645,22 @@ var jiathis_config={
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义新的命令-newcommand"><span class="nav-number">1.1.</span> <span class="nav-text">定义新的命令:\newcommand</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定义已有的命令-renewcommand"><span class="nav-number">1.2.</span> <span class="nav-text">重定义已有的命令:\renewcommand</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
