@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LaTeX入门系列之文档类]]></title>
+    <url>%2F2018%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%96%87%E6%A1%A3%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[关键词：文档类 这一节，我们把我经常出错的地方列一下]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文档类</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之易错易混]]></title>
     <url>%2F2018%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%98%93%E9%94%99%E6%98%93%E6%B7%B7%2F</url>
     <content type="text"><![CDATA[关键词：注意 这一节，我们把我经常出错的地方列一下 1\vskip 5cm %不能使用\vskip&#123;5cm&#125; 123\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;%定义字体族新的名称\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;%设置CJK字体族注意二者的意思不同，一个是fontfamily一个是familyfont 123\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;尽量在定义字体的时候把正体，斜体，粗体等全部定义完整，不然会出现找不到这种字体，爆出警告]]></content>
@@ -79,7 +90,7 @@
   <entry>
     <title><![CDATA[LaTeX入门系列之命令与环境的定义]]></title>
     <url>%2F2017%2F03%2F21%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%9A%E4%B9%89%2F</url>
-    <content type="text"><![CDATA[关键词：命令，环境 这一节，我们讨论一下LaTeX中命令与环境的定义 LaTeX中宏被分为了两类：命令与环境 命令定义新的命令:\newcommand1\newcommand&lt;新命令（命令是要带\的）&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125; 12345678910\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\newcommand\jinse&#123;\qingsong 锦瑟&#125;\newcommand\js[3][锦瑟]&#123;#3#1#2&#125;\begin&#123;document&#125;\jinse \jinse \par\js&#123;无端&#125;&#123;五十弦&#125;\end&#123;document&#125; 重定义已有的命令:\renewcommand12\renewcommand&lt;原有命令&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;参数个数最多9个，参数的在命令定义中用#1~#9表示 环境123\newenvironment&#123;环境名称name&#125;[参数个数][首参数默认值]&#123;环境前定义before&#125;&#123;环境后定义after&#125;在before 中的内容将在此环境包含的文本之前处理，而在after 中的内容将在遇到\end&#123;name&#125; 命令时处理。参数个数最多9个，参数的在命令定义中用#1~#9表示 12345678\newenvironment&#123;shengming&#125;[1][声明]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\begin&#123;shenming&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shenming&#125; 123456789after内不能引用参数，因此要在before中通过某种方法实现\newenvironment&#123;zhuyi&#125;[1][注意]&#123; \newcommand\zy&#123;#1&#125; \textbf&#123;\zy&#125;\hfill&#125;&#123;\hfill \textbf&#123;\zy&#125;&#125;------\begin&#123;zhuyi&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;zhuyi&#125;]]></content>
+    <content type="text"><![CDATA[关键词：命令，环境 这一节，我们讨论一下LaTeX中命令与环境的定义 LaTeX中宏被分为了两类：命令与环境 命令定义新的命令:\newcommand1\newcommand&lt;新命令（命令是要带\的）&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125; 12345678910\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\newcommand\jinse&#123;\qingsong 锦瑟&#125;\newcommand\js[3][锦瑟]&#123;#3#1#2&#125;\begin&#123;document&#125;\jinse \jinse \par\js&#123;无端&#125;&#123;五十弦&#125;\end&#123;document&#125; 重定义已有的命令:\renewcommand12\renewcommand&lt;原有命令&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;参数个数最多9个，参数的在命令定义中用#1~#9表示 环境123\newenvironment&#123;环境名称name&#125;[参数个数][首参数默认值]&#123;环境前定义before&#125;&#123;环境后定义after&#125;在before 中的内容将在此环境包含的文本之前处理，而在after 中的内容将在遇到\end&#123;name&#125; 命令时处理。参数个数最多9个，参数的在命令定义中用#1~#9表示 12345678\newenvironment&#123;shengming&#125;[1][声明]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\begin&#123;shenming&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shenming&#125; 123456789after内不能引用参数，因此要在before中通过某种方法实现\newenvironment&#123;zhuyi&#125;[1][注意]&#123; \newcommand\zy&#123;#1&#125; \textbf&#123;\zy&#125;\hfill&#125;&#123;\hfill \textbf&#123;\zy&#125;&#125;------\begin&#123;zhuyi&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;zhuyi&#125; 所以，定制命令和环境十分重要，利用自定义的命令和环境把字体，字号，缩进，对齐，间距等内容封装起来，可以令文档结构清晰。大型文档中，定义的命令和环境一般都放在单独的文档里。]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -159,20 +170,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之盒子]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>盒子</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+    <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -189,6 +189,17 @@
       </categories>
       <tags>
         <tag>代码环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
       </tags>
   </entry>
   <entry>
@@ -214,14 +225,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之盒子]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>文本环境</tag>
+        <tag>盒子</tag>
       </tags>
   </entry>
   <entry>
@@ -247,9 +258,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -258,9 +269,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -386,9 +397,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -397,9 +408,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
