@@ -108,7 +108,9 @@
 <meta property="og:description" content="关键词：页码,页眉,页脚">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fkdcj7vvhej31kw0u97dk.jpg">
-<meta property="og:updated_time" content="2017-10-10T10:59:46.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fkfg6x1pb1j30nk04fjrt.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fkfgbj2vgdj31kw0yrqgk.jpg">
+<meta property="og:updated_time" content="2017-10-12T06:36:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之页码、页眉、页脚">
 <meta name="twitter:description" content="关键词：页码,页眉,页脚">
@@ -410,8 +412,107 @@
 <a id="more"></a>
 <p>这一节，我们讨论页码，页眉与页脚</p>
 <h4 id="页码"><a href="#页码" class="headerlink" title="页码"></a>页码</h4><p>通过前面的学习，我们清楚了，编号类的都是计数器在控制，而页码的控制器是page，\pagenumbering{格式}来控制页码的编号方式，一定要另起新的一页，这个命令会在新的一页开始重新开始进行计数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，顾均用其做的示例</div><div class="line">%但是这是最麻烦的办法，应该使用如下方法：</div><div class="line">%\usepackage&#123;lipsum&#125;</div><div class="line">%\lipsum[1-n]</div><div class="line">%使用lipsum时最简单有效的办法</div><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\CJKfamily&#123;qingsong&#125;</div><div class="line">\pagenumbering&#123;roman&#125;%使用罗马数字字体</div><div class="line">(文本)</div><div class="line">\newpage</div><div class="line">\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体</div><div class="line">(文本)</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，故均用其做的示例</div><div class="line">%但是这是最麻烦的办法，应该使用如下方法：</div><div class="line">%\usepackage&#123;lipsum&#125;</div><div class="line">%\lipsum[1-n]</div><div class="line">%使用lipsum时最简单有效的办法</div><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\CJKfamily&#123;qingsong&#125;</div><div class="line">\pagenumbering&#123;roman&#125;%使用罗马数字字体</div><div class="line">(文本)</div><div class="line">\newpage</div><div class="line">\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体</div><div class="line">(文本)</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fkdcj7vvhej31kw0u97dk.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arabic</td>
+<td>阿拉伯数字</td>
+</tr>
+<tr>
+<td>roman</td>
+<td>小写罗马数字</td>
+</tr>
+<tr>
+<td>Roman</td>
+<td>大写罗马数字</td>
+</tr>
+<tr>
+<td>alph</td>
+<td>小写字母</td>
+</tr>
+<tr>
+<td>Alph</td>
+<td>大写字母</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="页眉页脚"><a href="#页眉页脚" class="headerlink" title="页眉页脚"></a>页眉页脚</h4><h5 id="预定义"><a href="#预定义" class="headerlink" title="预定义"></a>预定义</h5><p>LaTeX提供了几个<strong>预定义</strong>的页眉页脚风格看可以选择，4种 page style</p>
+<table>
+<thead>
+<tr>
+<th>页面风格</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>empty</td>
+<td>无页眉页脚</td>
+</tr>
+<tr>
+<td>plain</td>
+<td>无页眉，页脚为居中页码</td>
+</tr>
+<tr>
+<td>headings</td>
+<td>无页脚，页眉为章节名与页码</td>
+</tr>
+<tr>
+<td>myheadings</td>
+<td>无页脚，页眉为页码等</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>设定命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\pagestyle{页面风格}</td>
+<td>设定页面风格</td>
+</tr>
+<tr>
+<td>\thispagestyle{页面风格}</td>
+<td>设定当前页面的风格</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\leftmark</td>
+<td>应用到页眉页脚设置中，leftMark表示high-level (chapter和section，chapter就是high-level)</td>
+</tr>
+<tr>
+<td>\rightmark</td>
+<td>应用到页眉页脚设置中，rightMark表示low-level(section和subsec，subsec就是low-level)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="宏包fancyhdr"><a href="#宏包fancyhdr" class="headerlink" title="宏包fancyhdr"></a>宏包fancyhdr</h5><p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fkfg6x1pb1j30nk04fjrt.jpg" alt=""></p>
+<p>这张图截取自fancyhdr的宏包文档</p>
+<p>fancyhdr宏包提供的fancy页面风格，<strong>将页眉页脚分为了六部分和两条线</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;ctexart&#125;</div><div class="line">\usepackage&#123;fancyhdr&#125;	%使用fancyhdr宏包</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\pagestyle&#123;fancy&#125;		%使用fancy页面风格</div><div class="line">\lhead&#123;左边页眉&#125;		 %设置页眉左侧</div><div class="line">\chead&#123;中间页眉&#125;			%设置页眉中间</div><div class="line">\rhead&#123;\leftmark&#125;			%设置页眉右侧为leftmark</div><div class="line">\lfoot&#123;\rightmark&#125;			%设置页脚左侧为rightmark</div><div class="line">\cfoot&#123;\thepage&#125;			%设置页脚中间为页码</div><div class="line">\rfoot&#123;右边页脚&#125;			%设置页脚右侧为&quot;右边页脚&quot;</div><div class="line">\usepackage&#123;lipsum&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\section&#123;锦瑟无端五十弦&#125;</div><div class="line">\subsection&#123;一弦一柱思华年&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\newpage</div><div class="line">\section&#123;庄生晓梦迷蝴蝶&#125;</div><div class="line">\subsection&#123;望帝春深托杜鹃&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fkfgbj2vgdj31kw0yrqgk.jpg" alt=""></p>
 
       
     </div>
@@ -475,8 +576,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————列表环境/" rel="next" title="LaTeX入门系列之正文环境（二）———— 列表环境">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（二）———— 列表环境
+              <a href="/2017/03/15/LaTeX入门系列之正文环境（五）————-代码环境/" rel="next" title="LaTeX入门系列之正文环境（五）———— 代码环境">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（五）———— 代码环境
               </a>
             
           </div>
@@ -646,7 +747,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页码"><span class="nav-number">1.</span> <span class="nav-text">页码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页码"><span class="nav-number">1.</span> <span class="nav-text">页码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页眉页脚"><span class="nav-number">2.</span> <span class="nav-text">页眉页脚</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预定义"><span class="nav-number">2.1.</span> <span class="nav-text">预定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#宏包fancyhdr"><span class="nav-number">2.2.</span> <span class="nav-text">宏包fancyhdr</span></a></li></ol></li></ol></div>
             
 
           </div>
