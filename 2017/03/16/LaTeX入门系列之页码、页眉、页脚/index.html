@@ -111,7 +111,8 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fkfg6x1pb1j30nk04fjrt.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fkfgbj2vgdj31kw0yrqgk.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fkfkze8bdsj30jx04cgm1.jpg">
-<meta property="og:updated_time" content="2017-10-12T15:31:49.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fkjw9z20wyj30w90l5wlh.jpg">
+<meta property="og:updated_time" content="2017-10-16T02:50:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之页码、页眉、页脚">
 <meta name="twitter:description" content="关键词：页码,页眉,页脚">
@@ -518,6 +519,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\fancyhead[位置]&#123;内容&#125; %设置页眉，位置可以是E、O与L、C、R的组合</div><div class="line">\fancyfoot[位置]&#123;内容&#125; %设置页脚，位置可以是E、O与L、C、R的组合</div><div class="line">\fancyhf[位置]&#123;内容&#125;   %设置页眉与页脚，位置可以是H、F与E、O与L、C、R的组合</div></pre></td></tr></table></figure>
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fkfkze8bdsj30jx04cgm1.jpg" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">%页眉页脚线也可以进行设置，特别注意，页脚线的宽度不是长度变量，而是文本宏，修改定义如下</div><div class="line">\renewcommand\headrulewidth&#123;0.4pt&#125;</div><div class="line">\renewcommand\footrulewidth&#123;0.6pt&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;book&#125;</div><div class="line">\usepackage[heading = true]&#123;ctex&#125;</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;</div><div class="line">\usepackage&#123;fancyhdr&#125;</div><div class="line">\usepackage&#123;anyfontsize&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\pagestyle&#123;fancy&#125;</div><div class="line">\fancyhf&#123;&#125;		%用于清除所有的页眉页脚</div><div class="line">\fancyhead[CO]&#123;\leftmark&#125;	%hight-level</div><div class="line">\fancyhead[CE]&#123;\rightmark&#125;	%low-level</div><div class="line">\fancyfoot[CO]&#123;\thepage&#125;</div><div class="line">\fancyhf[FR]&#123;$\spadesuit$&#125;</div><div class="line">\renewcommand&#123;\headrulewidth&#125;&#123;1pt&#125;</div><div class="line">\renewcommand&#123;\footrulewidth&#125;&#123;2pt&#125;</div><div class="line">\usepackage&#123;lipsum&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\chapter&#123;锦瑟1&#125;</div><div class="line">\section&#123;锦瑟无端五十弦&#125;</div><div class="line">\subsection&#123;一弦一柱思华年&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\newpage</div><div class="line">\chapter&#123;锦瑟2&#125;</div><div class="line">\section&#123;庄生晓梦迷蝴蝶&#125;</div><div class="line">\subsection&#123;望帝春深托杜鹃&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fkjw9z20wyj30w90l5wlh.jpg" alt=""></p>
 
       
     </div>
@@ -581,8 +584,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（三）————-定理环境/" rel="next" title="LaTeX入门系列之正文环境（三）———— 定理环境">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（三）———— 定理环境
+              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————列表环境/" rel="next" title="LaTeX入门系列之正文环境（二）———— 列表环境">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（二）———— 列表环境
               </a>
             
           </div>
@@ -695,7 +698,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -717,7 +720,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
