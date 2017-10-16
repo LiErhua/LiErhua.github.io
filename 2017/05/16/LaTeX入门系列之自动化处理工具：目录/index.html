@@ -110,7 +110,8 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fkjxg06la0j30rv07j0ux.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fkk03bqwazj311f0kadr4.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fkk03eelvtj311e0k4tjy.jpg">
-<meta property="og:updated_time" content="2017-10-16T05:03:17.000Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fkk4hllcy7j31gy0oegp4.jpg">
+<meta property="og:updated_time" content="2017-10-16T07:42:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之自动化处理工具：目录">
 <meta name="twitter:description" content="关键词：自动化工具,目录">
@@ -433,15 +434,51 @@
 </tr>
 </tbody>
 </table>
+<p>默认情况下，像目录本身，参考文献，索引等是不会自动加入目录里的，我们使用宏包tocbibind来控制他们是否出现，用此宏包有可选项来控制（默认所有全部显示)</p>
+<p>可选项：</p>
+<table>
+<thead>
+<tr>
+<th>可选参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>notbib</td>
+<td>不加入参考文献</td>
+</tr>
+<tr>
+<td>notindex</td>
+<td>不加入索引目录</td>
+</tr>
+<tr>
+<td>nottoc</td>
+<td>不加入章节目录</td>
+</tr>
+<tr>
+<td>not lot</td>
+<td>不加表格目录</td>
+</tr>
+<tr>
+<td>notlof</td>
+<td>不加图目录</td>
+</tr>
+</tbody>
+</table>
+<p>具体请参考宏包：tocbibind</p>
 <p>目录可以使用到的宏包有：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;tocbibind&#125;</div><div class="line">\usepackage&#123;titletoc&#125;</div><div class="line">\usepackage&#123;minitoc&#125;</div><div class="line">\usepackage&#123;tocloft&#125;</div></pre></td></tr></table></figure>
 <h3 id="定制目录格式"><a href="#定制目录格式" class="headerlink" title="定制目录格式"></a>定制目录格式</h3><p>定制目录格式通常使用宏包</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;tocloft&#125;				%语法较为简单，定制格式简单</div><div class="line">\usepackage&#123;titletoc&#125;				%更为复杂的目录定制宏包</div></pre></td></tr></table></figure>
 <p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fkjxg06la0j30rv07j0ux.jpg" alt=""></p>
 <p>解释：标题前后间距的长度是变量，可以使用setlength来进行修改；而其他的都是宏，需要使用重定义命令来进行修改\renewcommand</p>
-<p>具体的如何修改字体族，字体大小等我们直接看tocloft宏包的部分内容</p>
+<p>具体的如何修改字体族，字体大小等我们直接看tocloft宏包的部分内容（具体请直接查看宏包文档）</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fkk03bqwazj311f0kadr4.jpg" alt=""></p>
 <p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fkk03eelvtj311e0k4tjy.jpg" alt=""></p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;book&#125;</div><div class="line">\usepackage[heading = true]&#123;ctex&#125;</div><div class="line">\usepackage&#123;anyfontsize&#125;</div><div class="line">\newcommand&#123;\muluchap&#125;&#123;\fontsize&#123;20pt&#125;&#123;15pt&#125;\selectfont&#125;</div><div class="line">\newcommand&#123;\mulutit&#125;&#123;\fontsize&#123;35pt&#125;&#123;25pt&#125;\selectfont&#125;</div><div class="line">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</div><div class="line">\usepackage&#123;tocloft&#125;</div><div class="line">\renewcommand&#123;\cfttoctitlefont&#125;&#123;\qingsong\mulutit&#125;	%设定“目录”的字体族与大小</div><div class="line">\renewcommand&#123;\cftchapfont&#125;&#123;\qingsong\muluchap&#125;		%设定“章”的字体族与大小</div><div class="line">\renewcommand&#123;\cftsecfont&#125;&#123;\qingsong&#125;				%设定“节”的字体族</div><div class="line">\renewcommand&#123;\cftsubsecfont&#125;&#123;\qingsong&#125;			%设定“subsec”的字体族</div><div class="line">\setlength&#123;\cftbeforetoctitleskip&#125;&#123;5mm&#125;				%设定“目录”二字到版芯上沿的距离</div><div class="line">\setlength&#123;\cftaftertoctitleskip&#125;&#123;10mm&#125;				%设定“目录”二字到目录正文的距离</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;</div><div class="line">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\usepackage&#123;lipsum&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\tableofcontents</div><div class="line">\chapter&#123;锦瑟1&#125;</div><div class="line">\section&#123;锦瑟无端五十弦&#125;</div><div class="line">\subsection&#123;一弦一柱思华年&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\newpage</div><div class="line">\chapter&#123;锦瑟2&#125;</div><div class="line">\section&#123;庄生晓梦迷蝴蝶&#125;</div><div class="line">\subsection&#123;望帝春深托杜鹃&#125;</div><div class="line">\lipsum[3-5]</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fkk4hllcy7j31gy0oegp4.jpg" alt=""></p>
 
       
     </div>
@@ -517,8 +554,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/01/Python数据处理matplotlib篇（二）——全局设置初始参数/" rel="prev" title="设置全局参数——定制matplotlib（部分翻译）">
-                设置全局参数——定制matplotlib（部分翻译） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/01/Python数据处理笔记matplotlib篇（一）/" rel="prev" title="Python数据处理笔记matplotlib篇（一）">
+                Python数据处理笔记matplotlib篇（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
