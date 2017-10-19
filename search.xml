@@ -66,7 +66,43 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式]]></title>
+    <title><![CDATA[LaTeX入门系列之宏]]></title>
+    <url>%2F2017%2F05%2F21%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AE%8F%2F</url>
+    <content type="text"><![CDATA[关键词：宏，宏包 这一节，我们讨论LaTeX中的宏。 LaTeX就是运行于TeX基础上的一系列宏集，这些宏经过预编译就得到了LaTeX格式]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>宏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>字体</tag>
+        <tag>间距</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>符号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式具体实现]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[关键词：数学公式 这一节，我们讨论数学公式。 综述数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath} 数学公式分为 行内公式（inline equation) 使用两个$符号，形如$公式$ 行间公式 (display equation) 不带标号的行间公式： $$……$$ \[ …… \ ] \begin{displaymath} …… \end{displaymath} 带标号的行间公式： \begin{equation} …… \end{equation} 例子： 123456789101112\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：\[a^2 + b^2 = r^2\]我要是使用带有编号的公式呢？要这样；\begin&#123;equation&#125;a^2 + b^2 = c^2\end&#123;equation&#125;\end&#123;document&#125; 公式内实现中文实现公式内中文的方法： \text{中文} 推荐 \mbox{中文} 并不推荐 分数形式行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子 123456789101112131415\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125; %无衬线字体族提供的命令\texttt&#123;dfrac&#125; %打字机字体形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下\begin&#123;equation&#125; %行间分数排布\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;\end&#123;equation&#125;\end&#123;document&#125; 上下标LaTeX数学公式的上下标可以说的非常的精彩了。 1234567891011121314151617181920212223242526272829303132333435363738\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%------%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par%------%最普通的上下标举例——行间公式\begin&#123;equation&#125;10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n\end&#123;equation&#125; %-------%几个特殊符号(度数，求导符号)举例——行内公式$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par%------%几个特殊符号(度数，求导符号)举例——行间公式\begin&#123;equation&#125;f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;\end&#123;equation&#125; %------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad %前置角标\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $ %四周角标%------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式\begin&#123;equation&#125;\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;\end&#123;equation&#125; %------\end&#123;document&#125; 化学公式使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。 12\usepackage&#123;mhchem&#125;\ce&#123;这里面填化学式或者化学元素即可&#125; 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%这是水\ce&#123;H2O&#125;\par%这是乙酸乙酯\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125; \end&#123;document&#125; 上下线以及上下括号使用amsmath宏包提供的命令： 123456\overline&#123;内容&#125; %上端划线\underline&#123;内容&#125; %下端划线\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125; %上端花括号\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125; %下端花括号还有若干加箭头的命令形如：\over(under)left(right)arrow&#123;内容&#125; 123456789101112131415\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------\begin&#123;gather&#125; %gather环境也是常用的排版多行公式的环境%上下线和上下箭头\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\%上下括号\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;\end&#123;gather&#125;------\end&#123;document&#125; 平方根实现形式\sqrt[开放次数]{被开方数} 12345678910111213\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------%\uproot&#123;16&#125;实现向上平移16个单位\begin&#123;equation&#125;\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;\end&#123;equation&#125;------\end&#123;document&#125; 几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理： 12\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度 但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：使用\mathstrut 这个表示一个圆括号高度与深度的支架，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。 123456\begin&#123;equation&#125;%单独开平方\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125; \qquad %使用\mathstrut支架来平衡不同高度与深度\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;\end&#123;equation&#125; 矩阵同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。 矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境 矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行 12345678910111213141516171819202122232425262728293031323334353637383940\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\begin&#123;align&#125;\text&#123;matrix环境&#125;&amp;\colon\quad\begin&#123;matrix&#125;a&amp;b\\c&amp;d\end&#123;matrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;pmatrix&#125;a&amp;b\\c&amp;d\end&#123;pmatrix&#125;\\\text&#123;vmatrix环境&#125;&amp;\colon\quad\begin&#123;vmatrix&#125;a&amp;b\\c&amp;d\end&#123;vmatrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;bmatrix&#125;a&amp;b\\c&amp;d\end&#123;bmatrix&#125;\\\text&#123;Bmatrix环境&#125;&amp;\colon\quad\begin&#123;Bmatrix&#125;a&amp;b\\c&amp;d\end&#123;Bmatrix&#125;\\\text&#123;Vmatrix环境&#125;&amp;\colon\quad\begin&#123;Vmatrix&#125;a&amp;b\\c&amp;d\end&#123;Vmatrix&#125;\end&#123;align&#125;\end&#123;document&#125; 矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点 命令 形式 \dots 水平点点点 \vdots 竖直点点点 \ddots 斜点点点 多行公式(实现，对齐，编号) 多行公式 实现 对齐 编号 \begin{gather*} 居中 无编号 \begin{gather} 居中 编号，可用\notag来删除某行公式编号 \begin{align*} 使用&amp;对某符号竖直对齐 无编号 \begin{align} 使用&amp;对某符号竖直对齐 编号，可用\notag来删除某行公式编号 123456789101112131415161718192021222324252627282930313233\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;\begin&#123;document&#125;------%使用\\换行居中排布公式\begin&#123;gather*&#125;(a+b)^2\\=a^2 + b^2 + 2ab \\=12\end&#123;gather*&#125;------\begin&#123;gather&#125;(a+b)^2 \notag \\=a^2 + b^2 + 2ab \\=12 \notag\end&#123;gather&#125;------%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;\begin&#123;align*&#125;&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \\&amp;=12\end&#123;align*&#125;------\begin&#123;align&#125;&amp;\phantom&#123;=&#125;(a+b)^2 \\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \notag \\&amp;=12\qquad\text&#123;易得&#125;\notag\end&#123;align&#125;------\end&#123;document&#125;]]></content>
       <categories>
@@ -84,8 +120,8 @@
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>自动化</tag>
         <tag>参考文献</tag>
+        <tag>自动化</tag>
         <tag>bibtex</tag>
       </tags>
   </entry>
@@ -165,17 +201,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
-    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
-    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>多文档</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之标题]]></title>
     <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%A0%87%E9%A2%98%2F</url>
     <content type="text"><![CDATA[关键词：标题 这一节，我们讨论一个文档的标题 文章的标题可以分为两部分，一部分是声明标题，一部分是显示输出标题。 每个标题由 标题 作者 时间组成 例子： 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;---或者使用如下方式定义时间的格式\ctexset&#123;today=big&#125;---% \CTEXoptions[today = big]%\CTEXoptions[today = small]\CTEXoptions[today = old]%ctex宏包用来设置中文日期的显示方式\title&#123;八卦\\六十四卦&#125;\author&#123;LiErhua \and 李二花&#125;%用 and 分隔多个作者\date&#123;\today&#125;\begin&#123;document&#125;\maketitle%输出标题项\end&#123;document&#125; 如果像是毕业论文这种文档的标题页建议使用 titlepage 环境进行手动排版 123\begin&#123;titlepage&#125;标题内容\end&#123;titlepage&#125; 更进阶： Wilson宏包文档]]></content>
@@ -184,6 +209,17 @@
       </categories>
       <tags>
         <tag>标题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
+    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
+    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>多文档</tag>
       </tags>
   </entry>
   <entry>
@@ -196,6 +232,17 @@
       <tags>
         <tag>章节</tag>
         <tag>定制章节</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之参考文献]]></title>
+    <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%2F</url>
+    <content type="text"><![CDATA[关键词：参考文献 这一节，我们讨论参考文献。我们基于bibtex进行参考文献处理。 tex正文需要做的准备： 导言区使用宏包\bibliographystyle{参考文献格式} 正文使用\cite{需要的文献} 一般文末处使用\bibliography{数据库名字（后缀为.bib的）不把后缀写上}命令点名使用的文献数据库库 参考文献格式: bib数据库的结构（一般我们使用jabref软件生成） 我们可以在Google schoolar 中挑选我们的文章，然后复制 bibtex 形式的引用，添加到我们自己要使用的数据库中，或者直接在 jebref 中进行手动编辑。 注意： bib 是一个数据库，其中的内容并不一定等于 LaTeX 排版参考文献列表时的内容。也就是说，如果 bib 数据库中有 10 条文献信息，并不一定说 LaTeX 排版出来的 PDF 文件中，参考文献列表里也一定有 10 条。实际排版出来的参考文献列表中有多少条文献，实际是哪几条，具体由文中使用的 \cite 命令（以及 \nocite 命令）指定。如果没有使用 \cite 命令调取文献信息，那么即使在 bib 文件中定义了文献信息，也不会展现在参考文献列表中。很多人对此误解甚深，于是经常有人问道「为什么我在 bib 文件里写的文献，不出现在参考文献中」之类的问题。 1%myarticle.bib 延伸阅读： 符合 GBT7714-2005 标准的 BibTeX Style 使用 BibTeX 生成参考文献列表 小结（摘自孟晨哥的博客） BibTeX 是一个参考文献格式化工具，它会根据需要，按照（bst 文件规定的）某种格式，将（bib 文件中包含的）参考文献信息，格式化 为 LaTeX 能够使用的列表信息。 正确使用 BibTeX 处理参考文献，需要先用 (Xe/PDF)LaTeX 编译 tex 文件，生成 aux 辅助文件。 执行 BibTeX 将读入 aux 文件，搞清楚用户需要哪些文献。 紧接着，BibTeX 根据 aux 文件中的内容，找到正确的 bst 和 bib 文件，并将参考文献信息格式化为 LaTeX 的 thebibliography 环境，作为 bbl 文件输出。 第二次执行 (Xe/PDF)LaTeX 将会读入新生成的 bbl 文件，同时更新 aux 文件。 此时，参考文献列表将会正常展示，但是正文中的引用标记显示为问号。 第三次执行 (Xe/PDF)LaTeX 将会读入 bbl 文件和更新过后的 aux 文件。此时，参考文献相关内容都正常显示。 因此，总的来说，想要正确使用 BibTeX 协同 LaTeX 处理参考文献，需要编译四次]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>参考文献</tag>
       </tags>
   </entry>
   <entry>
@@ -247,6 +294,39 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>抄录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之盒子]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>盒子</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
@@ -280,39 +360,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之盒子]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>盒子</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文本环境</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之文字强调]]></title>
     <url>%2F2017%2F03%2F13%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%96%87%E5%AD%97%E5%BC%BA%E8%B0%83%2F</url>
     <content type="text"><![CDATA[关键词：文字强调 在文章中，我们有时需要对某几句话或者几个字进行重点的强调 基本的强调形式一般分为：斜体，加粗，下划线 分别对应：\emph{文字}，\textbf{文字}，\underline{文字} 12345678\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\begin&#123;document&#125;锦瑟无端五十弦，&#123;\qingsong 一弦一柱思华年&#125;\\\underline&#123;庄生晓梦迷蝴蝶&#125;，\emph&#123;望帝春深托杜鹃&#125;\end&#123;document&#125; 推荐使用如下两个宏包来进行着重处理： 1.英文环境宏包：\ulem 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;ulem&#125;\begin&#123;document&#125;\uline&#123;hello&#125;\uuline&#123;hello&#125;\uwave&#123;hello&#125;\sout&#123;hello&#125;\end&#123;document&#125;%除此之外，还提供了许多其他的着重形式 2.中文环境宏包：\CJKfntef 123456789\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;CJKfntef&#125;\begin&#123;document&#125;\CJKunderline&#123;测试&#125;\CJKunderdot&#123;测试&#125;\CJKunderwave&#123;测试&#125;\CJKsout&#123;测试&#125;\end&#123;document&#125;]]></content>
@@ -335,9 +382,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -346,9 +393,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -428,17 +475,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
-    <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
-    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>表格</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX习题答案]]></title>
     <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
     <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
@@ -450,15 +486,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Word字号与磅数对照表]]></title>
-    <url>%2F2017%2F01%2F03%2F%20Word%20%E5%AD%97%E5%8F%B7%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[关键词：Word，字号，磅 介绍下 Word 字号对照表 字号 磅 初号 42 小初 36 一号 26 小一号 24 二号 22 小二号 18 三号 16 小三号 15 四号 14 小四号 12 五号 10.5 小五号 9 六号 7.5 小六号 6.5 七号 5.5 八号 5 度量换算表 英寸(in) 厘米(cm) 毫米(mm) 磅(pt) 像素 inch centimeter millimetre point pixel 1 2.54 25.4 72 96（非固定） ppi(pixels per inch):每英寸像素数量，一般用于电脑行业 dpi(dots per inch):每英寸点数，一般用于印刷行业]]></content>
+    <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
+    <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
       <categories>
-        <category>排版</category>
+        <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>word</tag>
-        <tag>字号</tag>
+        <tag>表格</tag>
       </tags>
   </entry>
   <entry>
@@ -474,9 +509,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[Word字号与磅数对照表]]></title>
+    <url>%2F2017%2F01%2F03%2F%20Word%20%E5%AD%97%E5%8F%B7%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[关键词：Word，字号，磅 介绍下 Word 字号对照表 字号 磅 初号 42 小初 36 一号 26 小一号 24 二号 22 小二号 18 三号 16 小三号 15 四号 14 小四号 12 五号 10.5 小五号 9 六号 7.5 小六号 6.5 七号 5.5 八号 5 度量换算表 英寸(in) 厘米(cm) 毫米(mm) 磅(pt) 像素 inch centimeter millimetre point pixel 1 2.54 25.4 72 96（非固定） ppi(pixels per inch):每英寸像素数量，一般用于电脑行业 dpi(dots per inch):每英寸点数，一般用于印刷行业]]></content>
+      <categories>
+        <category>排版</category>
+      </categories>
+      <tags>
+        <tag>word</tag>
+        <tag>字号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -485,9 +532,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
