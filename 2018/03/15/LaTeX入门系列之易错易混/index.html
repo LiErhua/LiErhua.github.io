@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：注意">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-29T12:45:31.000Z">
+<meta property="og:updated_time" content="2017-10-23T03:59:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之易错易混">
 <meta name="twitter:description" content="关键词：注意">
@@ -407,9 +407,19 @@
         <p>关键词：注意</p>
 <a id="more"></a>
 <p>这一节，我们把我经常出错的地方列一下</p>
+<p>1</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">\vskip 5cm %不能使用\vskip&#123;5cm&#125;</div></pre></td></tr></table></figure>
+<p>2</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;%定义字体族新的名称</div><div class="line">\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;%设置CJK字体族</div><div class="line">注意二者的意思不同，一个是fontfamily一个是familyfont</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;</div><div class="line">尽量在定义字体的时候把正体，斜体，粗体等全部定义完整，不然会出现找不到这种字体，爆出警告</div></pre></td></tr></table></figure>
+<p>3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;</div><div class="line">尽量在定义字体的时候把正体，斜体，粗体等全部定义完整，不然会出现找不到这种字体，爆出警告</div></pre></td></tr></table></figure></p>
+<p>4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">%geometry的设置一定要放在页眉页脚的设置之前，一定注意</div><div class="line">\usepackage[]&#123;geometry&#125;</div><div class="line">\usepackage&#123;fancyhdr&#125;</div><div class="line">\pagestyle&#123;fancy&#125;</div></pre></td></tr></table></figure>
+<p>5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">\usepackage[heading = true]&#123;ctex&#125;</div><div class="line">%一定注意ctexset设定内不能暴力分行（可以自然换行），不然不能编译</div><div class="line">\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;&#125;&#125;</div><div class="line">\newcommand&#123;\mysection&#125;[1]&#123;\Large #1&#125;</div></pre></td></tr></table></figure>
+<p>6</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\overbrace&#123;括号内容&#125;^&#123;注释内容&#125;</div><div class="line">%注意一定要加上^或者_符号，不然会错误</div></pre></td></tr></table></figure>
+<p>7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">%在使用align或者gather环境时，一定注意，里面尽量不要出现空行，且最后一项不要加\\</div><div class="line">\begin&#123;align&#125;</div><div class="line">第一项\\</div><div class="line">第二项\\</div><div class="line">第三项(不加\\)</div><div class="line">\end&#123;align&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -469,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/19/夜雨秋灯/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/10/19/LaTeX入门系列之完整实例/" rel="next" title="LaTeX入门系列之完整实例">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之完整实例
               </a>
             
           </div>
@@ -570,7 +580,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -592,7 +602,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
