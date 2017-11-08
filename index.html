@@ -622,7 +622,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/08/Python爬虫的一些注意事项/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2017/11/08/Python爬虫的一些注意事项/" itemprop="url">Python爬虫的一些注意事项</a></h1>
         
 
         <div class="post-meta">
@@ -644,6 +644,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -673,49 +695,14 @@
 
       
         
-          
-            <h3 id="Python爬虫的一些注意事项"><a href="#Python爬虫的一些注意事项" class="headerlink" title="Python爬虫的一些注意事项"></a>Python爬虫的一些注意事项</h3><hr>
-<ul>
-<li><h4 id="如何查看网页是由-js-加载还是直接加载的："><a href="#如何查看网页是由-js-加载还是直接加载的：" class="headerlink" title="如何查看网页是由 js 加载还是直接加载的："></a>如何查看网页是由 js 加载还是直接加载的：</h4></li>
-</ul>
-<blockquote>
-<p>我们使用 chrome 浏览器，点击域名栏左侧的安全或者是叹号，在里面将 javascript 选项选择阻止，如果重新加载之后网页没有变化，就说明不是使用 js 加载的，如果加载不出来，说明使用 js 加载的。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1flazroaoy4j31kw01rgmb.jpg" alt=""></p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flazs0flrlj31kw01uaad.jpg" alt=""></p>
-</blockquote>
-<hr>
-<ul>
-<li><h4 id="关于爬虫协议-robots-txt"><a href="#关于爬虫协议-robots-txt" class="headerlink" title="关于爬虫协议 robots.txt"></a>关于爬虫协议 robots.txt</h4></li>
-</ul>
-<blockquote>
-<p>一般在站点的根目录下都会放置一个爬虫协议如：</p>
-<p><a href="http://www.baidu.com/robots.txt" target="_blank" rel="external">http://www.baidu.com/robots.txt</a></p>
-<p>里面的内容形式如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; User-agent: Baiduspider</div><div class="line">&gt; Disallow: /baidu</div><div class="line">&gt; Disallow: /s?</div><div class="line">&gt; Disallow: /ulink?</div><div class="line">&gt; Disallow: /link?</div><div class="line">&gt;</div><div class="line">&gt; User-agent: Googlebot</div><div class="line">&gt; Disallow: /baidu</div><div class="line">&gt; Disallow: /s?</div><div class="line">&gt; Disallow: /shifen/</div><div class="line">&gt; Disallow: /homepage/</div><div class="line">&gt; Disallow: /cpro</div><div class="line">&gt; Disallow: /ulink?</div><div class="line">&gt; Disallow: /link?</div><div class="line">&gt;</div><div class="line">&gt; ....</div><div class="line">&gt; ....</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>解释下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; #表示禁止所有搜索引擎访问网站的所有部分</div><div class="line">&gt; User-agent: *</div><div class="line">&gt; Disallow: /</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; #禁止所有搜索引擎，访问站点的一下几个目录的内容，其他目录的内容可以访问</div><div class="line">&gt; User-agent: *</div><div class="line">&gt; Disallow: /01/</div><div class="line">&gt; Disallow: /02/</div><div class="line">&gt; Disallow: /03/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; #特定引擎 BadBot, 不允许访问的内容是所有内容</div><div class="line">&gt; User-agent: BadBot</div><div class="line">&gt; Disallow: /</div><div class="line">&gt; #特定引擎 BadHot, 不允许访问的内容是站点 subject 目录下的内容</div><div class="line">&gt; User-agent: BadHot</div><div class="line">&gt; Disallow: /subject/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; Allow: /cgi-bin/　这里定义是允许爬寻cgi-bin目录下面的目录</div><div class="line">&gt; Allow: /tmp 这里定义是允许爬寻tmp的整个目录</div><div class="line">&gt; Allow: .htm$ 仅允许访问以".htm"为后缀的URL。</div><div class="line">&gt; Allow: .gif$ 允许抓取网页和gif格式图片</div><div class="line">&gt; Sitemap: 网站地图 告诉爬虫这个页面是网站地图</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<hr>
-<ul>
-<li>关于使用 xpath </li>
-</ul>
-
-          
+          <p>关键词：爬虫</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/08/Python爬虫的一些注意事项/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1816,7 +1803,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
