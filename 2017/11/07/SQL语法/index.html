@@ -107,13 +107,18 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：SQL,语法">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1flap9a3g4vj31ie0augn9.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1flap24t1b0j31kw02faab.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1flap7efr9jj31hg0ao0ud.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1flaphkoog2j31jq07mmym.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1flapsbagsoj31j808m3zu.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fl9sk93fa8j31kw03jwfn.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fl9sm4nxzzj31kw03hwfl.jpg">
-<meta property="og:updated_time" content="2017-11-07T12:32:51.000Z">
+<meta property="og:updated_time" content="2017-11-08T09:55:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL语法">
 <meta name="twitter:description" content="关键词：SQL,语法">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fl9sk93fa8j31kw03jwfn.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1flap9a3g4vj31ie0augn9.jpg">
 
 
 
@@ -410,6 +415,21 @@
         <p>关键词：SQL,语法</p>
 <a id="more"></a>
 <p>这一节，我们讨论一下SQL的语法问题</p>
+<h4 id="SQL的查询"><a href="#SQL的查询" class="headerlink" title="SQL的查询"></a>SQL的查询</h4><p>这是一个最简单的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> prod_id, prod_name</div><div class="line"><span class="keyword">FROM</span> Products;</div></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1flap9a3g4vj31ie0augn9.jpg" alt=""></p>
+<p>使用WHERE对查询进行限定</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> prod_id, prod_name</div><div class="line"><span class="keyword">FROM</span> Products</div><div class="line"><span class="keyword">WHERE</span> prod_id = <span class="string">'BNBG01'</span>;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1flap24t1b0j31kw02faab.jpg" alt=""></p>
+<p>对查询的数据进行排序，使用 ORDER BY，其中 DESC 表示降序排列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> prod_id, prod_name</div><div class="line"><span class="keyword">FROM</span> Products</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_id <span class="keyword">DESC</span>;</div></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flap7efr9jj31hg0ao0ud.jpg" alt=""></p>
+<p>使用 LIKE 与通配符 % 查询字符串</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price, prod_desc</div><div class="line"><span class="keyword">FROM</span> Products</div><div class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">'%ea%'</span>;</div></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flaphkoog2j31jq07mmym.jpg" alt=""></p>
+<p>使用 NOT 和 IN 进行筛选</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> prod_id, prod_name</div><div class="line"><span class="keyword">FROM</span> Products</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> prod_id <span class="keyword">IN</span> (<span class="string">'RYL01'</span>,<span class="string">'RYL02'</span>)</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name, prod_id;</div></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1flapsbagsoj31j808m3zu.jpg" alt=""></p>
 <h4 id="SQL的联结"><a href="#SQL的联结" class="headerlink" title="SQL的联结"></a>SQL的联结</h4><h5 id="SQL的自然联结"><a href="#SQL的自然联结" class="headerlink" title="SQL的自然联结"></a>SQL的自然联结</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> C.*, O.order_num, O.order_date,</div><div class="line">	OI.prod_id, OI.quantity, OI.item_price</div><div class="line"><span class="keyword">FROM</span> Customers <span class="keyword">AS</span> C, Orders <span class="keyword">AS</span> O, OrderItems <span class="keyword">AS</span> OI</div><div class="line"><span class="keyword">WHERE</span> C.cust_id = O.cust_id</div><div class="line"><span class="keyword">AND</span>   OI.order_num = O.order_num</div><div class="line"><span class="keyword">AND</span>   prod_id = <span class="string">"RGAN01"</span>;</div></pre></td></tr></table></figure>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fl9sk93fa8j31kw03jwfn.jpg" alt=""></p>
 <p>这种在一个表内使用通配符*的联结，最后返回的数据没有重复，但是如果我们如下表达</p>
@@ -487,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/15/LaTeX入门系列之易错易混/" rel="prev" title="LaTeX入门系列之易错易混">
-                LaTeX入门系列之易错易混 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/08/https:book.douban.com:subject:1084336:comments:---/" rel="prev" title="爬虫入门（1）">
+                爬虫入门（1） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,7 +611,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -602,7 +622,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -613,7 +633,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -648,7 +668,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL的联结"><span class="nav-number">1.</span> <span class="nav-text">SQL的联结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL的自然联结"><span class="nav-number">1.1.</span> <span class="nav-text">SQL的自然联结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL的查询"><span class="nav-number">1.</span> <span class="nav-text">SQL的查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL的联结"><span class="nav-number">2.</span> <span class="nav-text">SQL的联结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL的自然联结"><span class="nav-number">2.1.</span> <span class="nav-text">SQL的自然联结</span></a></li></ol></li></ol></div>
             
 
           </div>
