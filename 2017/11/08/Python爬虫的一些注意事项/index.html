@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="注意事项,爬虫," />
+  <meta name="keywords" content="爬虫,注意事项," />
 
 
 
@@ -100,18 +100,20 @@
 
 
 <meta name="description" content="关键词：爬虫">
-<meta name="keywords" content="注意事项,爬虫">
+<meta name="keywords" content="爬虫,注意事项">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python爬虫的一些注意事项">
+<meta property="og:title" content="Python爬虫入门（1）————一些容易忽视的注意事项">
 <meta property="og:url" content="http://yoursite.com/2017/11/08/Python爬虫的一些注意事项/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：爬虫">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1flazroaoy4j31kw01rgmb.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1flazs0flrlj31kw01uaad.jpg">
-<meta property="og:updated_time" content="2017-11-08T15:45:35.000Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1flbrx54sn4j30ne04tgmz.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1flbxkv484bj30qh0cmjvd.jpg">
+<meta property="og:updated_time" content="2017-11-14T01:00:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python爬虫的一些注意事项">
+<meta name="twitter:title" content="Python爬虫入门（1）————一些容易忽视的注意事项">
 <meta name="twitter:description" content="关键词：爬虫">
 <meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1flazroaoy4j31kw01rgmb.jpg">
 
@@ -149,7 +151,7 @@
 
 
 
-  <title>Python爬虫的一些注意事项 | 夜雨秋灯</title>
+  <title>Python爬虫入门（1）————一些容易忽视的注意事项 | 夜雨秋灯</title>
   
 
 
@@ -335,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python爬虫的一些注意事项</h1>
+          <h1 class="post-title" itemprop="name headline">Python爬虫入门（1）————一些容易忽视的注意事项</h1>
         
 
         <div class="post-meta">
@@ -409,7 +411,13 @@
       
         <p>关键词：爬虫</p>
 <a id="more"></a>
-<p>这一节，我们讨论一下爬虫</p>
+<p>这一节，我们讨论一下爬虫的一些注意事项</p>
+<p>一个好的爬虫专栏:</p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/pachong" target="_blank" rel="external">https://zhuanlan.zhihu.com/pachong</a></p>
+<p>一译</p>
+<p>JSONview插件chrome浏览器</p>
+</blockquote>
 <hr>
 <ul>
 <li><h4 id="如何查看网页是由-js-加载还是直接加载的："><a href="#如何查看网页是由-js-加载还是直接加载的：" class="headerlink" title="如何查看网页是由 js 加载还是直接加载的："></a>如何查看网页是由 js 加载还是直接加载的：</h4></li>
@@ -449,6 +457,56 @@
 <hr>
 <ul>
 <li>关于使用 xpath </li>
+</ul>
+<blockquote>
+<p>xpath 是 lxml 的一个获取HTML的一个东西，可以直接在检查中获取，因为 lxml 由 C 编写，所以速度要比BeautifulSoup快</p>
+</blockquote>
+<ul>
+<li>关于 AJAX 加载的页面</li>
+</ul>
+<blockquote>
+<p>有些网页，我们翻页之后，页面的URL不会发生改变，检查不是因为 js 加载的情况之后，一般在谷歌浏览器中右键检查然后选择network里面的all，这个时候我们换一下页码，然后看看里面的preview，就可以看出来了。</p>
+<p>总结：一般，翻页之后，URL没有发生变化的一般为AJAX加载，我们要从XHR或者JS里面去寻找爬取的线索，一般要把所有的请求清空，然后点击下一页。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1flbrx54sn4j30ne04tgmz.jpg" alt=""></p>
+</blockquote>
+<ul>
+<li>JSONview插件chrome浏览器</li>
+</ul>
+<blockquote>
+<p>可以在chrome 浏览器中使用这个插件，在异步加载 AJAX 过程中，我们就可以在开发者工具中，使用这个插件将 JSON 进行格式化输出</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1flbxkv484bj30qh0cmjvd.jpg" alt=""></p>
+</blockquote>
+<ul>
+<li>请求头headers 和响应头</li>
+</ul>
+<blockquote>
+<p>在反爬虫做的很好的网站，必须加入好多请求头信息，爬虫才会默认我们是人类，而不是机器人</p>
+<p>请求头：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; Accept: text/html,image/*(浏览器可以接收的类型)</div><div class="line">&gt; Accept-Charset: ISO-8859-1(浏览器可以接收的编码类型)</div><div class="line">&gt; Accept-Encoding: gzip,compress(浏览器可以接收压缩编码类型)</div><div class="line">&gt; Accept-Language: en-us,zh-cn(浏览器可以接收的语言和国家类型)</div><div class="line">&gt; Host: www.it315.org:80(浏览器请求的主机和端口)</div><div class="line">&gt; If-Modified-Since: Tue, 11 Jul 2000 18:23:51 GMT(某个页面缓存时间)</div><div class="line">&gt; Referer: http://www.it315.org/index.jsp(请求来自于哪个页面)</div><div class="line">&gt; User-Agent: Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)(浏览器相关信息)</div><div class="line">&gt; Cookie：(浏览器暂存服务器发送的信息)</div><div class="line">&gt; Connection: close(1.0)/Keep-Alive(1.1)(HTTP请求的版本的特点)</div><div class="line">&gt; Date: Tue, 11 Jul 2000 18:23:51 GMT(请求网站的时间)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>响应头：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&gt; Location: http://www.it315.org/index.jsp(控制浏览器显示哪个页面)</div><div class="line">&gt; Server:apache tomcat(服务器的类型)</div><div class="line">&gt; Content-Encoding: gzip(服务器发送的压缩编码方式)</div><div class="line">&gt; Content-Length: 80(服务器发送显示的字节码长度)</div><div class="line">&gt; Content-Language: zh-cn(服务器发送内容的语言和国家名)</div><div class="line">&gt; Content-Type: image/jpeg; charset=UTF-8(服务器发送内容的类型和编码类型)</div><div class="line">&gt; Last-Modified: Tue, 11 Jul 2000 18:23:51 GMT(服务器最后一次修改的时间)</div><div class="line">&gt; Refresh: 1;url=http://www.it315.org(控制浏览器1秒钟后转发URL所指向的页面)</div><div class="line">&gt; Content-Disposition: attachment; filename=aaa.jpg(服务器控制浏览器发下载方式打开文件)</div><div class="line">&gt; Transfer-Encoding: chunked(服务器分块传递数据到客户端） </div><div class="line">&gt; Set-Cookie:SS=Q0=5Lb_nQ; path=/search(服务器发送Cookie相关的信息)</div><div class="line">&gt; Expires: -1(服务器控制浏览器不要缓存网页，默认是缓存)</div><div class="line">&gt; Cache-Control: no-cache(服务器控制浏览器不要缓存网页)</div><div class="line">&gt; Pragma: no-cache(服务器控制浏览器不要缓存网页)  </div><div class="line">&gt; Connection: close/Keep-Alive(HTTP请求的版本的特点)  </div><div class="line">&gt; Date: Tue, 11 Jul 2000 18:23:51 GMT(响应网站的时间)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>特殊的请求头和响应头信息——以知乎为例</li>
+</ul>
+<blockquote>
+<p>知乎你登录后，浏览信息，他的request-header有好多不同之处</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; accept:application/json, text/plain, */*</div><div class="line">&gt; Accept-Encoding:gzip, deflate, br</div><div class="line">&gt; Accept-Language:zh-CN,zh;q=0.8,en;q=0.6</div><div class="line">&gt; authorization:Bearer Mi4xQ01rZEFBQUFBQUFBVUlKWkE0aTVDeGNBQUFCaEFsVk5tY0RXV2dEMXZGbTZpbGJzX2tma0Itamh2RWhWdVdPQzhR|1508471449|a86d19990d47a31f3a9e9024bb1d1a15e8f9a53e</div><div class="line">&gt; Connection:keep-alive</div><div class="line">&gt; Cookie:_zap=5e5da3cd-545c-4642-8392-534f021f53b1; d_c0="AFCCWQOIuQuPTlmLLuby8TEFDROSBhQJEio=|1494209355"; r_cap_id="ODg2OWQ5MGIyMjdkNDkwMDgzNzY1OTE5ZWYzODBhMDE=|1508471442|9a0726321ff2ff543d47c12b9554f6eb4dcff47d"; cap_id="NzEzNGQ3NTVhYjdiNGY5MGEzNzcxZTE0OWY5Nzk2YTM=|1508471442|bf83c58212c39c654e693236611272f7d007cc73"; z_c0=Mi4xQ01rZEFBQUFBQUFBVUlKWkE0aTVDeGNBQUFCaEFsVk5tY0RXV2dEMXZGbTZpbGJzX2tma0Itamh2RWhWdVdPQzhR|1508471449|a86d19990d47a31f3a9e9024bb1d1a15e8f9a53e; aliyungf_tc=AQAAAIkOH0C3Wg0AgqjCOpKX0GRc+8ag; q_c1=7a8336678f744f338ba84397145d8ce1|1508746676000|1492264806000; q_c1=7a8336678f744f338ba84397145d8ce1|1508746676000|1492264806000; s-q=vczh; s-i=1; sid=leqk4kg8; __utma=51854390.948185062.1508471444.1509788776.1510206822.6; __utmc=51854390; __utmz=51854390.1510206822.6.4.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20131026=1^3=entry_date=20131026=1; _xsrf=b842ca7b-0d11-4637-80a0-1260104f0d8b</div><div class="line">&gt; Host:www.zhihu.com</div><div class="line">&gt; Referer:https://www.zhihu.com/people/excited-vczh/following?page=2</div><div class="line">&gt; User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36</div><div class="line">&gt; X-UDID:AFCCWQOIuQuPTlmLLuby8TEFDROSBhQJEio=</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>我把其中特别的几项（爬虫用于验证身份的几项列出来）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; ------一个是authorization</div><div class="line">&gt; authorization:Bearer Mi4xQ01rZEFBQUFBQUFBVUlKWkE0aTVDeGNBQUFCaEFsVk5tY0RXV2dEMXZGbTZpbGJzX2tma0Itamh2RWhWdVdPQzhR|1508471449|a86d19990d47a31f3a9e9024bb1d1a15e8f9a53e</div><div class="line">&gt; ------一个是User-Agent</div><div class="line">&gt; User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36</div><div class="line">&gt; ------一个是X-UDID</div><div class="line">&gt; X-UDID:AFCCWQOIuQuPTlmLLuby8TEFDROSBhQJEio=</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>我们在爬虫的时候，需要将他们以字典的形式放在 header 字典里</p>
+</blockquote>
+<ul>
+<li>大规模爬取与小规模的差很多</li>
 </ul>
 
       
@@ -496,9 +554,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/注意事项/" rel="tag"># 注意事项</a>
-          
             <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/注意事项/" rel="tag"># 注意事项</a>
           
         </div>
       
@@ -625,7 +683,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -636,7 +694,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -647,7 +705,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
