@@ -12,11 +12,47 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
+    <url>%2F2018%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95%E5%92%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[经常见到~/.，来说一说他是什么 首先是.代表当前目录，也可以用./ ..代表上级目录，也可以用../ 注意：如果一个目录或者文件以一个.开始的话，说明这个目录或者文件是一个隐藏的目录或者文件，比如（.bashrc），即以默认方式查找时，不显示该目录或文件（需要使用ls -a来查看） 在Mac中，有一个根目录/，然后根目录下有一个/Users的目录，里面有所有的用户 而~就代表你当前使用的用户的目录下，比如，我在任意环境下使用cd ~/就代表立即切换到/Users内以我自己的名字命名的目录，比如本机的目录就是fplee，然后就可以在此文件夹内进行操作！ 其中，/代表的是根目录，根目录下有好多的其他的文件夹或文件，在Linux系统中一般的如下： 稍后整理（未完待续……）]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>日拱一卒</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[matplotlib的一个小例子]]></title>
+    <url>%2F2017%2F12%2F06%2Fmatplotlib%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E4%BE%8B%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[一个例子： 123456#-*-coding:utf-8-*-#文件名: ch.pydef set_ch(): from pylab import mpl mpl.rcParams['font.sans-serif'] = ['STFangsong'] # 指定默认字体 mpl.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970"""1-导入Excel文档2-获得每一列数据3-第一列作为X轴4-2~17列作为Y的数据"""import chch.set_ch()from collections import OrderedDictimport xlrdimport matplotlib.pyplot as pltimport matplotlib as mplimport numpy as npimport scipyfrom scipy.interpolate import splinefrom matplotlib import tickerfont = &#123; 'family':'STFangsong', 'size':12 &#125;mpl.rc('font',**font)mpl.rc('figure',autolayout = True,facecolor = 'white')#figure自动使所有内容全部自适应出现在整个图像内mpl.rc('axes',facecolor = 'white',grid = True)#导入表格，获取sheetpath = "/Volumes/大白菜/研究生研究课题工作/国网报告整理/20170902严主任数据/实验数据/16路微水变化对比.xlsx"book_temp = xlrd.open_workbook(path)sheetName = book_temp.sheet_names()#建立每一列的数组，数组的元素是1~17列的数据sheet1 = book_temp.sheet_by_name(sheetName[0])col_name = []for i in range(16): col_name.append('col_data_'+str(i)) col_name[i] = sheet1.col_values(i)[1::15]#列出X轴的数据x = np.array([x for x in range(len(col_name[0]))])xnew = np.linspace(x.min(),x.max(),3000)#Y轴的数据，使用有序字典y = OrderedDict()for i in range(15): y[i] = col_name[i+1]ynew = OrderedDict()for i in range(15): ynew[i] = spline(x,y[i],xnew)#曲线平滑处理#进行绘图fig,ax = plt.subplots(1,1)for i in range(15): ax.plot(xnew,ynew[i],label = str(i+1)+"号")# plt.xlabel("时间")plt.ylabel("微水($\mu L/L$)")plt.legend(loc = 0,framealpha = 0.5,fontsize = 8,frameon = False)#修改legend的大小plt.title("16路微水变化对比图")#改变X轴坐标的显示import matplotlib.ticker as tickertick_spacing = 15plt.xticks(x, col_name[0], rotation=15)#改变X轴显示的内容ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))#改变X轴显示的密度fig.set_size_inches(6.3,3.5)plt.savefig('./images/%s.pdf'%(ax.get_title()),dpi = 300,bbox_inches=None, pad_inches=0.1)plt.savefig('./images/%s.png'%(ax.get_title()),dpi = 300,bbox_inches=None, pad_inches=0.1)plt.show()]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[廖大的Web有感]]></title>
+    <url>%2F2017%2F11%2F29%2F%E5%BB%96%E5%A4%A7%E7%9A%84Web%E6%9C%89%E6%84%9F%2F</url>
+    <content type="text"><![CDATA[廖大的Web教程真是让我领略了编程之美： 在使用aiohttp异步框架写Web时，刚开始一直有几点不是太明白，现在想来还是太年轻，其实廖大的教程写的非常好。 主要是集中在URL处理函数上]]></content>
+      <categories>
+        <category>essay</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）]]></title>
     <url>%2F2017%2F11%2F29%2FMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B0%E7%9A%84%E6%84%9F%E6%82%9F%EF%BC%88%E7%BB%93%E5%90%88%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8aiomysql%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89%2F</url>
     <content type="text"><![CDATA[首先要装好MySQL 123456789101112131415161718192021222324import asyncioimport aiomysql#导入我们需要使用的协程库loop = asyncio.get_event_loop()#建立一个协程循环#建立一个测试文件@asyncio.coroutinedef test_example(): #里面是我们必填的文件，一定注意db的名字是上图对应的哪里，纠结了一下午。。。 conn = yield from aiomysql.connect(host='127.0.0.1', port=3306, user='root', password='0000', db='demo', loop=loop) cur = yield from conn.cursor() yield from cur.execute("SELECT * FROM users") print(cur.description) r = yield from cur.fetchall() print(r) yield from cur.close() conn.close()loop.run_until_complete(test_example())loop.run_forever()]]></content>
       <categories>
         <category>MySQL</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Python科学计算国网实例]]></title>
+    <url>%2F2017%2F11%2F29%2FPython%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%9B%BD%E7%BD%91%E5%AE%9E%E4%BE%8B%2F</url>
+    <content type="text"><![CDATA[一个国家电网的实例： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970"""1-导入Excel文档2-获得每一列数据3-第一列作为X轴4-2~17列作为Y的数据"""import chch.set_ch()from collections import OrderedDictimport xlrdimport matplotlib.pyplot as pltimport matplotlib as mplimport numpy as npimport scipyfrom scipy.interpolate import splinefrom matplotlib import tickerfont = &#123; 'family':'STFangsong', 'size':12 &#125;mpl.rc('font',**font)mpl.rc('figure',autolayout = True,facecolor = 'white')#figure自动使所有内容全部自适应出现在整个图像内mpl.rc('axes',facecolor = 'white',grid = True)#导入表格，获取sheetpath = "/Volumes/大白菜/研究生研究课题工作/国网报告整理/20170902严主任数据/实验数据/16路微水变化对比.xlsx"book_temp = xlrd.open_workbook(path)sheetName = book_temp.sheet_names()#建立每一列的数组，数组的元素是1~17列的数据sheet1 = book_temp.sheet_by_name(sheetName[0])col_name = []for i in range(16): col_name.append('col_data_'+str(i)) col_name[i] = sheet1.col_values(i)[1::15]#列出X轴的数据x = np.array([x for x in range(len(col_name[0]))])xnew = np.linspace(x.min(),x.max(),3000)#Y轴的数据，使用有序字典y = OrderedDict()for i in range(15): y[i] = col_name[i+1]ynew = OrderedDict()for i in range(15): ynew[i] = spline(x,y[i],xnew)#曲线平滑处理#进行绘图fig,ax = plt.subplots(1,1)for i in range(15): ax.plot(xnew,ynew[i],label = str(i+1)+"号")# plt.xlabel("时间")plt.ylabel("微水($\mu L/L$)")plt.legend(loc = 0,framealpha = 0.5,fontsize = 8,frameon = False)#修改legend的大小plt.title("16路微水变化对比图")#改变X轴坐标的显示import matplotlib.ticker as tickertick_spacing = 15plt.xticks(x, col_name[0], rotation=15)#改变X轴显示的内容ax.xaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))#改变X轴显示的密度fig.set_size_inches(6.3,3.5)plt.savefig('./images/%s.pdf'%(ax.get_title()),dpi = 300,bbox_inches=None, pad_inches=0.1)plt.savefig('./images/%s.png'%(ax.get_title()),dpi = 300,bbox_inches=None, pad_inches=0.1)plt.show()]]></content>
+      <categories>
+        <category>python</category>
       </categories>
   </entry>
   <entry>
@@ -286,6 +322,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>符号</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之数学公式具体实现]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[关键词：数学公式 这一节，我们讨论数学公式。 综述数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath} 数学公式分为 行内公式（inline equation) 使用两个$符号，形如$公式$ 行间公式 (display equation) 不带标号的行间公式： $$……$$ \[ …… \ ] \begin{displaymath} …… \end{displaymath} 带标号的行间公式： \begin{equation} …… \end{equation} 例子： 123456789101112\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：\[a^2 + b^2 = r^2\]我要是使用带有编号的公式呢？要这样；\begin&#123;equation&#125;a^2 + b^2 = c^2\end&#123;equation&#125;\end&#123;document&#125; 公式内实现中文实现公式内中文的方法： \text{中文} 推荐 \mbox{中文} 并不推荐 分数形式行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子 123456789101112131415\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125; %无衬线字体族提供的命令\texttt&#123;dfrac&#125; %打字机字体形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下\begin&#123;equation&#125; %行间分数排布\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;\end&#123;equation&#125;\end&#123;document&#125; 上下标LaTeX数学公式的上下标可以说的非常的精彩了。 1234567891011121314151617181920212223242526272829303132333435363738\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%------%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par%------%最普通的上下标举例——行间公式\begin&#123;equation&#125;10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n\end&#123;equation&#125; %-------%几个特殊符号(度数，求导符号)举例——行内公式$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par%------%几个特殊符号(度数，求导符号)举例——行间公式\begin&#123;equation&#125;f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;\end&#123;equation&#125; %------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad %前置角标\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $ %四周角标%------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式\begin&#123;equation&#125;\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;\end&#123;equation&#125; %------\end&#123;document&#125; 化学公式使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。 12\usepackage&#123;mhchem&#125;\ce&#123;这里面填化学式或者化学元素即可&#125; 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%这是水\ce&#123;H2O&#125;\par%这是乙酸乙酯\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125; \end&#123;document&#125; 上下线以及上下括号使用amsmath宏包提供的命令： 123456\overline&#123;内容&#125; %上端划线\underline&#123;内容&#125; %下端划线\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125; %上端花括号\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125; %下端花括号还有若干加箭头的命令形如：\over(under)left(right)arrow&#123;内容&#125; 123456789101112131415\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------\begin&#123;gather&#125; %gather环境也是常用的排版多行公式的环境%上下线和上下箭头\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\%上下括号\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;\end&#123;gather&#125;------\end&#123;document&#125; 平方根实现形式\sqrt[开放次数]{被开方数} 12345678910111213\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------%\uproot&#123;16&#125;实现向上平移16个单位\begin&#123;equation&#125;\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;\end&#123;equation&#125;------\end&#123;document&#125; 几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理： 12\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度 但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：使用\mathstrut 这个表示一个圆括号高度与深度的支架，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。 123456\begin&#123;equation&#125;%单独开平方\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125; \qquad %使用\mathstrut支架来平衡不同高度与深度\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;\end&#123;equation&#125; 矩阵同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。 矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境 矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行 12345678910111213141516171819202122232425262728293031323334353637383940\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\begin&#123;align&#125;\text&#123;matrix环境&#125;&amp;\colon\quad\begin&#123;matrix&#125;a&amp;b\\c&amp;d\end&#123;matrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;pmatrix&#125;a&amp;b\\c&amp;d\end&#123;pmatrix&#125;\\\text&#123;vmatrix环境&#125;&amp;\colon\quad\begin&#123;vmatrix&#125;a&amp;b\\c&amp;d\end&#123;vmatrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;bmatrix&#125;a&amp;b\\c&amp;d\end&#123;bmatrix&#125;\\\text&#123;Bmatrix环境&#125;&amp;\colon\quad\begin&#123;Bmatrix&#125;a&amp;b\\c&amp;d\end&#123;Bmatrix&#125;\\\text&#123;Vmatrix环境&#125;&amp;\colon\quad\begin&#123;Vmatrix&#125;a&amp;b\\c&amp;d\end&#123;Vmatrix&#125;\end&#123;align&#125;\end&#123;document&#125; 矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点 命令 形式 \dots 水平点点点 \vdots 竖直点点点 \ddots 斜点点点 多行公式(实现，对齐，编号) 多行公式 实现 对齐 编号 \begin{gather*} 居中 无编号 \begin{gather} 居中 编号，可用\notag来删除某行公式编号 \begin{align*} 使用&amp;对某符号竖直对齐 无编号 \begin{align} 使用&amp;对某符号竖直对齐 编号，可用\notag来删除某行公式编号 123456789101112131415161718192021222324252627282930313233\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;\begin&#123;document&#125;------%使用\\换行居中排布公式\begin&#123;gather*&#125;(a+b)^2\\=a^2 + b^2 + 2ab \\=12\end&#123;gather*&#125;------\begin&#123;gather&#125;(a+b)^2 \notag \\=a^2 + b^2 + 2ab \\=12 \notag\end&#123;gather&#125;------%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;\begin&#123;align*&#125;&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \\&amp;=12\end&#123;align*&#125;------\begin&#123;align&#125;&amp;\phantom&#123;=&#125;(a+b)^2 \\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \notag \\&amp;=12\qquad\text&#123;易得&#125;\notag\end&#123;align&#125;------\end&#123;document&#125;]]></content>
@@ -310,18 +358,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
-    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>数学公式</tag>
-        <tag>符号</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之自动化处理工具：参考文献BibTeX]]></title>
     <url>%2F2017%2F05%2F18%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AEBibTeX%2F</url>
     <content type="text"><![CDATA[关键词：自动化工具,参考文献 这一节，我们讨论参考文献。]]></content>
@@ -332,18 +368,6 @@
         <tag>参考文献</tag>
         <tag>自动化</tag>
         <tag>bibtex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之自动化处理工具：超链接]]></title>
-    <url>%2F2017%2F05%2F17%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E8%B6%85%E9%93%BE%E6%8E%A5%2F</url>
-    <content type="text"><![CDATA[关键词：自动化工具,超链接 这一节，我们讨论超链接。 超链接——目录与交叉引用我们现在随着电子书的盛行，超链接的作用越来越大。并且一般我们文档的目录和标签应该都有超链接功能 超链接我们使用\hyperref宏包 1\usepackage&#123;hyperref&#125; 是要使用了这个宏包，在进行文档的编译时，就可以根据章节结构 自动生成目录结构的超链接 同时自动生成交叉引用的超链接 hyperref宏包有一个\hypersetup命令，他的参数是一个类似于字典的键值对，形式如下 1234\hypersetup&#123; colorlinks = true, bookmarks = true,&#125; 具体的键值对见宏包。 超链接——网址等\hyperref的\url命令可以用于输出网址超链接 1\url&#123;http://www.google.com&#125; 1\href&#123;url地址&#125;&#123;文字&#125; %产生一个文字指向地址的形式 1hyperref[标志，交叉引用中的label内容]&#123;文字&#125; %产生指向性的超链接，文字指向交叉引用处]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>自动化</tag>
-        <tag>超链接</tag>
       </tags>
   </entry>
   <entry>
@@ -358,6 +382,18 @@
         <tag>总目录</tag>
         <tag>图片目录</tag>
         <tag>表格目录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之自动化处理工具：超链接]]></title>
+    <url>%2F2017%2F05%2F17%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E8%B6%85%E9%93%BE%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[关键词：自动化工具,超链接 这一节，我们讨论超链接。 超链接——目录与交叉引用我们现在随着电子书的盛行，超链接的作用越来越大。并且一般我们文档的目录和标签应该都有超链接功能 超链接我们使用\hyperref宏包 1\usepackage&#123;hyperref&#125; 是要使用了这个宏包，在进行文档的编译时，就可以根据章节结构 自动生成目录结构的超链接 同时自动生成交叉引用的超链接 hyperref宏包有一个\hypersetup命令，他的参数是一个类似于字典的键值对，形式如下 1234\hypersetup&#123; colorlinks = true, bookmarks = true,&#125; 具体的键值对见宏包。 超链接——网址等\hyperref的\url命令可以用于输出网址超链接 1\url&#123;http://www.google.com&#125; 1\href&#123;url地址&#125;&#123;文字&#125; %产生一个文字指向地址的形式 1hyperref[标志，交叉引用中的label内容]&#123;文字&#125; %产生指向性的超链接，文字指向交叉引用处]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>自动化</tag>
+        <tag>超链接</tag>
       </tags>
   </entry>
   <entry>
@@ -397,17 +433,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之命令与环境的定义]]></title>
-    <url>%2F2017%2F03%2F21%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%9A%E4%B9%89%2F</url>
-    <content type="text"><![CDATA[关键词：命令，环境 这一节，我们讨论一下LaTeX中命令与环境的定义 LaTeX中宏被分为了两类：命令与环境 命令定义新的命令:\newcommand1\newcommand&lt;新命令（命令是要带\的）&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125; 12345678910\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true，不然ctexset不能使用\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\newcommand\jinse&#123;\qingsong 锦瑟&#125;\newcommand\js[3][锦瑟]&#123;#3#1#2&#125;\begin&#123;document&#125;\jinse \jinse \par\js&#123;无端&#125;&#123;五十弦&#125;\end&#123;document&#125; 重定义已有的命令:\renewcommand12\renewcommand&lt;原有命令&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;参数个数最多9个，参数的在命令定义中用#1~#9表示 环境123\newenvironment&#123;环境名称name&#125;[参数个数][首参数默认值]&#123;环境前定义before&#125;&#123;环境后定义after&#125;在before 中的内容将在此环境包含的文本之前处理，而在after 中的内容将在遇到\end&#123;name&#125; 命令时处理。参数个数最多9个，参数的在命令定义中用#1~#9表示 123456789%默认参数值时\newenvironment&#123;shengming&#125;[1][声明]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\begin&#123;shengming&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shengming&#125; 123456789101112%自定义参数值时\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;------\newenvironment&#123;shengming&#125;[1]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\CJKfamily&#123;qingsong&#125;\begin&#123;shengming&#125;&#123;我来声明&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shengming&#125; 123456789after内不能引用参数，因此要在before中通过某种方法实现\newenvironment&#123;zhuyi&#125;[1][注意]&#123; \newcommand\zy&#123;#1&#125; \textbf&#123;\zy&#125;\hfill&#125;&#123;\hfill \textbf&#123;\zy&#125;&#125;------\begin&#123;zhuyi&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;zhuyi&#125; 所以，定制命令和环境十分重要，利用自定义的命令和环境把字体，字号，缩进，对齐，间距等内容封装起来，可以令文档结构清晰。大型文档中，定义的命令和环境一般都放在单独的文档里。]]></content>
+    <title><![CDATA[Mac和Windows下如何令matplotlib支持中文]]></title>
+    <url>%2F2017%2F03%2F29%2FMac%E5%92%8CWindows%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BB%A4matplotlib%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87%2F</url>
+    <content type="text"><![CDATA[matplotlib支持中文： 注意事项： 在修改完字体选项后，集合把cache给删除 1rm -rf ~/.matplotlib/*.cache 最简单的方法（大众字体）：123456789101112import matplotlibfont = &#123; 'family':'STFangsong'&#125;axes = &#123; 'unicode_minus':False&#125;matplotlib.rc('font',**font)matplotlib.rc('axes',**axes)------或者matplotlib.rcParams['font.family'] = 'STFangsong'#解决字体问题matplotlib.rcParams['axes.unicode_minus'] = False #解决符号问题 但是这样方法，有个弊端就是使用的字体有限 在ipython下：只能使用这个列表显示的字体，我们电脑字库中存在的字体是不能使用的，会显示没有此字体 12import matplotlibsorted([f.name for f in matplotlib.font_manager.fontManager.ttflist]) 在普通IDE环境下：可以使用我们的电脑字库的字体来显示，但是无法进行保存（保存后文字变为方格） 偶尔一用（小众字体）：这种方法没有任何限制，所有平台字体都可以使用（可能显示的字体不对，但是保存的图片的字体正确） 12345678910111213#首先导入需要的matplotlib.font_manager包from matplotlib.font_manager import *#设定好我们的小众字体，后面的PATH就是你电脑中字体的位置myfont = FontProperties(fname='/Users/fplee/Library/Fonts/方正清刻本悦宋简体.TTF')import matplotlib.pyplot as pltimport numpy as npx = np.arange(0,10)y = np.sin(x)#然后再需要用的地方，就可以这样调用fontproperties=myfontplt.title('你好',fontproperties=myfont)plt.plot(x,y, label = '测试')plt.legend(prop=myfont)plt.show() 比较麻烦的方法：首先获得matplotlib的包位置 123import matplotlibmatplotlib.matplotlib_fname() #将会获得matplotlib包所在文件夹#比如我的是：/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/matplotlib/mpl-data/matplotlibrc 然后打开matplotlib.matplotlib_fname()地址的上一个文件夹 1/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/matplotlib/mpl-data/ 发现里面的fonts文件夹，将你需要的字体拷贝进这个文件夹里的一个中，修改为一个这个文件夹中存在的名字，然后相当于替换掉他。 然后再使用如下，就可以了，亲测可行 1matplotlib.rcParams['font.family'] = '替换的名字'#解决字体问题 下面是转载： 12345678910111213141516171819我也是试了各种方法，最后终于弄好了下载字体文件，比如 我下载的 wqy-microhei.ttc将字体文件放到matplotlib包的的fonts的目录下，比如我的 anaconda3/lib/python3.5/site-packages/matplotlib/mpl-data/fonts/3. 运行ipython 中的matplotlib，输入 import matplotlib sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist]) 查看你的字体文件在fontManager中的注册的名字,比如：wqy-microhei.ttc 在ttflist中的key是 WenQuanYi Micro Hei4. 修改你的matplotlib的配置文件matplotlibrc，比如我的是：anaconda3/lib/python3.5/site-packages/matplotlib/mpl-data/matplotlibrc找到：#font.family : sans-serif#font.style : normal#font.variant : normal#font.weight : medium#font.stretch : normal这一部分，将#font.family : sans-serif 修改为 font.family : WenQuanYi Micro Hei注意注释#号要去掉，修改的名字必须是ttflist里有的key，修改为wqy-microhei会提示找不到字体或者不修改配置文件，直接指定rcParams也行 ：import matplotlib.pyplot as pltfrom matplotlib import rcParamsrcParams['font.family'] = 'WenQuanYi Micro Hei'5. 测试：import matplotlibimport matplotlib.pyplot as pltplt.figure()plt.title("哈哈")plt.show()]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>Python</category>
       </categories>
-      <tags>
-        <tag>命令</tag>
-        <tag>环境</tag>
-        <tag>定义</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[如何安装与配置MySQL]]></title>
@@ -420,6 +451,19 @@
         <tag>安装</tag>
         <tag>MySQL</tag>
         <tag>配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之命令与环境的定义]]></title>
+    <url>%2F2017%2F03%2F21%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%9A%E4%B9%89%2F</url>
+    <content type="text"><![CDATA[关键词：命令，环境 这一节，我们讨论一下LaTeX中命令与环境的定义 LaTeX中宏被分为了两类：命令与环境 命令定义新的命令:\newcommand1\newcommand&lt;新命令（命令是要带\的）&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125; 12345678910\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true，不然ctexset不能使用\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\newcommand\jinse&#123;\qingsong 锦瑟&#125;\newcommand\js[3][锦瑟]&#123;#3#1#2&#125;\begin&#123;document&#125;\jinse \jinse \par\js&#123;无端&#125;&#123;五十弦&#125;\end&#123;document&#125; 重定义已有的命令:\renewcommand12\renewcommand&lt;原有命令&gt;[参数个数][首个参数的默认值]&#123;具体的命令定义&#125;参数个数最多9个，参数的在命令定义中用#1~#9表示 环境123\newenvironment&#123;环境名称name&#125;[参数个数][首参数默认值]&#123;环境前定义before&#125;&#123;环境后定义after&#125;在before 中的内容将在此环境包含的文本之前处理，而在after 中的内容将在遇到\end&#123;name&#125; 命令时处理。参数个数最多9个，参数的在命令定义中用#1~#9表示 123456789%默认参数值时\newenvironment&#123;shengming&#125;[1][声明]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\begin&#123;shengming&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shengming&#125; 123456789101112%自定义参数值时\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;------\newenvironment&#123;shengming&#125;[1]&#123; \begin&#123;center&#125;#1\end&#123;center&#125; \begin&#123;center&#125;&#125;&#123;\end&#123;center&#125;&#125;------\CJKfamily&#123;qingsong&#125;\begin&#123;shengming&#125;&#123;我来声明&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;shengming&#125; 123456789after内不能引用参数，因此要在before中通过某种方法实现\newenvironment&#123;zhuyi&#125;[1][注意]&#123; \newcommand\zy&#123;#1&#125; \textbf&#123;\zy&#125;\hfill&#125;&#123;\hfill \textbf&#123;\zy&#125;&#125;------\begin&#123;zhuyi&#125;锦瑟无端五十弦，一弦一柱思华年\end&#123;zhuyi&#125; 所以，定制命令和环境十分重要，利用自定义的命令和环境把字体，字号，缩进，对齐，间距等内容封装起来，可以令文档结构清晰。大型文档中，定义的命令和环境一般都放在单独的文档里。]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+        <tag>环境</tag>
+        <tag>定义</tag>
       </tags>
   </entry>
   <entry>
@@ -457,17 +501,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之参考文献]]></title>
-    <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%2F</url>
-    <content type="text"><![CDATA[关键词：参考文献 这一节，我们讨论参考文献。我们基于bibtex进行参考文献处理。 tex正文需要做的准备： 导言区使用宏包\bibliographystyle{参考文献格式} 正文使用\cite{需要的文献} 一般文末处使用\bibliography{数据库名字（后缀为.bib的）不把后缀写上}命令点名使用的文献数据库库 参考文献格式: bib数据库的结构（一般我们使用jabref软件生成） 我们可以在Google schoolar 中挑选我们的文章，然后复制 bibtex 形式的引用，添加到我们自己要使用的数据库中，或者直接在 jebref 中进行手动编辑。 注意： bib 是一个数据库，其中的内容并不一定等于 LaTeX 排版参考文献列表时的内容。也就是说，如果 bib 数据库中有 10 条文献信息，并不一定说 LaTeX 排版出来的 PDF 文件中，参考文献列表里也一定有 10 条。实际排版出来的参考文献列表中有多少条文献，实际是哪几条，具体由文中使用的 \cite 命令（以及 \nocite 命令）指定。如果没有使用 \cite 命令调取文献信息，那么即使在 bib 文件中定义了文献信息，也不会展现在参考文献列表中。很多人对此误解甚深，于是经常有人问道「为什么我在 bib 文件里写的文献，不出现在参考文献中」之类的问题。 123456789101112131415161718192021222324252627%myarticle.bib@article&#123;hedrick1992supercritical,title=&#123;Supercritical fluid extraction&#125;,author=&#123;Hedrick, Joseph L and Mulcahey, Leah J and Taylor, Larry T&#125;,journal=&#123;Mikrochimica Acta&#125;,volume=&#123;108&#125;,pages=&#123;115--132&#125;,year=&#123;1992&#125;&#125;@article&#123;higham1994bibtex, title=&#123;BibTEX: A versatile tool for LaTEX users&#125;, author=&#123;Higham, Nicholas J&#125;, journal=&#123;SIAM News&#125;, volume=&#123;27&#125;, number=&#123;1&#125;, pages=&#123;10&#125;, year=&#123;1994&#125;&#125;------%XXX.tex\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\bibliographystyle&#123;unsrt&#125;\begin&#123;document&#125;我是一个粉刷匠啊，哈哈哈哈我来自超高周疲劳星球\cite&#123;hedrick1992supercritical,higham1994bibtex&#125;\bibliography&#123;myarticle&#125;\end&#123;document&#125; 延伸阅读： 符合 GBT7714-2005 标准的 BibTeX Style 使用 BibTeX 生成参考文献列表 小结（摘自孟晨哥的博客） BibTeX 是一个参考文献格式化工具，它会根据需要，按照（bst 文件规定的）某种格式，将（bib 文件中包含的）参考文献信息，格式化 为 LaTeX 能够使用的列表信息。 正确使用 BibTeX 处理参考文献，需要先用 (Xe/PDF)LaTeX 编译 tex 文件，生成 aux 辅助文件。 执行 BibTeX 将读入 aux 文件，搞清楚用户需要哪些文献。 紧接着，BibTeX 根据 aux 文件中的内容，找到正确的 bst 和 bib 文件，并将参考文献信息格式化为 LaTeX 的 thebibliography 环境，作为 bbl 文件输出。 第二次执行 (Xe/PDF)LaTeX 将会读入新生成的 bbl 文件，同时更新 aux 文件。 此时，参考文献列表将会正常展示，但是正文中的引用标记显示为问号。 第三次执行 (Xe/PDF)LaTeX 将会读入 bbl 文件和更新过后的 aux 文件。此时，参考文献相关内容都正常显示。 因此，总的来说，想要正确使用 BibTeX 协同 LaTeX 处理参考文献，需要编译四次]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>参考文献</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之整体文档架构]]></title>
     <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E6%96%87%E6%A1%A3%E6%9E%B6%E6%9E%84%2F</url>
     <content type="text"><![CDATA[关键词：整体文档结构 这一节，我们讨论一个文档的整体架构 首先看一个文档整体架构的框图 长度变量对照表： 长度变量 解释 \paperwidth \paperheight 纸张的宽度 \textwidth \textheight 版心的宽和高：常用于图片大小设置 \tomargin 额外的上边缘 \headheight 页眉高 \headsep 页眉与版心 \marginparwidth 边注宽 \marginparsep 边注与版心 \footskip 页脚基线与正文最后一行基线的间距 以上所有的参数都可以直接使用\setlength来设定 1\setlength\textwidth&#123;7in&#125; geometry宏包geometry宏包为我们提供了一个相对简单设置页面的接口，不至于过多的纠结于数值计算 使用geometry，我们使用如下图的长度变量即可很轻松的设置页面了(选自刘海洋的入门) 对于双面的书籍类，有如下的形式： 1234567\documentclass[draft]&#123;book&#125;\usepackage&#123;ctex&#125;\usepackage[bindingoffset = 8mm,top = 30mm, bottom = 30mm, inner = 20mm, outer = 45mm, marginparwidth = 30mm, headheight = 8mm, footskip = 18mm, showframe]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\Large\lipsum\end&#123;document&#125;]]></content>
@@ -476,6 +509,17 @@
       </categories>
       <tags>
         <tag>文档结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之参考文献]]></title>
+    <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%2F</url>
+    <content type="text"><![CDATA[关键词：参考文献 这一节，我们讨论参考文献。我们基于bibtex进行参考文献处理。 tex正文需要做的准备： 导言区使用宏包\bibliographystyle{参考文献格式} 正文使用\cite{需要的文献} 一般文末处使用\bibliography{数据库名字（后缀为.bib的）不把后缀写上}命令点名使用的文献数据库库 参考文献格式: bib数据库的结构（一般我们使用jabref软件生成） 我们可以在Google schoolar 中挑选我们的文章，然后复制 bibtex 形式的引用，添加到我们自己要使用的数据库中，或者直接在 jebref 中进行手动编辑。 注意： bib 是一个数据库，其中的内容并不一定等于 LaTeX 排版参考文献列表时的内容。也就是说，如果 bib 数据库中有 10 条文献信息，并不一定说 LaTeX 排版出来的 PDF 文件中，参考文献列表里也一定有 10 条。实际排版出来的参考文献列表中有多少条文献，实际是哪几条，具体由文中使用的 \cite 命令（以及 \nocite 命令）指定。如果没有使用 \cite 命令调取文献信息，那么即使在 bib 文件中定义了文献信息，也不会展现在参考文献列表中。很多人对此误解甚深，于是经常有人问道「为什么我在 bib 文件里写的文献，不出现在参考文献中」之类的问题。 123456789101112131415161718192021222324252627%myarticle.bib@article&#123;hedrick1992supercritical,title=&#123;Supercritical fluid extraction&#125;,author=&#123;Hedrick, Joseph L and Mulcahey, Leah J and Taylor, Larry T&#125;,journal=&#123;Mikrochimica Acta&#125;,volume=&#123;108&#125;,pages=&#123;115--132&#125;,year=&#123;1992&#125;&#125;@article&#123;higham1994bibtex, title=&#123;BibTEX: A versatile tool for LaTEX users&#125;, author=&#123;Higham, Nicholas J&#125;, journal=&#123;SIAM News&#125;, volume=&#123;27&#125;, number=&#123;1&#125;, pages=&#123;10&#125;, year=&#123;1994&#125;&#125;------%XXX.tex\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\bibliographystyle&#123;unsrt&#125;\begin&#123;document&#125;我是一个粉刷匠啊，哈哈哈哈我来自超高周疲劳星球\cite&#123;hedrick1992supercritical,higham1994bibtex&#125;\bibliography&#123;myarticle&#125;\end&#123;document&#125; 延伸阅读： 符合 GBT7714-2005 标准的 BibTeX Style 使用 BibTeX 生成参考文献列表 小结（摘自孟晨哥的博客） BibTeX 是一个参考文献格式化工具，它会根据需要，按照（bst 文件规定的）某种格式，将（bib 文件中包含的）参考文献信息，格式化 为 LaTeX 能够使用的列表信息。 正确使用 BibTeX 处理参考文献，需要先用 (Xe/PDF)LaTeX 编译 tex 文件，生成 aux 辅助文件。 执行 BibTeX 将读入 aux 文件，搞清楚用户需要哪些文献。 紧接着，BibTeX 根据 aux 文件中的内容，找到正确的 bst 和 bib 文件，并将参考文献信息格式化为 LaTeX 的 thebibliography 环境，作为 bbl 文件输出。 第二次执行 (Xe/PDF)LaTeX 将会读入新生成的 bbl 文件，同时更新 aux 文件。 此时，参考文献列表将会正常展示，但是正文中的引用标记显示为问号。 第三次执行 (Xe/PDF)LaTeX 将会读入 bbl 文件和更新过后的 aux 文件。此时，参考文献相关内容都正常显示。 因此，总的来说，想要正确使用 BibTeX 协同 LaTeX 处理参考文献，需要编译四次]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>参考文献</tag>
       </tags>
   </entry>
   <entry>
@@ -538,17 +582,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
@@ -560,14 +593,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>文本环境</tag>
+        <tag>抄录</tag>
       </tags>
   </entry>
   <entry>
@@ -579,6 +612,17 @@
       </categories>
       <tags>
         <tag>盒子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
       </tags>
   </entry>
   <entry>
@@ -719,18 +763,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[4A0 到 A10的纸张尺寸]]></title>
-    <url>%2F2017%2F01%2F03%2FTable%20of%20Paper%20Sizes%20From%204A0%20to%20A10%2F</url>
-    <content type="text"><![CDATA[关键词：A4,纸张尺寸 介绍下纸张的尺寸 Size Width x Height (mm) Width x Height (in) 4A0 1682 x 2378 mm 66.2 x 93.6 in 2A0 1189 x 1682 mm 46.8 x 66.2 in A0 841 x 1189 mm 33.1 x 46.8 in A1 594 x 841 mm 23.4 x 33.1 in A2 420 x 594 mm 16.5 x 23.4 in A3 297 x 420 mm 11.7 x 16.5 in A4 210 x 297 mm 8.3 x 11.7 in A5 148 x 210 mm 5.8 x 8.3 in A6 105 x 148 mm 4.1 x 5.8 in A7 74 x 105 mm 2.9 x 4.1 in A8 52 x 74 mm 2.0 x 2.9 in A9 37 x 52 mm 1.5 x 2.0 in A10 26 x 37 mm 1.0 x 1.5 in Size Micrometres Millimetres Centimetres Metres 4A0 1682000 x 2378000 μm 1682 x 2378 mm 168.2 x 237.8 cm 1.682 x 2.378 m 2A0 1189000 x 1682000 μm 1189 x 1682 mm 118.9 x 168.2 cm 1.189 x 1.682 m A0 841000 x 1189000 μm 841 x 1189 mm 84.1 x 118.9 cm 0.841 x 1.189 m A1 594000 x 841000 μm 594 x 841 mm 59.4 x 84.1 cm 0.594 x 0.841 m A2 420000 x 594000 μm 420 x 594 mm 42.0 x 59.4 cm 0.420 x 0.594 m A3 297000 x 420000 μm 297 x 420 mm 29.7 x 42.0 cm 0.297 x 0.420 m A4 210000 x 297000 μm 210 x 297 mm 21.0 x 29.7 cm 0.210 x 0.297 m A5 148000 x 210000 μm 148 x 210 mm 14.8 x 21.0 cm 0.148 x 0.210 m A6 105000 x 148000 μm 105 x 148 mm 10.5 x 14.8 cm 0.105 x 0.148 m A7 74000 x 105000 μm 74 x 105 mm 7.4 x 10.5 cm 0.074 x 0.105 m A8 52000 x 74000 μm 52 x 74 mm 5.2 x 7.4 cm 0.052 x 0.074 m A9 37000 x 52000 μm 37 x 52 mm 3.7 x 5.2 cm 0.037 x 0.052 m A10 26000 x 37000 μm 26 x 37 mm 2.6 x 3.7 cm 0.026 x 0.037 m Size Thou Inches Feet Yards 4A0 66220 x 93622 th 66.220 x 93.622 in 5.518 x 7.802 ft 1.839 x 2.601 yd 2A0 46811 x 66220 th 46.811 x 66.220 in 3.901 x 5.518 ft 1.300 x 1.839 yd A0 33110 x 46811 th 33.110 x 46.811 in 2.759 x 3.901 ft 0.920 x 1.300 yd A1 23388 x 33110 th 23.388 x 33.110 in 1.949 x 2.759 ft 0.650 x 0.920 yd A2 16535 x 23388 th 16.535 x 23.388 in 1.378 x 1.949 ft 0.459 x 0.650 yd A3 11693 x 16535 th 11.693 x 16.535 in 0.974 x 1.378 ft 0.325 x 0.459 yd A4 8268 x 11693 th 8.268 x 11.693 in 0.689 x 0.974 ft 0.230 x 0.325 yd A5 5827 x 8268 th 5.827 x 8.268 in 0.486 x 0.689 ft 0.162 x 0.230 yd A6 4134 x 5827 th 4.134 x 5.827 in 0.344 x 0.486 ft 0.115 x 0.162 yd A7 2913 x 4134 th 2.913 x 4.134 in 0.243 x 0.344 ft 0.081 x 0.115 yd A8 2047 x 2913 th 2.047 x 2.913 in 0.171 x 0.243 ft 0.057 x 0.081 yd A9 1457 x 2047 th 1.457 x 2.047 in 0.121 x 0.171 ft 0.040 x 0.057 yd A10 1024 x 1457 th 1.024 x 1.457 in 0.085 x 0.121 ft 0.028 x 0.040 yd Size Pica Point(pt) HPGL 4A0 397.3 x 561.7 4768 x 6741 67280 x 95120 2A0 280.9 x 397.3 3370 x 4768 47560 x 67280 A0 198.7 x 280.9 2384 x 3370 33640 x 47560 A1 140.3 x 198.7 1684 x 2384 23760 x 33640 A2 99.2 x 140.3 1191 x 1684 16800 x 23760 A3 70.2 x 99.2 842 x 1191 11880 x 16800 A4 49.6 x 70.2 595 x 842 8400 x 11880 A5 35.0 x 49.6 420 x 595 5920 x 8400 A6 24.8 x 35.0 298 x 420 4200 x 5920 A7 17.5 x 24.8 210 x 298 2960 x 4200 A8 12.3 x 17.5 147 x 210 2080 x 2960 A9 8.7 x 12.3 105 x 147 1480 x 2080 A10 6.1 x 8.7 74 x 105 1040 x 1480]]></content>
-      <categories>
-        <category>排版</category>
-      </categories>
-      <tags>
-        <tag>A4</tag>
-        <tag>纸张尺寸</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Word字号与磅数对照表]]></title>
     <url>%2F2017%2F01%2F03%2F%20Word%20%E5%AD%97%E5%8F%B7%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[关键词：Word，字号，磅 介绍下 Word 字号对照表 字号 磅 初号 42 小初 36 一号 26 小一号 24 二号 22 小二号 18 三号 16 小三号 15 四号 14 小四号 12 五号 10.5 小五号 9 六号 7.5 小六号 6.5 七号 5.5 八号 5 度量换算表 英寸(in) 厘米(cm) 毫米(mm) 磅(pt) 像素 inch centimeter millimetre point pixel 1 2.54 25.4 72 96（非固定） ppi(pixels per inch):每英寸像素数量，一般用于电脑行业 dpi(dots per inch):每英寸点数，一般用于印刷行业]]></content>
@@ -743,9 +775,21 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[4A0 到 A10的纸张尺寸]]></title>
+    <url>%2F2017%2F01%2F03%2FTable%20of%20Paper%20Sizes%20From%204A0%20to%20A10%2F</url>
+    <content type="text"><![CDATA[关键词：A4,纸张尺寸 介绍下纸张的尺寸 Size Width x Height (mm) Width x Height (in) 4A0 1682 x 2378 mm 66.2 x 93.6 in 2A0 1189 x 1682 mm 46.8 x 66.2 in A0 841 x 1189 mm 33.1 x 46.8 in A1 594 x 841 mm 23.4 x 33.1 in A2 420 x 594 mm 16.5 x 23.4 in A3 297 x 420 mm 11.7 x 16.5 in A4 210 x 297 mm 8.3 x 11.7 in A5 148 x 210 mm 5.8 x 8.3 in A6 105 x 148 mm 4.1 x 5.8 in A7 74 x 105 mm 2.9 x 4.1 in A8 52 x 74 mm 2.0 x 2.9 in A9 37 x 52 mm 1.5 x 2.0 in A10 26 x 37 mm 1.0 x 1.5 in Size Micrometres Millimetres Centimetres Metres 4A0 1682000 x 2378000 μm 1682 x 2378 mm 168.2 x 237.8 cm 1.682 x 2.378 m 2A0 1189000 x 1682000 μm 1189 x 1682 mm 118.9 x 168.2 cm 1.189 x 1.682 m A0 841000 x 1189000 μm 841 x 1189 mm 84.1 x 118.9 cm 0.841 x 1.189 m A1 594000 x 841000 μm 594 x 841 mm 59.4 x 84.1 cm 0.594 x 0.841 m A2 420000 x 594000 μm 420 x 594 mm 42.0 x 59.4 cm 0.420 x 0.594 m A3 297000 x 420000 μm 297 x 420 mm 29.7 x 42.0 cm 0.297 x 0.420 m A4 210000 x 297000 μm 210 x 297 mm 21.0 x 29.7 cm 0.210 x 0.297 m A5 148000 x 210000 μm 148 x 210 mm 14.8 x 21.0 cm 0.148 x 0.210 m A6 105000 x 148000 μm 105 x 148 mm 10.5 x 14.8 cm 0.105 x 0.148 m A7 74000 x 105000 μm 74 x 105 mm 7.4 x 10.5 cm 0.074 x 0.105 m A8 52000 x 74000 μm 52 x 74 mm 5.2 x 7.4 cm 0.052 x 0.074 m A9 37000 x 52000 μm 37 x 52 mm 3.7 x 5.2 cm 0.037 x 0.052 m A10 26000 x 37000 μm 26 x 37 mm 2.6 x 3.7 cm 0.026 x 0.037 m Size Thou Inches Feet Yards 4A0 66220 x 93622 th 66.220 x 93.622 in 5.518 x 7.802 ft 1.839 x 2.601 yd 2A0 46811 x 66220 th 46.811 x 66.220 in 3.901 x 5.518 ft 1.300 x 1.839 yd A0 33110 x 46811 th 33.110 x 46.811 in 2.759 x 3.901 ft 0.920 x 1.300 yd A1 23388 x 33110 th 23.388 x 33.110 in 1.949 x 2.759 ft 0.650 x 0.920 yd A2 16535 x 23388 th 16.535 x 23.388 in 1.378 x 1.949 ft 0.459 x 0.650 yd A3 11693 x 16535 th 11.693 x 16.535 in 0.974 x 1.378 ft 0.325 x 0.459 yd A4 8268 x 11693 th 8.268 x 11.693 in 0.689 x 0.974 ft 0.230 x 0.325 yd A5 5827 x 8268 th 5.827 x 8.268 in 0.486 x 0.689 ft 0.162 x 0.230 yd A6 4134 x 5827 th 4.134 x 5.827 in 0.344 x 0.486 ft 0.115 x 0.162 yd A7 2913 x 4134 th 2.913 x 4.134 in 0.243 x 0.344 ft 0.081 x 0.115 yd A8 2047 x 2913 th 2.047 x 2.913 in 0.171 x 0.243 ft 0.057 x 0.081 yd A9 1457 x 2047 th 1.457 x 2.047 in 0.121 x 0.171 ft 0.040 x 0.057 yd A10 1024 x 1457 th 1.024 x 1.457 in 0.085 x 0.121 ft 0.028 x 0.040 yd Size Pica Point(pt) HPGL 4A0 397.3 x 561.7 4768 x 6741 67280 x 95120 2A0 280.9 x 397.3 3370 x 4768 47560 x 67280 A0 198.7 x 280.9 2384 x 3370 33640 x 47560 A1 140.3 x 198.7 1684 x 2384 23760 x 33640 A2 99.2 x 140.3 1191 x 1684 16800 x 23760 A3 70.2 x 99.2 842 x 1191 11880 x 16800 A4 49.6 x 70.2 595 x 842 8400 x 11880 A5 35.0 x 49.6 420 x 595 5920 x 8400 A6 24.8 x 35.0 298 x 420 4200 x 5920 A7 17.5 x 24.8 210 x 298 2960 x 4200 A8 12.3 x 17.5 147 x 210 2080 x 2960 A9 8.7 x 12.3 105 x 147 1480 x 2080 A10 6.1 x 8.7 74 x 105 1040 x 1480]]></content>
+      <categories>
+        <category>排版</category>
+      </categories>
+      <tags>
+        <tag>A4</tag>
+        <tag>纸张尺寸</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -754,9 +798,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
