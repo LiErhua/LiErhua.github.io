@@ -808,7 +808,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/pyhon中导入的几点问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/vi的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -827,7 +827,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/12/归档/pyhon中导入的几点问题/" itemprop="url">pyhon中导入的几点问题</a></h1>
+                <a class="post-title-link" href="/2018/01/12/vi的使用/" itemprop="url">vi的使用</a></h1>
         
 
         <div class="post-meta">
@@ -879,20 +879,47 @@
       
         
           
-            <p>Python的导入方式如下，分别解释</p>
+            <p>vi有三种模式</p>
 <ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> xxx   <span class="comment">#当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx</span></div></pre></td></tr></table></figure>
-</li>
+<li>命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。</li>
+<li>输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式</li>
+<li>底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#tasklet.py</span></div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div></pre></td></tr></table></figure>
-<ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> .A <span class="keyword">import</span> xxx  <span class="comment">#其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div><div class="line"></div><div class="line"><span class="comment">#app.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_dockenv</span><span class="params">(import_name=<span class="string">''</span>, config_file=<span class="string">"config.yaml"</span>)</span>:</span></div><div class="line">    env = DockEnv(import_name, config_file=config_file)</div><div class="line">    <span class="keyword">return</span> env</div></pre></td></tr></table></figure>
-<ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
-</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fne1hjrv7xj30lv0erabh.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>命令例子</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2h</td>
+<td>左移两个</td>
+</tr>
+<tr>
+<td>30l</td>
+<td>右移30</td>
+</tr>
+<tr>
+<td>10j</td>
+<td>下移10个</td>
+</tr>
+<tr>
+<td>5k</td>
+<td>上移5个</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并推出</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+</tbody>
+</table>
 
           
         
@@ -1358,7 +1385,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/vi的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/pyhon中导入的几点问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -1377,7 +1404,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/12/vi的使用/" itemprop="url">vi的使用</a></h1>
+                <a class="post-title-link" href="/2018/01/12/归档/pyhon中导入的几点问题/" itemprop="url">pyhon中导入的几点问题</a></h1>
         
 
         <div class="post-meta">
@@ -1429,47 +1456,20 @@
       
         
           
-            <p>vi有三种模式</p>
+            <p>Python的导入方式如下，分别解释</p>
 <ul>
-<li>命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。</li>
-<li>输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式</li>
-<li>底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> xxx   <span class="comment">#当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fne1hjrv7xj30lv0erabh.jpg" alt=""></p>
-<table>
-<thead>
-<tr>
-<th>命令例子</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2h</td>
-<td>左移两个</td>
-</tr>
-<tr>
-<td>30l</td>
-<td>右移30</td>
-</tr>
-<tr>
-<td>10j</td>
-<td>下移10个</td>
-</tr>
-<tr>
-<td>5k</td>
-<td>上移5个</td>
-</tr>
-<tr>
-<td>:wq</td>
-<td>保存并推出</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出</td>
-</tr>
-</tbody>
-</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#tasklet.py</span></div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> .A <span class="keyword">import</span> xxx  <span class="comment">#其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div><div class="line"></div><div class="line"><span class="comment">#app.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_dockenv</span><span class="params">(import_name=<span class="string">''</span>, config_file=<span class="string">"config.yaml"</span>)</span>:</span></div><div class="line">    env = DockEnv(import_name, config_file=config_file)</div><div class="line">    <span class="keyword">return</span> env</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
+</ul>
 
           
         

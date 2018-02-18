@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-14T03:21:50.000Z">
+<meta property="og:updated_time" content="2018-02-18T07:12:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习手册精简版不断更新">
 <meta name="twitter:description" content="git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。">
@@ -436,6 +436,7 @@
 <p><strong>notice：</strong></p>
 <p>其中我们push和clone时，地址都是有两种选择的，一种是SSH，一种是http协议的分别如下</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git@github.com:你的GitHub用户名/文件夹名称.git</span></div><div class="line"><span class="attribute">https://github.com/用户名/文件夹名称.git</span></div></pre></td></tr></table></figure>
+<p>注意在<code>push</code>的时候，先要对自己修改的文档进行一个<code>stash</code>操作，然后对<code>origin</code>进行<code>pull</code>操作，操作完成之后再使用<code>git stash apply</code>把之前<code>stash</code>的内容给找回来，然后再进行<code>push</code>操作。</p>
 
       
     </div>
