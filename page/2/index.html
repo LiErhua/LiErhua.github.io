@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/归档/appsflyer_install_events_etl的执行顺序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/16/归档/dock中的dock-tasklet与config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -330,7 +330,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/16/归档/appsflyer_install_events_etl的执行顺序/" itemprop="url">appsflyer_install_events_etl的执行顺序</a></h1>
+                <a class="post-title-link" href="/2018/01/16/归档/dock中的dock-tasklet与config/" itemprop="url">dock中的dock-tasklet与config</a></h1>
         
 
         <div class="post-meta">
@@ -382,142 +382,14 @@
       
         
           
-            <p>使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    args = json.loads(sys.argv[<span class="number">1</span>])</div><div class="line">    schedule.every().day.at(args[<span class="string">'yesterday_cron'</span>]).do(yesterday_main)</div><div class="line">    [schedule.every().day.at(ts).do(today_main) <span class="keyword">for</span> ts <span class="keyword">in</span> args[<span class="string">'today_crons'</span>]]</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        schedule.run_pending()</div><div class="line">        gevent.sleep(<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line">yesterday_main = partial(main, <span class="number">1</span>)</div><div class="line">today_main = partial(main, <span class="number">0</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(day_count_forward)</span>:</span></div><div class="line">    log_date = datetime.date.today() - datetime.timedelta(days=day_count_forward)</div><div class="line">    args = json.loads(sys.argv[<span class="number">1</span>])</div><div class="line"></div><div class="line">    logger.info(<span class="string">'Start'</span>, (<span class="string">'log_date'</span>, log_date.strftime(<span class="string">'%Y-%m-%d'</span>)))</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        install_events_etl(</div><div class="line">            log_date,</div><div class="line">            args[<span class="string">'appsflyer_install_events_s3'</span>],   <span class="comment">#一个字典</span></div><div class="line">            args[<span class="string">'athena_data_s3'</span>]                 <span class="comment">#一个字典</span></div><div class="line">        )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        logger.error(<span class="string">'Error'</span>, exc_info=<span class="keyword">True</span>)</div><div class="line">    logger.info(<span class="string">'End'</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="attr">tasklet:</span></div><div class="line">  <span class="string">dock_datahome.tasklet.appsflyer_install_events_etl:</span></div><div class="line"><span class="attr">    doc:</span> <span class="string">"Fetch appslflyer install events and convert it into the parquet format which is used to query by athena"</span></div><div class="line"><span class="attr">    args:</span></div><div class="line"><span class="attr">      appsflyer_install_events_s3:</span></div><div class="line"><span class="attr">        bucket:</span> <span class="string">'appcloudbox-logs'</span></div><div class="line"><span class="attr">        prefix:</span> <span class="string">'appevent/appsflyer'</span></div><div class="line"><span class="attr">        region:</span> <span class="string">'us-east-1'</span></div><div class="line"><span class="attr">        aws_access_key_id:</span> <span class="string">'AKIAI6JAWFHYLMTKXOGA'</span></div><div class="line"><span class="attr">        aws_secret_access_key:</span> <span class="string">'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'</span></div><div class="line"><span class="attr">      athena_data_s3:</span></div><div class="line"><span class="attr">        bucket:</span> <span class="string">'appcloudbox-data'</span></div><div class="line"><span class="attr">        prefix:</span> <span class="string">'datahome'</span></div><div class="line"><span class="attr">        region:</span> <span class="string">'us-east-1'</span></div><div class="line"><span class="attr">        aws_access_key_id:</span> <span class="string">'AKIAI6JAWFHYLMTKXOGA'</span></div><div class="line"><span class="attr">        aws_secret_access_key:</span> <span class="string">'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'</span></div><div class="line"><span class="attr">      yesterday_cron:</span> <span class="string">'00:20'</span></div><div class="line"><span class="attr">      today_crons:</span> <span class="string">[]</span></div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#install_events_etl.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">install_events_etl</span><span class="params">(log_date, install_events_s3, athena_data_s3)</span>:</span></div><div class="line">    fetcher = Fetcher(log_date, **install_events_s3)</div><div class="line">    <span class="keyword">for</span> s3_file <span class="keyword">in</span> fetcher:</div><div class="line">        <span class="comment">#在s3.py中就是prefix</span></div><div class="line">        fname = os.path.basename(s3_file.s3_config[<span class="string">'key'</span>])</div><div class="line">        <span class="keyword">if</span> fname.endswith(<span class="string">'.gz'</span>):</div><div class="line">            fname = fname[:<span class="number">-3</span>]</div><div class="line">        model = S3AppsflyerInstallEvents(log_date, fname, **athena_data_s3)</div><div class="line">        model.add(s3_file)</div><div class="line">        model.save()</div><div class="line">        s3_file.close()</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#install_events_etl.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fetcher</span><span class="params">(S3Downloader)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, log_date, **kwargs)</span>:</span></div><div class="line">        super(Fetcher, self).__init__(**kwargs)</div><div class="line">        self.log_date = log_date</div><div class="line">        self.prefix = self.s3_config[<span class="string">'prefix'</span>]</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#downloader.py</span></div><div class="line"><span class="comment">#args['appsflyer_install_events_s3']就是**s3_config</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">S3Downloader</span><span class="params">(S3ConfigMixin)</span>:</span></div><div class="line">    <span class="string">"""In general, you only need to override the `iter_s3_configs` method."""</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, pool_size=<span class="number">8</span>, queue_size=<span class="number">32</span>, **s3_config)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        Args:</span></div><div class="line"><span class="string">            s3_config:</span></div><div class="line"><span class="string">                &#123;</span></div><div class="line"><span class="string">                    'bucket': 'xxx',</span></div><div class="line"><span class="string">                    'prefix' or 'key': 'xxx',</span></div><div class="line"><span class="string">                    'region': 'xxx',</span></div><div class="line"><span class="string">                    'aws_access_key_id': 'xxx',</span></div><div class="line"><span class="string">                    'aws_secret_access_key': 'xxx',</span></div><div class="line"><span class="string">                &#125;</span></div><div class="line"><span class="string">        """</span></div><div class="line"></div><div class="line">        self.s3_config = s3_config</div><div class="line"></div><div class="line">        self._que = Queue(queue_size)</div><div class="line">        self._pool = Pool(pool_size)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        producer_thread = threading.Thread(target=self._producer)</div><div class="line">        producer_thread.daemon = <span class="keyword">True</span></div><div class="line">        producer_thread.start()</div><div class="line"></div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                item = self._que.get(timeout=<span class="number">0.5</span>)</div><div class="line">            <span class="keyword">except</span> Empty:</div><div class="line">                <span class="keyword">continue</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> item == _sentinel:</div><div class="line">                <span class="keyword">break</span></div><div class="line"></div><div class="line">            <span class="keyword">yield</span> item</div><div class="line"></div><div class="line">        producer_thread.join()</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#s3.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">S3ConfigMixin</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter_s3_configs</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">yield</span> self.()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_s3_config</span><span class="params">(self, bucket=None, key=None)</span>:</span></div><div class="line">        bucket = bucket <span class="keyword">or</span> self.s3_config[<span class="string">'bucket'</span>]</div><div class="line">        key = key <span class="keyword">or</span> self.s3_config.get(<span class="string">'key'</span>) <span class="keyword">or</span> self.s3_config.get(<span class="string">'prefix'</span>)</div><div class="line">        s3_config = &#123;&#125;</div><div class="line">        keys = (</div><div class="line">            <span class="string">'aws_access_key_id'</span>, <span class="string">'aws_secret_access_key'</span>, <span class="string">'region'</span>,</div><div class="line">            <span class="string">'bucket'</span>, <span class="string">'key'</span>,</div><div class="line">        )</div><div class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> keys:</div><div class="line">            s3_config[k] = self.s3_config.get(k)</div><div class="line">        s3_config[<span class="string">'bucket'</span>] = bucket</div><div class="line">        s3_config[<span class="string">'key'</span>] = key</div><div class="line">        <span class="keyword">return</span> s3_config</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#install_events_etl.py</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">S3AppsflyerInstallEvents</span><span class="params">(S3ConfigMixin)</span>:</span></div><div class="line">    s3_position_template = <span class="string">'&#123;prefix&#125;&#123;table&#125;/app_id=&#123;&#123;app_id&#125;&#125;/log_date=&#123;&#123;log_date&#125;&#125;/&#123;&#123;fname&#125;&#125;.parquet'</span></div><div class="line">	<span class="comment">#此时的fname = appsflyer ,**s3_config是**athena_data_s3即args['athena_data_s3']</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, log_date, fname, pool_size=<span class="number">16</span>, **s3_config)</span>:</span></div><div class="line">        self.log_date = log_date.strftime(<span class="string">'%Y-%m-%d'</span>)</div><div class="line">        self.fname = fname</div><div class="line">        self.s3_config = s3_config</div><div class="line"></div><div class="line">        prefix = s3_config[<span class="string">'prefix'</span>]</div><div class="line">        <span class="keyword">if</span> prefix <span class="keyword">and</span> <span class="keyword">not</span> prefix.endswith(<span class="string">'/'</span>):</div><div class="line">            prefix += <span class="string">'/'</span></div><div class="line">        self.s3_position_template = self.s3_position_template.format(</div><div class="line">            prefix=prefix, table=AppsflyerInstallEvents.__tablename__)</div><div class="line"></div><div class="line">        self._pool = Pool(pool_size)</div><div class="line">        self._cache = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, s3_file)</span>:</span></div><div class="line">        <span class="keyword">if</span> s3_file.filetype == <span class="string">'gz'</span>:</div><div class="line">            f = GzipFileHandler(s3_file)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            f = s3_file</div><div class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</div><div class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> JsonLineHandler(line):</div><div class="line">                <span class="keyword">if</span> self._is_available(item):</div><div class="line">                    s3_position = self._get_s3_position(item)</div><div class="line">                    <span class="keyword">if</span> s3_position <span class="keyword">not</span> <span class="keyword">in</span> self._cache:</div><div class="line">                        self._cache[s3_position] = AppsflyerInstallEvents()</div><div class="line">                    self._cache[s3_position].add(item)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">for</span> key, model <span class="keyword">in</span> self._cache.items():</div><div class="line">            self._pool.spawn(self._upload, model,</div><div class="line">                             **self._get_s3_config(key=key))</div><div class="line">        self._pool.join()</div></pre></td></tr></table></figure>
+            <h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><p>config是dock中的一个全部变量</p>
+<p>初始化了dockenv之后，即init_dockenv()之后，进行了一系列中间过程</p>
+<p>最终config这个变量里面存储了config.yaml内的所有的信息，可以直接使用字典的所有方法对其进行数据的取得，但是不能更改</p>
+<p>从这条线开始，config可以直接从main开始读取。</p>
+<h4 id="dock-tasklet"><a href="#dock-tasklet" class="headerlink" title="dock-tasklet"></a>dock-tasklet</h4><p>使用dock-tasklet这个console-script之后，因为会直接运行tasklet.py里的run()函数，他的一个很重要的目的就是直接可以去找到我们config.yaml里tasklet模块提供可以运行的Python文件的路径，同时可以令我们使用sys.argv[]来获取tasklet模块提供的其他参数（当然，需要我们json化sys.argv[]的数据）</p>
+<p>在这条线上，sys.argv[]只能读运行路径之后的数据</p>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/归档/Python发布工具setuptools的用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/15/归档/Python发布工具setuptools的用法/" itemprop="url">日拱一卒之：Python发布工具setuptools的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T00:00:00+08:00">
-                2018-01-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>作为Python标准的打包及分发工具，setuptools可以说相当地简单易用。它会随着Python一起安装在你的机器上。你只需写一个简短的setup.py安装文件，就可以将你的Python应用打包。本文就会介绍下如何编写安装文件及如何打包分发</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/15/归档/Python发布工具setuptools的用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -688,6 +560,263 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/归档/Python发布工具setuptools的用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/15/归档/Python发布工具setuptools的用法/" itemprop="url">日拱一卒之：Python发布工具setuptools的用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T00:00:00+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>作为Python标准的打包及分发工具，setuptools可以说相当地简单易用。它会随着Python一起安装在你的机器上。你只需写一个简短的setup.py安装文件，就可以将你的Python应用打包。本文就会介绍下如何编写安装文件及如何打包分发</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/15/归档/Python发布工具setuptools的用法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/pyhon中导入的几点问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/12/pyhon中导入的几点问题/" itemprop="url">pyhon中导入的几点问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Python的导入方式如下，分别解释</p>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> xxx   <span class="comment">#当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#tasklet.py</span></div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> .A <span class="keyword">import</span> xxx  <span class="comment">#其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div><div class="line"></div><div class="line"><span class="comment">#app.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_dockenv</span><span class="params">(import_name=<span class="string">''</span>, config_file=<span class="string">"config.yaml"</span>)</span>:</span></div><div class="line">    env = DockEnv(import_name, config_file=config_file)</div><div class="line">    <span class="keyword">return</span> env</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/pyhon中导入的几点问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -773,6 +902,410 @@
 <ul>
 <li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
 </ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/vi的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/12/归档/vi的使用/" itemprop="url">vi的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vi有三种模式</p>
+<ul>
+<li>命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。</li>
+<li>输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式</li>
+<li>底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fne1hjrv7xj30lv0erabh.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>命令例子</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2h</td>
+<td>左移两个</td>
+</tr>
+<tr>
+<td>30l</td>
+<td>右移30</td>
+</tr>
+<tr>
+<td>10j</td>
+<td>下移10个</td>
+</tr>
+<tr>
+<td>5k</td>
+<td>上移5个</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并推出</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/os.path的用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/12/归档/os.path的用法/" itemprop="url">os.path的用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">用法：</div><div class="line">os.path.abspath(path)</div><div class="line"><span class="comment">#path的绝对路径</span></div><div class="line">os.path.dirname(path或者file)</div><div class="line"><span class="comment">#路径或者文件的上层目录</span></div><div class="line">__file__</div><div class="line"><span class="comment">#当前运行的文件名字</span></div><div class="line">os.path.join(path1,path2,...)</div><div class="line"><span class="comment">#拼接多个路径为一个路径</span></div><div class="line">os.path.basename(path)</div><div class="line"><span class="comment">#返回文件名或者最后的文件夹名</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/yaml简介与Python上的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/12/归档/yaml简介与Python上的应用/" itemprop="url">yaml简介与Python上的应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件</p>
+<p>yaml小例子</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#config.yaml</span></div><div class="line"><span class="attr">name:</span> <span class="string">Tom</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">age:</span> <span class="number">37</span>  </div><div class="line"><span class="attr">spouse:</span>  </div><div class="line"><span class="attr">    name:</span> <span class="string">Jane</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">    age:</span> <span class="number">25</span>  </div><div class="line"><span class="attr">children:</span>  </div><div class="line"><span class="attr"> - name:</span> <span class="string">Jimmy</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age:</span> <span class="number">15</span>  </div><div class="line"><span class="attr"> - name1:</span> <span class="string">Jenny</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age1:</span> <span class="number">12</span></div></pre></td></tr></table></figure>
+<p>使用<code>pyyaml</code>这个库来处理<code>yaml</code>文件，如上</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> yaml</div><div class="line"><span class="comment">#读取yaml内的内容</span></div><div class="line">file = open(<span class="string">'config.yaml'</span>,<span class="string">'w+r'</span>) <span class="comment">#如果需要写入，需要w</span></div><div class="line">content = yaml.load(file)</div><div class="line">print(content)</div><div class="line">&#123;<span class="string">'name'</span>: <span class="string">'junxi'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'spouse'</span>: &#123;<span class="string">'name'</span>: <span class="string">'Rui'</span>, <span class="string">'age'</span>: <span class="number">19</span>&#125;, <span class="string">'children'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'Chen You'</span>, <span class="string">'age'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'name'</span>: <span class="string">'Ruo Xi'</span>, <span class="string">'age'</span>: <span class="number">2</span>&#125;]&#125;</div><div class="line"></div><div class="line">------</div><div class="line"><span class="comment">#写入数据到yaml</span></div><div class="line">data=&#123;<span class="string">'host'</span>: &#123;<span class="string">'ip01'</span>: &#123;<span class="string">'two'</span>: <span class="string">'192.168.1.254'</span>, <span class="string">'one'</span>: <span class="string">'192.168.1.2'</span>&#125;, <span class="string">'ip00'</span>: <span class="string">'192.168.1.1'</span>&#125;, <span class="string">'soft'</span>: &#123;<span class="string">'apache'</span>: <span class="number">2.2</span>, <span class="string">'php'</span>: <span class="number">5.3</span>, <span class="string">'mysql'</span>: <span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file:   </div><div class="line">    yaml.dump(data,file)</div><div class="line">    </div><div class="line"><span class="comment">#config.yaml</span></div><div class="line">host:</div><div class="line">  ip00: <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></div><div class="line">  ip01: &#123;one: <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, two: <span class="number">192.168</span><span class="number">.1</span><span class="number">.254</span>&#125;</div><div class="line">soft: &#123;apache: <span class="number">2.2</span>, mysql: <span class="number">5.2</span>, php: <span class="number">5.3</span>&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1057,543 +1590,6 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#config.yaml</span></div><div class="line"><span class="attr">name:</span> <span class="string">Tom</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">age:</span> <span class="number">37</span>  </div><div class="line"><span class="attr">spouse:</span>  </div><div class="line"><span class="attr">    name:</span> <span class="string">Jane</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">    age:</span> <span class="number">25</span>  </div><div class="line"><span class="attr">children:</span>  </div><div class="line"><span class="attr"> - name:</span> <span class="string">Jimmy</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age:</span> <span class="number">15</span>  </div><div class="line"><span class="attr"> - name1:</span> <span class="string">Jenny</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age1:</span> <span class="number">12</span></div></pre></td></tr></table></figure>
 <p>使用<code>pyyaml</code>这个库来处理<code>yaml</code>文件，如上</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> yaml</div><div class="line"><span class="comment">#读取yaml内的内容</span></div><div class="line">file = open(<span class="string">'config.yaml'</span>,<span class="string">'w+r'</span>) <span class="comment">#如果需要写入，需要w</span></div><div class="line">content = yaml.load(file)</div><div class="line">print(content)</div><div class="line">&#123;<span class="string">'name'</span>: <span class="string">'junxi'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'spouse'</span>: &#123;<span class="string">'name'</span>: <span class="string">'Rui'</span>, <span class="string">'age'</span>: <span class="number">19</span>&#125;, <span class="string">'children'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'Chen You'</span>, <span class="string">'age'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'name'</span>: <span class="string">'Ruo Xi'</span>, <span class="string">'age'</span>: <span class="number">2</span>&#125;]&#125;</div><div class="line"></div><div class="line">------</div><div class="line"><span class="comment">#写入数据到yaml</span></div><div class="line">data=&#123;<span class="string">'host'</span>: &#123;<span class="string">'ip01'</span>: &#123;<span class="string">'two'</span>: <span class="string">'192.168.1.254'</span>, <span class="string">'one'</span>: <span class="string">'192.168.1.2'</span>&#125;, <span class="string">'ip00'</span>: <span class="string">'192.168.1.1'</span>&#125;, <span class="string">'soft'</span>: &#123;<span class="string">'apache'</span>: <span class="number">2.2</span>, <span class="string">'php'</span>: <span class="number">5.3</span>, <span class="string">'mysql'</span>: <span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file:   </div><div class="line">    yaml.dump(data,file)</div><div class="line">    </div><div class="line"><span class="comment">#config.yaml</span></div><div class="line">host:</div><div class="line">  ip00: <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></div><div class="line">  ip01: &#123;one: <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, two: <span class="number">192.168</span><span class="number">.1</span><span class="number">.254</span>&#125;</div><div class="line">soft: &#123;apache: <span class="number">2.2</span>, mysql: <span class="number">5.2</span>, php: <span class="number">5.3</span>&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/vi的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/归档/vi的使用/" itemprop="url">vi的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>vi有三种模式</p>
-<ul>
-<li>命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。</li>
-<li>输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式</li>
-<li>底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令</li>
-</ul>
-<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fne1hjrv7xj30lv0erabh.jpg" alt=""></p>
-<table>
-<thead>
-<tr>
-<th>命令例子</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2h</td>
-<td>左移两个</td>
-</tr>
-<tr>
-<td>30l</td>
-<td>右移30</td>
-</tr>
-<tr>
-<td>10j</td>
-<td>下移10个</td>
-</tr>
-<tr>
-<td>5k</td>
-<td>上移5个</td>
-</tr>
-<tr>
-<td>:wq</td>
-<td>保存并推出</td>
-</tr>
-<tr>
-<td>:q</td>
-<td>退出</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/pyhon中导入的几点问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/pyhon中导入的几点问题/" itemprop="url">pyhon中导入的几点问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Python的导入方式如下，分别解释</p>
-<ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> xxx   <span class="comment">#当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#tasklet.py</span></div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div></pre></td></tr></table></figure>
-<ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> .A <span class="keyword">import</span> xxx  <span class="comment">#其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div><div class="line"></div><div class="line"><span class="comment">#app.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_dockenv</span><span class="params">(import_name=<span class="string">''</span>, config_file=<span class="string">"config.yaml"</span>)</span>:</span></div><div class="line">    env = DockEnv(import_name, config_file=config_file)</div><div class="line">    <span class="keyword">return</span> env</div></pre></td></tr></table></figure>
-<ul>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/yaml简介与Python上的应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/归档/yaml简介与Python上的应用/" itemprop="url">yaml简介与Python上的应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件</p>
-<p>yaml小例子</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#config.yaml</span></div><div class="line"><span class="attr">name:</span> <span class="string">Tom</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">age:</span> <span class="number">37</span>  </div><div class="line"><span class="attr">spouse:</span>  </div><div class="line"><span class="attr">    name:</span> <span class="string">Jane</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">    age:</span> <span class="number">25</span>  </div><div class="line"><span class="attr">children:</span>  </div><div class="line"><span class="attr"> - name:</span> <span class="string">Jimmy</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age:</span> <span class="number">15</span>  </div><div class="line"><span class="attr"> - name1:</span> <span class="string">Jenny</span> <span class="string">Smith</span>  </div><div class="line"><span class="attr">   age1:</span> <span class="number">12</span></div></pre></td></tr></table></figure>
-<p>使用<code>pyyaml</code>这个库来处理<code>yaml</code>文件，如上</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> yaml</div><div class="line"><span class="comment">#读取yaml内的内容</span></div><div class="line">file = open(<span class="string">'config.yaml'</span>,<span class="string">'w+r'</span>) <span class="comment">#如果需要写入，需要w</span></div><div class="line">content = yaml.load(file)</div><div class="line">print(content)</div><div class="line">&#123;<span class="string">'name'</span>: <span class="string">'junxi'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'spouse'</span>: &#123;<span class="string">'name'</span>: <span class="string">'Rui'</span>, <span class="string">'age'</span>: <span class="number">19</span>&#125;, <span class="string">'children'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'Chen You'</span>, <span class="string">'age'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'name'</span>: <span class="string">'Ruo Xi'</span>, <span class="string">'age'</span>: <span class="number">2</span>&#125;]&#125;</div><div class="line"></div><div class="line">------</div><div class="line"><span class="comment">#写入数据到yaml</span></div><div class="line">data=&#123;<span class="string">'host'</span>: &#123;<span class="string">'ip01'</span>: &#123;<span class="string">'two'</span>: <span class="string">'192.168.1.254'</span>, <span class="string">'one'</span>: <span class="string">'192.168.1.2'</span>&#125;, <span class="string">'ip00'</span>: <span class="string">'192.168.1.1'</span>&#125;, <span class="string">'soft'</span>: &#123;<span class="string">'apache'</span>: <span class="number">2.2</span>, <span class="string">'php'</span>: <span class="number">5.3</span>, <span class="string">'mysql'</span>: <span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file:   </div><div class="line">    yaml.dump(data,file)</div><div class="line">    </div><div class="line"><span class="comment">#config.yaml</span></div><div class="line">host:</div><div class="line">  ip00: <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></div><div class="line">  ip01: &#123;one: <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, two: <span class="number">192.168</span><span class="number">.1</span><span class="number">.254</span>&#125;</div><div class="line">soft: &#123;apache: <span class="number">2.2</span>, mysql: <span class="number">5.2</span>, php: <span class="number">5.3</span>&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/归档/os.path的用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/归档/os.path的用法/" itemprop="url">os.path的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:00:00+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">用法：</div><div class="line">os.path.abspath(path)</div><div class="line"><span class="comment">#path的绝对路径</span></div><div class="line">os.path.dirname(path或者file)</div><div class="line"><span class="comment">#路径或者文件的上层目录</span></div><div class="line">__file__</div><div class="line"><span class="comment">#当前运行的文件名字</span></div><div class="line">os.path.join(path1,path2,...)</div><div class="line"><span class="comment">#拼接多个路径为一个路径</span></div><div class="line">os.path.basename(path)</div><div class="line"><span class="comment">#返回文件名或者最后的文件夹名</span></div></pre></td></tr></table></figure>
 
           
         
