@@ -99,17 +99,17 @@
 
 
 
-<meta name="description" content="使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据 12345678#appsflyer_install_eve">
+<meta name="description" content="关键字：略">
 <meta property="og:type" content="article">
 <meta property="og:title" content="appsflyer_install_events_etl的执行顺序">
 <meta property="og:url" content="http://yoursite.com/2018/01/16/归档/appsflyer_install_events_etl的执行顺序/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
-<meta property="og:description" content="使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据 12345678#appsflyer_install_eve">
+<meta property="og:description" content="关键字：略">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-29T03:23:58.000Z">
+<meta property="og:updated_time" content="2018-02-19T12:22:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="appsflyer_install_events_etl的执行顺序">
-<meta name="twitter:description" content="使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据 12345678#appsflyer_install_eve">
+<meta name="twitter:description" content="关键字：略">
 
 
 
@@ -381,7 +381,9 @@
       
 
       
-        <p>使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据</p>
+        <p>关键字：略</p>
+<a id="more"></a>
+<p>使用dock-tasklet，所以去扫描yaml文件来执行appsflyer_install_events_etl.py文件。又因为使用了Popen方法把yaml里的内容当做参数传递给了（Python解释器 appsflyer_install_events_etl.py  这里），所以，可以使用sys.argv[]来获取yaml里的数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    args = json.loads(sys.argv[<span class="number">1</span>])</div><div class="line">    schedule.every().day.at(args[<span class="string">'yesterday_cron'</span>]).do(yesterday_main)</div><div class="line">    [schedule.every().day.at(ts).do(today_main) <span class="keyword">for</span> ts <span class="keyword">in</span> args[<span class="string">'today_crons'</span>]]</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        schedule.run_pending()</div><div class="line">        gevent.sleep(<span class="number">1</span>)</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line">yesterday_main = partial(main, <span class="number">1</span>)</div><div class="line">today_main = partial(main, <span class="number">0</span>)</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#appsflyer_install_events_etl</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(day_count_forward)</span>:</span></div><div class="line">    log_date = datetime.date.today() - datetime.timedelta(days=day_count_forward)</div><div class="line">    args = json.loads(sys.argv[<span class="number">1</span>])</div><div class="line"></div><div class="line">    logger.info(<span class="string">'Start'</span>, (<span class="string">'log_date'</span>, log_date.strftime(<span class="string">'%Y-%m-%d'</span>)))</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        install_events_etl(</div><div class="line">            log_date,</div><div class="line">            args[<span class="string">'appsflyer_install_events_s3'</span>],   <span class="comment">#一个字典</span></div><div class="line">            args[<span class="string">'athena_data_s3'</span>]                 <span class="comment">#一个字典</span></div><div class="line">        )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        logger.error(<span class="string">'Error'</span>, exc_info=<span class="keyword">True</span>)</div><div class="line">    logger.info(<span class="string">'End'</span>)</div></pre></td></tr></table></figure>
