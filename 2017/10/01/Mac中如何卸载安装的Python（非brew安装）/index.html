@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="使用非brew安装的Python导致后续大坑一堆，于是决定卸载，然后使用homebrew重新安装，步骤如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-25T17:21:06.000Z">
+<meta property="og:updated_time" content="2018-04-25T18:31:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac中如何卸载安装的Python（非brew安装）">
 <meta name="twitter:description" content="使用非brew安装的Python导致后续大坑一堆，于是决定卸载，然后使用homebrew重新安装，步骤如下：">
@@ -421,6 +421,15 @@
 <p>注意如果出现如下错误，请使用如下方法修复</p>
 <p>错误: <code>Could not symlink lib/pkgconfig/aFile/usr/local/lib/pkgconfig is not writable.</code></p>
 <p>修复:<code>sudo chown -R $(whoami) /usr/local/lib/pkgconfig</code></p>
+<hr>
+<p>重新安装的时候，安装pip的方法</p>
+<ul>
+<li><code>sudo easy_install pip</code></li>
+<li><code>wget https://bootstrap.pypa.io/get-pip.py</code></li>
+</ul>
+<p>我们使用<code>homebrew</code>安装Python时（无论是2还是3），都会默认装在<code>/usr/local/Cellar</code>这个目录下，所以我们去找真正的<code>Python</code>的可执行文件要从这个目录下走。</p>
+<p>安装好的<code>Python</code>与对应的<code>pip</code>都在目录<code>/usr/local/Cellar/python@2(python的目录)/2.7.14_3(对应版本号)/Frameworks/Python.framework/Versions/2.7(版本号)/bin</code>里，当我们需要创建软链接时，首先去<code>/usr/local/bin</code>去找对应的软链接的地址，如果觉得地址不对，则删除这个软链，然后重建，如果没有对应的软链，直接创建——<code>ln -s source new_name</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ln [options] existingfile newfile（sexistingfile 待建立链接文件的文件，newfile是新创建的链接文件）</div><div class="line">ln [options] existingfile-list directory</div></pre></td></tr></table></figure>
 
       
     </div>
