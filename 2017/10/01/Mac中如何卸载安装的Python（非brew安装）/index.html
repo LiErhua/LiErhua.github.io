@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="使用非brew安装的Python导致后续大坑一堆，于是决定卸载，然后使用homebrew重新安装，步骤如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-25T17:06:05.000Z">
+<meta property="og:updated_time" content="2018-04-25T17:21:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac中如何卸载安装的Python（非brew安装）">
 <meta name="twitter:description" content="使用非brew安装的Python导致后续大坑一堆，于是决定卸载，然后使用homebrew重新安装，步骤如下：">
@@ -417,6 +417,10 @@
 <li><p>重新使用<code>homebrew</code>安装即可</p>
 </li>
 </ol>
+<p><strong>步骤2，3非常实用，以后出现问题可以多用</strong></p>
+<p>注意如果出现如下错误，请使用如下方法修复</p>
+<p>错误: <code>Could not symlink lib/pkgconfig/aFile/usr/local/lib/pkgconfig is not writable.</code></p>
+<p>修复:<code>sudo chown -R $(whoami) /usr/local/lib/pkgconfig</code></p>
 
       
     </div>
