@@ -407,10 +407,10 @@
         <p>关键词：tmux，Mac</p>
 <a id="more"></a>
 <h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>使用<code>brew</code>进行安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span>brew install tmux</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash">brew install tmux</span></div></pre></td></tr></table></figure>
 <h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><p>每当我们开启一个新的会话时，都会读取 <code>~/.tmux.conf</code>这个文件，该文件中存放的就是对 Tmux 的配置。</p>
 <p>小提示：如果你希望新的配置项能够立即生效，那么你可以将下面这一行配置加入到文件 <code>~/.tmux.conf</code> 中。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> bind a reload key</div><div class="line">bind R source-file ~/.tmux.conf ; display-message "Config reloaded.."</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">bind</span> a reload key</span></div><div class="line">bind R source-file ~/.tmux.conf ; display-message "Config reloaded.."</div></pre></td></tr></table></figure>
 <p><strong>这样配置了之后，每当向 <code>~/.tmux.conf</code> 文件中添加了新的配置，只需要按下 <code>Ctrl-b r</code>就可以重新加载配置并使新的配置生效，从而免去了开启一个新的会话。</strong></p>
 
       
@@ -473,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/29/归档/关于uuid库的简介/" rel="next" title="关于uuid库的简介">
-                <i class="fa fa-chevron-left"></i> 关于uuid库的简介
+              <a href="/2018/01/15/归档/日拱一卒之：Mac下的tree工具/" rel="next" title="日拱一卒之：Mac下的tree工具">
+                <i class="fa fa-chevron-left"></i> 日拱一卒之：Mac下的tree工具
               </a>
             
           </div>
@@ -483,8 +483,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/14/sublime-插件的安装与Vim模式的设置/" rel="prev" title="sublime 插件的安装与Vim模式的设置">
-                sublime 插件的安装与Vim模式的设置 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/29/归档/关于datetime与time模块的一个例子/" rel="prev" title="关于datetime与time模块的一个例子">
+                关于datetime与time模块的一个例子 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +587,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">96</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -598,7 +598,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -609,7 +609,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

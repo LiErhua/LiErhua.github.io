@@ -391,7 +391,7 @@
 <p>首先安装tree包</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tree</div></pre></td></tr></table></figure>
 <p>使用方法</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>tree  #显示当前目录的目录树</div><div class="line"><span class="meta">&gt;</span>tree -L n   #显示当前目录下的n级目录树</div><div class="line"><span class="meta">&gt;</span>tree -L n &gt;README.md   #将目录树输出为文件</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span><span class="bash">tree  <span class="comment">#显示当前目录的目录树</span></span></div><div class="line"><span class="meta">&gt;</span><span class="bash">tree -L n   <span class="comment">#显示当前目录下的n级目录树</span></span></div><div class="line"><span class="meta">&gt;</span><span class="bash">tree -L n &gt;README.md   <span class="comment">#将目录树输出为文件</span></span></div></pre></td></tr></table></figure>
 <hr>
 <h4 id="最简单的安装文件"><a href="#最简单的安装文件" class="headerlink" title="最简单的安装文件"></a>最简单的安装文件</h4><p>新建一个<code>setuptools</code>的文件夹，他的目录形式如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">setuptools</div><div class="line">    ├── MyApp</div><div class="line">    │   └── __init__.py</div><div class="line">    └── setup.py</div></pre></td></tr></table></figure>
@@ -401,24 +401,24 @@
 <li>创建egg包</li>
 </ol>
 <p>现在最简单的安装文件已经有了，现在要执行安装，需要如下的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python setup.py bdist_egg</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> python setup.py bdist_egg</span></div></pre></td></tr></table></figure>
 <p>这个命令会在当前的主目录<code>setuptools_test</code>中建立一个文件夹<code>dist</code>，里面包含创建的<code>egg</code>文件，名字是<code>MyApp-1.0-py2.7.egg</code>,格式是<code>应用的名字（你要发布的应用的名字，不一定和你的内部包名一致）-版本号-对应的Python版本.egg</code>。同时，会在文件夹内，建立两个其他文件夹，分别是<code>build</code>和<code>MyApp.egg-info</code>，这两个文件夹存放打包的中间结果。</p>
 <ol>
 <li>创建tar.gz包</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python setup.py sdist --formats=gztar</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> python setup.py sdist --formats=gztar</span></div></pre></td></tr></table></figure>
 <p>同上例类似，只不过创建的文件类型是tar.gz，文件名为”MyApp-1.0.tar.gz”。</p>
 <ol>
 <li>安装应用</li>
 </ol>
 <ul>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python setup.py install</div><div class="line"><span class="meta">#</span>该命令会将当前的Python应用安装到当前Python环境的”site-packages”目录下，这样其他程序就可以像导入标准库一样导入该应用的代码了。</div></pre></td></tr></table></figure>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> python setup.py install</span></div><div class="line"><span class="meta">#</span><span class="bash">该命令会将当前的Python应用安装到当前Python环境的”site-packages”目录下，这样其他程序就可以像导入标准库一样导入该应用的代码了。</span></div></pre></td></tr></table></figure>
 </li>
-<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python setup.py develop</div><div class="line"><span class="meta">#</span>如果应用在开发过程中会频繁变更，每次安装还需要先将原来的版本卸掉，很麻烦。使用”develop”开发方式安装的话，应用代码不会真的被拷贝到本地Python环境的”site-packages”目录下，而是在”site-packages”目录里创建一个指向当前应用位置的链接。这样如果当前位置的源码被改动，就会马上反映到”site-packages”里。</div></pre></td></tr></table></figure>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> python setup.py develop</span></div><div class="line"><span class="meta">#</span><span class="bash">如果应用在开发过程中会频繁变更，每次安装还需要先将原来的版本卸掉，很麻烦。使用”develop”开发方式安装的话，应用代码不会真的被拷贝到本地Python环境的”site-packages”目录下，而是在”site-packages”目录里创建一个指向当前应用位置的链接。这样如果当前位置的源码被改动，就会马上反映到”site-packages”里。</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>安装之后要卸载的话，可以使用pip进行卸载</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pip uninstall 应用名字   #此时的应用名字就是我们setup()函数中的name</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> pip uninstall 应用名字   <span class="comment">#此时的应用名字就是我们setup()函数中的name</span></span></div></pre></td></tr></table></figure>
 <p>此时的目录树如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">setuptools_test</div><div class="line">    ├── MyApp</div><div class="line">    │   ├── __init__.py</div><div class="line">    │   ├── __init__.pyc</div><div class="line">    │   </div><div class="line">    ├── MyApp.egg-info  #打包生成的</div><div class="line">    │   ├── PKG-INFO</div><div class="line">    │   ├── SOURCES.txt</div><div class="line">    │   ├── dependency_links.txt</div><div class="line">    │   └── top_level.txt</div><div class="line">    ├── build   #打包生成的</div><div class="line">    │   ├── bdist.macosx-10.13-x86_64</div><div class="line">    │   └── lib</div><div class="line">    │       └── MyApp</div><div class="line">    │           └── __init__.py</div><div class="line">    ├── dist</div><div class="line">    │   └── MyApp-1.0-py2.7.egg</div><div class="line">    └── setup.py</div></pre></td></tr></table></figure>
 <h4 id="引入非Python文件（不是-py的文件）"><a href="#引入非Python文件（不是-py的文件）" class="headerlink" title="引入非Python文件（不是.py的文件）"></a>引入非Python文件（不是.py的文件）</h4><p>上例中，我们只会将”MyApp”包下的源码打包，如果我们还想将其他非Python文件也打包，比如静态文件（JS，CSS，图片），应该怎么做呢？这时我们要在项目目录下添加一个”MANIFEST.in”文件夹。假设我们把所有静态文件都放在”static”子目录下，现在的项目结构如下：</p>
@@ -609,7 +609,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">96</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -620,7 +620,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -631,7 +631,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
