@@ -470,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/29/归档/关于uuid库的简介/" rel="next" title="关于uuid库的简介">
-                <i class="fa fa-chevron-left"></i> 关于uuid库的简介
+              <a href="/2018/01/29/归档/关于datetime与time模块的一个例子/" rel="next" title="关于datetime与time模块的一个例子">
+                <i class="fa fa-chevron-left"></i> 关于datetime与time模块的一个例子
               </a>
             
           </div>
@@ -679,6 +679,26 @@ var jiathis_config={
   <span class="post-meta-divider">|</span>
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<!-- 不蒜子 -->
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 100);
+        var busuanziSiteOffset = parseInt(100000);
+        function fixCount() {
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                clearInterval(int);
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+            }
+        }
+    });
+</script>
+
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

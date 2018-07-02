@@ -440,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/12/归档/pyhon中导入的几点问题/" rel="next" title="pyhon中导入的几点问题">
-                <i class="fa fa-chevron-left"></i> pyhon中导入的几点问题
+              <a href="/2018/01/12/归档/os.path的用法/" rel="next" title="os.path的用法">
+                <i class="fa fa-chevron-left"></i> os.path的用法
               </a>
             
           </div>
@@ -450,8 +450,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/15/归档/日拱一卒之：Mac下的tree工具/" rel="prev" title="日拱一卒之：Mac下的tree工具">
-                日拱一卒之：Mac下的tree工具 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/12/归档/pyhon中导入的几点问题/" rel="prev" title="pyhon中导入的几点问题">
+                pyhon中导入的几点问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -624,6 +624,26 @@ var jiathis_config={
   <span class="post-meta-divider">|</span>
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<!-- 不蒜子 -->
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 100);
+        var busuanziSiteOffset = parseInt(100000);
+        function fixCount() {
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                clearInterval(int);
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+            }
+        }
+    });
+</script>
+
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

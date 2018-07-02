@@ -483,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/17/LaTeX入门系列之自动化处理工具：交叉引用/" rel="next" title="LaTeX入门系列之自动化处理工具：交叉引用">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之自动化处理工具：交叉引用
+              <a href="/2017/05/16/LaTeX入门系列之自动化处理工具：目录/" rel="next" title="LaTeX入门系列之自动化处理工具：目录">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之自动化处理工具：目录
               </a>
             
           </div>
@@ -493,8 +493,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/18/LaTeX入门系列之自动化处理工具：参考文献BibTeX/" rel="prev" title="LaTeX入门系列之自动化处理工具：参考文献BibTeX">
-                LaTeX入门系列之自动化处理工具：参考文献BibTeX <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/17/LaTeX入门系列之自动化处理工具：交叉引用/" rel="prev" title="LaTeX入门系列之自动化处理工具：交叉引用">
+                LaTeX入门系列之自动化处理工具：交叉引用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -692,6 +692,26 @@ var jiathis_config={
   <span class="post-meta-divider">|</span>
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<!-- 不蒜子 -->
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 100);
+        var busuanziSiteOffset = parseInt(100000);
+        function fixCount() {
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                clearInterval(int);
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+            }
+        }
+    });
+</script>
+
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
