@@ -665,8 +665,8 @@ var jiathis_config={
 <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var int = setInterval(fixCount, 100);
-        var busuanziSiteOffset = parseInt(10000);
+        var int = setInterval(fixCount, 1);
+        var busuanziSiteOffset = parseInt(1000000);
         function fixCount() {
             if ($("#busuanzi_container_site_pv").css("display") != "none") {
                 clearInterval(int);
