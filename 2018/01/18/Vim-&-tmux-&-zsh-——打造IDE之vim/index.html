@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vim," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键词：Vim 我在我的github也维护了一份关于Vim的文档，编辑器之神，话不多说，直接上配置 zsh直接用homebrew安装即可，不做过多介绍。">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim &amp; tmux &amp; zsh ——打造IDE之vim">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之vim/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键词：Vim 我在我的github也维护了一份关于Vim的文档，编辑器之神，话不多说，直接上配置 zsh直接用homebrew安装即可，不做过多介绍。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-02T16:07:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim &amp; tmux &amp; zsh ——打造IDE之vim">
+<meta name="twitter:description" content="关键词：Vim 我在我的github也维护了一份关于Vim的文档，编辑器之神，话不多说，直接上配置 zsh直接用homebrew安装即可，不做过多介绍。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之vim/"/>
+
+
+
+
+
+  <title>Vim & tmux & zsh ——打造IDE之vim | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vim & tmux & zsh ——打造IDE之vim</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T00:00:00+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键词：Vim</p>
+<p>我在我的github也维护了一份关于Vim的文档，编辑器之神，话不多说，直接上配置</p>
+<p><code>zsh</code>直接用<code>homebrew</code>安装即可，不做过多介绍。</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div></pre></td><td class="code"><pre><div class="line"><span class="string">" https://lierhua.top</span></div><div class="line"><span class="string">"</span> https://yeyuqiudeng.top</div><div class="line"></div><div class="line"><span class="string">" ===============================================================================</span></div><div class="line"><span class="string">"</span> Info</div><div class="line"><span class="string">"   leader: default is `\`, detailed with `:help &lt;leader&gt;``</span></div><div class="line"><span class="string">"</span> ===============================================================================</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">" ===============================================================================</span></div><div class="line"><span class="string">"</span> General Configuration</div><div class="line"><span class="string">" ===============================================================================</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">set nocompatible  "</span> Use the vim<span class="string">'s keyboard setting, not vi</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">if filereadable(expand("~/.vim/vimrc.vundle"))</span></div><div class="line"><span class="string">  source ~/.vim/vimrc.vundle</span></div><div class="line"><span class="string">endif</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">set nu  " Set the line number</span></div><div class="line"><span class="string">syntax on  " Syntax highlighting</span></div><div class="line"><span class="string">"set autochdir  " Set the current dir as thr work dir</span></div><div class="line"><span class="string">filetype on  " File type detection</span></div><div class="line"><span class="string">filetype plugin on  " Loading the plugin files for specific file types</span></div><div class="line"><span class="string">filetype indent on  " Loading the indent file for specific file types with</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Tab and Indent</span></div><div class="line"><span class="string">set tabstop=4</span></div><div class="line"><span class="string">set softtabstop=4</span></div><div class="line"><span class="string">set shiftwidth=4</span></div><div class="line"><span class="string">set smarttab</span></div><div class="line"><span class="string">"set expandtab  " Use the space to instead of tab</span></div><div class="line"><span class="string">set autoindent  " Copy indent from current line when starting a new line</span></div><div class="line"><span class="string">set smartindent</span></div><div class="line"><span class="string">set cindent</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Seach and Match</span></div><div class="line"><span class="string">set hlsearch  " Highlight the search result</span></div><div class="line"><span class="string">set incsearch  " Real-time search</span></div><div class="line"><span class="string">set ignorecase</span></div><div class="line"><span class="string">set smartcase</span></div><div class="line"><span class="string">set showmatch  " When a bracket is inserted, briefly jump to the matching one</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Display</span></div><div class="line"><span class="string">set showmode  " Show the current mode</span></div><div class="line"><span class="string">set t_Co=256  " If under tty, use 256</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Display tab and trail space</span></div><div class="line"><span class="string">set list</span></div><div class="line"><span class="string">set listchars=tab:&gt;-,trail:.</span></div><div class="line"><span class="string">" Not display above list</span></div><div class="line"><span class="string">nmap &lt;leader&gt;l :set list!&lt;CR&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Other</span></div><div class="line"><span class="string">set nobackup</span></div><div class="line"><span class="string">set fileencodings=utf-8,gb18030,cp936,big5 " Set the encode</span></div><div class="line"><span class="string">" set pastetoggle=&lt;F10&gt;  " Bind `F10` to `:set paste`</span></div><div class="line"><span class="string">set pastetoggle=&lt;leader&gt;p</span></div><div class="line"><span class="string">set backspace=2 " same as ":set backspace=indent,eol,start" in vim7.4</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Press `shift` while selecting with the mouse can disable into visual mode</span></div><div class="line"><span class="string">" In mac os, hold `alt/option` is easier</span></div><div class="line"><span class="string">" ref: http://stackoverflow.com/questions/4608161/copy-text-out-of-vim-with-set-mouse-a-enabled</span></div><div class="line"><span class="string">set mouse=a  " Enable mouse</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">set foldmethod=indent  " The kind of folding used for the current window</span></div><div class="line"><span class="string">set foldlevel=99</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">" Enhanced</span></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Execute python file being edited with &lt;Shift&gt; + e:</span></div><div class="line"><span class="string">map &lt;buffer&gt; &lt;S-e&gt; :w&lt;CR&gt;:!/usr/bin/env python % &lt;CR&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" Auto add head info</span></div><div class="line"><span class="string">" .py file auto add header</span></div><div class="line"><span class="string">function HeaderPython()</span></div><div class="line"><span class="string">    call setline(1, "#!/usr/bin/env python")</span></div><div class="line"><span class="string">    call append(1,  "# -*- coding: utf-8 -*-")</span></div><div class="line"><span class="string">    call append(2,  "# fupeng.li @ " . strftime('</span>%Y-%m-%d<span class="string">', localtime()))</span></div><div class="line"><span class="string">    normal G</span></div><div class="line"><span class="string">    normal o</span></div><div class="line"><span class="string">endf</span></div><div class="line"><span class="string">autocmd bufnewfile *.py call HeaderPython()</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" .sh file auto add header</span></div><div class="line"><span class="string">function HeaderBash()</span></div><div class="line"><span class="string">    call setline(1, "#!/bin/bash")</span></div><div class="line"><span class="string">    call append(1,  "# fupeng.li @ " . strftime('</span>%Y-%m-%d<span class="string">', localtime()))</span></div><div class="line"><span class="string">    normal G</span></div><div class="line"><span class="string">    normal o</span></div><div class="line"><span class="string">endf</span></div><div class="line"><span class="string">autocmd bufnewfile *.sh call HeaderBash()</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" ref: http://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type</span></div><div class="line"><span class="string">autocmd FileType html set shiftwidth=2|set expandtab</span></div><div class="line"><span class="string">autocmd FileType htmljinja setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab</span></div><div class="line"><span class="string">autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab</span></div><div class="line"><span class="string">autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab</span></div><div class="line"><span class="string">autocmd FileType sh setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab</span></div><div class="line"><span class="string">autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab</span></div><div class="line"><span class="string">autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" enable quick jump between keyword, such as if/endif</span></div><div class="line"><span class="string">runtime macros/matchit.vim</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">" quick expand current active file'</span>s directory (not work directory)</div><div class="line"><span class="string">" use `%%' to auto expand instead of `%:h&lt;Tab&gt;'</span></div><div class="line"><span class="string">cnoremap &lt;expr&gt; %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> -------------------------------------------------------------------------------</div><div class="line"><span class="string">" Bind Keys</span></div><div class="line"><span class="string">"</span> -------------------------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="string">" &lt;C-l&gt;: quick temp disable hlsearch</span></div><div class="line"><span class="string">nnoremap &lt;silent&gt; &lt;C-l&gt; :&lt;C-u&gt;nohlsearch&lt;CR&gt;&lt;C-l&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ===============================================================================</div><div class="line"><span class="string">" Vundle Configuration</span></div><div class="line"><span class="string">"</span> ===============================================================================</div><div class="line"></div><div class="line"><span class="built_in">set</span> nocompatible               <span class="string">" be iMproved, required</span></div><div class="line"><span class="string">filetype off                   "</span> required!</div><div class="line"></div><div class="line"><span class="string">" set the runtime path to include Vundle and initialize</span></div><div class="line"><span class="string">set rtp+=~/.vim/bundle/Vundle.vim</span></div><div class="line"><span class="string">call vundle#begin()</span></div><div class="line"><span class="string">"</span> alternatively, pass a path <span class="built_in">where</span> Vundle should install plugins</div><div class="line"><span class="string">"call vundle#begin('~/some/path/here')</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> <span class="built_in">let</span> Vundle manage Vundle, required!</div><div class="line">Plugin <span class="string">'gmarik/Vundle.vim'</span></div><div class="line"></div><div class="line"><span class="string">" My Vundles here:</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> Display</div><div class="line"><span class="string">"Plugin 'Lokaltog/vim-powerline'  "</span> newer powerline is https://github.com/powerline/powerline</div><div class="line">Plugin <span class="string">'vim-airline/vim-airline'</span></div><div class="line">Plugin <span class="string">'vim-airline/vim-airline-themes'</span></div><div class="line">Plugin <span class="string">'chriskempson/tomorrow-theme'</span></div><div class="line">Plugin <span class="string">'jnurmine/Zenburn'</span></div><div class="line">Plugin <span class="string">'kien/rainbow_parentheses.vim'</span></div><div class="line"><span class="string">"Plugin 'Yggdroot/indentLine'</span></div><div class="line"><span class="string">"</span> Note vim-colorschemes will cause vim-powerline not work <span class="keyword">if</span> :tabnew</div><div class="line"><span class="string">" Plugin 'flazz/vim-colorschemes'  "</span> themes collection</div><div class="line">Plugin <span class="string">'Color-Scheme-Explorer'</span></div><div class="line"></div><div class="line"><span class="string">" Python</span></div><div class="line"><span class="string">Plugin 'davidhalter/jedi-vim'</span></div><div class="line"><span class="string">Plugin 'nvie/vim-flake8'</span></div><div class="line"><span class="string">Plugin 'mitsuhiko/vim-jinja'</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'kevinw/pyflakes-vim'</span></div><div class="line"><span class="string">"Plugin 'fs111/pydoc.vim'</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'Pydiction'</span></div><div class="line"><span class="string">"Plugin 'pep8'</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> HTML &amp; CSS</div><div class="line"><span class="string">"Plugin 'mattn/emmet-vim'</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'hail2u/vim-css3-syntax'</span></div><div class="line"></div><div class="line"><span class="string">" JavaScript</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'pangloss/vim-javascript'</span>  <span class="string">" improved indentation</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'ternjs/tern_for_vim'</span>  <span class="string">" js autocompletion</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'Shutnik/jshint2.vim'</span></div><div class="line"></div><div class="line"><span class="string">" Go</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'fatih/vim-go'</span></div><div class="line"></div><div class="line"><span class="string">" LaTeX</span></div><div class="line"><span class="string">Plugin 'lervag/vimtex'</span></div><div class="line"><span class="string">"</span>---tex config---</div><div class="line"><span class="built_in">let</span> g:vimtex_compiler_latexmk = &#123;<span class="string">'callback'</span> : 0&#125;</div><div class="line"><span class="built_in">set</span> nocompatible</div><div class="line"><span class="built_in">let</span> &amp;rtp  = <span class="string">'~/.vim/bundle/vimtex,'</span> . &amp;rtp</div><div class="line"><span class="built_in">let</span> &amp;rtp .= <span class="string">',~/.vim/bundle/vimtex/after'</span></div><div class="line">filetype plugin indent on</div><div class="line">syntax <span class="built_in">enable</span></div><div class="line"></div><div class="line"><span class="string">" Markdown</span></div><div class="line"><span class="string">Plugin 'sjl/badwolf'</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> Enhanced</div><div class="line">Plugin <span class="string">'scrooloose/nerdtree'</span></div><div class="line">Plugin <span class="string">'jistr/vim-nerdtree-tabs'</span></div><div class="line">Plugin <span class="string">'airblade/vim-gitgutter'</span></div><div class="line">Plugin <span class="string">'ervandew/supertab'</span></div><div class="line">Plugin <span class="string">'Shougo/neocomplete.vim'</span>  <span class="string">" neocomplete need vim --with-lua</span></div><div class="line"><span class="string">Plugin 'SirVer/ultisnips'</span></div><div class="line"><span class="string">Plugin 'honza/vim-snippets'  "</span> needed with SirVer/ultisnips</div><div class="line">Plugin <span class="string">'AndrewRadev/splitjoin.vim'</span>  <span class="string">" transition between multiline and single-line code</span></div><div class="line"><span class="string">Plugin 'Tagbar'  "</span> Tagbar is more powerful than <span class="string">'taglist.vim'</span></div><div class="line">Plugin <span class="string">'Auto-Pairs'</span>  <span class="string">" Auto-Pairs is more useful than AutoClose</span></div><div class="line"><span class="string">"</span>Plugin <span class="string">'godlygeek/tabular'</span></div><div class="line">Plugin <span class="string">'hotoo/pangu.vim'</span></div><div class="line">Plugin <span class="string">'easymotion/vim-easymotion'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> has(<span class="string">'mac'</span>) || has(<span class="string">'macunix'</span>)</div><div class="line">    Plugin <span class="string">'rizzatti/dash.vim'</span></div><div class="line">endif</div><div class="line"></div><div class="line">call vundle<span class="comment">#end()             " required!</span></div><div class="line">filetype plugin indent on     <span class="string">" required!</span></div><div class="line"><span class="string">"</span> To ignore plugin indent changes, instead use:</div><div class="line"><span class="string">"filetype plugin on"</span></div><div class="line"><span class="string">"</span></div><div class="line"><span class="string">"</span> Brief <span class="built_in">help</span></div><div class="line"><span class="string">" :PluginList       - lists configured plugins</span></div><div class="line"><span class="string">"</span> :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate</div><div class="line"><span class="string">" :PluginSearch foo - searches for foo; append `!` to refresh local cache</span></div><div class="line"><span class="string">"</span> :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal</div><div class="line"><span class="string">"</span></div><div class="line"><span class="string">"</span> see :h vundle <span class="keyword">for</span> more details or wiki <span class="keyword">for</span> FAQ</div><div class="line"><span class="string">" Put your non-Plugin stuff after this line</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> -------------------------------------------------------------------------------</div><div class="line"><span class="string">" Lokaltog/vim-powerline</span></div><div class="line"><span class="string">"</span> -------------------------------------------------------------------------------</div><div class="line"><span class="built_in">let</span> g:Powerline_symbols = <span class="string">'unicode'</span> <span class="string">" compatible/unicode/fancy</span></div><div class="line"><span class="string">set laststatus=2   "</span> Always show the statusline</div><div class="line"><span class="built_in">set</span> encoding=utf-8 <span class="string">" Necessary to show Unicode glyphs</span></div><div class="line"><span class="string">set t_Co=256 "</span> Explicitly tell Vim that the terminal supports 256 colors</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> vim-airline/vim-airline</div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> Keep vim-powerline configuration opened</div><div class="line"><span class="string">" In Mac with iTerm2, need to select patched font for non-ascii font, in</span></div><div class="line"><span class="string">"</span> Profiles -&gt; Text</div><div class="line"><span class="built_in">let</span> g:airline_powerline_fonts = 1</div><div class="line"><span class="built_in">let</span> g:airline_theme=<span class="string">'molokai'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> kien/rainbow_parentheses.vim</div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> always on</div><div class="line">au VimEnter *.py,*.js,*.html,*.css,*.sls RainbowParenthesesToggle</div><div class="line">au Syntax *.py,*.js,*.html,*.css,*.sls RainbowParenthesesLoadRound</div><div class="line">au Syntax *.py,*.js,*.html,*.css,*.sls RainbowParenthesesLoadSquare</div><div class="line">au Syntax *.py,*.js,*.html,*.css,*.sls RainbowParenthesesLoadBraces</div><div class="line"></div><div class="line"><span class="string">" the outer layer is the last pair</span></div><div class="line"><span class="string">"</span> remove black <span class="keyword">for</span> dark terminal</div><div class="line"><span class="built_in">let</span> g:rbpt_colorpairs = [</div><div class="line">    \ [<span class="string">'brown'</span>,       <span class="string">'RoyalBlue3'</span>],</div><div class="line">    \ [<span class="string">'darkblue'</span>,    <span class="string">'SeaGreen3'</span>],</div><div class="line">    \ [<span class="string">'darkgray'</span>,    <span class="string">'DarkOrchid3'</span>],</div><div class="line">    \ [<span class="string">'darkgreen'</span>,   <span class="string">'firebrick3'</span>],</div><div class="line">    \ [<span class="string">'darkcyan'</span>,    <span class="string">'RoyalBlue3'</span>],</div><div class="line">    \ [<span class="string">'darkred'</span>,     <span class="string">'SeaGreen3'</span>],</div><div class="line">    \ [<span class="string">'darkmagenta'</span>, <span class="string">'DarkOrchid3'</span>],</div><div class="line">    \ [<span class="string">'brown'</span>,       <span class="string">'firebrick3'</span>],</div><div class="line">    \ [<span class="string">'gray'</span>,        <span class="string">'RoyalBlue3'</span>],</div><div class="line">    \ [<span class="string">'darkred'</span>,     <span class="string">'DarkOrchid3'</span>],</div><div class="line">    \ [<span class="string">'darkmagenta'</span>, <span class="string">'DarkOrchid3'</span>],</div><div class="line">    \ [<span class="string">'darkblue'</span>,    <span class="string">'firebrick3'</span>],</div><div class="line">    \ [<span class="string">'darkgreen'</span>,   <span class="string">'RoyalBlue3'</span>],</div><div class="line">    \ [<span class="string">'darkcyan'</span>,    <span class="string">'SeaGreen3'</span>],</div><div class="line">    \ [<span class="string">'red'</span>,         <span class="string">'firebrick3'</span>],</div><div class="line">    \ ]</div><div class="line"><span class="built_in">let</span> g:rbpt_max = 15</div><div class="line"></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> Yggdroot/indentLine</div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span>   https://github.com/Yggdroot/indentLine</div><div class="line"><span class="string">" let g:indentLine_char='┆'</span></div><div class="line"><span class="string">"</span> <span class="built_in">let</span> g:indentLine_enabled = 1</div><div class="line"></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> davidhalter/jedi-vim</div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span>   Goto assignments &lt;leader&gt;g (typical goto <span class="keyword">function</span>)</div><div class="line"><span class="string">"   Goto definitions &lt;leader&gt;d (follow identifier as far as possible, includes</span></div><div class="line"><span class="string">"</span>   imports and statements)</div><div class="line"><span class="string">"   Show Documentation/Pydoc K (shows a popup with assignments)</span></div><div class="line"><span class="string">"</span>   Renaming &lt;leader&gt;r</div><div class="line"><span class="string">"   Usages &lt;leader&gt;n (shows all the usages of a name)</span></div><div class="line"><span class="string">"</span>   Open module, e.g. :Pyimport os (opens the os module)</div><div class="line">autocmd FileType python setlocal completeopt-=preview    <span class="string">" disable docstring</span></div><div class="line"><span class="string">"</span><span class="built_in">let</span> g:jedi<span class="comment">#completions_command = "&lt;C-N&gt;"</span></div><div class="line"></div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> nvie/vim-flake8</div><div class="line"><span class="string">" -------------------------------------------------------------------------------</span></div><div class="line"><span class="string">autocmd FileType python map &lt;buffer&gt; &lt;F3&gt; :call Flake8()&lt;CR&gt;</span></div><div class="line"><span class="string">let g:flake8_quickfix_height=5</span></div><div class="line"><span class="string">let g:flake8_show_in_gutter=1</span></div><div class="line"><span class="string">highlight link Flake8_Error      Error</span></div><div class="line"><span class="string">highlight link Flake8_Warning    WarningMsg</span></div><div class="line"><span class="string">highlight link Flake8_Complexity WarningMsg</span></div><div class="line"><span class="string">highlight link Flake8_Naming     WarningMsg</span></div><div class="line"><span class="string">highlight link Flake8_PyFlake    WarningMsg</span></div><div class="line"><span class="string">autocmd BufWritePost *.py call Flake8()</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" mattn/emmet-vim</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">"   trigger key: &lt;c-y&gt;,  "</span> note with comma</div><div class="line"><span class="string">"   html:5</span></div><div class="line"><span class="string">"</span>   &lt;c-y&gt;n: next edit point</div><div class="line"><span class="string">"   &lt;c-y&gt;N: previous edit point</span></div><div class="line"><span class="string">"</span>   &lt;c-y&gt;d: select whole label</div><div class="line"><span class="string">"   &lt;c-y&gt;D: select whole label content</span></div><div class="line"><span class="string">"</span>   &lt;c-y&gt;k: delete current label</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> hail2u/vim-css3-syntax</div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">augroup VimCSS3Syntax</span></div><div class="line"><span class="string">  autocmd!</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">  autocmd FileType css setlocal iskeyword+=-</span></div><div class="line"><span class="string">augroup END</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" ternjs/tern_for_vim</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="built_in">let</span> tern_show_signature_in_pum = 1</div><div class="line"><span class="built_in">let</span> tern_show_argument_hints = <span class="string">'on_hold'</span></div><div class="line">autocmd FileType javascript nnoremap &lt;leader&gt;d :TernDef&lt;CR&gt;</div><div class="line">autocmd FileType javascript setlocal omnifunc=tern<span class="comment">#Complete</span></div><div class="line"><span class="string">"</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" Shutnik/jshint2.vim</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="built_in">let</span> jshint2_save = 1</div><div class="line"><span class="string">" jshint validation</span></div><div class="line"><span class="string">nnoremap &lt;leader&gt;j :JSHint&lt;CR&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" scrooloose/nerdtree and jistr/vim-nerdtree-tabs</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">"nmap &lt;leader&gt;ne :NERDTreeToggle&lt;CR&gt;</span></div><div class="line"><span class="string">nmap &lt;leader&gt;ne :NERDTreeTabsToggle&lt;CR&gt;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span>Ctrl+N 打开/关闭</div><div class="line">map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;</div><div class="line"><span class="string">" 当不带参数打开Vim时自动加载项目树</span></div><div class="line"><span class="string">autocmd StdinReadPre * let s:std_in=1</span></div><div class="line"><span class="string">autocmd VimEnter * if argc() == 0 &amp;&amp; !exists("</span>s:std_in<span class="string">") | NERDTree | endif</span></div><div class="line"><span class="string">"</span> 当所有文件关闭时关闭项目树窗格</div><div class="line">autocmd bufenter * <span class="keyword">if</span> (winnr(<span class="string">"$"</span>) == 1 &amp;&amp; exists(<span class="string">"b:NERDTreeType"</span>) &amp;&amp; b:NERDTreeType == <span class="string">"primary"</span>) | q | endif</div><div class="line"><span class="string">" 不显示这些文件</span></div><div class="line"><span class="string">let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "</span>ignore files <span class="keyword">in</span> NERDTree</div><div class="line"><span class="string">" 不显示项目树上额外的信息，例如帮助、提示什么的</span></div><div class="line"><span class="string">let NERDTreeMinimalUI=1</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" ervandew/supertab</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="built_in">set</span> completeopt=longest,menu,preview</div><div class="line"><span class="built_in">let</span> g:SuperTabDefaultCompletionType = <span class="string">"&lt;c-x&gt;&lt;c-o&gt;"</span>  <span class="string">" use omni completion instead of default</span></div><div class="line"><span class="string">let g:SuperTabCrMapping = 1  "</span> <span class="built_in">disable</span> &lt;enter&gt; with newline, https://github.com/ervandew/supertab/issues/142</div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> Shougo/neocomplete.vim</div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> Disable AutoComplPop.</div><div class="line"><span class="built_in">let</span> g:acp_enableAtStartup = 0</div><div class="line"><span class="string">" Use neocomplete.</span></div><div class="line"><span class="string">let g:neocomplete#enable_at_startup = 1</span></div><div class="line"><span class="string">"</span> Use smartcase.</div><div class="line"><span class="built_in">let</span> g:neocomplete<span class="comment">#enable_smart_case = 1</span></div><div class="line"><span class="string">" Set minimum syntax keyword length.</span></div><div class="line"><span class="string">let g:neocomplete#sources#syntax#min_keyword_length = 3</span></div><div class="line"><span class="string">let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> Define dictionary.</div><div class="line"><span class="built_in">let</span> g:neocomplete<span class="comment">#sources#dictionary#dictionaries = &#123;</span></div><div class="line">    \ <span class="string">'default'</span> : <span class="string">''</span>,</div><div class="line">    \ <span class="string">'vimshell'</span> : <span class="variable">$HOME</span>.<span class="string">'/.vimshell_hist'</span>,</div><div class="line">    \ <span class="string">'scheme'</span> : <span class="variable">$HOME</span>.<span class="string">'/.gosh_completions'</span></div><div class="line">        \ &#125;</div><div class="line"></div><div class="line"><span class="string">" Define keyword.</span></div><div class="line"><span class="string">if !exists('g:neocomplete#keyword_patterns')</span></div><div class="line"><span class="string">    let g:neocomplete#keyword_patterns = &#123;&#125;</span></div><div class="line"><span class="string">endif</span></div><div class="line"><span class="string">let g:neocomplete#keyword_patterns['default'] = '\h\w*'</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> Plugin key-mappings.</div><div class="line">inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplete<span class="comment">#undo_completion()</span></div><div class="line">inoremap &lt;expr&gt;&lt;C<span class="_">-l</span>&gt;     neocomplete<span class="comment">#complete_common_string()</span></div><div class="line"></div><div class="line"><span class="string">" Recommended key-mappings.</span></div><div class="line"><span class="string">"</span> &lt;TAB&gt;: completion.</div><div class="line">inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? <span class="string">"\&lt;C-n&gt;"</span> : <span class="string">"\&lt;TAB&gt;"</span></div><div class="line"><span class="string">" &lt;C-h&gt;, &lt;BS&gt;: close popup and delete backword char.</span></div><div class="line"><span class="string">inoremap &lt;expr&gt;&lt;C-h&gt; neocomplete#smart_close_popup()."</span>\&lt;C-h&gt;<span class="string">"</span></div><div class="line"><span class="string">inoremap &lt;expr&gt;&lt;BS&gt; neocomplete#smart_close_popup()."</span>\&lt;C-h&gt;<span class="string">"</span></div><div class="line"><span class="string">"</span> Close popup by &lt;Space&gt;.</div><div class="line"><span class="string">"inoremap &lt;expr&gt;&lt;Space&gt; pumvisible() ? "</span>\&lt;C-y&gt;<span class="string">" : "</span>\&lt;Space&gt;<span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> AutoComplPop like behavior.</div><div class="line"><span class="built_in">let</span> g:neocomplete<span class="comment">#enable_auto_select = 1</span></div><div class="line"></div><div class="line"><span class="string">" Enable omni completion.</span></div><div class="line"><span class="string">autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS</span></div><div class="line"><span class="string">autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags</span></div><div class="line"><span class="string">autocmd FileType javascript setlocal omnifunc=tern#Complete  "</span> <span class="keyword">for</span> ternjs</div><div class="line">autocmd FileType python setlocal omnifunc=jedi<span class="comment">#completions  " for jedi</span></div><div class="line">autocmd FileType xml setlocal omnifunc=xmlcomplete<span class="comment">#CompleteTags</span></div><div class="line"></div><div class="line"><span class="string">" Enable heavy omni completion.</span></div><div class="line"><span class="string">if !exists('g:neocomplete#sources#omni#input_patterns')</span></div><div class="line"><span class="string">  let g:neocomplete#sources#omni#input_patterns = &#123;&#125;</span></div><div class="line"><span class="string">endif</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" SirVer/ultisnips</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" Trigger configuration. Do not use &lt;tab&gt; if you use https://github.com/Valloric/YouCompleteMe.</span></div><div class="line"><span class="string">let g:UltiSnipsExpandTrigger="</span>&lt;tab&gt;<span class="string">"</span></div><div class="line"><span class="string">let g:UltiSnipsJumpForwardTrigger="</span>&lt;c-b&gt;<span class="string">"</span></div><div class="line"><span class="string">let g:UltiSnipsJumpBackwardTrigger="</span>&lt;c-z&gt;<span class="string">"</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> If you want :UltiSnipsEdit to split your window.</div><div class="line"><span class="built_in">let</span> g:UltiSnipsEditSplit=<span class="string">"vertical"</span></div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> Tagbar</div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">nmap &lt;F8&gt; :TagbarToggle&lt;CR&gt;</span></div><div class="line"><span class="string">map &lt;leader&gt;tb :TagbarToggle&lt;CR&gt;</span></div><div class="line"><span class="string">let g:tagbar_sort = 0</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span><span class="built_in">let</span> g:tagbar_type_markdown = &#123;</div><div class="line"><span class="string">"    \ 'ctagstype': 'markdown',</span></div><div class="line"><span class="string">"</span>    \ <span class="string">'ctagsbin'</span> : <span class="string">'/Users/fupeng.li/.dotfiles/markdown2ctags.py'</span>,</div><div class="line"><span class="string">"    \ 'ctagsargs' : '-f - --sort=yes',</span></div><div class="line"><span class="string">"</span>    \ <span class="string">'kinds'</span> : [</div><div class="line"><span class="string">"        \ 's:sections',</span></div><div class="line"><span class="string">"</span>        \ <span class="string">'i:images'</span></div><div class="line"><span class="string">"    \ ],</span></div><div class="line"><span class="string">"</span>    \ <span class="string">'sro'</span> : <span class="string">'|'</span>,</div><div class="line"><span class="string">"    \ 'kind2scope' : &#123;</span></div><div class="line"><span class="string">"</span>        \ <span class="string">'s'</span> : <span class="string">'section'</span>,</div><div class="line"><span class="string">"    \ &#125;,</span></div><div class="line"><span class="string">"</span>    \ <span class="string">'sort'</span>: 0,</div><div class="line"><span class="string">"\ &#125;</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" airblade/vim-gitgutter</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="built_in">let</span> g:gitgutter_max_signs = 500</div><div class="line"><span class="string">"let g:gitgutter_highlight_lines = 1</span></div><div class="line"><span class="string">highlight clear SignColumn</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" SirVer/ultisnips</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" Trigger configuration. Do not use &lt;tab&gt; if you use https://github.com/Valloric/YouCompleteMe.</span></div><div class="line"><span class="string">"</span><span class="built_in">let</span> g:UltiSnipsExpandTrigger=<span class="string">"&lt;tab&gt;"</span></div><div class="line"><span class="string">"let g:UltiSnipsJumpForwardTrigger="</span>&lt;c-b&gt;<span class="string">"</span></div><div class="line"><span class="string">"</span><span class="built_in">let</span> g:UltiSnipsJumpBackwardTrigger=<span class="string">"&lt;c-z&gt;"</span></div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> rizzatti/dash.vim</div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> https://raw.githubusercontent.com/rizzatti/dash.vim/master/doc/dash.txt</div><div class="line"><span class="built_in">let</span> g:dash_map = &#123;</div><div class="line">  \ <span class="string">'python'</span> : [<span class="string">'py'</span>, <span class="string">'python2'</span>, <span class="string">'py3'</span>, <span class="string">'python3'</span>]</div><div class="line">  \ &#125;</div><div class="line">nmap &lt;silent&gt; &lt;leader&gt;da &lt;Plug&gt;DashSearch</div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> godlygeek/tabular</div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> use `Tab /|` to auto align <span class="string">'|'</span></div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> hotoo/pangu.vim</div><div class="line"><span class="string">" https://github.com/hotoo/pangu.vim</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line">autocmd BufWritePre *.markdown,*.md call PanGuSpacing()</div><div class="line"></div><div class="line"><span class="string">" ----------------------------------------------------------------------------</span></div><div class="line"><span class="string">"</span> easymotion/vim-easymotion</div><div class="line"><span class="string">" https://github.com/easymotion/vim-easymotion</span></div><div class="line"><span class="string">"</span> ----------------------------------------------------------------------------</div><div class="line"><span class="string">" &lt;Leader&gt;f&#123;char&#125; to move to &#123;char&#125;</span></div><div class="line"><span class="string">map  &lt;Leader&gt;f &lt;Plug&gt;(easymotion-bd-f)</span></div><div class="line"><span class="string">nmap &lt;Leader&gt;f &lt;Plug&gt;(easymotion-overwin-f)</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> s&#123;char&#125;&#123;char&#125; to move to &#123;char&#125;&#123;char&#125;</div><div class="line">nmap s &lt;Plug&gt;(easymotion-overwin-f2)</div><div class="line"></div><div class="line"><span class="string">" Move to line</span></div><div class="line"><span class="string">map &lt;Leader&gt;L &lt;Plug&gt;(easymotion-bd-jk)</span></div><div class="line"><span class="string">nmap &lt;Leader&gt;L &lt;Plug&gt;(easymotion-overwin-line)</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> Move to word</div><div class="line">map  &lt;Leader&gt;w &lt;Plug&gt;(easymotion-bd-w)</div><div class="line">nmap &lt;Leader&gt;w &lt;Plug&gt;(easymotion-overwin-w)</div><div class="line"></div><div class="line"><span class="string">" ===============================================================================</span></div><div class="line"><span class="string">"</span> Color Settings</div><div class="line"><span class="string">" ===============================================================================</span></div><div class="line"><span class="string">"</span> <span class="built_in">test</span> color with run `:runtime syntax/colortest.vim`</div><div class="line"></div><div class="line"><span class="built_in">set</span> t_Co=256</div><div class="line"></div><div class="line"><span class="keyword">if</span> exists(<span class="string">'+colorcolumn'</span>)</div><div class="line">    <span class="string">" cc is only exist &gt;= `Vim7.3`</span></div><div class="line"><span class="string">    set cc=100 "</span> Short <span class="keyword">for</span> colorcolumn</div><div class="line"><span class="keyword">else</span></div><div class="line">    au BufWinEnter * <span class="built_in">let</span> w:m2=matchadd(<span class="string">'ErrorMsg'</span>, <span class="string">'\%&gt;80v.\+'</span>, -1)</div><div class="line">endif</div><div class="line">hi ColorColumn ctermbg=lightgrey guibg=lightgrey  <span class="string">" Highlighter cc</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">try</span></div><div class="line"><span class="string">    set background=dark</span></div><div class="line"><span class="string">    colorscheme Tomorrow-Night-Bright</span></div><div class="line"><span class="string">    "</span> Below syntax will affect vim-airline statusbar; write colorscheme</div><div class="line">    <span class="string">" directly is ok</span></div><div class="line"><span class="string">    "</span> autocmd BufEnter * colorscheme Tomorrow-Night-Bright</div><div class="line">    autocmd BufEnter *.md,*.mkd,*.markdown colorscheme badwolf</div><div class="line">catch /^Vim\%((\a\+)\)\=:E185/</div><div class="line">    colorscheme desert</div><div class="line">endtry</div><div class="line"></div><div class="line"><span class="string">" for gui, such as macvim</span></div><div class="line"><span class="string">if has("</span>gui_running<span class="string">")</span></div><div class="line"><span class="string">  "</span><span class="built_in">set</span> guifont=Monaco:h12</div><div class="line">  <span class="built_in">set</span> guifont=Source\ Code\ Pro\ <span class="keyword">for</span>\ Powerline:h12  <span class="string">" for vim-airline</span></div><div class="line"><span class="string">  set gcr=a:blinkon0  "</span>Disable cursor blink</div><div class="line">  <span class="built_in">set</span> lines=60</div><div class="line">  <span class="built_in">set</span> columns=150</div><div class="line"><span class="keyword">else</span></div><div class="line">  colorscheme Zenburn</div><div class="line">endif</div><div class="line"></div><div class="line"><span class="string">" Highlight TODO/FIXME/XXX</span></div><div class="line"><span class="string">highlight myTODO cterm=bold term=bold ctermbg=yellow ctermfg=black</span></div><div class="line"><span class="string">match myTODO /\(TODO\|XXX\|FIXME\)/</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">"</span> this options can be setted with colors, and must be put after colorscheme</div><div class="line"><span class="built_in">set</span> cursorline <span class="string">" Highlighter the current line</span></div><div class="line"><span class="string">set cursorcolumn "</span> Highlighter the vertical line<span class="string">"</span></div><div class="line"><span class="string">hi search cterm=underline ctermfg=white</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">highlight PmenuSel cterm=underline,bold ctermfg=blue</span></div><div class="line"><span class="string">"</span>设置光标样式为竖线vertical bar</div><div class="line"><span class="string">""</span> Change cursor shape between insert and normal mode <span class="keyword">in</span> iTerm2.app</div><div class="line"><span class="keyword">if</span> <span class="variable">$TERM_PROGRAM</span> =~ <span class="string">"iTerm"</span></div><div class="line">  <span class="built_in">let</span> &amp;t_SI = <span class="string">"\&lt;Esc&gt;]50;CursorShape=1\x7"</span> <span class="string">" Vertical bar in insert mode</span></div><div class="line"><span class="string">  let &amp;t_EI = "</span>\&lt;Esc&gt;]50;CursorShape=0\x7<span class="string">" "</span> Block <span class="keyword">in</span> normal mode</div><div class="line">endif</div><div class="line"></div><div class="line"><span class="string">" 设置在tmux下光标样式为vertical bar</span></div><div class="line"><span class="string">if exists('<span class="variable">$TMUX</span>')</span></div><div class="line"><span class="string">  let &amp;t_SI = "</span>\&lt;Esc&gt;Ptmux;\&lt;Esc&gt;\&lt;Esc&gt;]50;CursorShape=1\x7\&lt;Esc&gt;\\<span class="string">"</span></div><div class="line"><span class="string">  let &amp;t_EI = "</span>\&lt;Esc&gt;Ptmux;\&lt;Esc&gt;\&lt;Esc&gt;]50;CursorShape=0\x7\&lt;Esc&gt;\\<span class="string">"</span></div><div class="line"><span class="string">else</span></div><div class="line"><span class="string">  let &amp;t_SI = "</span>\&lt;Esc&gt;]50;CursorShape=1\x7<span class="string">"</span></div><div class="line"><span class="string">  let &amp;t_EI = "</span>\&lt;Esc&gt;]50;CursorShape=0\x7<span class="string">"</span></div><div class="line"><span class="string">endif</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之tmux/" rel="next" title="Vim & tmux & zsh ——打造Python IDE之tmux">
+                <i class="fa fa-chevron-left"></i> Vim & tmux & zsh ——打造Python IDE之tmux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/29/归档/关于uuid库的简介/" rel="prev" title="关于uuid库的简介">
+                关于uuid库的简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 300000;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
