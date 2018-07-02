@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2016/09/21/%E5%A6%82%E4%BD%95%E5%9C%A8Mac%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%99%BB%E5%BD%95MySQL/</loc>
+    
+    <lastmod>2018-07-02T16:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/01/18/Vim-&-tmux-&-zsh-%E2%80%94%E2%80%94%E6%89%93%E9%80%A0IDE%E4%B9%8Btmux/</loc>
     
     <lastmod>2018-07-02T16:07:18.000Z</lastmod>
@@ -96,13 +103,6 @@
     <loc>http://yoursite.com/2016/03/10/%E5%A6%82%E4%BD%95%E5%9C%A8Mac%E5%86%85%E6%B7%BB%E5%8A%A0PATH%E8%B7%AF%E5%BE%84%20copy/</loc>
     
     <lastmod>2018-07-02T15:37:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/06/29/%E5%A6%82%E4%BD%95%E5%9C%A8Mac%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%99%BB%E5%BD%95MySQL/</loc>
-    
-    <lastmod>2018-07-02T15:35:28.000Z</lastmod>
     
   </url>
   

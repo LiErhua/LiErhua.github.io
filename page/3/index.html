@@ -311,152 +311,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/VPN汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/08/VPN汇总/" itemprop="url">VPN汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T23:34:33+08:00">
-                2017-11-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VPN/" itemprop="url" rel="index">
-                    <span itemprop="name">VPN</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>关键词：VPN</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/08/VPN汇总/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/LaTeX入门系列之完整实例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1677,6 +1531,152 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> yaml</div><div class="line"><span class="comment">#读取yaml内的内容</span></div><div class="line">file = open(<span class="string">'config.yaml'</span>,<span class="string">'w+r'</span>) <span class="comment">#如果需要写入，需要w</span></div><div class="line">content = yaml.load(file)</div><div class="line">print(content)</div><div class="line">&#123;<span class="string">'name'</span>: <span class="string">'junxi'</span>, <span class="string">'age'</span>: <span class="number">18</span>, <span class="string">'spouse'</span>: &#123;<span class="string">'name'</span>: <span class="string">'Rui'</span>, <span class="string">'age'</span>: <span class="number">19</span>&#125;, <span class="string">'children'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'Chen You'</span>, <span class="string">'age'</span>: <span class="number">3</span>&#125;, &#123;<span class="string">'name'</span>: <span class="string">'Ruo Xi'</span>, <span class="string">'age'</span>: <span class="number">2</span>&#125;]&#125;</div><div class="line"></div><div class="line">------</div><div class="line"><span class="comment">#写入数据到yaml</span></div><div class="line">data=&#123;<span class="string">'host'</span>: &#123;<span class="string">'ip01'</span>: &#123;<span class="string">'two'</span>: <span class="string">'192.168.1.254'</span>, <span class="string">'one'</span>: <span class="string">'192.168.1.2'</span>&#125;, <span class="string">'ip00'</span>: <span class="string">'192.168.1.1'</span>&#125;, <span class="string">'soft'</span>: &#123;<span class="string">'apache'</span>: <span class="number">2.2</span>, <span class="string">'php'</span>: <span class="number">5.3</span>, <span class="string">'mysql'</span>: <span class="number">5.2</span>&#125;&#125;</div><div class="line"><span class="keyword">with</span> open(<span class="string">'config.yaml'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file:   </div><div class="line">    yaml.dump(data,file)</div><div class="line">    </div><div class="line"><span class="comment">#config.yaml</span></div><div class="line">host:</div><div class="line">  ip00: <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></div><div class="line">  ip01: &#123;one: <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, two: <span class="number">192.168</span><span class="number">.1</span><span class="number">.254</span>&#125;</div><div class="line">soft: &#123;apache: <span class="number">2.2</span>, mysql: <span class="number">5.2</span>, php: <span class="number">5.3</span>&#125;</div></pre></td></tr></table></figure>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/01/Python数据处理笔记matplotlib篇（一）/" itemprop="url">Python数据处理笔记matplotlib篇（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T00:00:00+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/01/Python数据处理笔记matplotlib篇（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
