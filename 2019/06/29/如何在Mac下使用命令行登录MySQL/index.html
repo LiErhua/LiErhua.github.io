@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="演示，首先要装好MySQL">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在Mac下使用命令行登录MySQL">
+<meta property="og:url" content="http://yoursite.com/2019/06/29/如何在Mac下使用命令行登录MySQL/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="演示，首先要装好MySQL">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-02T15:35:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在Mac下使用命令行登录MySQL">
+<meta name="twitter:description" content="演示，首先要装好MySQL">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/29/如何在Mac下使用命令行登录MySQL/"/>
+
+
+
+
+
+  <title>如何在Mac下使用命令行登录MySQL | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/如何在Mac下使用命令行登录MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何在Mac下使用命令行登录MySQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-29T00:29:31+08:00">
+                2019-06-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>演示，首先要装好MySQL</p>
+<a id="more"></a>
+<h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>方法一：使用绝对路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">终端中输入命令：/usr/local/mysql/bin/mysql -u root -p</div><div class="line">提示：输入你的密码</div></pre></td></tr></table></figure>
+<p>方法二：相对路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">终端中输入命令：</div><div class="line">查看路径中有没有需要的路径：</div><div class="line">终端中输入命令：echo $PATH</div><div class="line">没有，继续(如何添加路径请看我的另一篇文章)</div><div class="line">添加需要路径：PATH="$PATH":/usr/local/mysql/bin</div><div class="line">终端中需输入命令：mysql -u root -p 即可</div></pre></td></tr></table></figure>
+<h4 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">二.创建用户 分配权限 </div><div class="line">grant all privileges on *.* to 'user'@'localhost' with grant option </div><div class="line">grant all privileges on *.* to 'user'@'localhost' identified by '123456′; </div><div class="line">flush privileges; </div><div class="line"></div><div class="line">1.新建用户。 </div><div class="line"></div><div class="line">登录MYSQL </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line">创建用户 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> insert into mysql.user(Host,User,Password) values(<span class="string">"localhost"</span>,<span class="string">"phplamp"</span>,password(<span class="string">"1234"</span>)); </span></div><div class="line">刷新系统权限表 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line">这样就创建了一个名为：phplamp  密码为：1234  的用户。 </div><div class="line"></div><div class="line">然后登录一下。 </div><div class="line"></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"><span class="built_in">exit</span>; </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u phplamp -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">输入密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">登录成功 </span></div><div class="line"></div><div class="line">2.为用户授权。 </div><div class="line"></div><div class="line">登录MYSQL（有ROOT权限）。我里我以ROOT身份登录. </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line">首先为用户创建一个数据库(phplampDB) </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">create database phplampDB; </span></div><div class="line">授权phplamp用户拥有phplamp数据库的所有权限。 </div><div class="line"><span class="meta">&gt;</span><span class="bash">grant all privileges on phplampDB.* to phplamp@localhost identified by <span class="string">'1234'</span>; </span></div><div class="line">刷新系统权限表 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">其它操作 </span></div><div class="line"></div><div class="line"></div><div class="line">如果想指定部分权限给一用户，可以这样来写: </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">grant select,update on phplampDB.* to phplamp@localhost identified by <span class="string">'1234'</span>; </span></div><div class="line">//刷新系统权限表。 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line"></div><div class="line"></div><div class="line">3.删除用户。 </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">DELETE FROM user WHERE User=<span class="string">"phplamp"</span> and Host=<span class="string">"localhost"</span>; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line">//删除用户的数据库 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">drop database phplampDB; </span></div><div class="line"></div><div class="line">4.修改指定用户密码。 </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">update mysql.user <span class="built_in">set</span> password=password(<span class="string">'新密码'</span>) <span class="built_in">where</span> User=<span class="string">"phplamp"</span> and Host=<span class="string">"localhost"</span>; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges;</span></div></pre></td></tr></table></figure>
+<h4 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line">一.安装mysql </div><div class="line"></div><div class="line"></div><div class="line">1.mysql下载地址http://dev.mysql.com/downloads/mysql/我的机器是mac 10.8的;所以使用mysql-5.6.10-osx10.7-x86_64.dmg安装包； </div><div class="line">2.安装软件包位于硬盘映象(.dmg)文件中，必须首先双击搜索起中的图标来安装该文件。应当安装图像并显示其内容。 </div><div class="line"></div><div class="line">注释：在继续安装前，一定要使用MySQL管理器应用程序(在Mac OS X服务器上)或通过命令行的mysqladmin shutdown关闭所有运行MySQL服务器实例。 </div><div class="line">MySQL的Mac OS X PKG安装到/usr/local/mysql-VERSION，并且还会安装一个符号连接，/usr/local/mysql，指向新的位置。如果有/usr/local/mysql目录，首先将它改名为/usr/local/mysql.bak。安装完后，安装器执行mysql_install_db在MySQL数据库中创建授权表。 </div><div class="line"></div><div class="line">安装布局与tar文件二进制分发版类似；所有MySQL二进制代码位于目录/usr/local/mysql/bin中。默认情况，MySQL套接字文件创建为/tmp/mysql.sock。 </div><div class="line"></div><div class="line"> MAC下安装MYSQL有两种方式，一种为压缩包形式 另一种为.dmg文件安装包 。</div><div class="line">首先先介绍压缩包形式的安装方法：</div><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash"> sudo mv mysql-5.1.45-osx10.6-x86_64 /usr/<span class="built_in">local</span>/mysql</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /usr/<span class="built_in">local</span></span></div><div class="line"><span class="meta">$</span><span class="bash"> sudo chown -R mysql:mysql mysql</span></div><div class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> mysql</span></div><div class="line"><span class="meta">$</span><span class="bash"> sudo scripts/mysql_install_db --user=mysql</span></div><div class="line"><span class="meta">$</span><span class="bash"> sudo chown -R root .</span></div><div class="line"><span class="meta">$</span><span class="bash"> sudo chown -R mysql data</span></div><div class="line"></div><div class="line">然后cd bin用</div><div class="line"><span class="meta">$</span><span class="bash"> sudo ./mysql_secure_installation </span></div><div class="line">来修改root密码，默认为空，显然不太安全，然后根据提示酌情配置，因为是开发环境不用那么严格限制。</div><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash"> sudo ./mysqld_safe </span></div><div class="line">来启动mysql</div><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash"> sudo ./mysql -u root -p </span></div><div class="line">输入刚才设置的root密码来登录mysql</div><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash"> sudo ./mysqld_safe stop </span></div><div class="line">停止mysql</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">安装包文件形式的安装方法：</div><div class="line"></div><div class="line">首先，去http://www.mysql.com/downloads/mysql下载mysql-5.6.10-osx10.7-x86_64.dmg，然后，双击该文件，安装映像中的两个安装包文件。</div><div class="line"></div><div class="line">a. mysql-5.6.10-osx10.7-x86_64.dmg（mysql标准版安装）</div><div class="line"></div><div class="line">b. MySQLStartupItem.pkg（mysql启动项目），可以在你电脑启动系统时自动运行mysql服务，它安装在/Library /StartupItems/MySQL/，如果你不想系统启动时运行mysql服务，请不要安装。如果你在安装后又不想使用，请删除/Library /StartupItems/MySQL/这个目录。</div><div class="line"></div><div class="line">启动mysql服务</div><div class="line"></div><div class="line">1、如果你已经安装了MySQLStartupItem.pkg，重新启动电脑即可。</div><div class="line"></div><div class="line">2、如果你有安装MySQLStartupItem.pkg或者不想启动电脑，运行：应用程序－实用工具－终端，在终端中输入命令：sudo /Library/StartupItems/MySQLCOM/MySQLCOM start，然后输入你的系统管理员密码即可。</div><div class="line"></div><div class="line">关闭mysql服务</div><div class="line"></div><div class="line">终端中输入命令：sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop，然后输入你的系统管理员密码即可。</div><div class="line"></div><div class="line">你也可以去系统偏好设置－其他－MySQL，通过这个来启动和停止MySQL服务。</div><div class="line"></div><div class="line">更改mysql root账户密码</div><div class="line"></div><div class="line">终端中输入命令：/usr/local/mysql/bin/mysqladmin -u root password 新密码</div><div class="line"></div><div class="line">你可以随时使用这条命令更改你的密码。</div><div class="line"></div><div class="line">终端登录mysql</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">终端登录mysql</div><div class="line"></div><div class="line">方法1:绝对路径</div><div class="line"></div><div class="line">终端中输入命令：/usr/local/mysql/bin/mysql -u root -p</div><div class="line"></div><div class="line">提示：输入你的新密码</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">方法2：（推荐)相对路径</div><div class="line"></div><div class="line">终端中输入命令：</div><div class="line"></div><div class="line">查看路径中有没有需要的路径：</div><div class="line"></div><div class="line">终端中输入命令：echo $PATH</div><div class="line"></div><div class="line">没有，继续</div><div class="line"></div><div class="line">添加需要路径：PATH="$PATH":/usr/local/mysql/bin</div><div class="line"></div><div class="line">以后</div><div class="line"></div><div class="line">终端中需输入命令：mysql -u root -p 即可</div><div class="line"></div><div class="line"></div><div class="line">二.创建用户 分配权限 </div><div class="line">grant all privileges on *.* to 'user'@'localhost' with grant option </div><div class="line">grant all privileges on *.* to 'user'@'localhost' identified by '123456′; </div><div class="line">flush privileges; </div><div class="line"></div><div class="line">1.新建用户。 </div><div class="line"></div><div class="line">登录MYSQL </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line">创建用户 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"> insert into mysql.user(Host,User,Password) values(<span class="string">"localhost"</span>,<span class="string">"phplamp"</span>,password(<span class="string">"1234"</span>)); </span></div><div class="line">刷新系统权限表 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line">这样就创建了一个名为：phplamp  密码为：1234  的用户。 </div><div class="line"></div><div class="line">然后登录一下。 </div><div class="line"></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"><span class="built_in">exit</span>; </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u phplamp -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">输入密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">登录成功 </span></div><div class="line"></div><div class="line">2.为用户授权。 </div><div class="line"></div><div class="line">登录MYSQL（有ROOT权限）。我里我以ROOT身份登录. </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line">首先为用户创建一个数据库(phplampDB) </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">create database phplampDB; </span></div><div class="line">授权phplamp用户拥有phplamp数据库的所有权限。 </div><div class="line"><span class="meta">&gt;</span><span class="bash">grant all privileges on phplampDB.* to phplamp@localhost identified by <span class="string">'1234'</span>; </span></div><div class="line">刷新系统权限表 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">其它操作 </span></div><div class="line"></div><div class="line"></div><div class="line">如果想指定部分权限给一用户，可以这样来写: </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">grant select,update on phplampDB.* to phplamp@localhost identified by <span class="string">'1234'</span>; </span></div><div class="line">//刷新系统权限表。 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line"></div><div class="line"></div><div class="line">3.删除用户。 </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">DELETE FROM user WHERE User=<span class="string">"phplamp"</span> and Host=<span class="string">"localhost"</span>; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges; </span></div><div class="line">//删除用户的数据库 </div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">drop database phplampDB; </span></div><div class="line"></div><div class="line">4.修改指定用户密码。 </div><div class="line"><span class="meta">@&gt;</span><span class="bash">mysql -u root -p </span></div><div class="line"><span class="meta">@&gt;</span><span class="bash">密码 </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">update mysql.user <span class="built_in">set</span> password=password(<span class="string">'新密码'</span>) <span class="built_in">where</span> User=<span class="string">"phplamp"</span> and Host=<span class="string">"localhost"</span>; </span></div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">flush privileges;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/26/程序员必备云笔记本：Quiver/" rel="next" title="程序员必备云笔记本：Quiver">
+                <i class="fa fa-chevron-left"></i> 程序员必备云笔记本：Quiver
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#登录"><span class="nav-number">1.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管理用户"><span class="nav-number">2.</span> <span class="nav-text">管理用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原文"><span class="nav-number">3.</span> <span class="nav-text">原文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 300000;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
