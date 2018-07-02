@@ -20,17 +20,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[sublime 插件的安装与Vim模式的设置]]></title>
-    <url>%2F2018%2F02%2F14%2Fsublime-%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8EVim%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：Vim，sublime 安装sublime以及其配置下载安装：http://www.sublimetext.com/3Package Control安装：https://sublime.wbond.net/installation how to install the plugins在第1步中安装好后 按 Ctrl+Shift+P ，输入insta 在下拉菜单选择 Install Package 按回车键，在接着弹出的输入框中输入插件名字，回车选择即可安装该插件： 常用的插件 1. ConvertToUTF8 支持多种编码，解决中文乱码问题。 2. Bracket Highlighter 用于高亮匹配括号、引号、html标签。 3. DocBlockr 可以自动生成PHPDoc风格的注释。 4. Emmet 快速编写HTML，原 Zen Coding。 5. SideBar Enhancements 这个插件改进了侧边栏，增加了许多功能 6. evernote 这个是 evernote 的插件，支持 markdown 语法 7. markdown preview markdown 预览插件 alt+m开启 如何启用Vim模式在菜单栏中： Preferences -&gt; Setting - User ，即可打开配置文件进行编辑，将 ignored_packages 项的[]里面内容清空：]]></content>
-      <categories>
-        <category>sublime</category>
-      </categories>
-      <tags>
-        <tag>Vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[如何修改Mac的键盘映射]]></title>
     <url>%2F2018%2F02%2F14%2F%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9Mac%E7%9A%84%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84%2F</url>
     <content type="text"><![CDATA[关键词： Mac，KeyRemap4MacBook Mac上的大小写键，作用其实并不是太大。同时在使用Vim的时候Esc键的时候，太远，不太好触及到，我们可以做一个键盘的修改，让大小写键映射到Esc键上，或者映射到control键上( 因为control+[ )相当于Esc键。 默认Mac下键盘映射的修改 使用软件进行映射修改：KeyRemap4MacBook我们可以下载这个软件：KeyRemap4MacBook来进行更加高级的键盘的映射修改选择。 首先我们可以将大小写键映射成left_control 然后将我们的control键编程点按时发送Esc功能，联合使用时回复left_control功能。]]></content>
@@ -42,32 +31,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
-    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Mac下tmux的安装与基本使用]]></title>
-    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2FMac%E4%B8%8Btmux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[关键词：tmux，Mac 安装使用brew进行安装 1$brew install tmux 注意每当我们开启一个新的会话时，都会读取 ~/.tmux.conf这个文件，该文件中存放的就是对 Tmux 的配置。 小提示：如果你希望新的配置项能够立即生效，那么你可以将下面这一行配置加入到文件 ~/.tmux.conf 中。 12# bind a reload keybind R source-file ~/.tmux.conf ; display-message "Config reloaded.." 这样配置了之后，每当向 ~/.tmux.conf 文件中添加了新的配置，只需要按下 Ctrl-b r就可以重新加载配置并使新的配置生效，从而免去了开启一个新的会话。]]></content>
+    <title><![CDATA[sublime 插件的安装与Vim模式的设置]]></title>
+    <url>%2F2018%2F02%2F14%2Fsublime-%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8EVim%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：Vim，sublime 安装sublime以及其配置下载安装：http://www.sublimetext.com/3Package Control安装：https://sublime.wbond.net/installation how to install the plugins在第1步中安装好后 按 Ctrl+Shift+P ，输入insta 在下拉菜单选择 Install Package 按回车键，在接着弹出的输入框中输入插件名字，回车选择即可安装该插件： 常用的插件 1. ConvertToUTF8 支持多种编码，解决中文乱码问题。 2. Bracket Highlighter 用于高亮匹配括号、引号、html标签。 3. DocBlockr 可以自动生成PHPDoc风格的注释。 4. Emmet 快速编写HTML，原 Zen Coding。 5. SideBar Enhancements 这个插件改进了侧边栏，增加了许多功能 6. evernote 这个是 evernote 的插件，支持 markdown 语法 7. markdown preview markdown 预览插件 alt+m开启 如何启用Vim模式在菜单栏中： Preferences -&gt; Setting - User ，即可打开配置文件进行编辑，将 ignored_packages 项的[]里面内容清空：]]></content>
       <categories>
-        <category>Mac</category>
+        <category>sublime</category>
       </categories>
       <tags>
-        <tag>Mac</tag>
-        <tag>tmux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[sqlalchemy中的types.TypeDecortor类]]></title>
-    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2Fsqlalchemy%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E5%89%8D%E5%A4%84%E7%90%86%E4%B8%8E%E5%90%8E%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。 我们以json格式为例，假设我们要使用的数据类型是json格式 存储到数据库之前是python格式，比如我们一般使用list或者dict等格式（存储前） 存储到数据库中的是json字符串（数据库中格式，用impl的格式来存储 然后从数据库中取出来之后的格式是原始的python格式（比如dict或者list） 12345678910111213import sqlalchemy.types as typesclass MyType(types.TypeDecorator): #impl变量规定了存储到数据库中的存储形式 impl = types.TEXT #复写process_bind_param方法，此方法用于传入数据库的前处理 def process_bind_param(self, value, dialect): return json.dumps(value) #复写process_result_value方法,对从数据库中取出的数据进行后处理 def process_result_value(self, value, dialect): return json.loads(value)]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>sqlalchemy</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -95,6 +66,35 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
+    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[sqlalchemy中的types.TypeDecortor类]]></title>
+    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2Fsqlalchemy%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E5%89%8D%E5%A4%84%E7%90%86%E4%B8%8E%E5%90%8E%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。 我们以json格式为例，假设我们要使用的数据类型是json格式 存储到数据库之前是python格式，比如我们一般使用list或者dict等格式（存储前） 存储到数据库中的是json字符串（数据库中格式，用impl的格式来存储 然后从数据库中取出来之后的格式是原始的python格式（比如dict或者list） 12345678910111213import sqlalchemy.types as typesclass MyType(types.TypeDecorator): #impl变量规定了存储到数据库中的存储形式 impl = types.TEXT #复写process_bind_param方法，此方法用于传入数据库的前处理 def process_bind_param(self, value, dialect): return json.dumps(value) #复写process_result_value方法,对从数据库中取出的数据进行后处理 def process_result_value(self, value, dialect): return json.loads(value)]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>sqlalchemy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Mac下tmux的安装与基本使用]]></title>
+    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2FMac%E4%B8%8Btmux%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[关键词：tmux，Mac 安装使用brew进行安装 1$brew install tmux 注意每当我们开启一个新的会话时，都会读取 ~/.tmux.conf这个文件，该文件中存放的就是对 Tmux 的配置。 小提示：如果你希望新的配置项能够立即生效，那么你可以将下面这一行配置加入到文件 ~/.tmux.conf 中。 12# bind a reload keybind R source-file ~/.tmux.conf ; display-message "Config reloaded.." 这样配置了之后，每当向 ~/.tmux.conf 文件中添加了新的配置，只需要按下 Ctrl-b r就可以重新加载配置并使新的配置生效，从而免去了开启一个新的会话。]]></content>
+      <categories>
+        <category>Mac</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+        <tag>tmux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[日拱一卒之：Python发布工具setuptools的用法]]></title>
     <url>%2F2018%2F01%2F15%2F%E5%BD%92%E6%A1%A3%2FPython%E5%8F%91%E5%B8%83%E5%B7%A5%E5%85%B7setuptools%E7%9A%84%E7%94%A8%E6%B3%95%2F</url>
     <content type="text"><![CDATA[作为Python标准的打包及分发工具，setuptools可以说相当地简单易用。它会随着Python一起安装在你的机器上。你只需写一个简短的setup.py安装文件，就可以将你的Python应用打包。本文就会介绍下如何编写安装文件及如何打包分发 首先，我们安装setuptools可以使用 1234#找到setuptools的下载页面：https://pypi.python.org/pypi/setuptools 并下载#解压#cd 到解压后的文件夹内#执行 python setup.py install 即可 tips：如何在Mac中使用目录树 Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包。 首先安装tree包 1brew install tree 使用方法 123&gt;tree #显示当前目录的目录树&gt;tree -L n #显示当前目录下的n级目录树&gt;tree -L n &gt;README.md #将目录树输出为文件 最简单的安装文件新建一个setuptools的文件夹，他的目录形式如下 1234setuptools ├── MyApp │ └── __init__.py └── setup.py 一个最基本的setup.py的文件内容如下 123456789#encoding:--utf8--from setuptools import setupsetup( name = 'MyApp',#应用名字 version = '1.0', #版本号 packages = ['MyApp'] #包括在安装包内的Python包（这里就是我们要装的MyApp这个包）) 执行安装 创建egg包 现在最简单的安装文件已经有了，现在要执行安装，需要如下的命令 1$ python setup.py bdist_egg 这个命令会在当前的主目录setuptools_test中建立一个文件夹dist，里面包含创建的egg文件，名字是MyApp-1.0-py2.7.egg,格式是应用的名字（你要发布的应用的名字，不一定和你的内部包名一致）-版本号-对应的Python版本.egg。同时，会在文件夹内，建立两个其他文件夹，分别是build和MyApp.egg-info，这两个文件夹存放打包的中间结果。 创建tar.gz包 1$ python setup.py sdist --formats=gztar 同上例类似，只不过创建的文件类型是tar.gz，文件名为”MyApp-1.0.tar.gz”。 安装应用 12$ python setup.py install#该命令会将当前的Python应用安装到当前Python环境的”site-packages”目录下，这样其他程序就可以像导入标准库一样导入该应用的代码了。 12$ python setup.py develop#如果应用在开发过程中会频繁变更，每次安装还需要先将原来的版本卸掉，很麻烦。使用”develop”开发方式安装的话，应用代码不会真的被拷贝到本地Python环境的”site-packages”目录下，而是在”site-packages”目录里创建一个指向当前应用位置的链接。这样如果当前位置的源码被改动，就会马上反映到”site-packages”里。 安装之后要卸载的话，可以使用pip进行卸载 1$ pip uninstall 应用名字 #此时的应用名字就是我们setup()函数中的name 此时的目录树如下 123456789101112131415161718setuptools_test ├── MyApp │ ├── __init__.py │ ├── __init__.pyc │ ├── MyApp.egg-info #打包生成的 │ ├── PKG-INFO │ ├── SOURCES.txt │ ├── dependency_links.txt │ └── top_level.txt ├── build #打包生成的 │ ├── bdist.macosx-10.13-x86_64 │ └── lib │ └── MyApp │ └── __init__.py ├── dist │ └── MyApp-1.0-py2.7.egg └── setup.py 引入非Python文件（不是.py的文件）上例中，我们只会将”MyApp”包下的源码打包，如果我们还想将其他非Python文件也打包，比如静态文件（JS，CSS，图片），应该怎么做呢？这时我们要在项目目录下添加一个”MANIFEST.in”文件夹。假设我们把所有静态文件都放在”static”子目录下，现在的项目结构如下： 12345678910111213141516171819setuptools_test ├── MANIFEST.in #清单文件 ├── MyApp #源代码 │ ├── __init__.py │ ├── __init__.pyc │ └── static #静态目录 ├── MyApp.egg-info │ ├── PKG-INFO │ ├── SOURCES.txt │ ├── dependency_links.txt │ └── top_level.txt ├── build │ ├── bdist.macosx-10.13-x86_64 │ └── lib │ └── MyApp │ └── __init__.py ├── dist │ └── MyApp-1.0-py2.7.egg └── setup.py #安装文件 此时，我们可以在MANIFEST.in中李处想要在包内引入的目录的路径 12recursive-include MyApp/static *#其他的文件夹的引入形式一样 然后在”setup.py”中将” include_package_data”参数设为True： 12345678910#encoding:--utf8--from setuptools import setupsetup( name = 'MyApp',#应用名字 version = '1.0', #版本号 packages = ['MyApp'], #包括在安装包内的Python包（这里就是我们要装的MyApp这个包） include_package_data = True) 之后再次打包或者安装，”myapp/static”目录下的所有文件都会被包含在内。如果你想排除一部分文件，可以在setup.py中使用”exclude_package_date”参数，比如： 12345setup( ... include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;) 上面的代码会将所有”.gitignore”文件排除在包外。如果上述”exclude_package_date”对象属性不为空，比如”{‘MyApp’:[‘.gitignore’]}”，就表明只排除”MyApp”包下的所有”.gitignore”文件。 自动安装依赖包我们的应用会依赖于第三方的Python包，虽然可以在说明文件中要求用户提前安装依赖包，但毕竟很麻烦，用户还有可能装错版本。其实我们可以在setup.py文件中指定依赖包，然后在使用setuptools安装应用时，依赖包的相应版本就会被自动安装。让我们来修改上例中的setup.py文件，加入”install_requires”参数： 1234567891011121314#coding:utf8from setuptools import setup setup( name='MyApp', # 应用名 version='1.0', # 版本号 packages=['myapp'], # 包括在安装包内的Python包 include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;, install_requires=[ # 依赖列表 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ]) 上面的代码中，我们声明了应用依赖Flask 0.10及以上版本，和Flask-SQLAlchemy 1.5及以上、2.1及以下版本。setuptools会先检查本地有没有符合要求的依赖包，如果没有的话，就会从PyPI中获得一个符合条件的最新的包安装到本地。 大家可以执行下试试，你会发现不但Flask 0.10.1（当前最新版本）被自动安装了，连Flask的依赖包Jinja2和Werkzeug也被自动安装了，很方便吧。 自动搜索Python包进行安装之前我们在setup.py中指定了”packages=[‘MyApp’]”，说明将Python包”MyApp”下的源码打包。如果我们的应用很大，Python包很多怎么办。大家看到这个参数是一个列表，我们当然可以将所有的源码包都列在里面，但肯定很多人觉得这样做很傻。的确，setuptools提供了”find_packages()”方法来自动搜索可以引入的Python包 1234567891011121314#coding:utf8from setuptools import setup, find_packages setup( name='MyApp', # 应用名 version='1.0', # 版本号 packages=find_packages(), # 包括在安装包内的Python包 include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;, install_requires=[ # 依赖列表 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ]) 这样当前项目内所有的Python包都会自动被搜索到并引入到打好的包内。”find_packages()”方法可以限定你要搜索的路径，比如使用”find_packages(‘src’)”就表明只在”src”子目录下搜索所有的Python包。 Setuptools 的setup()函数的所有参数的介绍1234567891011name: 即项目名称，本例为 MyAppversion: 即版本号，关于版本号的取法请见 Choosing a versioning schemekeywords: 描述项目的关键字description: 项目简介long_description: 项目详细介绍author: 作者名称author_email: 作者邮箱url: 项目的 homepagepackages: 项目包括的 python package，setuptools.find_packages() 可自动找出包含的 packagelicense: 如 MIT, APACHE, GNU 等classifiers: 它包含 package 的成熟度，类型，以及支持的平台等信息 1234install_requires=[ # 依赖列表,用于添加我们要建立的包的依赖库 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ] 1packages=find_packages(), # 包括在安装包内的Python包,可以使用参数exclude=["tests.*", "tests"]的方式来除去一些不安装的包 12345678910111213141516#配置CLI，即提供命令行的入口entry_points=&#123; 'console_scripts': [ 'redyna-sync = dock.redynadb.sync:run', 'redyna-stats = dock.redynadb.stats:run', 'reds3-sync = dock.reds3.sync:run', 'dock-server = dock.common.run:run_server', 'dock-shell = dock.common.run:run_shell', #setup时令dock-tasklet指向dock.common.tasklet:run 'dock-tasklet = dock.common.tasklet:run']&#125;#这个参数提供我们一个动态发现服务和插件的方法#The most commonly used entry point is “console_scripts” #'console_scripts'指明了命令行工具的名称，#Use “console_script” entry points to register your script interfaces. You can then let #the toolchain handle the work of turning these interfaces into actual scripts [2]. The #scripts will be generated during the install of your distribution.------#例子：dock-server就是在命令行可以输入的命令，dock.common.run:run_server中dock.common.run是对应的程序入口地址，run_server是执行的函数。 12zip_safe=False#决定应用是否作为一个zip压缩后的egg文件安装在当前Python环境中，还是作为一个以.egg结尾的目录安装在当前环境中。因为有些工具不支持zip压缩文件，而且压缩后的包也不方便调试，所以建议将其设为False：”zip_safe=False”。]]></content>
@@ -105,13 +105,18 @@
     <content type="text"><![CDATA[Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包 首先安装tree包 1brew install tree 使用方法 123&gt;tree #显示当前目录的目录树&gt;tree -L n #显示当前目录下的n级目录树&gt;tree -L n &gt;README.md #将目录树输出为文件]]></content>
   </entry>
   <entry>
+    <title><![CDATA[pyhon中导入的几点问题]]></title>
+    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[os.path的用法]]></title>
     <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fos.path%E7%9A%84%E7%94%A8%E6%B3%95%2F</url>
     <content type="text"><![CDATA[1234567891011用法：os.path.abspath(path)#path的绝对路径os.path.dirname(path或者file)#路径或者文件的上层目录__file__#当前运行的文件名字os.path.join(path1,path2,...)#拼接多个路径为一个路径os.path.basename(path)#返回文件名或者最后的文件夹名]]></content>
   </entry>
   <entry>
     <title><![CDATA[vi的使用]]></title>
-    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fvi%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <url>%2F2018%2F01%2F12%2Fvi%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[vi有三种模式 命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。 输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式 底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令 命令例子 效果 2h 左移两个 30l 右移30 10j 下移10个 5k 上移5个 :wq 保存并推出 :q 退出]]></content>
   </entry>
   <entry>
@@ -121,23 +126,18 @@
   </entry>
   <entry>
     <title><![CDATA[yaml简介与Python上的应用]]></title>
-    <url>%2F2018%2F01%2F12%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[yaml简介与Python上的应用]]></title>
     <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
     <content type="text"><![CDATA[关键字: yaml, python Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
   </entry>
   <entry>
     <title><![CDATA[vi的使用]]></title>
-    <url>%2F2018%2F01%2F12%2Fvi%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fvi%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[vi有三种模式 命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。 输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式 底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令 命令例子 效果 2h 左移两个 30l 右移30 10j 下移10个 5k 上移5个 :wq 保存并推出 :q 退出]]></content>
   </entry>
   <entry>
-    <title><![CDATA[pyhon中导入的几点问题]]></title>
-    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
+    <title><![CDATA[yaml简介与Python上的应用]]></title>
+    <url>%2F2018%2F01%2F12%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
   </entry>
   <entry>
     <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
@@ -532,17 +532,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式具体实现]]></title>
-    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[关键词：数学公式 这一节，我们讨论数学公式。 综述数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath} 数学公式分为 行内公式（inline equation) 使用两个$符号，形如$公式$ 行间公式 (display equation) 不带标号的行间公式： $$……$$ \[ …… \ ] \begin{displaymath} …… \end{displaymath} 带标号的行间公式： \begin{equation} …… \end{equation} 例子： 123456789101112\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：\[a^2 + b^2 = r^2\]我要是使用带有编号的公式呢？要这样；\begin&#123;equation&#125;a^2 + b^2 = c^2\end&#123;equation&#125;\end&#123;document&#125; 公式内实现中文实现公式内中文的方法： \text{中文} 推荐 \mbox{中文} 并不推荐 分数形式行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子 123456789101112131415\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125; %无衬线字体族提供的命令\texttt&#123;dfrac&#125; %打字机字体形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下\begin&#123;equation&#125; %行间分数排布\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;\end&#123;equation&#125;\end&#123;document&#125; 上下标LaTeX数学公式的上下标可以说的非常的精彩了。 1234567891011121314151617181920212223242526272829303132333435363738\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%------%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par%------%最普通的上下标举例——行间公式\begin&#123;equation&#125;10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n\end&#123;equation&#125; %-------%几个特殊符号(度数，求导符号)举例——行内公式$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par%------%几个特殊符号(度数，求导符号)举例——行间公式\begin&#123;equation&#125;f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;\end&#123;equation&#125; %------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad %前置角标\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $ %四周角标%------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式\begin&#123;equation&#125;\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;\end&#123;equation&#125; %------\end&#123;document&#125; 化学公式使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。 12\usepackage&#123;mhchem&#125;\ce&#123;这里面填化学式或者化学元素即可&#125; 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%这是水\ce&#123;H2O&#125;\par%这是乙酸乙酯\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125; \end&#123;document&#125; 上下线以及上下括号使用amsmath宏包提供的命令： 123456\overline&#123;内容&#125; %上端划线\underline&#123;内容&#125; %下端划线\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125; %上端花括号\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125; %下端花括号还有若干加箭头的命令形如：\over(under)left(right)arrow&#123;内容&#125; 123456789101112131415\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------\begin&#123;gather&#125; %gather环境也是常用的排版多行公式的环境%上下线和上下箭头\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\%上下括号\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;\end&#123;gather&#125;------\end&#123;document&#125; 平方根实现形式\sqrt[开放次数]{被开方数} 12345678910111213\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------%\uproot&#123;16&#125;实现向上平移16个单位\begin&#123;equation&#125;\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;\end&#123;equation&#125;------\end&#123;document&#125; 几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理： 12\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度 但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：使用\mathstrut 这个表示一个圆括号高度与深度的支架，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。 123456\begin&#123;equation&#125;%单独开平方\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125; \qquad %使用\mathstrut支架来平衡不同高度与深度\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;\end&#123;equation&#125; 矩阵同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。 矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境 矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行 12345678910111213141516171819202122232425262728293031323334353637383940\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\begin&#123;align&#125;\text&#123;matrix环境&#125;&amp;\colon\quad\begin&#123;matrix&#125;a&amp;b\\c&amp;d\end&#123;matrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;pmatrix&#125;a&amp;b\\c&amp;d\end&#123;pmatrix&#125;\\\text&#123;vmatrix环境&#125;&amp;\colon\quad\begin&#123;vmatrix&#125;a&amp;b\\c&amp;d\end&#123;vmatrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;bmatrix&#125;a&amp;b\\c&amp;d\end&#123;bmatrix&#125;\\\text&#123;Bmatrix环境&#125;&amp;\colon\quad\begin&#123;Bmatrix&#125;a&amp;b\\c&amp;d\end&#123;Bmatrix&#125;\\\text&#123;Vmatrix环境&#125;&amp;\colon\quad\begin&#123;Vmatrix&#125;a&amp;b\\c&amp;d\end&#123;Vmatrix&#125;\end&#123;align&#125;\end&#123;document&#125; 矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点 命令 形式 \dots 水平点点点 \vdots 竖直点点点 \ddots 斜点点点 多行公式(实现，对齐，编号) 多行公式 实现 对齐 编号 \begin{gather*} 居中 无编号 \begin{gather} 居中 编号，可用\notag来删除某行公式编号 \begin{align*} 使用&amp;对某符号竖直对齐 无编号 \begin{align} 使用&amp;对某符号竖直对齐 编号，可用\notag来删除某行公式编号 123456789101112131415161718192021222324252627282930313233\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;\begin&#123;document&#125;------%使用\\换行居中排布公式\begin&#123;gather*&#125;(a+b)^2\\=a^2 + b^2 + 2ab \\=12\end&#123;gather*&#125;------\begin&#123;gather&#125;(a+b)^2 \notag \\=a^2 + b^2 + 2ab \\=12 \notag\end&#123;gather&#125;------%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;\begin&#123;align*&#125;&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \\&amp;=12\end&#123;align*&#125;------\begin&#123;align&#125;&amp;\phantom&#123;=&#125;(a+b)^2 \\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \notag \\&amp;=12\qquad\text&#123;易得&#125;\notag\end&#123;align&#125;------\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>数学公式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
@@ -553,6 +542,17 @@
         <tag>数学公式</tag>
         <tag>字体</tag>
         <tag>间距</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式具体实现]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式 这一节，我们讨论数学公式。 综述数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath} 数学公式分为 行内公式（inline equation) 使用两个$符号，形如$公式$ 行间公式 (display equation) 不带标号的行间公式： $$……$$ \[ …… \ ] \begin{displaymath} …… \end{displaymath} 带标号的行间公式： \begin{equation} …… \end{equation} 例子： 123456789101112\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：\[a^2 + b^2 = r^2\]我要是使用带有编号的公式呢？要这样；\begin&#123;equation&#125;a^2 + b^2 = c^2\end&#123;equation&#125;\end&#123;document&#125; 公式内实现中文实现公式内中文的方法： \text{中文} 推荐 \mbox{中文} 并不推荐 分数形式行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子 123456789101112131415\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125; %无衬线字体族提供的命令\texttt&#123;dfrac&#125; %打字机字体形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下\begin&#123;equation&#125; %行间分数排布\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;\end&#123;equation&#125;\end&#123;document&#125; 上下标LaTeX数学公式的上下标可以说的非常的精彩了。 1234567891011121314151617181920212223242526272829303132333435363738\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%------%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par%------%最普通的上下标举例——行间公式\begin&#123;equation&#125;10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n\end&#123;equation&#125; %-------%几个特殊符号(度数，求导符号)举例——行内公式$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par%------%几个特殊符号(度数，求导符号)举例——行间公式\begin&#123;equation&#125;f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;\end&#123;equation&#125; %------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad %前置角标\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $ %四周角标%------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式\begin&#123;equation&#125;\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;\end&#123;equation&#125; %------\end&#123;document&#125; 化学公式使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。 12\usepackage&#123;mhchem&#125;\ce&#123;这里面填化学式或者化学元素即可&#125; 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%这是水\ce&#123;H2O&#125;\par%这是乙酸乙酯\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125; \end&#123;document&#125; 上下线以及上下括号使用amsmath宏包提供的命令： 123456\overline&#123;内容&#125; %上端划线\underline&#123;内容&#125; %下端划线\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125; %上端花括号\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125; %下端花括号还有若干加箭头的命令形如：\over(under)left(right)arrow&#123;内容&#125; 123456789101112131415\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------\begin&#123;gather&#125; %gather环境也是常用的排版多行公式的环境%上下线和上下箭头\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\%上下括号\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;\end&#123;gather&#125;------\end&#123;document&#125; 平方根实现形式\sqrt[开放次数]{被开方数} 12345678910111213\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------%\uproot&#123;16&#125;实现向上平移16个单位\begin&#123;equation&#125;\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;\end&#123;equation&#125;------\end&#123;document&#125; 几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理： 12\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度 但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：使用\mathstrut 这个表示一个圆括号高度与深度的支架，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。 123456\begin&#123;equation&#125;%单独开平方\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125; \qquad %使用\mathstrut支架来平衡不同高度与深度\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;\end&#123;equation&#125; 矩阵同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。 矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境 矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行 12345678910111213141516171819202122232425262728293031323334353637383940\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\begin&#123;align&#125;\text&#123;matrix环境&#125;&amp;\colon\quad\begin&#123;matrix&#125;a&amp;b\\c&amp;d\end&#123;matrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;pmatrix&#125;a&amp;b\\c&amp;d\end&#123;pmatrix&#125;\\\text&#123;vmatrix环境&#125;&amp;\colon\quad\begin&#123;vmatrix&#125;a&amp;b\\c&amp;d\end&#123;vmatrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;bmatrix&#125;a&amp;b\\c&amp;d\end&#123;bmatrix&#125;\\\text&#123;Bmatrix环境&#125;&amp;\colon\quad\begin&#123;Bmatrix&#125;a&amp;b\\c&amp;d\end&#123;Bmatrix&#125;\\\text&#123;Vmatrix环境&#125;&amp;\colon\quad\begin&#123;Vmatrix&#125;a&amp;b\\c&amp;d\end&#123;Vmatrix&#125;\end&#123;align&#125;\end&#123;document&#125; 矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点 命令 形式 \dots 水平点点点 \vdots 竖直点点点 \ddots 斜点点点 多行公式(实现，对齐，编号) 多行公式 实现 对齐 编号 \begin{gather*} 居中 无编号 \begin{gather} 居中 编号，可用\notag来删除某行公式编号 \begin{align*} 使用&amp;对某符号竖直对齐 无编号 \begin{align} 使用&amp;对某符号竖直对齐 编号，可用\notag来删除某行公式编号 123456789101112131415161718192021222324252627282930313233\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;\begin&#123;document&#125;------%使用\\换行居中排布公式\begin&#123;gather*&#125;(a+b)^2\\=a^2 + b^2 + 2ab \\=12\end&#123;gather*&#125;------\begin&#123;gather&#125;(a+b)^2 \notag \\=a^2 + b^2 + 2ab \\=12 \notag\end&#123;gather&#125;------%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;\begin&#123;align*&#125;&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \\&amp;=12\end&#123;align*&#125;------\begin&#123;align&#125;&amp;\phantom&#123;=&#125;(a+b)^2 \\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \notag \\&amp;=12\qquad\text&#123;易得&#125;\notag\end&#123;align&#125;------\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
       </tags>
   </entry>
   <entry>
@@ -607,6 +607,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[SSH的远程登录]]></title>
+    <url>%2F2017%2F05%2F16%2FSSH%E7%9A%84%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[关键词：自动化工具,目录 整体梳理如下： 主机密码登录：当我购买一个一个远程主机之后会给我提供 host （就是那个IP地址） user （就是用户名字，一般新主机都是root, 登录后可以自己新建其他的用户） password 我要使用这两者来登录需要12ssh user@host然后等待输入密码 登录之后的其他操作 我登录之后，新添加用户adduser username，尽量不要使用root来操作 以后我要直接远程登录此新加用户，对应的user就要填新添加的 username ssh username@host 然后使用密码登录 NOTICE：我们新添加用户之后，此用户是没有sudo命令的，所以我们要给新增的用户加上此权限，如下： 1、用root帐号登录或者su到root。 2、增加sudoers文件的写权限： chmod u+w /etc/sudoers或者chmod 700 /etc/sudoers 3、vim /etc/sudoers 找到 root ALL=(ALL) ALL 在这行下边添加 username ALL=(ALL) ALL (ps:suername代表是你要添加sudo权限的用户名) 4、除去sudoers文件的写权限：chmod u-w /etc/sudoers或者chmod 400 /etc/sudoers 文件权限 rwx 对应 421 公钥登录然后为了不再使用密码登录，我们就要使用公钥登录 原理： 所谓”公钥登录”，原理很简单，就是用户将自己的公钥储存在远程主机上。登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。 第一步：生成需要的公钥ssh keygen (如果已经有了公钥了们就可以不用再生成，当然想再生成其他新的也可以）默认生成的私钥和公钥的名字是id_rsa和id_rsa.pub如果已经有了key，不想新生成的key覆盖原来的key，我们使用ssh keygen newkeyname来生成新的key。1ssh-keygen ~/.ssh/id_rsa.erhua 上面的id_rsa.erhua就是我们指定的文件名，这时~/.ssh目录下会多出id_rsa.erhua和id_rsa.erhua.pub两个文件，id_rsa.erhua.pub里保存的就是我们要使用的公钥。 第二步：将公钥复制到对应的远程主机上去,并配置远程主机 使用scp将公钥文件复制到远程主机的.ssh/文件内 并把公钥内的内容复制追加到远程主机.ssh/authorized_keys文件内（如果没有此文件，须新建） 检查/etc/ssh/sshd_config文件内一下三项内容是否全部开启：RSAAuthentication yes,PubkeyAuthentication yes,AuthorizedKeysFile .ssh/authorized_keys 重启远程主机的ssh服务 1234// ubuntu系统 service ssh restart // debian系统 /etc/init.d/ssh restart 第三步：配置本地的config文件快速连接host为了让登录更加的轻松，简化ssh user@host的形式，我们可以配置config文件来实现 打开本地.ssh/config文件，若没有，则新建 已如下形式保存一个远程登录的信息 1234Host erhua # 连接时用的名字 HostName 207.148.14.198 # 远程主机的host地址 User erhua # 要登录的远程主机的账户（就是在host上的用户名字root或者其他新建） IdentityFile ~/.ssh/id_rsa # 你的私钥地址，相当于密码 使用此方式登录 —— ssh erhua]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之自动化处理工具：目录]]></title>
     <url>%2F2017%2F05%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E7%9B%AE%E5%BD%95%2F</url>
     <content type="text"><![CDATA[关键词：自动化工具,目录 这一节，我们讨论目录的自动生成，我们在设定好的标题通过\tableofcontents来产生目录。 定制目录产生控制目录标题的格式我们之前讨论过了:标题定制 类型 命令 备注 图片目录 \listoffigures \caption 命令产生的标题 表格目录 \listoftables \caption 命令产生的标题 默认情况下，像目录本身，参考文献，索引等是不会自动加入目录里的，我们使用宏包tocbibind来控制他们是否出现，用此宏包有可选项来控制（默认所有全部显示) 可选项： 可选参数 解释 notbib 不加入参考文献 notindex 不加入索引目录 nottoc 不加入章节目录 not lot 不加表格目录 notlof 不加图目录 具体请参考宏包：tocbibind 目录可以使用到的宏包还有： 1234\usepackage&#123;tocbibind&#125;\usepackage&#123;titletoc&#125;\usepackage&#123;minitoc&#125;\usepackage&#123;tocloft&#125; 定制目录格式定制目录格式通常使用宏包 12\usepackage&#123;tocloft&#125; %语法较为简单，定制格式简单\usepackage&#123;titletoc&#125; %更为复杂的目录定制宏包 解释：标题前后间距的长度是变量，可以使用setlength来进行修改；而其他的都是宏，需要使用重定义命令来进行修改\renewcommand 具体的如何修改字体族，字体大小等我们直接看tocloft宏包的部分内容（具体请直接查看宏包文档） 例子： 123456789101112131415161718192021222324252627282930\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\muluchap&#125;&#123;\fontsize&#123;20pt&#125;&#123;15pt&#125;\selectfont&#125;\newcommand&#123;\mulutit&#125;&#123;\fontsize&#123;35pt&#125;&#123;25pt&#125;\selectfont&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage&#123;tocloft&#125;\renewcommand&#123;\cfttoctitlefont&#125;&#123;\qingsong\mulutit&#125; %设定“目录”的字体族与大小\renewcommand&#123;\cftchapfont&#125;&#123;\qingsong\muluchap&#125; %设定“章”的字体族与大小\renewcommand&#123;\cftsecfont&#125;&#123;\qingsong&#125; %设定“节”的字体族\renewcommand&#123;\cftsubsecfont&#125;&#123;\qingsong&#125; %设定“subsec”的字体族\setlength&#123;\cftbeforetoctitleskip&#125;&#123;5mm&#125; %设定“目录”二字到版芯上沿的距离\setlength&#123;\cftaftertoctitleskip&#125;&#123;10mm&#125; %设定“目录”二字到目录正文的距离\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\tableofcontents\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 定制目录版面除此之外，我们还可以定制目录的版面，看图： 由于使用不多，具体请看宏包]]></content>
@@ -618,17 +629,6 @@
         <tag>总目录</tag>
         <tag>图片目录</tag>
         <tag>表格目录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[SSH的远程登录]]></title>
-    <url>%2F2017%2F05%2F16%2FSSH%E7%9A%84%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[关键词：自动化工具,目录 整体梳理如下： 主机密码登录：当我购买一个一个远程主机之后会给我提供 host （就是那个IP地址） user （就是用户名字，一般新主机都是root, 登录后可以自己新建其他的用户） password 我要使用这两者来登录需要12ssh user@host然后等待输入密码 登录之后的其他操作 我登录之后，新添加用户adduser username，尽量不要使用root来操作 以后我要直接远程登录此新加用户，对应的user就要填新添加的 username ssh username@host 然后使用密码登录 NOTICE：我们新添加用户之后，此用户是没有sudo命令的，所以我们要给新增的用户加上此权限，如下： 1、用root帐号登录或者su到root。 2、增加sudoers文件的写权限： chmod u+w /etc/sudoers或者chmod 700 /etc/sudoers 3、vim /etc/sudoers 找到 root ALL=(ALL) ALL 在这行下边添加 username ALL=(ALL) ALL (ps:suername代表是你要添加sudo权限的用户名) 4、除去sudoers文件的写权限：chmod u-w /etc/sudoers或者chmod 400 /etc/sudoers 文件权限 rwx 对应 421 公钥登录然后为了不再使用密码登录，我们就要使用公钥登录 原理： 所谓”公钥登录”，原理很简单，就是用户将自己的公钥储存在远程主机上。登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。 第一步：生成需要的公钥ssh keygen (如果已经有了公钥了们就可以不用再生成，当然想再生成其他新的也可以）默认生成的私钥和公钥的名字是id_rsa和id_rsa.pub如果已经有了key，不想新生成的key覆盖原来的key，我们使用ssh keygen newkeyname来生成新的key。1ssh-keygen ~/.ssh/id_rsa.erhua 上面的id_rsa.erhua就是我们指定的文件名，这时~/.ssh目录下会多出id_rsa.erhua和id_rsa.erhua.pub两个文件，id_rsa.erhua.pub里保存的就是我们要使用的公钥。 第二步：将公钥复制到对应的远程主机上去,并配置远程主机 使用scp将公钥文件复制到远程主机的.ssh/文件内 并把公钥内的内容复制追加到远程主机.ssh/authorized_keys文件内（如果没有此文件，须新建） 检查/etc/ssh/sshd_config文件内一下三项内容是否全部开启：RSAAuthentication yes,PubkeyAuthentication yes,AuthorizedKeysFile .ssh/authorized_keys 重启远程主机的ssh服务 1234// ubuntu系统 service ssh restart // debian系统 /etc/init.d/ssh restart 第三步：配置本地的config文件快速连接host为了让登录更加的轻松，简化ssh user@host的形式，我们可以配置config文件来实现 打开本地.ssh/config文件，若没有，则新建 已如下形式保存一个远程登录的信息 1234Host erhua # 连接时用的名字 HostName 207.148.14.198 # 远程主机的host地址 User erhua # 要登录的远程主机的账户（就是在host上的用户名字root或者其他新建） IdentityFile ~/.ssh/id_rsa # 你的私钥地址，相当于密码 使用此方式登录 —— ssh erhua]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -700,17 +700,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
-    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
-    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>多文档</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之标题]]></title>
     <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%A0%87%E9%A2%98%2F</url>
     <content type="text"><![CDATA[关键词：标题 这一节，我们讨论一个文档的标题 文章的标题可以分为两部分，一部分是声明标题，一部分是显示输出标题。 每个标题由 标题 作者 时间组成 例子： 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;---或者使用如下方式定义时间的格式\ctexset&#123;today=big&#125;---% \CTEXoptions[today = big]%\CTEXoptions[today = small]\CTEXoptions[today = old]%ctex宏包用来设置中文日期的显示方式\title&#123;八卦\\六十四卦&#125;\author&#123;LiErhua \and 李二花&#125;%用 and 分隔多个作者\date&#123;\today&#125;\begin&#123;document&#125;\maketitle%输出标题项\end&#123;document&#125; 如果像是毕业论文这种文档的标题页建议使用 titlepage 环境进行手动排版 123\begin&#123;titlepage&#125;标题内容\end&#123;titlepage&#125; 更进阶： Wilson宏包文档]]></content>
@@ -719,6 +708,17 @@
       </categories>
       <tags>
         <tag>标题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
+    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
+    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>多文档</tag>
       </tags>
   </entry>
   <entry>
@@ -781,53 +781,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文本环境</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文本环境</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之盒子]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>盒子</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（一）————文本环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：文本环境，引用环境，诗词环境，摘要环境 这一节，我们讨论文本环境 12345678引用环境\begin&#123;quote&#125;首行无缩进的引用内容\end&#123;quote&#125;---\begin&#123;quotation&#125;首行缩进的应用内容\end&#123;quotation&#125; 1234诗歌环境\begin&#123;verse&#125;以\\换行\end&#123;verse&#125; 1234摘要环境\begin&#123;abstract&#125;摘要内容\end&#123;abstract&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -844,6 +800,50 @@
       </categories>
       <tags>
         <tag>代码环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>抄录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（一）————文本环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：文本环境，引用环境，诗词环境，摘要环境 这一节，我们讨论文本环境 12345678引用环境\begin&#123;quote&#125;首行无缩进的引用内容\end&#123;quote&#125;---\begin&#123;quotation&#125;首行缩进的应用内容\end&#123;quotation&#125; 1234诗歌环境\begin&#123;verse&#125;以\\换行\end&#123;verse&#125; 1234摘要环境\begin&#123;abstract&#125;摘要内容\end&#123;abstract&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之盒子]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>盒子</tag>
       </tags>
   </entry>
   <entry>
@@ -962,17 +962,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX习题答案]]></title>
-    <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
-    <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>table,习题答案</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
     <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
     <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
@@ -981,6 +970,17 @@
       </categories>
       <tags>
         <tag>表格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX习题答案]]></title>
+    <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>table,习题答案</tag>
       </tags>
   </entry>
   <entry>
