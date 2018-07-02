@@ -699,22 +699,9 @@
 <span class="post-meta-divider">|</span>
 
 <span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    本站总访问量100<span id="busuanzi_value_site_pv"></span>次
 </span>
 
-<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var int = setInterval(fixCount, 1);
-        var busuanziSiteOffset = parseInt(1000000);
-        function fixCount() {
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                clearInterval(int);
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
-            }
-        }
-    });
-</script>
 
         
 
