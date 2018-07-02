@@ -20,6 +20,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[sublime 插件的安装与Vim模式的设置]]></title>
+    <url>%2F2018%2F02%2F14%2Fsublime-%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8EVim%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：Vim，sublime 安装sublime以及其配置下载安装：http://www.sublimetext.com/3Package Control安装：https://sublime.wbond.net/installation how to install the plugins在第1步中安装好后 按 Ctrl+Shift+P ，输入insta 在下拉菜单选择 Install Package 按回车键，在接着弹出的输入框中输入插件名字，回车选择即可安装该插件： 常用的插件 1. ConvertToUTF8 支持多种编码，解决中文乱码问题。 2. Bracket Highlighter 用于高亮匹配括号、引号、html标签。 3. DocBlockr 可以自动生成PHPDoc风格的注释。 4. Emmet 快速编写HTML，原 Zen Coding。 5. SideBar Enhancements 这个插件改进了侧边栏，增加了许多功能 6. evernote 这个是 evernote 的插件，支持 markdown 语法 7. markdown preview markdown 预览插件 alt+m开启 如何启用Vim模式在菜单栏中： Preferences -&gt; Setting - User ，即可打开配置文件进行编辑，将 ignored_packages 项的[]里面内容清空：]]></content>
+      <categories>
+        <category>sublime</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[如何修改Mac的键盘映射]]></title>
     <url>%2F2018%2F02%2F14%2F%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9Mac%E7%9A%84%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84%2F</url>
     <content type="text"><![CDATA[关键词： Mac，KeyRemap4MacBook Mac上的大小写键，作用其实并不是太大。同时在使用Vim的时候Esc键的时候，太远，不太好触及到，我们可以做一个键盘的修改，让大小写键映射到Esc键上，或者映射到control键上( 因为control+[ )相当于Esc键。 默认Mac下键盘映射的修改 使用软件进行映射修改：KeyRemap4MacBook我们可以下载这个软件：KeyRemap4MacBook来进行更加高级的键盘的映射修改选择。 首先我们可以将大小写键映射成left_control 然后将我们的control键编程点按时发送Esc功能，联合使用时回复left_control功能。]]></content>
@@ -31,14 +42,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[sublime 插件的安装与Vim模式的设置]]></title>
-    <url>%2F2018%2F02%2F14%2Fsublime-%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8EVim%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：Vim，sublime 安装sublime以及其配置下载安装：http://www.sublimetext.com/3Package Control安装：https://sublime.wbond.net/installation how to install the plugins在第1步中安装好后 按 Ctrl+Shift+P ，输入insta 在下拉菜单选择 Install Package 按回车键，在接着弹出的输入框中输入插件名字，回车选择即可安装该插件： 常用的插件 1. ConvertToUTF8 支持多种编码，解决中文乱码问题。 2. Bracket Highlighter 用于高亮匹配括号、引号、html标签。 3. DocBlockr 可以自动生成PHPDoc风格的注释。 4. Emmet 快速编写HTML，原 Zen Coding。 5. SideBar Enhancements 这个插件改进了侧边栏，增加了许多功能 6. evernote 这个是 evernote 的插件，支持 markdown 语法 7. markdown preview markdown 预览插件 alt+m开启 如何启用Vim模式在菜单栏中： Preferences -&gt; Setting - User ，即可打开配置文件进行编辑，将 ignored_packages 项的[]里面内容清空：]]></content>
+    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
+    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[sqlalchemy中的types.TypeDecortor类]]></title>
+    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2Fsqlalchemy%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E5%89%8D%E5%A4%84%E7%90%86%E4%B8%8E%E5%90%8E%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。 我们以json格式为例，假设我们要使用的数据类型是json格式 存储到数据库之前是python格式，比如我们一般使用list或者dict等格式（存储前） 存储到数据库中的是json字符串（数据库中格式，用impl的格式来存储 然后从数据库中取出来之后的格式是原始的python格式（比如dict或者list） 12345678910111213import sqlalchemy.types as typesclass MyType(types.TypeDecorator): #impl变量规定了存储到数据库中的存储形式 impl = types.TEXT #复写process_bind_param方法，此方法用于传入数据库的前处理 def process_bind_param(self, value, dialect): return json.dumps(value) #复写process_result_value方法,对从数据库中取出的数据进行后处理 def process_result_value(self, value, dialect): return json.loads(value)]]></content>
       <categories>
-        <category>sublime</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>Vim</tag>
+        <tag>python</tag>
+        <tag>sqlalchemy</tag>
       </tags>
   </entry>
   <entry>
@@ -54,18 +71,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[sqlalchemy中的types.TypeDecortor类]]></title>
-    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2Fsqlalchemy%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E5%89%8D%E5%A4%84%E7%90%86%E4%B8%8E%E5%90%8E%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。 我们以json格式为例，假设我们要使用的数据类型是json格式 存储到数据库之前是python格式，比如我们一般使用list或者dict等格式（存储前） 存储到数据库中的是json字符串（数据库中格式，用impl的格式来存储 然后从数据库中取出来之后的格式是原始的python格式（比如dict或者list） 12345678910111213import sqlalchemy.types as typesclass MyType(types.TypeDecorator): #impl变量规定了存储到数据库中的存储形式 impl = types.TEXT #复写process_bind_param方法，此方法用于传入数据库的前处理 def process_bind_param(self, value, dialect): return json.dumps(value) #复写process_result_value方法,对从数据库中取出的数据进行后处理 def process_result_value(self, value, dialect): return json.loads(value)]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>sqlalchemy</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Mac下vim的安装与基本使用]]></title>
     <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2FMac%E4%B8%8Bvim%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[关键词：vim，Mac 安装1$brew install vim 即可安装对应的版本 homebrew按装软件时（以vim为例），会将其安装到自己的目录下，对应的路径一般是/usr/local/Cellar，然后再使用软连接的方式将其链接到$PATH变量中包含的路径内，一般是/usr/local/bin，这样，安装的软件（这里就是我们vim）就可以直接在命令行使用了，因为他已经被添加到环境变量了。]]></content>
@@ -76,11 +81,6 @@
         <tag>Mac</tag>
         <tag>vim</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
-    <url>%2F2018%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
   </entry>
   <entry>
     <title><![CDATA[Mac下tmux的安装与基本使用]]></title>
@@ -105,19 +105,29 @@
     <content type="text"><![CDATA[作为Python标准的打包及分发工具，setuptools可以说相当地简单易用。它会随着Python一起安装在你的机器上。你只需写一个简短的setup.py安装文件，就可以将你的Python应用打包。本文就会介绍下如何编写安装文件及如何打包分发 首先，我们安装setuptools可以使用 1234#找到setuptools的下载页面：https://pypi.python.org/pypi/setuptools 并下载#解压#cd 到解压后的文件夹内#执行 python setup.py install 即可 tips：如何在Mac中使用目录树 Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包。 首先安装tree包 1brew install tree 使用方法 123&gt;tree #显示当前目录的目录树&gt;tree -L n #显示当前目录下的n级目录树&gt;tree -L n &gt;README.md #将目录树输出为文件 最简单的安装文件新建一个setuptools的文件夹，他的目录形式如下 1234setuptools ├── MyApp │ └── __init__.py └── setup.py 一个最基本的setup.py的文件内容如下 123456789#encoding:--utf8--from setuptools import setupsetup( name = 'MyApp',#应用名字 version = '1.0', #版本号 packages = ['MyApp'] #包括在安装包内的Python包（这里就是我们要装的MyApp这个包）) 执行安装 创建egg包 现在最简单的安装文件已经有了，现在要执行安装，需要如下的命令 1$ python setup.py bdist_egg 这个命令会在当前的主目录setuptools_test中建立一个文件夹dist，里面包含创建的egg文件，名字是MyApp-1.0-py2.7.egg,格式是应用的名字（你要发布的应用的名字，不一定和你的内部包名一致）-版本号-对应的Python版本.egg。同时，会在文件夹内，建立两个其他文件夹，分别是build和MyApp.egg-info，这两个文件夹存放打包的中间结果。 创建tar.gz包 1$ python setup.py sdist --formats=gztar 同上例类似，只不过创建的文件类型是tar.gz，文件名为”MyApp-1.0.tar.gz”。 安装应用 12$ python setup.py install#该命令会将当前的Python应用安装到当前Python环境的”site-packages”目录下，这样其他程序就可以像导入标准库一样导入该应用的代码了。 12$ python setup.py develop#如果应用在开发过程中会频繁变更，每次安装还需要先将原来的版本卸掉，很麻烦。使用”develop”开发方式安装的话，应用代码不会真的被拷贝到本地Python环境的”site-packages”目录下，而是在”site-packages”目录里创建一个指向当前应用位置的链接。这样如果当前位置的源码被改动，就会马上反映到”site-packages”里。 安装之后要卸载的话，可以使用pip进行卸载 1$ pip uninstall 应用名字 #此时的应用名字就是我们setup()函数中的name 此时的目录树如下 123456789101112131415161718setuptools_test ├── MyApp │ ├── __init__.py │ ├── __init__.pyc │ ├── MyApp.egg-info #打包生成的 │ ├── PKG-INFO │ ├── SOURCES.txt │ ├── dependency_links.txt │ └── top_level.txt ├── build #打包生成的 │ ├── bdist.macosx-10.13-x86_64 │ └── lib │ └── MyApp │ └── __init__.py ├── dist │ └── MyApp-1.0-py2.7.egg └── setup.py 引入非Python文件（不是.py的文件）上例中，我们只会将”MyApp”包下的源码打包，如果我们还想将其他非Python文件也打包，比如静态文件（JS，CSS，图片），应该怎么做呢？这时我们要在项目目录下添加一个”MANIFEST.in”文件夹。假设我们把所有静态文件都放在”static”子目录下，现在的项目结构如下： 12345678910111213141516171819setuptools_test ├── MANIFEST.in #清单文件 ├── MyApp #源代码 │ ├── __init__.py │ ├── __init__.pyc │ └── static #静态目录 ├── MyApp.egg-info │ ├── PKG-INFO │ ├── SOURCES.txt │ ├── dependency_links.txt │ └── top_level.txt ├── build │ ├── bdist.macosx-10.13-x86_64 │ └── lib │ └── MyApp │ └── __init__.py ├── dist │ └── MyApp-1.0-py2.7.egg └── setup.py #安装文件 此时，我们可以在MANIFEST.in中李处想要在包内引入的目录的路径 12recursive-include MyApp/static *#其他的文件夹的引入形式一样 然后在”setup.py”中将” include_package_data”参数设为True： 12345678910#encoding:--utf8--from setuptools import setupsetup( name = 'MyApp',#应用名字 version = '1.0', #版本号 packages = ['MyApp'], #包括在安装包内的Python包（这里就是我们要装的MyApp这个包） include_package_data = True) 之后再次打包或者安装，”myapp/static”目录下的所有文件都会被包含在内。如果你想排除一部分文件，可以在setup.py中使用”exclude_package_date”参数，比如： 12345setup( ... include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;) 上面的代码会将所有”.gitignore”文件排除在包外。如果上述”exclude_package_date”对象属性不为空，比如”{‘MyApp’:[‘.gitignore’]}”，就表明只排除”MyApp”包下的所有”.gitignore”文件。 自动安装依赖包我们的应用会依赖于第三方的Python包，虽然可以在说明文件中要求用户提前安装依赖包，但毕竟很麻烦，用户还有可能装错版本。其实我们可以在setup.py文件中指定依赖包，然后在使用setuptools安装应用时，依赖包的相应版本就会被自动安装。让我们来修改上例中的setup.py文件，加入”install_requires”参数： 1234567891011121314#coding:utf8from setuptools import setup setup( name='MyApp', # 应用名 version='1.0', # 版本号 packages=['myapp'], # 包括在安装包内的Python包 include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;, install_requires=[ # 依赖列表 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ]) 上面的代码中，我们声明了应用依赖Flask 0.10及以上版本，和Flask-SQLAlchemy 1.5及以上、2.1及以下版本。setuptools会先检查本地有没有符合要求的依赖包，如果没有的话，就会从PyPI中获得一个符合条件的最新的包安装到本地。 大家可以执行下试试，你会发现不但Flask 0.10.1（当前最新版本）被自动安装了，连Flask的依赖包Jinja2和Werkzeug也被自动安装了，很方便吧。 自动搜索Python包进行安装之前我们在setup.py中指定了”packages=[‘MyApp’]”，说明将Python包”MyApp”下的源码打包。如果我们的应用很大，Python包很多怎么办。大家看到这个参数是一个列表，我们当然可以将所有的源码包都列在里面，但肯定很多人觉得这样做很傻。的确，setuptools提供了”find_packages()”方法来自动搜索可以引入的Python包 1234567891011121314#coding:utf8from setuptools import setup, find_packages setup( name='MyApp', # 应用名 version='1.0', # 版本号 packages=find_packages(), # 包括在安装包内的Python包 include_package_data=True, # 启用清单文件MANIFEST.in exclude_package_date=&#123;'':['.gitignore']&#125;, install_requires=[ # 依赖列表 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ]) 这样当前项目内所有的Python包都会自动被搜索到并引入到打好的包内。”find_packages()”方法可以限定你要搜索的路径，比如使用”find_packages(‘src’)”就表明只在”src”子目录下搜索所有的Python包。 Setuptools 的setup()函数的所有参数的介绍1234567891011name: 即项目名称，本例为 MyAppversion: 即版本号，关于版本号的取法请见 Choosing a versioning schemekeywords: 描述项目的关键字description: 项目简介long_description: 项目详细介绍author: 作者名称author_email: 作者邮箱url: 项目的 homepagepackages: 项目包括的 python package，setuptools.find_packages() 可自动找出包含的 packagelicense: 如 MIT, APACHE, GNU 等classifiers: 它包含 package 的成熟度，类型，以及支持的平台等信息 1234install_requires=[ # 依赖列表,用于添加我们要建立的包的依赖库 'Flask&gt;=0.10', 'Flask-SQLAlchemy&gt;=1.5,&lt;=2.1' ] 1packages=find_packages(), # 包括在安装包内的Python包,可以使用参数exclude=["tests.*", "tests"]的方式来除去一些不安装的包 12345678910111213141516#配置CLI，即提供命令行的入口entry_points=&#123; 'console_scripts': [ 'redyna-sync = dock.redynadb.sync:run', 'redyna-stats = dock.redynadb.stats:run', 'reds3-sync = dock.reds3.sync:run', 'dock-server = dock.common.run:run_server', 'dock-shell = dock.common.run:run_shell', #setup时令dock-tasklet指向dock.common.tasklet:run 'dock-tasklet = dock.common.tasklet:run']&#125;#这个参数提供我们一个动态发现服务和插件的方法#The most commonly used entry point is “console_scripts” #'console_scripts'指明了命令行工具的名称，#Use “console_script” entry points to register your script interfaces. You can then let #the toolchain handle the work of turning these interfaces into actual scripts [2]. The #scripts will be generated during the install of your distribution.------#例子：dock-server就是在命令行可以输入的命令，dock.common.run:run_server中dock.common.run是对应的程序入口地址，run_server是执行的函数。 12zip_safe=False#决定应用是否作为一个zip压缩后的egg文件安装在当前Python环境中，还是作为一个以.egg结尾的目录安装在当前环境中。因为有些工具不支持zip压缩文件，而且压缩后的包也不方便调试，所以建议将其设为False：”zip_safe=False”。]]></content>
   </entry>
   <entry>
-    <title><![CDATA[pyhon中导入的几点问题]]></title>
-    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[os.path的用法]]></title>
     <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fos.path%E7%9A%84%E7%94%A8%E6%B3%95%2F</url>
     <content type="text"><![CDATA[1234567891011用法：os.path.abspath(path)#path的绝对路径os.path.dirname(path或者file)#路径或者文件的上层目录__file__#当前运行的文件名字os.path.join(path1,path2,...)#拼接多个路径为一个路径os.path.basename(path)#返回文件名或者最后的文件夹名]]></content>
   </entry>
   <entry>
+    <title><![CDATA[yaml简介与Python上的应用]]></title>
+    <url>%2F2018%2F01%2F12%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[vi的使用]]></title>
     <url>%2F2018%2F01%2F12%2Fvi%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[vi有三种模式 命令模式：一旦启动便自动进入此模式，此状态下敲击键盘会被视为是vi命令而不是输入字符。 输入模式：i切换到输入模式，ESC退出输入模式，切换到命令模式 底线命令模式：使用:切换到底线命令模式，在最底下一行输入命令 命令例子 效果 2h 左移两个 30l 右移30 10j 下移10个 5k 上移5个 :wq 保存并推出 :q 退出]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[pyhon中导入的几点问题]]></title>
+    <url>%2F2018%2F01%2F12%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[pyhon中导入的几点问题]]></title>
+    <url>%2F2018%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
   </entry>
   <entry>
     <title><![CDATA[vi的使用]]></title>
@@ -130,19 +140,9 @@
     <content type="text"><![CDATA[关键字: yaml, python Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
   </entry>
   <entry>
-    <title><![CDATA[yaml简介与Python上的应用]]></title>
-    <url>%2F2018%2F01%2F12%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[pyhon中导入的几点问题]]></title>
-    <url>%2F2018%2F01%2F12%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[日拱一卒系列：python的虚拟环境virtualenv]]></title>
-    <url>%2F2018%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9Apython%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83virtualenv%2F</url>
-    <content type="text"><![CDATA[我们同一台电脑可能需要同事开发基于不同版本的Python的程序，就算同一个版本的Python，也可能需要对应不同的模块（或者同一模块的不同版本）。 为此，我们需要为Python创建一个虚拟的环境，每个应用使用一套独立的运行环境，我们使用virtualenv为一个应用创建隔离的环境，virtualenvwrapper是virtualenv的封装，可以方便的删除、拷贝、切换不同的环境。 我们使用virtualenvwrapper来进行处理。 首先需要安装virtualenvwrapper 1pip install virtualenvwrapper 使用之前需要进行如下的配置： 首先为你的虚拟环境设置一个存放的路径 我们这里设置使用mkdir ~/.virtualenvs，或者是mkdir $HOME/.virtualenvs，其中~/.代表什么请见这里，这样就设置了一个隐藏的路径 然后我们需要在.bashrc或者是.zshrc中里加入下面的内容，之后要使用source .bashrc来重新加载 123expert WORKON_HOME=$HOME/.virtualenvs 这个路径就是你创建的隐藏路径expert VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2 我这里使用的是Python2版本，具体使用哪个版本，一定要提前选择好，然后把对应的路径写到这里source /usr/local/bin/virtualenvwrapper.sh 将.sh这个文件source一下 这里要提到的是，我们可以使用命令来进行软连接 123如果之前有软连接，我们使用unlink先解开，比如我要把pip链接到Python3解开，令pip3链接到python3unlink pipln -s path(要软连接的路径) pip3 我们使用ls -ln来查看软连接 快捷键：command+shift+.查看隐藏文件与隐藏隐藏文件 上面的步骤结束后，使用一下命令来创建与切换虚拟环境 创建虚拟环境：mkvirtualenv env_name,如果要选择Python的版本，需要使用 mkvirtualenv -p python的路径或者名称 env_name 进入虚拟环境：workon env_name 退出虚拟环境：deactivate 删除虚拟环境：rmvirtualenv env_name]]></content>
+    <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
+    <url>%2F2018%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95%E5%92%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[经常见到~/.，来说一说他是什么 首先是.代表当前目录，也可以用./ ..代表上级目录，也可以用../ 注意：如果一个目录或者文件以一个.开始的话，说明这个目录或者文件是一个隐藏的目录或者文件，比如（.bashrc），即以默认方式查找时，不显示该目录或文件（需要使用ls -a来查看） 在Mac中，有一个根目录/，然后根目录下有一个/Users的目录，里面有所有的用户 而~就代表你当前使用的用户名字对应的目录，同样~等价于$HOME，他们两个都代表以你的用户名为命名的目录，比如，我在任意环境下使用cd ~/就代表立即切换到/Users内以我自己的名字命名的目录，比如本机的目录就是fplee，然后就可以在此文件夹内进行操作！但是一般显示的时候显示~ 其中，/代表的是根目录，根目录下有好多的其他的文件夹或文件，在Linux系统中一般的如下： 稍后整理（未完待续……）]]></content>
       <categories>
         <category>Python</category>
       </categories>
@@ -152,9 +152,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
-    <url>%2F2018%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95%E5%92%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[经常见到~/.，来说一说他是什么 首先是.代表当前目录，也可以用./ ..代表上级目录，也可以用../ 注意：如果一个目录或者文件以一个.开始的话，说明这个目录或者文件是一个隐藏的目录或者文件，比如（.bashrc），即以默认方式查找时，不显示该目录或文件（需要使用ls -a来查看） 在Mac中，有一个根目录/，然后根目录下有一个/Users的目录，里面有所有的用户 而~就代表你当前使用的用户名字对应的目录，同样~等价于$HOME，他们两个都代表以你的用户名为命名的目录，比如，我在任意环境下使用cd ~/就代表立即切换到/Users内以我自己的名字命名的目录，比如本机的目录就是fplee，然后就可以在此文件夹内进行操作！但是一般显示的时候显示~ 其中，/代表的是根目录，根目录下有好多的其他的文件夹或文件，在Linux系统中一般的如下： 稍后整理（未完待续……）]]></content>
+    <title><![CDATA[日拱一卒系列：python的虚拟环境virtualenv]]></title>
+    <url>%2F2018%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9Apython%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83virtualenv%2F</url>
+    <content type="text"><![CDATA[我们同一台电脑可能需要同事开发基于不同版本的Python的程序，就算同一个版本的Python，也可能需要对应不同的模块（或者同一模块的不同版本）。 为此，我们需要为Python创建一个虚拟的环境，每个应用使用一套独立的运行环境，我们使用virtualenv为一个应用创建隔离的环境，virtualenvwrapper是virtualenv的封装，可以方便的删除、拷贝、切换不同的环境。 我们使用virtualenvwrapper来进行处理。 首先需要安装virtualenvwrapper 1pip install virtualenvwrapper 使用之前需要进行如下的配置： 首先为你的虚拟环境设置一个存放的路径 我们这里设置使用mkdir ~/.virtualenvs，或者是mkdir $HOME/.virtualenvs，其中~/.代表什么请见这里，这样就设置了一个隐藏的路径 然后我们需要在.bashrc或者是.zshrc中里加入下面的内容，之后要使用source .bashrc来重新加载 123expert WORKON_HOME=$HOME/.virtualenvs 这个路径就是你创建的隐藏路径expert VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2 我这里使用的是Python2版本，具体使用哪个版本，一定要提前选择好，然后把对应的路径写到这里source /usr/local/bin/virtualenvwrapper.sh 将.sh这个文件source一下 这里要提到的是，我们可以使用命令来进行软连接 123如果之前有软连接，我们使用unlink先解开，比如我要把pip链接到Python3解开，令pip3链接到python3unlink pipln -s path(要软连接的路径) pip3 我们使用ls -ln来查看软连接 快捷键：command+shift+.查看隐藏文件与隐藏隐藏文件 上面的步骤结束后，使用一下命令来创建与切换虚拟环境 创建虚拟环境：mkvirtualenv env_name,如果要选择Python的版本，需要使用 mkvirtualenv -p python的路径或者名称 env_name 进入虚拟环境：workon env_name 退出虚拟环境：deactivate 删除虚拟环境：rmvirtualenv env_name]]></content>
       <categories>
         <category>Python</category>
       </categories>
@@ -205,12 +205,15 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）]]></title>
-    <url>%2F2017%2F11%2F29%2FMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B0%E7%9A%84%E6%84%9F%E6%82%9F%EF%BC%88%E7%BB%93%E5%90%88%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8aiomysql%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[首先要装好MySQL 123456789101112131415161718192021222324import asyncioimport aiomysql#导入我们需要使用的协程库loop = asyncio.get_event_loop()#建立一个协程循环#建立一个测试文件@asyncio.coroutinedef test_example(): #里面是我们必填的文件，一定注意db的名字是上图对应的哪里，纠结了一下午。。。 conn = yield from aiomysql.connect(host='127.0.0.1', port=3306, user='root', password='0000', db='demo', loop=loop) cur = yield from conn.cursor() yield from cur.execute("SELECT * FROM users") print(cur.description) r = yield from cur.fetchall() print(r) yield from cur.close() conn.close()loop.run_until_complete(test_example())loop.run_forever()]]></content>
+    <title><![CDATA[廖大的Web有感]]></title>
+    <url>%2F2017%2F11%2F29%2F%E5%BB%96%E5%A4%A7%E7%9A%84Web%E6%9C%89%E6%84%9F%2F</url>
+    <content type="text"><![CDATA[廖大的Web教程真是让我领略了编程之美： 在使用aiohttp异步框架写Web时，刚开始一直有几点不是太明白，现在想来还是太年轻，其实廖大的教程写的非常好。 主要是集中在URL处理函数上]]></content>
       <categories>
-        <category>MySQL</category>
+        <category>Python</category>
       </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Python科学计算国网实例]]></title>
@@ -221,15 +224,12 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[廖大的Web有感]]></title>
-    <url>%2F2017%2F11%2F29%2F%E5%BB%96%E5%A4%A7%E7%9A%84Web%E6%9C%89%E6%84%9F%2F</url>
-    <content type="text"><![CDATA[廖大的Web教程真是让我领略了编程之美： 在使用aiohttp异步框架写Web时，刚开始一直有几点不是太明白，现在想来还是太年轻，其实廖大的教程写的非常好。 主要是集中在URL处理函数上]]></content>
+    <title><![CDATA[MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）]]></title>
+    <url>%2F2017%2F11%2F29%2FMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B0%E7%9A%84%E6%84%9F%E6%82%9F%EF%BC%88%E7%BB%93%E5%90%88%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8aiomysql%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[首先要装好MySQL 123456789101112131415161718192021222324import asyncioimport aiomysql#导入我们需要使用的协程库loop = asyncio.get_event_loop()#建立一个协程循环#建立一个测试文件@asyncio.coroutinedef test_example(): #里面是我们必填的文件，一定注意db的名字是上图对应的哪里，纠结了一下午。。。 conn = yield from aiomysql.connect(host='127.0.0.1', port=3306, user='root', password='0000', db='demo', loop=loop) cur = yield from conn.cursor() yield from cur.execute("SELECT * FROM users") print(cur.description) r = yield from cur.fetchall() print(r) yield from cur.close() conn.close()loop.run_until_complete(test_example())loop.run_forever()]]></content>
       <categories>
-        <category>Python</category>
+        <category>MySQL</category>
       </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[Python爬虫入门（5）———— selenium与PhantomJS爬虫]]></title>
@@ -499,6 +499,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[同一台机器，如何配置多个github账户信息]]></title>
+    <url>%2F2017%2F06%2F16%2F%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心, 下面按照设置两个账户来开始详细的介绍： 第一步：生成需要的key$ ssh-keygen -t rsa -C &quot;youremail@email.com&quot; -f ~/.ssh/id_rsa_one该公钥和私钥包含了你邮箱的信息，具有随机不可复现性 BEGIN-NOTICE:ssh-keygen -t rsa -C “any comment can be here” -f path-t rsa The type of the key to generate密钥的类型-C &quot;youremail&quot; comment to identify the key用于识别这个密钥的注释所以这个注释你可以输入任何内容，很多网站和软件用这个注释作为密钥的名字-f path新生成的密钥的地址路径END-NOTICE 假设我们生成了如下两个key .ssh/id_rsa_one.ssh/id_rsa_one.pub.ssh/id_rsa_two.ssh/id_rsa_two.pub 第二步：设置SSH本地需要识别刚才生产的SSH-KEY，就需要使用一下命令进行添加123# 使用-K可以将私钥添加到钥匙串，不用每次开机后还要再次输入这条命令$ ssh-add -K ~/.ssh/id_rsa_one $ ssh-add -K ~/.ssh/id_rsa_two 通过下面命令，查看key的设置：1$ ssh-add -l 建立对应的config123456789Host one.github.com # 设置的用于链接的名字，可以随便设置 HostName github.com # github的主机地址（相当于我们的IP，只不过做了域名对应） User git # 默认的User就是git IdentityFile ~/.ssh/id_rsa_one # 我们添加的私钥的地址（公钥在github上对应）Host two.github.com HostName github.com User git IdentityFile ~/.ssh/id_rsa_two 第三步：添加公钥到我们不同的远程主机（这里就是我们不同的github账号）由于github直接提供复制，我们直接对pub公钥进行复制，然后粘贴到每个账户对应的设置中去。将公钥复制到github上之后，我们就可以开始测试他们的连接了123456$ ssh -T one.github.com$ ssh -T two.github.com# 执行后如果出现信息，就表示验证通过了：Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.# 这个地方的 Yourname 指的是你的对应的github账户的名字，如果出现的不是对应的账户的名字，也说明是没有成功。 第四步：设置git区分与注意事项 首先要做的是我们克隆仓库和新建仓库后推送到远程的时候的设置123# 本地新建，然后推送$ git remote add origin git@one.github.com/github_name/respo_name.git$ git remote add origin git@two.github.com/github_name/respo_name.git 这样才能保证连接的是对应的仓库 如果是clone的仓库，最好也这么修改，便于区分 123# 远程新建，本地克隆$ git clone git@one.github.com/github_name/respo_name.git$ git clone git@two.github.com/github_name/respo_name.git 矫正respo下面的.git/config里的内容 git 命令修改其内容 123$ git config --local user.name "yourname"$ git config --local user.email "youemail"# 注意的是，这个邮箱必须是你这个仓库对应的github的注册邮箱，名字无所谓，但是建议也一致 直接进文件修改器内容 123[remote "origin"] url = https://github.com/github_name/respo_name.git fetch = +refs/heads/*:refs/remotes/origin/* 如果返现这里的内容不一致，请修改过来也]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Git 设置]]></title>
     <url>%2F2017%2F06%2F16%2FGit-%E8%AE%BE%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[关键词：git Git 使用一系列的配置文件来存储你定义的偏好 配置git的scale ———— 如果定义的值有冲突，以后面层中定义的为准 /etc/gitconfig :该文件含有对系统上所有用户及他们所拥有的仓库都生效的配置值（译注：gitconfig是全局配置文件）,如果传递--system选项给git config命令， Git 会读写这个文件. ~/.gitconfig :接下来 Git 会查找每个用户的~/.gitconfig文件, 你能传递--global选项让 Git读写该文件. .git/config :最后 Git 会查找由用户定义的各个库中Git,目录下的配置文件,该文件中的值只对属主库有效.git config --local --list 小 demo 演示各个部分的含义 最重要的部分, 设置名字与邮箱（对应你的git推送目的地）12git config --global user.name &quot;myname&quot;git config --global user.email &quot;test@gmail.com&quot;]]></content>
@@ -521,6 +532,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>符号</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
@@ -531,18 +554,6 @@
         <tag>数学公式</tag>
         <tag>字体</tag>
         <tag>间距</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
-    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>数学公式</tag>
-        <tag>符号</tag>
       </tags>
   </entry>
   <entry>
@@ -623,7 +634,7 @@
   <entry>
     <title><![CDATA[git 学习手册精简版不断更新]]></title>
     <url>%2F2017%2F04%2F17%2Fgit%20%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C%E7%B2%BE%E7%AE%80%E7%89%88%EF%BC%88%E5%82%BB%E7%93%9C%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。 基本操作第一步：首先要进入GitHub注册一下，并记住自己的用户名，邮箱和密码 第二步：找一个空白的文件夹，打开命令行窗口cd 到此目录下（具体的操作方法见http://blog.csdn.net/cdqn10086/article/details/53978825） 进行自报家门的操作 12git config --global user.name YourNamegit config --global user.email YourEmail 建立要进行版本控制的操作（建立一个文件夹，一切操作在其中进行） 1234mkdir demo01 %建立文件夹名字为demo01cd demo01 %进入此文件夹git init %进行init，将这个目录变成git管理的仓库进行完此项之后，会在demo01文件夹内有一个.git文件，要用ls -ah来查看隐藏文件。 对里面的文件进行操作（新建一个文本文档demo01.txt，并输入几句英文） 12git add demo01.txtgit commit -m &quot;this is the first demo&quot; ###远程仓库（GitHub） 第一步：获取SSH（打开命令行，进行如下操作） 1$ ssh-keygen -t rsa -C YourEmail 进行此命令之后，我们就可以找到文件夹.ssh ，因为.ssh文件件在主目录下，因此可以直接如下方式打开 1$ open ~/.ssh 第二步：找到我们需要的两个文件，id_rsa （私人秘钥，万勿泄露）和id_rsa.pub（公钥），然后登陆GitHub，找到Account settings中的SSH Keys，新建sshkey，title写一个平时常用的名字即可，key里面输入我们公钥里的所有的内容。 第三步：在GitHub的个人页处新添加一个仓库(我们新建的仓库名字就是demo01) 本地库关联远程库 第四步：为了让本地的与远程的同步，我们在本地的demo01仓库下运行如下的命令 12git init #初始化，如果上一步完成了这一步就不用了git remote add origin https://github.com/用户名/demo01.git (此时我们的远程库就叫做名字origin) 使用如下将本地库推送到远程库 1git push -u origin master 现在也就是完成了本地库的提交，以后，只要是有了新的改动，本地做了提交，都可以通过如下命令来进行把本地的master分支推送到GitHub。 1git push origin master 远程库克隆到本地 首先，要在GitHub上建立一个远程仓库并且生成readme.txt文件 然后，在选择你要保存的一个目录，在此目录下进行如下克隆 1git clone https://github.com/LiErhua（GitHub用户名）/demo02.git 然后会发现已经克隆到自己的硬盘本地了。 notice： 其中我们push和clone时，地址都是有两种选择的，一种是SSH，一种是http协议的分别如下 12git@github.com:你的GitHub用户名/文件夹名称.githttps://github.com/用户名/文件夹名称.git 注意在push的时候，先要对自己修改的文档进行一个stash操作，然后对origin进行pull操作，操作完成之后再使用git stash apply把之前stash的内容给找回来，然后再进行push操作。]]></content>
+    <content type="text"><![CDATA[git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。 基本操作第一步：首先要进入GitHub注册一下，并记住自己的用户名，邮箱和密码 第二步：找一个空白的文件夹，打开命令行窗口cd 到此目录下（具体的操作方法见http://blog.csdn.net/cdqn10086/article/details/53978825） 进行自报家门的操作 12git config --global user.name YourNamegit config --global user.email YourEmail 建立要进行版本控制的操作（建立一个文件夹，一切操作在其中进行） 1234mkdir demo01 %建立文件夹名字为demo01cd demo01 %进入此文件夹git init %进行init，将这个目录变成git管理的仓库进行完此项之后，会在demo01文件夹内有一个.git文件，要用ls -ah来查看隐藏文件。 对里面的文件进行操作（新建一个文本文档demo01.txt，并输入几句英文） 12git add demo01.txtgit commit -m &quot;this is the first demo&quot; ###远程仓库（GitHub） 第一步：获取SSH（打开命令行，进行如下操作） 1$ ssh-keygen -t rsa -C YourEmail NOTICE: When you create the ssh you type (for example): ssh-keygen -t rsa -C “any comment can be here”当你创建ssh的时候 -t = The type of the key to generate密钥的类型-C = comment to identify the key用于识别这个密钥的注释 So the Comment is for you only and you can put anything inside. Many sites and software are using this comment as the key name. 所以这个注释你可以输入任何内容，很多网站和软件用这个注释作为密钥的名字 ENDNOTICE 进行此命令之后，我们就可以找到文件夹.ssh ，因为.ssh文件件在主目录下，因此可以直接如下方式打开 1$ open ~/.ssh 第二步：找到我们需要的两个文件，id_rsa （私人秘钥，万勿泄露）和id_rsa.pub（公钥），然后登陆GitHub，找到Account settings中的SSH Keys，新建sshkey，title写一个平时常用的名字即可，key里面输入我们公钥里的所有的内容。 第三步：在GitHub的个人页处新添加一个仓库(我们新建的仓库名字就是demo01) 本地库关联远程库 第四步：为了让本地的与远程的同步，我们在本地的demo01仓库下运行如下的命令 12git init #初始化，如果上一步完成了这一步就不用了git remote add origin https://github.com/用户名/demo01.git (此时我们的远程库就叫做名字origin) 使用如下将本地库推送到远程库 1git push -u origin master 现在也就是完成了本地库的提交，以后，只要是有了新的改动，本地做了提交，都可以通过如下命令来进行把本地的master分支推送到GitHub。 1git push origin master 远程库克隆到本地 首先，要在GitHub上建立一个远程仓库并且生成readme.txt文件 然后，在选择你要保存的一个目录，在此目录下进行如下克隆 1git clone https://github.com/LiErhua（GitHub用户名）/demo02.git 然后会发现已经克隆到自己的硬盘本地了。 notice： 其中我们push和clone时，地址都是有两种选择的，一种是SSH，一种是http协议的分别如下 12git@github.com:你的GitHub用户名/文件夹名称.githttps://github.com/用户名/文件夹名称.git 注意在push的时候，先要对自己修改的文档进行一个stash操作，然后对origin进行pull操作，操作完成之后再使用git stash apply把之前stash的内容给找回来，然后再进行push操作。]]></content>
       <categories>
         <category>Git</category>
       </categories>
@@ -770,17 +781,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文本环境</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
@@ -789,17 +789,6 @@
       </categories>
       <tags>
         <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>代码环境</tag>
       </tags>
   </entry>
   <entry>
@@ -817,6 +806,28 @@
     <title><![CDATA[LaTeX入门系列之正文环境（三）———— 定理环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E5%AE%9A%E7%90%86%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：定理环境 这一节，我们讨论定理环境 定理环境其实在我们正式的论文写作中用的并不是太多 12345\newtheorem&#123;theory&#125;&#123;定理&#125;上面这个放置在导言区，命令声明了定理环境，两个参数，前者是新定义的环境名称，后者是显示在文档内的输出标题名字\begin&#123;theory&#125;[可选的二标题]定理内容\end&#123;theory&#125; 同样需要定制样式时，我们需要使用宏包 theorem，几个比较重要的 12345\usepackage&#123;theorem&#125;\theorembodyfont&#123;字体&#125;设置定理内容字体,字体最好预先定义好\theoremheaderfont&#123;字体&#125;设置定理头字体,字体最好预先定义好\theorempreskipamount 定理前垂直距离变量，使用\setlength来设置\theorempostskipamount 定理后垂直距离变量 123456789101112131415161718192021222324\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;theorem&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong[ItalicFont = FZQKBYSJW--GB1-0,BoldFont = FZQKBYSJW--GB1-0]&#123;FZQKBYSJW--GB1-0&#125;\newCJKfontfamily\fs[ItalicFont = STFangsong,BoldFont = STFangsong]&#123;STFangsong&#125;\newtheorem&#123;theory&#125;&#123;夜雨秋灯&#125;\theorembodyfont&#123;\fs&#125;%设置定理内容字体\theoremheaderfont&#123;\qingsong&#125;%设置定理头字体\setlength&#123;\theorempreskipamount&#125;&#123;0.2cm&#125; %定理前垂直距离变量\setlength&#123;\theorempostskipamount&#125;&#123;0cm&#125; %定理后垂直距离变量\begin&#123;document&#125;\noindent&#123;\qingsong 夜雨秋灯&#125;\qquad&#123;\fs 两点之间，线段最短&#125;\\\vskip 1cm\begin&#123;theory&#125;两点之间，线段最短\end&#123;theory&#125;\begin&#123;theory&#125;同位角相等\end&#123;theory&#125;\begin&#123;theory&#125;三角形两边之和大于第三边\end&#123;theory&#125;\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>代码环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -858,9 +869,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -869,9 +880,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -997,9 +1008,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
-    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
+    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
+    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
+    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
@@ -1008,9 +1019,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[如何在hexo添加一个标签云页面]]></title>
-    <url>%2F2017%2F01%2F01%2F%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2%2F</url>
-    <content type="text"><![CDATA[添加一个标签云页面，并在菜单中显示页面链接。 新建一个页面，命名为 tags 。命令如下： 1hexo new page &quot;tags&quot; 编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。 1234title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;--- 注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 12345title: All tagsdate: 2014-12-22 12:39:04type: &quot;tags&quot;comments: false--- 在菜单中添加链接。编辑主题的 _config.yml ，添加 tags 到 menu 中，如下: 1234menu: home: / archives: /archives tags: /tags 神器：IPic图床工具，可以把图片传至图床，生成Markdown格式的链接 More info: Deployment]]></content>
+    <title><![CDATA[Hexo & NexT添加菜单分类并作为文章目录]]></title>
+    <url>%2F2017%2F01%2F01%2FHexo%26NexT%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95%E5%88%86%E7%B1%BB%E5%B9%B6%E4%BD%9C%E4%B8%BA%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[生成默认已有的分类 在NexT中，默认的menu有：首页，归档，分类，标签，关于 以标签 tags 为例： 12$hexo new page &quot;tags&quot;//在 hexo &gt; source 文件夹会出现一个tags文件夹 然后： 在 tags 文件夹的index.md文档中添加 type: tags 在 NexT 内的 _config 文档的menu中恢复 tags 的使用 生成没有的分类1$hexo new page &quot;essay&quot; 然后： 在 essay 文件夹下的 index.md 文档中添加 “type: essay “ 在NexT的config的menu中添加 essay: /categories/essay 在NexT的languages中修改中文文件，添加essay的中文显示 在需要放入 essay 菜单的文章的 front matter 中添加 categories: essay]]></content>
       <categories>
         <category>Hexo</category>
       </categories>

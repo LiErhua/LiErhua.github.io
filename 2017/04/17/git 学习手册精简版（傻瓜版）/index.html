@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T07:12:13.000Z">
+<meta property="og:updated_time" content="2018-07-01T04:50:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习手册精简版不断更新">
 <meta name="twitter:description" content="git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心。">
@@ -417,6 +417,17 @@
 <p>###远程仓库（GitHub）</p>
 <p>第一步：获取SSH（打开命令行，进行如下操作）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C YourEmail</div></pre></td></tr></table></figure>
+<p><strong>NOTICE</strong>:</p>
+<blockquote>
+<p>When you create the ssh you type (for example): </p>
+</blockquote>
+<p><code>ssh-keygen -t rsa -C “any comment can be here”</code><br>当你创建<code>ssh</code>的时候</p>
+<p><code>-t = The type of the key to generate</code>密钥的类型<br><code>-C = comment to identify the key</code>用于识别这个密钥的注释 </p>
+<blockquote>
+<p>So the Comment is for you only and you can put anything inside. Many sites and software are using this comment as the key name. </p>
+</blockquote>
+<p>所以这个注释你可以输入任何内容，很多网站和软件用这个注释作为密钥的名字</p>
+<p><strong>ENDNOTICE</strong></p>
 <p>进行此命令之后，我们就可以找到文件夹.ssh ，因为.ssh文件件在主目录下，因此可以直接如下方式打开</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ open ~/.ssh</div></pre></td></tr></table></figure>
 <p>第二步：找到我们需要的两个文件，id_rsa （私人秘钥，万勿泄露）和id_rsa.pub（公钥），然后登陆GitHub，找到Account settings中的SSH Keys，新建sshkey，title写一个平时常用的名字即可，key里面输入我们公钥里的所有的内容。</p>
@@ -610,7 +621,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-count">97</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -706,6 +717,12 @@ var jiathis_config={
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
 
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
 
         
 
