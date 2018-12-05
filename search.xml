@@ -35,17 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[用 WTForms 和装饰器做表单校验]]></title>
-    <url>%2F2018%2F03%2F16%2F%E7%94%A8-WTForms-%E5%92%8C%E8%A3%85%E9%A5%B0%E5%99%A8%E5%81%9A%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C%2F</url>
-    <content type="text"><![CDATA[关键词： flask, form 如何用wtforms来维护一份表单，部分文档来自李林克斯, 然后又根据实际的情况进行了添加，在此感谢！ 在一个 Web 应用里，不管是为了业务逻辑的正确性，还是系统安全性，做好参数（querystring, form, json）验证都是非常必要的。 WTForms 是一个非常好用而且强大的表单校验和渲染的库，提供 Form 基类用于定义表单结构（类似 ORM），内置了丰富的字段类型和校验方法，可以很方便的用来做校验。如果应用需要输出 HTML，集成到模板里也很容易。对于 JSON API 应用，用不到渲染的功能，但是结构化的表单和校验功能依然非常有用。 以一个注册的应用场景为例，用户输入用户名、邮箱、密码、确认密码，服务程序先检查参数然后处理登录逻辑。这几个字段都是必填的，此外还有一些额外的限制： 用户名：长度在 3-20 之间 邮箱：合法的邮箱格式，比如 “abc” 就不合法 密码：长度在 8-20 之间，必须同时包含大小写字母 确认密码：必须与密码一致 如果参数不合法，返回 400；登录逻辑略去不表。 最原始的做法，就是直接在注册的接口里取出每个参数，逐个手动校验。这种做法可能的代码是： 123456789101112131415161718192021@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])def register(): username = request.form.get(&apos;username&apos;) if not username or not (3 &lt;= len(username) &lt;= 20): abort(400) email = request.form.get(&apos;email&apos;) if not email or not re.match(EMAIL_REGEX, email): abort(400) password = request.form.get(&apos;password&apos;) if not password: abort(400) if password == password.lower() or password == password.upper(): abort(400) confirm_password = request.form.get(&apos;confirm_password&apos;) if not confirm_password or confirm_password != password: abort(400) # 处理注册的逻辑 有可能是我的写法不太对，但是这样检查参数的合法性，实在不够优雅。检查参数的代码行数甚至超出了注册的逻辑，也有些喧宾夺主的感觉。可以把这些代码移出来，使得业务逻辑代码更加清晰一点。下面先用 WTForms 来改造一下。 12345678910111213141516171819202122232425from wtforms import Formfrom wtforms.fields import StringField, PasswordFieldfrom wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationErrorclass SignupForm(Form): username = StringField(validators=[DataRequired(), Length(3, 20)]) email = StringField(validators=[DataRequired(), Email()]) password = PasswordField(validators=[DataRequired()]) confirm_password = PasswordField(validators=[DataRequired(), EqualTo(&apos;password&apos;)]) def validate_password(self, field): password = field.data if password == password.lower() or password == passowrd.upper(): raise ValidationError(u&apos;必须同时包含大小写字母&apos;)@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])def register(): form = SignupForm(formdata=request.form) if not form.validate(): abort(400) # 处理注册逻辑，参数从 form 对象获取，比如 username = form.username.data 这个版本带来的好处很明显： 参数更加结构化了，所有字段名和类型一目了然 有内置的，语义清晰的校验方法，可以组合使用 还能自定义额外的校验方法，方法签名是 def validate_xx(self, field)，其中 xx 是字段名，通过 field.data 来获取输入的值 还有没体现出来的，就是丰富的错误提示信息，既有内置的，也可以自定义 再看原来的 register 方法，代码变得更加简洁和清晰，整体的编码质量也得到了提升。 那么再考虑一下更复杂的场景，在一个返回 JSON 的 API 应用里，有很多 API，有不同的参数提交方式（GET 方法通过 query string，POST 方法可能有 form 和 JSON），一样的校验错误处理方式（abort(400) 或其他）。我们依然可以像上面那样处理，但如果再借助装饰器改进一下，又能少写几行“重复”的代码。 需要注意的是，WTForms 的 formdata 支持的是类似 Werkzeug/Django/WebOb 中的 MultiDict 的数据结构。Flask 中的 request.json 是一个 dict 类型，所以需要先包装一下。 继续改造注册的例子： 123456789101112131415161718192021222324252627282930313233343536import functoolsfrom werkzeug.datastructures import MultiDictdef validate_form(form_class): def decorator(view_func): @functools.wraps(view_func) def inner(*args, **kwargs): if request.method == &apos;GET&apos;: formdata = request.args else: if request.json: formdata = MultiDict(request.json) else: formdata = request.form form = form_class(formdata=formdata) if not form.validate(): return jsonify(code=400, message=form.errors), 400 g.form = form return view_func(*args, **kwargs) return inner return decorator@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])@validate_form(form_class=SignupForm)def register(): form = g.form # 运行到这里，说明表单是合法的 # 处理注册逻辑，参数从 form 对象获取，比如 username = form.username.data 实现了一个叫 validate_form 的装饰器，指定一个 Form 类，处理统一的参数获取、校验和错误处理，如果一切正确，再把 Form 对象保存到全局变量 g 里面，这样就可以在 view 函数里取出来用了。现在的 register 方法变得更加简洁，甚至都看不到检查参数的那些代码，只需要关心具体的和注册相关的逻辑本身就好。 这个装饰器的可重用性非常好，其他的接口只要定义一个 Form 类，然后调用一下装饰器，再从 g 获取 Form 对象。不仅省了很多心思和体力劳动，代码也变得更加清晰优雅和 Pythonic. NOTICE： 因为MultDict对list的支持特别不友好，容易把list的表单变成一个个的tuple形式。 例子media:[‘facebook’,’adwords’] 会被转为(‘media’,’facebook’),(‘media’,’adwords’) 因此，我们在装饰器内加入如下的设置，进行此问题的规避 1234567891011121314151617181920212223def validate_form(form_class): def decorator(view_func): @wraps(view_func) def inner(*args, **kwargs): if request.method == &apos;GET&apos;: form_data = request.values else: data = request.get_json() # 判断获取的JSON对象内有没有value是list的情况，如果有，将其dumps成JSON格式 if data: for k,v in data.items(): if isinstance(v, list): data[k] = json.dumps(v) form_data = MultiDict(data) else: form_data = request.form form = form_class(formdata=form_data) if not form.validate(): return &#123;&apos;error_message&apos;: form.errors&#125;, 400 g.form = form return view_func(*args, **kwargs) return inner return decorator]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>flask</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Nginx 简介]]></title>
     <url>%2F2018%2F03%2F16%2Fnginx-%E7%AE%80%E4%BB%8B%2F</url>
     <content type="text"><![CDATA[关键词：Nginx服务器代理 目的 nginx的简单实用 能够满足基本的线上业务的需求应用 nginx介绍nginx的基本介绍 Nginx是一个跨平台的Web服务器，可以使用当前操作系统特有的一些高效API来提高自己的性能 Nginx由一个master进程和若干worker进程组成，master进程主要用于读取配置文件和管理worker进程.worker进程负责处理请求。nginx基于事件模型并且能够根据操作系统的特性高效的利用worker进程处理请求。worker进程的数量在配置文件中定义，也可以通过指定的配置文件来定义其数量，或者自动根据CPU核心数确定其数量。 nginx的使用nginx的安装、启动、…1234567891. 安装 sudo apt-get update;sudo apt-get intall Nginx;2. 使用 测试： sudo service nginx configtest 配置文件是否ok//查看帮助，sudo service nginx -t sudo ngixn -t 测试每一个配置文件 重启： sudo service nginx reload stop: sudo service nginx stop start: sudo service nginx start / sudo service nginx restart nginx的配置、语法参考资料 http://ifool.me/linux/494.html https://www.linode.com/docs/websites/nginx/how-to-configure-nginx nginx的配置基本介绍location模块 http://seanlook.com/2015/05/17/nginx-location-rewrite/ 123451. 以 = 开头表示精确匹配，如上面的url链接只匹配根目录结尾的请求，后面不能带任何字符串。2. ^~ 开头表示uri以某个常规字符串开头，不是正则匹配3. ~ 开头表示区分大小写的正则匹配4. ~* 开头表示不区分大小写的正则匹配5. / 通用匹配，如果没有其它匹配，任何请求都会匹配到。 示例如下 转自 Sean’s Notes 1234567891011121314151617181920212223242526272829303132333435363738394041location = / &#123; # 精确匹配 / ，主机名后面不能带任何字符串 [ configuration A ]&#125;location / &#123; # 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求 # 但是正则和最长字符串会优先匹配 [ configuration B ]&#125;location /documents/ &#123; # 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索 # 只有后面的正则表达式没有匹配到时，这一条才会采用这一条 [ configuration C ]&#125;location ~ /documents/Abc &#123; # 匹配任何以 /documents/Abc 开头的地址，匹配符合以后，还要继续往下搜索 # 只有后面的正则表达式没有匹配到时，这一条才会采用这一条 [ configuration CC ]&#125;location ^~ /images/ &#123; # 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。 [ configuration D ]&#125;location ~* \.(gif|jpg|jpeg)$ &#123; # 匹配所有以 gif,jpg或jpeg 结尾的请求 # 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则 [ configuration E ]&#125;location /images/ &#123; # 字符匹配到 /images/，继续往下，会发现 ^~ 存在 [ configuration F ]&#125;location /images/abc &#123; # 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在 # F与G的放置顺序是没有关系的 [ configuration G ]&#125;location ~ /images/abc/ &#123; # 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用 [ configuration H ]&#125; 123456已=开头表示精确匹配如 A 中只匹配根目录结尾的请求，后面不能带任何字符串。^~ 开头表示uri以某个常规字符串开头，不是正则匹配~ 开头表示区分大小写的正则匹配;~* 开头表示不区分大小写的正则匹配/ 通用匹配, 如果没有其它匹配,任何请求都会匹配到 12顺序 优先级：(location =) &gt; (location 完整路径) &gt; (location ^~ 路径) &gt; (location ~,~* 正则顺序) &gt; (location 部分起始路径) &gt; (/) nginx注意事项（实际的解决问题） elb的check的检查 elb请求index.html,可能会大量产生404的请求，可以在nginx的location模块进行配置 123location =/index.html &#123;return 200 &apos;ok\n&apos;;&#125; proxy 转向 1234location /api &#123;include proxy_params;proxy_pass http://127.0.0.1:8100;&#125; gzip 打开 1gzip on; 文件大小的限制 1client_max_body_size 50M; 包含其他的配置文件 1include /etc/nginx/conf.d/*.conf; 监听域名 1234location &#123;listen 80 default_server;server_name localhost slack.com;&#125;]]></content>
@@ -54,6 +43,17 @@
       </categories>
       <tags>
         <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[用 WTForms 和装饰器做表单校验]]></title>
+    <url>%2F2018%2F03%2F16%2F%E7%94%A8-WTForms-%E5%92%8C%E8%A3%85%E9%A5%B0%E5%99%A8%E5%81%9A%E8%A1%A8%E5%8D%95%E6%A0%A1%E9%AA%8C%2F</url>
+    <content type="text"><![CDATA[关键词： flask, form 如何用wtforms来维护一份表单，部分文档来自李林克斯, 然后又根据实际的情况进行了添加，在此感谢！ 在一个 Web 应用里，不管是为了业务逻辑的正确性，还是系统安全性，做好参数（querystring, form, json）验证都是非常必要的。 WTForms 是一个非常好用而且强大的表单校验和渲染的库，提供 Form 基类用于定义表单结构（类似 ORM），内置了丰富的字段类型和校验方法，可以很方便的用来做校验。如果应用需要输出 HTML，集成到模板里也很容易。对于 JSON API 应用，用不到渲染的功能，但是结构化的表单和校验功能依然非常有用。 以一个注册的应用场景为例，用户输入用户名、邮箱、密码、确认密码，服务程序先检查参数然后处理登录逻辑。这几个字段都是必填的，此外还有一些额外的限制： 用户名：长度在 3-20 之间 邮箱：合法的邮箱格式，比如 “abc” 就不合法 密码：长度在 8-20 之间，必须同时包含大小写字母 确认密码：必须与密码一致 如果参数不合法，返回 400；登录逻辑略去不表。 最原始的做法，就是直接在注册的接口里取出每个参数，逐个手动校验。这种做法可能的代码是： 123456789101112131415161718192021@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])def register(): username = request.form.get(&apos;username&apos;) if not username or not (3 &lt;= len(username) &lt;= 20): abort(400) email = request.form.get(&apos;email&apos;) if not email or not re.match(EMAIL_REGEX, email): abort(400) password = request.form.get(&apos;password&apos;) if not password: abort(400) if password == password.lower() or password == password.upper(): abort(400) confirm_password = request.form.get(&apos;confirm_password&apos;) if not confirm_password or confirm_password != password: abort(400) # 处理注册的逻辑 有可能是我的写法不太对，但是这样检查参数的合法性，实在不够优雅。检查参数的代码行数甚至超出了注册的逻辑，也有些喧宾夺主的感觉。可以把这些代码移出来，使得业务逻辑代码更加清晰一点。下面先用 WTForms 来改造一下。 12345678910111213141516171819202122232425from wtforms import Formfrom wtforms.fields import StringField, PasswordFieldfrom wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationErrorclass SignupForm(Form): username = StringField(validators=[DataRequired(), Length(3, 20)]) email = StringField(validators=[DataRequired(), Email()]) password = PasswordField(validators=[DataRequired()]) confirm_password = PasswordField(validators=[DataRequired(), EqualTo(&apos;password&apos;)]) def validate_password(self, field): password = field.data if password == password.lower() or password == passowrd.upper(): raise ValidationError(u&apos;必须同时包含大小写字母&apos;)@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])def register(): form = SignupForm(formdata=request.form) if not form.validate(): abort(400) # 处理注册逻辑，参数从 form 对象获取，比如 username = form.username.data 这个版本带来的好处很明显： 参数更加结构化了，所有字段名和类型一目了然 有内置的，语义清晰的校验方法，可以组合使用 还能自定义额外的校验方法，方法签名是 def validate_xx(self, field)，其中 xx 是字段名，通过 field.data 来获取输入的值 还有没体现出来的，就是丰富的错误提示信息，既有内置的，也可以自定义 再看原来的 register 方法，代码变得更加简洁和清晰，整体的编码质量也得到了提升。 那么再考虑一下更复杂的场景，在一个返回 JSON 的 API 应用里，有很多 API，有不同的参数提交方式（GET 方法通过 query string，POST 方法可能有 form 和 JSON），一样的校验错误处理方式（abort(400) 或其他）。我们依然可以像上面那样处理，但如果再借助装饰器改进一下，又能少写几行“重复”的代码。 需要注意的是，WTForms 的 formdata 支持的是类似 Werkzeug/Django/WebOb 中的 MultiDict 的数据结构。Flask 中的 request.json 是一个 dict 类型，所以需要先包装一下。 继续改造注册的例子： 123456789101112131415161718192021222324252627282930313233343536import functoolsfrom werkzeug.datastructures import MultiDictdef validate_form(form_class): def decorator(view_func): @functools.wraps(view_func) def inner(*args, **kwargs): if request.method == &apos;GET&apos;: formdata = request.args else: if request.json: formdata = MultiDict(request.json) else: formdata = request.form form = form_class(formdata=formdata) if not form.validate(): return jsonify(code=400, message=form.errors), 400 g.form = form return view_func(*args, **kwargs) return inner return decorator@app.route(&apos;/user/signup/&apos;, methods=[&apos;POST&apos;])@validate_form(form_class=SignupForm)def register(): form = g.form # 运行到这里，说明表单是合法的 # 处理注册逻辑，参数从 form 对象获取，比如 username = form.username.data 实现了一个叫 validate_form 的装饰器，指定一个 Form 类，处理统一的参数获取、校验和错误处理，如果一切正确，再把 Form 对象保存到全局变量 g 里面，这样就可以在 view 函数里取出来用了。现在的 register 方法变得更加简洁，甚至都看不到检查参数的那些代码，只需要关心具体的和注册相关的逻辑本身就好。 这个装饰器的可重用性非常好，其他的接口只要定义一个 Form 类，然后调用一下装饰器，再从 g 获取 Form 对象。不仅省了很多心思和体力劳动，代码也变得更加清晰优雅和 Pythonic. NOTICE： 因为MultDict对list的支持特别不友好，容易把list的表单变成一个个的tuple形式。 例子media:[‘facebook’,’adwords’] 会被转为(‘media’,’facebook’),(‘media’,’adwords’) 因此，我们在装饰器内加入如下的设置，进行此问题的规避 1234567891011121314151617181920212223def validate_form(form_class): def decorator(view_func): @wraps(view_func) def inner(*args, **kwargs): if request.method == &apos;GET&apos;: form_data = request.values else: data = request.get_json() # 判断获取的JSON对象内有没有value是list的情况，如果有，将其dumps成JSON格式 if data: for k,v in data.items(): if isinstance(v, list): data[k] = json.dumps(v) form_data = MultiDict(data) else: form_data = request.form form = form_class(formdata=form_data) if not form.validate(): return &#123;&apos;error_message&apos;: form.errors&#125;, 400 g.form = form return view_func(*args, **kwargs) return inner return decorator]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>flask</tag>
       </tags>
   </entry>
   <entry>
@@ -257,9 +257,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Git 设置]]></title>
-    <url>%2F2017%2F06%2F16%2FGit-%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：git Git 使用一系列的配置文件来存储你定义的偏好 配置git的scale ———— 如果定义的值有冲突，以后面层中定义的为准 /etc/gitconfig :该文件含有对系统上所有用户及他们所拥有的仓库都生效的配置值（译注：gitconfig是全局配置文件）,如果传递--system选项给git config命令， Git 会读写这个文件. ~/.gitconfig :接下来 Git 会查找每个用户的~/.gitconfig文件, 你能传递--global选项让 Git读写该文件. .git/config :最后 Git 会查找由用户定义的各个库中Git,目录下的配置文件,该文件中的值只对属主库有效.git config --local --list 小 demo 演示各个部分的含义 最重要的部分, 设置名字与邮箱（对应你的git推送目的地）12git config --global user.name &quot;myname&quot;git config --global user.email &quot;test@gmail.com&quot;]]></content>
+    <title><![CDATA[同一台机器，如何配置多个github账户信息]]></title>
+    <url>%2F2017%2F06%2F16%2F%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心, 下面按照设置两个账户来开始详细的介绍： 第一步：生成需要的key$ ssh-keygen -t rsa -C &quot;youremail@email.com&quot; -f ~/.ssh/id_rsa_one该公钥和私钥包含了你邮箱的信息，具有随机不可复现性 BEGIN-NOTICE:ssh-keygen -t rsa -C “any comment can be here” -f path-t rsa The type of the key to generate密钥的类型-C &quot;youremail&quot; comment to identify the key用于识别这个密钥的注释所以这个注释你可以输入任何内容，很多网站和软件用这个注释作为密钥的名字-f path新生成的密钥的地址路径END-NOTICE 假设我们生成了如下两个key .ssh/id_rsa_one.ssh/id_rsa_one.pub.ssh/id_rsa_two.ssh/id_rsa_two.pub 第二步：设置SSH本地需要识别刚才生产的SSH-KEY，就需要使用一下命令进行添加123# 使用-K可以将私钥添加到钥匙串，不用每次开机后还要再次输入这条命令$ ssh-add -K ~/.ssh/id_rsa_one $ ssh-add -K ~/.ssh/id_rsa_two 通过下面命令，查看key的设置：1$ ssh-add -l 建立对应的config123456789Host one.github.com # 设置的用于链接的名字，可以随便设置 HostName github.com # github的主机地址（相当于我们的IP，只不过做了域名对应） User git # 默认的User就是git IdentityFile ~/.ssh/id_rsa_one # 我们添加的私钥的地址（公钥在github上对应）Host two.github.com HostName github.com User git IdentityFile ~/.ssh/id_rsa_two 第三步：添加公钥到我们不同的远程主机（这里就是我们不同的github账号）由于github直接提供复制，我们直接对pub公钥进行复制，然后粘贴到每个账户对应的设置中去。将公钥复制到github上之后，我们就可以开始测试他们的连接了123456$ ssh -T one.github.com$ ssh -T two.github.com# 执行后如果出现信息，就表示验证通过了：Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.# 这个地方的 Yourname 指的是你的对应的github账户的名字，如果出现的不是对应的账户的名字，也说明是没有成功。 第四步：设置git区分与注意事项 首先要做的是我们克隆仓库和新建仓库后推送到远程的时候的设置123# 本地新建，然后推送$ git remote add origin git@one.github.com/github_name/respo_name.git$ git remote add origin git@two.github.com/github_name/respo_name.git 这样才能保证连接的是对应的仓库 如果是clone的仓库，最好也这么修改，便于区分 123# 远程新建，本地克隆$ git clone git@one.github.com/github_name/respo_name.git$ git clone git@two.github.com/github_name/respo_name.git 矫正respo下面的.git/config里的内容 git 命令修改其内容 123$ git config --local user.name "yourname"$ git config --local user.email "youemail"# 注意的是，这个邮箱必须是你这个仓库对应的github的注册邮箱，名字无所谓，但是建议也一致 直接进文件修改器内容 123[remote "origin"] url = https://github.com/github_name/respo_name.git fetch = +refs/heads/*:refs/remotes/origin/* 如果返现这里的内容不一致，请修改过来也]]></content>
       <categories>
         <category>Git</category>
       </categories>
@@ -268,9 +268,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[同一台机器，如何配置多个github账户信息]]></title>
-    <url>%2F2017%2F06%2F16%2F%E5%90%8C%E4%B8%80%E5%8F%B0%E6%9C%BA%E5%99%A8%EF%BC%8C%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AAgithub%E8%B4%A6%E6%88%B7%E4%BF%A1%E6%81%AF%2F</url>
-    <content type="text"><![CDATA[git上是现在十分常用的版本控制工具，GitHub作为其代码的托管中心, 下面按照设置两个账户来开始详细的介绍： 第一步：生成需要的key$ ssh-keygen -t rsa -C &quot;youremail@email.com&quot; -f ~/.ssh/id_rsa_one该公钥和私钥包含了你邮箱的信息，具有随机不可复现性 BEGIN-NOTICE:ssh-keygen -t rsa -C “any comment can be here” -f path-t rsa The type of the key to generate密钥的类型-C &quot;youremail&quot; comment to identify the key用于识别这个密钥的注释所以这个注释你可以输入任何内容，很多网站和软件用这个注释作为密钥的名字-f path新生成的密钥的地址路径END-NOTICE 假设我们生成了如下两个key .ssh/id_rsa_one.ssh/id_rsa_one.pub.ssh/id_rsa_two.ssh/id_rsa_two.pub 第二步：设置SSH本地需要识别刚才生产的SSH-KEY，就需要使用一下命令进行添加123# 使用-K可以将私钥添加到钥匙串，不用每次开机后还要再次输入这条命令$ ssh-add -K ~/.ssh/id_rsa_one $ ssh-add -K ~/.ssh/id_rsa_two 通过下面命令，查看key的设置：1$ ssh-add -l 建立对应的config123456789Host one.github.com # 设置的用于链接的名字，可以随便设置 HostName github.com # github的主机地址（相当于我们的IP，只不过做了域名对应） User git # 默认的User就是git IdentityFile ~/.ssh/id_rsa_one # 我们添加的私钥的地址（公钥在github上对应）Host two.github.com HostName github.com User git IdentityFile ~/.ssh/id_rsa_two 第三步：添加公钥到我们不同的远程主机（这里就是我们不同的github账号）由于github直接提供复制，我们直接对pub公钥进行复制，然后粘贴到每个账户对应的设置中去。将公钥复制到github上之后，我们就可以开始测试他们的连接了123456$ ssh -T one.github.com$ ssh -T two.github.com# 执行后如果出现信息，就表示验证通过了：Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.# 这个地方的 Yourname 指的是你的对应的github账户的名字，如果出现的不是对应的账户的名字，也说明是没有成功。 第四步：设置git区分与注意事项 首先要做的是我们克隆仓库和新建仓库后推送到远程的时候的设置123# 本地新建，然后推送$ git remote add origin git@one.github.com/github_name/respo_name.git$ git remote add origin git@two.github.com/github_name/respo_name.git 这样才能保证连接的是对应的仓库 如果是clone的仓库，最好也这么修改，便于区分 123# 远程新建，本地克隆$ git clone git@one.github.com/github_name/respo_name.git$ git clone git@two.github.com/github_name/respo_name.git 矫正respo下面的.git/config里的内容 git 命令修改其内容 123$ git config --local user.name "yourname"$ git config --local user.email "youemail"# 注意的是，这个邮箱必须是你这个仓库对应的github的注册邮箱，名字无所谓，但是建议也一致 直接进文件修改器内容 123[remote "origin"] url = https://github.com/github_name/respo_name.git fetch = +refs/heads/*:refs/remotes/origin/* 如果返现这里的内容不一致，请修改过来也]]></content>
+    <title><![CDATA[Git 设置]]></title>
+    <url>%2F2017%2F06%2F16%2FGit-%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：git Git 使用一系列的配置文件来存储你定义的偏好 配置git的scale ———— 如果定义的值有冲突，以后面层中定义的为准 /etc/gitconfig :该文件含有对系统上所有用户及他们所拥有的仓库都生效的配置值（译注：gitconfig是全局配置文件）,如果传递--system选项给git config命令， Git 会读写这个文件. ~/.gitconfig :接下来 Git 会查找每个用户的~/.gitconfig文件, 你能传递--global选项让 Git读写该文件. .git/config :最后 Git 会查找由用户定义的各个库中Git,目录下的配置文件,该文件中的值只对属主库有效.git config --local --list 小 demo 演示各个部分的含义 最重要的部分, 设置名字与邮箱（对应你的git推送目的地）12git config --global user.name &quot;myname&quot;git config --global user.email &quot;test@gmail.com&quot;]]></content>
       <categories>
         <category>Git</category>
       </categories>
@@ -301,6 +301,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>字体</tag>
+        <tag>间距</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之数学公式具体实现]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[关键词：数学公式 这一节，我们讨论数学公式。 综述数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath} 数学公式分为 行内公式（inline equation) 使用两个$符号，形如$公式$ 行间公式 (display equation) 不带标号的行间公式： $$……$$ \[ …… \ ] \begin{displaymath} …… \end{displaymath} 带标号的行间公式： \begin{equation} …… \end{equation} 例子： 123456789101112\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：\[a^2 + b^2 = r^2\]我要是使用带有编号的公式呢？要这样；\begin&#123;equation&#125;a^2 + b^2 = c^2\end&#123;equation&#125;\end&#123;document&#125; 公式内实现中文实现公式内中文的方法： \text{中文} 推荐 \mbox{中文} 并不推荐 分数形式行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子 123456789101112131415\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125; %无衬线字体族提供的命令\texttt&#123;dfrac&#125; %打字机字体形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下\begin&#123;equation&#125; %行间分数排布\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;\end&#123;equation&#125;\end&#123;document&#125; 上下标LaTeX数学公式的上下标可以说的非常的精彩了。 1234567891011121314151617181920212223242526272829303132333435363738\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%------%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par%------%最普通的上下标举例——行间公式\begin&#123;equation&#125;10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n\end&#123;equation&#125; %-------%几个特殊符号(度数，求导符号)举例——行内公式$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par%------%几个特殊符号(度数，求导符号)举例——行间公式\begin&#123;equation&#125;f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;\end&#123;equation&#125; %------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad %前置角标\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $ %四周角标%------%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式\begin&#123;equation&#125;\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;\end&#123;equation&#125; %------\end&#123;document&#125; 化学公式使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。 12\usepackage&#123;mhchem&#125;\ce&#123;这里面填化学式或者化学元素即可&#125; 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\bigsize\centering%这是水\ce&#123;H2O&#125;\par%这是乙酸乙酯\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125; \end&#123;document&#125; 上下线以及上下括号使用amsmath宏包提供的命令： 123456\overline&#123;内容&#125; %上端划线\underline&#123;内容&#125; %下端划线\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125; %上端花括号\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125; %下端花括号还有若干加箭头的命令形如：\over(under)left(right)arrow&#123;内容&#125; 123456789101112131415\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------\begin&#123;gather&#125; %gather环境也是常用的排版多行公式的环境%上下线和上下箭头\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\%上下括号\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;\end&#123;gather&#125;------\end&#123;document&#125; 平方根实现形式\sqrt[开放次数]{被开方数} 12345678910111213\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;------%\uproot&#123;16&#125;实现向上平移16个单位\begin&#123;equation&#125;\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;\end&#123;equation&#125;------\end&#123;document&#125; 几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理： 12\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度 但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：使用\mathstrut 这个表示一个圆括号高度与深度的支架，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。 123456\begin&#123;equation&#125;%单独开平方\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125; \qquad %使用\mathstrut支架来平衡不同高度与深度\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;\end&#123;equation&#125; 矩阵同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。 矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境 矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行 12345678910111213141516171819202122232425262728293031323334353637383940\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\begin&#123;document&#125;\begin&#123;align&#125;\text&#123;matrix环境&#125;&amp;\colon\quad\begin&#123;matrix&#125;a&amp;b\\c&amp;d\end&#123;matrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;pmatrix&#125;a&amp;b\\c&amp;d\end&#123;pmatrix&#125;\\\text&#123;vmatrix环境&#125;&amp;\colon\quad\begin&#123;vmatrix&#125;a&amp;b\\c&amp;d\end&#123;vmatrix&#125;\\\text&#123;bmatrix环境&#125;&amp;\colon\quad\begin&#123;bmatrix&#125;a&amp;b\\c&amp;d\end&#123;bmatrix&#125;\\\text&#123;Bmatrix环境&#125;&amp;\colon\quad\begin&#123;Bmatrix&#125;a&amp;b\\c&amp;d\end&#123;Bmatrix&#125;\\\text&#123;Vmatrix环境&#125;&amp;\colon\quad\begin&#123;Vmatrix&#125;a&amp;b\\c&amp;d\end&#123;Vmatrix&#125;\end&#123;align&#125;\end&#123;document&#125; 矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点 命令 形式 \dots 水平点点点 \vdots 竖直点点点 \ddots 斜点点点 多行公式(实现，对齐，编号) 多行公式 实现 对齐 编号 \begin{gather*} 居中 无编号 \begin{gather} 居中 编号，可用\notag来删除某行公式编号 \begin{align*} 使用&amp;对某符号竖直对齐 无编号 \begin{align} 使用&amp;对某符号竖直对齐 编号，可用\notag来删除某行公式编号 123456789101112131415161718192021222324252627282930313233\documentclass[12pt]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;mathtools&#125;\usepackage&#123;mhchem&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;\begin&#123;document&#125;------%使用\\换行居中排布公式\begin&#123;gather*&#125;(a+b)^2\\=a^2 + b^2 + 2ab \\=12\end&#123;gather*&#125;------\begin&#123;gather&#125;(a+b)^2 \notag \\=a^2 + b^2 + 2ab \\=12 \notag\end&#123;gather&#125;------%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;\begin&#123;align*&#125;&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \\&amp;=12\end&#123;align*&#125;------\begin&#123;align&#125;&amp;\phantom&#123;=&#125;(a+b)^2 \\%使用幻影来假设提供出一个等号&amp;=a^2 + b^2 + 2ab \notag \\&amp;=12\qquad\text&#123;易得&#125;\notag\end&#123;align&#125;------\end&#123;document&#125;]]></content>
@@ -324,19 +337,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
-    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>数学公式</tag>
-        <tag>字体</tag>
-        <tag>间距</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之自动化处理工具：参考文献BibTeX]]></title>
     <url>%2F2017%2F05%2F18%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AEBibTeX%2F</url>
     <content type="text"><![CDATA[关键词：自动化工具,参考文献 这一节，我们讨论参考文献。]]></content>
@@ -344,9 +344,23 @@
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>自动化</tag>
         <tag>参考文献</tag>
+        <tag>自动化</tag>
         <tag>bibtex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之自动化处理工具：交叉引用]]></title>
+    <url>%2F2017%2F05%2F17%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[关键词：自动化工具,目录 这一节，我们讨论交叉引用。 标准文档的交叉引用交叉引用是由两部分一起工作的，首先是要引用的东西，第二个是在其他地方进行引用。即定义标签和引用标签 定义标签：在合适的位置给一个对象（这个对象一般需要有编号）添加一个标签（label），给这个对象赋予一个标识； 引用标签：在文档的另一个地方，利用定义好的标签，来引用对象的编号或者题目页码等信息。 注意： 标签的使用范围一般用在各种自动编号的对象上，大部分是LaTeX预定义的命令或者环境，当然，自己定义的带有标签的也是可以的。 如果对象是由一条命令产生的（如:\section等)，那么标签直接方法其后即可，如果是环境的话，放在环境内即可（如figure环境与tabular环境） 定义好了标签，我们便可以十分轻松的进行引用了，引用命令有两个： 12\ref&#123;标签&#125; %产生被引用对象的编号\pageref&#123;标签&#125; %产生被引用对象的页码 1234567891011121314151617181920\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\begin&#123;document&#125;\qingsong\section&#123;锦瑟&#125;\label&#123;sec:jinse&#125;\begin&#123;equation&#125;\label&#123;eq:jifen&#125;\alpha + \beta = \int^&#123;\infty&#125;_&#123;-\infty&#125;\sum_&#123;i = 1&#125;^&#123;n&#125;a_nx\ \text&#123;d&#125;x\end&#123;equation&#125;\begin&#123;figure&#125;[htbp]\centering\includegraphics[width = 0.15\textwidth]&#123;111.jpeg&#125;\caption&#123;小波&#125;\label&#123;fig:xiaobo&#125;\end&#123;figure&#125;\section&#123;无题&#125;\label&#123;sec:wuti&#125;好的，我们把上面一节，也就是第\ref&#123;sec:jinse&#125;写完了，开始写这一节，也就是第\ref&#123;sec:wuti&#125;节。首先呢，我们来看公式\ref&#123;eq:jifen&#125;，还是挺好看的；然后我们来看下一个图，也就是图\ref&#123;fig:xiaobo&#125;，也是很好看的嘛\end&#123;document&#125; 其他宏包12\usepackage&#123;nameref&#125; %得到被引用的章节或者标题的内容\usepackage&#123;hyperref&#125; %自动识别被引用的是图表还是其他的]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>自动化</tag>
+        <tag>总目录</tag>
+        <tag>图片目录</tag>
+        <tag>表格目录</tag>
       </tags>
   </entry>
   <entry>
@@ -362,9 +376,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之自动化处理工具：交叉引用]]></title>
-    <url>%2F2017%2F05%2F17%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E4%BA%A4%E5%8F%89%E5%BC%95%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[关键词：自动化工具,目录 这一节，我们讨论交叉引用。 标准文档的交叉引用交叉引用是由两部分一起工作的，首先是要引用的东西，第二个是在其他地方进行引用。即定义标签和引用标签 定义标签：在合适的位置给一个对象（这个对象一般需要有编号）添加一个标签（label），给这个对象赋予一个标识； 引用标签：在文档的另一个地方，利用定义好的标签，来引用对象的编号或者题目页码等信息。 注意： 标签的使用范围一般用在各种自动编号的对象上，大部分是LaTeX预定义的命令或者环境，当然，自己定义的带有标签的也是可以的。 如果对象是由一条命令产生的（如:\section等)，那么标签直接方法其后即可，如果是环境的话，放在环境内即可（如figure环境与tabular环境） 定义好了标签，我们便可以十分轻松的进行引用了，引用命令有两个： 12\ref&#123;标签&#125; %产生被引用对象的编号\pageref&#123;标签&#125; %产生被引用对象的页码 1234567891011121314151617181920\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;amsmath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\begin&#123;document&#125;\qingsong\section&#123;锦瑟&#125;\label&#123;sec:jinse&#125;\begin&#123;equation&#125;\label&#123;eq:jifen&#125;\alpha + \beta = \int^&#123;\infty&#125;_&#123;-\infty&#125;\sum_&#123;i = 1&#125;^&#123;n&#125;a_nx\ \text&#123;d&#125;x\end&#123;equation&#125;\begin&#123;figure&#125;[htbp]\centering\includegraphics[width = 0.15\textwidth]&#123;111.jpeg&#125;\caption&#123;小波&#125;\label&#123;fig:xiaobo&#125;\end&#123;figure&#125;\section&#123;无题&#125;\label&#123;sec:wuti&#125;好的，我们把上面一节，也就是第\ref&#123;sec:jinse&#125;写完了，开始写这一节，也就是第\ref&#123;sec:wuti&#125;节。首先呢，我们来看公式\ref&#123;eq:jifen&#125;，还是挺好看的；然后我们来看下一个图，也就是图\ref&#123;fig:xiaobo&#125;，也是很好看的嘛\end&#123;document&#125; 其他宏包12\usepackage&#123;nameref&#125; %得到被引用的章节或者标题的内容\usepackage&#123;hyperref&#125; %自动识别被引用的是图表还是其他的]]></content>
+    <title><![CDATA[LaTeX入门系列之自动化处理工具：目录]]></title>
+    <url>%2F2017%2F05%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[关键词：自动化工具,目录 这一节，我们讨论目录的自动生成，我们在设定好的标题通过\tableofcontents来产生目录。 定制目录产生控制目录标题的格式我们之前讨论过了:标题定制 类型 命令 备注 图片目录 \listoffigures \caption 命令产生的标题 表格目录 \listoftables \caption 命令产生的标题 默认情况下，像目录本身，参考文献，索引等是不会自动加入目录里的，我们使用宏包tocbibind来控制他们是否出现，用此宏包有可选项来控制（默认所有全部显示) 可选项： 可选参数 解释 notbib 不加入参考文献 notindex 不加入索引目录 nottoc 不加入章节目录 not lot 不加表格目录 notlof 不加图目录 具体请参考宏包：tocbibind 目录可以使用到的宏包还有： 1234\usepackage&#123;tocbibind&#125;\usepackage&#123;titletoc&#125;\usepackage&#123;minitoc&#125;\usepackage&#123;tocloft&#125; 定制目录格式定制目录格式通常使用宏包 12\usepackage&#123;tocloft&#125; %语法较为简单，定制格式简单\usepackage&#123;titletoc&#125; %更为复杂的目录定制宏包 解释：标题前后间距的长度是变量，可以使用setlength来进行修改；而其他的都是宏，需要使用重定义命令来进行修改\renewcommand 具体的如何修改字体族，字体大小等我们直接看tocloft宏包的部分内容（具体请直接查看宏包文档） 例子： 123456789101112131415161718192021222324252627282930\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\muluchap&#125;&#123;\fontsize&#123;20pt&#125;&#123;15pt&#125;\selectfont&#125;\newcommand&#123;\mulutit&#125;&#123;\fontsize&#123;35pt&#125;&#123;25pt&#125;\selectfont&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage&#123;tocloft&#125;\renewcommand&#123;\cfttoctitlefont&#125;&#123;\qingsong\mulutit&#125; %设定“目录”的字体族与大小\renewcommand&#123;\cftchapfont&#125;&#123;\qingsong\muluchap&#125; %设定“章”的字体族与大小\renewcommand&#123;\cftsecfont&#125;&#123;\qingsong&#125; %设定“节”的字体族\renewcommand&#123;\cftsubsecfont&#125;&#123;\qingsong&#125; %设定“subsec”的字体族\setlength&#123;\cftbeforetoctitleskip&#125;&#123;5mm&#125; %设定“目录”二字到版芯上沿的距离\setlength&#123;\cftaftertoctitleskip&#125;&#123;10mm&#125; %设定“目录”二字到目录正文的距离\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\tableofcontents\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 定制目录版面除此之外，我们还可以定制目录的版面，看图： 由于使用不多，具体请看宏包]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -384,20 +398,6 @@
       </categories>
       <tags>
         <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之自动化处理工具：目录]]></title>
-    <url>%2F2017%2F05%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%87%AA%E5%8A%A8%E5%8C%96%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%EF%BC%9A%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[关键词：自动化工具,目录 这一节，我们讨论目录的自动生成，我们在设定好的标题通过\tableofcontents来产生目录。 定制目录产生控制目录标题的格式我们之前讨论过了:标题定制 类型 命令 备注 图片目录 \listoffigures \caption 命令产生的标题 表格目录 \listoftables \caption 命令产生的标题 默认情况下，像目录本身，参考文献，索引等是不会自动加入目录里的，我们使用宏包tocbibind来控制他们是否出现，用此宏包有可选项来控制（默认所有全部显示) 可选项： 可选参数 解释 notbib 不加入参考文献 notindex 不加入索引目录 nottoc 不加入章节目录 not lot 不加表格目录 notlof 不加图目录 具体请参考宏包：tocbibind 目录可以使用到的宏包还有： 1234\usepackage&#123;tocbibind&#125;\usepackage&#123;titletoc&#125;\usepackage&#123;minitoc&#125;\usepackage&#123;tocloft&#125; 定制目录格式定制目录格式通常使用宏包 12\usepackage&#123;tocloft&#125; %语法较为简单，定制格式简单\usepackage&#123;titletoc&#125; %更为复杂的目录定制宏包 解释：标题前后间距的长度是变量，可以使用setlength来进行修改；而其他的都是宏，需要使用重定义命令来进行修改\renewcommand 具体的如何修改字体族，字体大小等我们直接看tocloft宏包的部分内容（具体请直接查看宏包文档） 例子： 123456789101112131415161718192021222324252627282930\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\usepackage&#123;anyfontsize&#125;\newcommand&#123;\muluchap&#125;&#123;\fontsize&#123;20pt&#125;&#123;15pt&#125;\selectfont&#125;\newcommand&#123;\mulutit&#125;&#123;\fontsize&#123;35pt&#125;&#123;25pt&#125;\selectfont&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage&#123;tocloft&#125;\renewcommand&#123;\cfttoctitlefont&#125;&#123;\qingsong\mulutit&#125; %设定“目录”的字体族与大小\renewcommand&#123;\cftchapfont&#125;&#123;\qingsong\muluchap&#125; %设定“章”的字体族与大小\renewcommand&#123;\cftsecfont&#125;&#123;\qingsong&#125; %设定“节”的字体族\renewcommand&#123;\cftsubsecfont&#125;&#123;\qingsong&#125; %设定“subsec”的字体族\setlength&#123;\cftbeforetoctitleskip&#125;&#123;5mm&#125; %设定“目录”二字到版芯上沿的距离\setlength&#123;\cftaftertoctitleskip&#125;&#123;10mm&#125; %设定“目录”二字到目录正文的距离\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\tableofcontents\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 定制目录版面除此之外，我们还可以定制目录的版面，看图： 由于使用不多，具体请看宏包]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>自动化</tag>
-        <tag>总目录</tag>
-        <tag>图片目录</tag>
-        <tag>表格目录</tag>
       </tags>
   </entry>
   <entry>
@@ -436,15 +436,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之章节与定制章节]]></title>
-    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%A0%E8%8A%82%E4%B8%8E%E5%AE%9A%E5%88%B6%E7%AB%A0%E8%8A%82%2F</url>
-    <content type="text"><![CDATA[关键词：章节，定制章节 这一节，我们讨论一个文档的章节 LaTeX提供的章节LaTeX的划分章节层次如下： 这些章节层次都会自动的编号，但是如果使用※，就可以不用编号，不用编排目录的章节 123\chapter*&#123;章的名字&#125;\section*&#123;节的名字&#125;都不会编号和目录展示 123\secnumdepth %计数器控制对章节进行编号的曾侧\tocdepth %控制章节编入目录的层次数可在导言区修改默认值 章节的定制对于中文，ctex 宏包提供了 \ctexset 或者 \CTEXsetup 命令来设置章节标题的格式123456------\usepackage[heading = true]&#123;ctex&#125;\ctexset&#123;section = &#123; 可选项 = 值， 可选项 = 值 ……&#125;，subsection = &#123;&#125;，……&#125;------\CTEXsetup[可选项 = 值，可选项 = 值，……]&#123;chapter,section,subsection……&#125;这是设置的形式。其中部分 可选项与对应的值 如下(更多的请查阅文档ctex.pdf第八章) 1234567891011\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\section&#123;一弦一柱思华年&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\section&#123;望帝春深托杜鹃&#125;\end&#123;document&#125; 除了ctex宏包外，还可以使用titlesec宏包来进行设置章节定制补充123具体的使用请查看ctex宏包18页\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;&#125;&#125;%定制自己的mysection类型方式\newcommand&#123;\mysection&#125;[1]&#123;mysection的具体表现形式&#125; %一定注意设置的内部一定不能手动换行！！！！！%尽量保持一项一项的设定1234567891011121314151617\documentclass[]&#123;article&#125;\usepackage[heading = true]&#123;ctex&#125;%一定注意设置的内部一定不能手动换行！！！！！\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;,nameformat = &#123;\qingsong\Huge&#125;,numberformat = &#123;\Huge&#125;&#125;,&#125;%定制自己的mysection类型方式\newcommand&#123;\mysection&#125;[1]&#123;\Huge\qingsong #1&#125;%尽量保持一项一项的设定\ctexset&#123;subsection = &#123;name = &#123;第,项&#125;,titleformat = &#123;\mysubsection&#125;,nameformat = &#123;\large&#125;&#125;&#125;\newcommand&#123;\mysubsection&#125;[1]&#123;\large\qingsong #1&#125;\usepackage&#123;anyfontsize&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\begin&#123;document&#125;\section&#123;我试试&#125;\subsection&#123;试试就试试&#125;试试就试试\end&#123;document&#125; 注意下如下： $$\lg[\text{D}]_t = \lg\text{K} + n\lg[\text{D}]_s$$ $$[\text{D}]_f = \text{K}[\text{D}]_f$$ $$\frac{1}{[\text{D}]_f} = \frac{1}{\text{K}[\text{D}]_s[\text{S}]}+\frac{1}{[\text{S}]}$$]]></content>
+    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
+    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
+    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>章节</tag>
-        <tag>定制章节</tag>
+        <tag>多文档</tag>
       </tags>
   </entry>
   <entry>
@@ -459,14 +458,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
-    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
-    <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
+    <title><![CDATA[LaTeX入门系列之章节与定制章节]]></title>
+    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%A0%E8%8A%82%E4%B8%8E%E5%AE%9A%E5%88%B6%E7%AB%A0%E8%8A%82%2F</url>
+    <content type="text"><![CDATA[关键词：章节，定制章节 这一节，我们讨论一个文档的章节 LaTeX提供的章节LaTeX的划分章节层次如下： 这些章节层次都会自动的编号，但是如果使用※，就可以不用编号，不用编排目录的章节 123\chapter*&#123;章的名字&#125;\section*&#123;节的名字&#125;都不会编号和目录展示 123\secnumdepth %计数器控制对章节进行编号的曾侧\tocdepth %控制章节编入目录的层次数可在导言区修改默认值 章节的定制对于中文，ctex 宏包提供了 \ctexset 或者 \CTEXsetup 命令来设置章节标题的格式123456------\usepackage[heading = true]&#123;ctex&#125;\ctexset&#123;section = &#123; 可选项 = 值， 可选项 = 值 ……&#125;，subsection = &#123;&#125;，……&#125;------\CTEXsetup[可选项 = 值，可选项 = 值，……]&#123;chapter,section,subsection……&#125;这是设置的形式。其中部分 可选项与对应的值 如下(更多的请查阅文档ctex.pdf第八章) 1234567891011\documentclass[]&#123;article&#125;\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\section&#123;一弦一柱思华年&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\section&#123;望帝春深托杜鹃&#125;\end&#123;document&#125; 除了ctex宏包外，还可以使用titlesec宏包来进行设置章节定制补充123具体的使用请查看ctex宏包18页\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;&#125;&#125;%定制自己的mysection类型方式\newcommand&#123;\mysection&#125;[1]&#123;mysection的具体表现形式&#125; %一定注意设置的内部一定不能手动换行！！！！！%尽量保持一项一项的设定1234567891011121314151617\documentclass[]&#123;article&#125;\usepackage[heading = true]&#123;ctex&#125;%一定注意设置的内部一定不能手动换行！！！！！\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;,nameformat = &#123;\qingsong\Huge&#125;,numberformat = &#123;\Huge&#125;&#125;,&#125;%定制自己的mysection类型方式\newcommand&#123;\mysection&#125;[1]&#123;\Huge\qingsong #1&#125;%尽量保持一项一项的设定\ctexset&#123;subsection = &#123;name = &#123;第,项&#125;,titleformat = &#123;\mysubsection&#125;,nameformat = &#123;\large&#125;&#125;&#125;\newcommand&#123;\mysubsection&#125;[1]&#123;\large\qingsong #1&#125;\usepackage&#123;anyfontsize&#125;\usepackage&#123;fontspec&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\begin&#123;document&#125;\section&#123;我试试&#125;\subsection&#123;试试就试试&#125;试试就试试\end&#123;document&#125; 注意下如下： $$\lg[\text{D}]_t = \lg\text{K} + n\lg[\text{D}]_s$$ $$[\text{D}]_f = \text{K}[\text{D}]_f$$ $$\frac{1}{[\text{D}]_f} = \frac{1}{\text{K}[\text{D}]_s[\text{S}]}+\frac{1}{[\text{S}]}$$]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>多文档</tag>
+        <tag>章节</tag>
+        <tag>定制章节</tag>
       </tags>
   </entry>
   <entry>
@@ -503,19 +503,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之页码、页眉、页脚]]></title>
-    <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E9%A1%B5%E7%A0%81%E3%80%81%E9%A1%B5%E7%9C%89%E3%80%81%E9%A1%B5%E8%84%9A%2F</url>
-    <content type="text"><![CDATA[关键词：页码,页眉,页脚 这一节，我们讨论页码，页眉与页脚 页码通过前面的学习，我们清楚了，编号类的都是计数器在控制，而页码的控制器是page，\pagenumbering{格式}来控制页码的编号方式，一定要另起新的一页，这个命令会在新的一页开始重新开始进行计数。 1234567891011121314151617%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，故均用其做的示例%但是这是最麻烦的办法，应该使用如下方法：%\usepackage&#123;lipsum&#125;%\lipsum[1-n]%使用lipsum时最简单有效的办法\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;\pagenumbering&#123;roman&#125;%使用罗马数字字体(文本)\newpage\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体(文本)\end&#123;document&#125; 名称 类型 arabic 阿拉伯数字 roman 小写罗马数字 Roman 大写罗马数字 alph 小写字母 Alph 大写字母 页眉页脚预定义LaTeX提供了几个预定义的页眉页脚风格看可以选择，4种 page style 页面风格 解释 empty 无页眉页脚 plain 无页眉，页脚为居中页码 headings 无页脚，页眉为章节名与页码 myheadings 无页脚，页眉为页码等 设定命令 解释 \pagestyle{页面风格} 设定页面风格 \thispagestyle{页面风格} 设定当前页面的风格 名称 作用 \leftmark 应用到页眉页脚设置中，leftMark表示high-level (chapter和section，chapter就是high-level) \rightmark 应用到页眉页脚设置中，rightMark表示low-level(section和subsec，subsec就是low-level) 宏包fancyhdr 这张图截取自fancyhdr的宏包文档 fancyhdr宏包提供的fancy页面风格，将页眉页脚分为了六部分和两条线 对于单页文档（单面文档，一般为article）：1234567891011121314151617181920\documentclass[]&#123;ctexart&#125;\usepackage&#123;fancyhdr&#125; %使用fancyhdr宏包\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125; %使用fancy页面风格\lhead&#123;左边页眉&#125; %设置页眉左侧\chead&#123;中间页眉&#125; %设置页眉中间\rhead&#123;\leftmark&#125; %设置页眉右侧为leftmark\lfoot&#123;\rightmark&#125; %设置页脚左侧为rightmark\cfoot&#123;\thepage&#125; %设置页脚中间为页码\rfoot&#123;右边页脚&#125; %设置页脚右侧为&quot;右边页脚&quot;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 对于双面文档：可以使用如下的方式 123\fancyhead[位置]&#123;内容&#125; %设置页眉，位置可以是E、O与L、C、R的组合\fancyfoot[位置]&#123;内容&#125; %设置页脚，位置可以是E、O与L、C、R的组合\fancyhf[位置]&#123;内容&#125; %设置页眉与页脚，位置可以是H、F与E、O与L、C、R的组合 123%页眉页脚线也可以进行设置，特别注意，页脚线的宽度不是长度变量，而是文本宏，修改定义如下\renewcommand\headrulewidth&#123;0.4pt&#125;\renewcommand\footrulewidth&#123;0.6pt&#125; 123456789101112131415161718192021222324252627\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\usepackage&#123;fancyhdr&#125;\usepackage&#123;anyfontsize&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125;\fancyhf&#123;&#125; %用于清除所有的页眉页脚\fancyhead[CO]&#123;\leftmark&#125; %hight-level\fancyhead[CE]&#123;\rightmark&#125; %low-level\fancyfoot[CO]&#123;\thepage&#125;\fancyhf[FR]&#123;$\spadesuit$&#125;\renewcommand&#123;\headrulewidth&#125;&#123;1pt&#125;\renewcommand&#123;\footrulewidth&#125;&#123;2pt&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>页码</tag>
-        <tag>页眉</tag>
-        <tag>页脚</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之字号、水平间距与垂直间距]]></title>
     <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AD%97%E5%8F%B7%E3%80%81%E6%B0%B4%E5%B9%B3%E9%97%B4%E8%B7%9D%E4%B8%8E%E5%9E%82%E7%9B%B4%E9%97%B4%E8%B7%9D%2F</url>
     <content type="text"><![CDATA[关键词：字号,水平间距,垂直间距 这一节，我们讨论字号的大小，单位是pt，pt单位是英寸的 1/72 大小，水平间距与垂直间距 首先我们明确，在LaTeX中，行距和字号是直接相关的，设置字号是，同时会默认设置基本行距（一行文字的基线到下行文字的基线距离）为文字大小的1.2倍. 字号的普通的声明式命令之局部字号设置英文字号注意：字号命令表示的尺寸和行间距随文档类和其他因素影响，因此并不能准确的表示字号的大小 123\tiny \scriptszie \footnotesize \small \normalsize \large \Large \LARGE\huge \Huge 1234567\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;&#123;\tiny 夜雨秋灯&#125; &#123;\scriptsize 夜雨秋灯&#125; &#123;\footnotesize 夜雨秋灯&#125; &#123;\small 夜雨秋灯&#125;\par夜雨秋灯 &#123;\large 夜雨秋灯&#125; &#123;\Large 夜雨秋灯&#125; &#123;\LARGE 夜雨秋灯&#125;\par&#123;\huge 夜雨秋灯&#125; &#123;\Huge 夜雨秋灯&#125;\end&#123;document&#125; 链接：pt与中国字号的关系 中文字号：中文字号的表示，在我们使用了ctex文档类，或者使用了ctex宏包之后就默认包含了，如下形式： 1234\zihao&#123;1&#125;\zihao&#123;-1&#125;\zihao&#123;3&#125;\zihao&#123;-3&#125; 12345678\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\zihao&#123;1&#125; 夜雨秋灯\par \zihao&#123;-1&#125;夜雨秋灯\par\zihao&#123;3&#125;夜雨秋灯\par\zihao&#123;-3&#125;夜雨秋灯\par \end&#123;document&#125; 字号的普通的声明式命令之整体字号大小的设置我们知道一篇文章或者一本书，总是有一种字体和字号作为正文是占主导作用的，通常的字体有默认的几个选项 123\tiny \scriptszie \footnotesize \small \normalsize \large \Large \LARGE\huge \Huge 那么我们可以使用重定义命令对其进行重新的定义，修改其默认代表的pt值，做到修改全局字体大小的作用 123\renewcommand\normalsize&#123;\fontsize&#123;18pt&#125;&#123;\baselineskip&#125;\selectfont&#125;使用宏包\anyfontsize其中\fontsize命令为\fontsize&#123;大小&#125;&#123;行间距&#125;\selectfont 竖直间距的设定基本行距的设置：中英都使用命令 \linespread{factor} （此命令的生效范围是在\selectfont命令之后） 其中factor指的是基本行距的倍数因子，默认基本行距为文字大小的1.2倍 默认的英文因子是1，默认的中文因子是1.3 即默认条件下，英文的行距是字号的1.2 X 1 = 1.2倍；中文行距是字号的 1.3 X1.2 = 1.56 倍 宏包：setspace 宏包 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;\setlength&#123;\parskip&#125;&#123;0.5cm&#125;%设置段落间距\usepackage&#123;showframe&#125;\begin&#123;document&#125;我在导言区设置了段落之间的间距为 0.5cm，所以当我写完这一断，然后开辟下一段的时候，大家就会发现，下一段和这一段的距离是 0.5cm。\par这是我新开启的一段，是不是可以清晰的看到段落之间的间距是 0.5cm。\par\linespread&#123;4&#125;\selectfont %设置行间距在这是我又设置了一个4倍的默认行距，所以在这一段里，每一行之间的行距是上面一段行距的4倍，待会儿编译完之后可以清晰的看到这个设置。\par\linespread&#123;1.3&#125;\selectfont重新设置了行距是单倍行距，现在我这一段的行距就是1.3倍(中文默认的行距)的了。锦瑟无端五十弦，一弦一柱思华年\end&#123;document&#125; 垂直间距：（实验失败，不知原因） 命令 作用 \vspace{长度} 生成垂直方向间距为“长度”的空白，但是有个大毛病 \vspace*{长度} 生成垂直方向间距为“长度”的空白 \vfill = \vspace{fill} 垂直方向上分散均匀排列 notice：其中长度参数可以是\parskip,\itemsep,\smallskip,\medskip,\bigskip等 以下比较以下\vspace{}与\vskip 长度 的异同 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;blindtext&#125;\begin&#123;document&#125;锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\vskip 1cm锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\vspace*&#123;1cm&#125;锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;document&#125; 可以明显的看出，\vspace必须将上一行补全才可以使用。所以建议使用\vskip 参考链接：\vskip 与 \vspace 的关系 水平间距的设定先介绍几个常用的LaTeX单位： 单位 中文 大小 备注 pt 磅 1/72英寸 in 英寸 2.54cm em 全身 字号对应的长度 大小等于\quad，大写M的宽度 ex 本意是小写字母 x 的高度 \quad 1em \qquad 2em \hspace{长度} 生成水平方向大小为“长度”的空白间距（每行的起始处不生效，不会产生缩进效果） \hspace*{长度} 生成水平方向大小为“长度”的空白间距（每行的起始处生效，产生缩进效果） \hfill = \hspace{fill} 水平方向上分散均匀排列 例子 12345678910\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;showframe&#125;\begin&#123;document&#125;\setlength&#123;\parindent&#125;&#123;0em&#125;锦瑟无端五十弦\quad 一弦一柱思华年\par庄生晓梦迷蝴蝶\qquad 望帝春深托杜鹃\par沧海月明珠有泪\hspace&#123;3cm&#125;蓝田日暖玉生烟\par此情可待\hfill 成追忆\hfill 只是当时\hfill 已惘然\end&#123;document&#125;]]></content>
@@ -529,14 +516,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+    <title><![CDATA[LaTeX入门系列之页码、页眉、页脚]]></title>
+    <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E9%A1%B5%E7%A0%81%E3%80%81%E9%A1%B5%E7%9C%89%E3%80%81%E9%A1%B5%E8%84%9A%2F</url>
+    <content type="text"><![CDATA[关键词：页码,页眉,页脚 这一节，我们讨论页码，页眉与页脚 页码通过前面的学习，我们清楚了，编号类的都是计数器在控制，而页码的控制器是page，\pagenumbering{格式}来控制页码的编号方式，一定要另起新的一页，这个命令会在新的一页开始重新开始进行计数。 1234567891011121314151617%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，故均用其做的示例%但是这是最麻烦的办法，应该使用如下方法：%\usepackage&#123;lipsum&#125;%\lipsum[1-n]%使用lipsum时最简单有效的办法\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;\pagenumbering&#123;roman&#125;%使用罗马数字字体(文本)\newpage\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体(文本)\end&#123;document&#125; 名称 类型 arabic 阿拉伯数字 roman 小写罗马数字 Roman 大写罗马数字 alph 小写字母 Alph 大写字母 页眉页脚预定义LaTeX提供了几个预定义的页眉页脚风格看可以选择，4种 page style 页面风格 解释 empty 无页眉页脚 plain 无页眉，页脚为居中页码 headings 无页脚，页眉为章节名与页码 myheadings 无页脚，页眉为页码等 设定命令 解释 \pagestyle{页面风格} 设定页面风格 \thispagestyle{页面风格} 设定当前页面的风格 名称 作用 \leftmark 应用到页眉页脚设置中，leftMark表示high-level (chapter和section，chapter就是high-level) \rightmark 应用到页眉页脚设置中，rightMark表示low-level(section和subsec，subsec就是low-level) 宏包fancyhdr 这张图截取自fancyhdr的宏包文档 fancyhdr宏包提供的fancy页面风格，将页眉页脚分为了六部分和两条线 对于单页文档（单面文档，一般为article）：1234567891011121314151617181920\documentclass[]&#123;ctexart&#125;\usepackage&#123;fancyhdr&#125; %使用fancyhdr宏包\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125; %使用fancy页面风格\lhead&#123;左边页眉&#125; %设置页眉左侧\chead&#123;中间页眉&#125; %设置页眉中间\rhead&#123;\leftmark&#125; %设置页眉右侧为leftmark\lfoot&#123;\rightmark&#125; %设置页脚左侧为rightmark\cfoot&#123;\thepage&#125; %设置页脚中间为页码\rfoot&#123;右边页脚&#125; %设置页脚右侧为&quot;右边页脚&quot;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 对于双面文档：可以使用如下的方式 123\fancyhead[位置]&#123;内容&#125; %设置页眉，位置可以是E、O与L、C、R的组合\fancyfoot[位置]&#123;内容&#125; %设置页脚，位置可以是E、O与L、C、R的组合\fancyhf[位置]&#123;内容&#125; %设置页眉与页脚，位置可以是H、F与E、O与L、C、R的组合 123%页眉页脚线也可以进行设置，特别注意，页脚线的宽度不是长度变量，而是文本宏，修改定义如下\renewcommand\headrulewidth&#123;0.4pt&#125;\renewcommand\footrulewidth&#123;0.6pt&#125; 123456789101112131415161718192021222324252627\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\usepackage&#123;fancyhdr&#125;\usepackage&#123;anyfontsize&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125;\fancyhf&#123;&#125; %用于清除所有的页眉页脚\fancyhead[CO]&#123;\leftmark&#125; %hight-level\fancyhead[CE]&#123;\rightmark&#125; %low-level\fancyfoot[CO]&#123;\thepage&#125;\fancyhf[FR]&#123;$\spadesuit$&#125;\renewcommand&#123;\headrulewidth&#125;&#123;1pt&#125;\renewcommand&#123;\footrulewidth&#125;&#123;2pt&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>文本环境</tag>
+        <tag>页码</tag>
+        <tag>页眉</tag>
+        <tag>页脚</tag>
       </tags>
   </entry>
   <entry>
@@ -551,6 +540,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>抄录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
     <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
@@ -559,17 +559,6 @@
       </categories>
       <tags>
         <tag>代码环境</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（一）————文本环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：文本环境，引用环境，诗词环境，摘要环境 这一节，我们讨论文本环境 12345678引用环境\begin&#123;quote&#125;首行无缩进的引用内容\end&#123;quote&#125;---\begin&#123;quotation&#125;首行缩进的应用内容\end&#123;quotation&#125; 1234诗歌环境\begin&#123;verse&#125;以\\换行\end&#123;verse&#125; 1234摘要环境\begin&#123;abstract&#125;摘要内容\end&#123;abstract&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文本环境</tag>
       </tags>
   </entry>
   <entry>
@@ -584,14 +573,25 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（四）———— 抄录命令与环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E5%9B%9B%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E6%8A%84%E5%BD%95%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。 命令： 123\verb 命令用来表示行文中的抄录\verb&lt;label&gt;内容&lt;label&gt;,两个label之间的内容将原样输出，label可以是任何相同的符号\verb* 形式可以是输出的空格可见 12345\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\Large&#123;\verb- &amp;%^%^%^&amp;%$% -&#125;\end&#123;document&#125; 环境： 要是需要抄录的内容太多，就必须使用环境了 12\begin&#123;verbatim&#125;%verbatim*同样可以输出空格\end&#123;verbatim&#125; 宏包fancyvrb提供了一系列的verbatim的扩展，可以修改多种内容，可以看查看其宏包文档Zandt]]></content>
+    <title><![CDATA[LaTeX入门系列之正文环境（一）————文本环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%96%87%E6%9C%AC%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：文本环境，引用环境，诗词环境，摘要环境 这一节，我们讨论文本环境 12345678引用环境\begin&#123;quote&#125;首行无缩进的引用内容\end&#123;quote&#125;---\begin&#123;quotation&#125;首行缩进的应用内容\end&#123;quotation&#125; 1234诗歌环境\begin&#123;verse&#125;以\\换行\end&#123;verse&#125; 1234摘要环境\begin&#123;abstract&#125;摘要内容\end&#123;abstract&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>抄录</tag>
+        <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（二）———— 列表环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%88%97%E8%A1%A8%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：列表环境，enumerate，itemize，description 这一节，我们讨论列表环境 123enumerate 环境带计数器itemize 环境不带计数器description 环境有强制使用的可选参数作为关键字 12345678910111213141516\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;enumerate&#125;\item one\item two\end&#123;enumerate&#125;\begin&#123;itemize&#125;\item three\item four\end&#123;itemize&#125;\begin&#123;description&#125;\item[five] five is 5\item[six] six is 6\end&#123;description&#125;\end&#123;document&#125; 列表的定制十分繁琐，因此有兴趣的可以去看他们的宏包]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>文本环境</tag>
       </tags>
   </entry>
   <entry>
@@ -617,9 +617,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -628,9 +628,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Windows版）]]></title>
-    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Windows%E7%89%88%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[关键词：sublime，Windows 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. sumatraPDF是Windows下跟LaTeX可以很好结合使用的PDF查看器。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Windows上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用sumatraPDF预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Windows上至少4GB的空余空间 高速的互联网连接 第一步：安装TeXLive 进入texlive官网下载TeXLive.exe文件。文件大约4GB. 下载完成之后，双击进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键，等待一段时间。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“control+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装sumatraPDF 进地址下载sumatraPDF并安装 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在sumatraPDF里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125; 部分请参考http://blog.csdn.net/cdqn10086/article/details/54980846]]></content>
+    <title><![CDATA[LaTeX入门系列之编辑器sublime的设置（Mac版）]]></title>
+    <url>%2F2017%2F03%2F11%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%BC%96%E8%BE%91%E5%99%A8sublime%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%88Mac%E7%89%88%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[关键词：sublime，Mac 介绍下 LaTeX 非常好用的编辑器的配置 Sublime Text是一款非常优秀的编辑器，速度快，界面简洁，插件众多。并且能跨平台使用，在Mac和Windows上都能完美使用。虽然是一款付费软件，但作者很厚道地给了无限期的试用期限。这一切正如其官网广告词说的那样：The text editor you’ll fall in love with. Skim是一款免费轻量的PDF阅读、标注工具，布局贴心友好，与OS X自带的Previewer相比，Skim能更好的注释PDF文件。 LaTeX是一款权威的科技论文排版软件，不仅可以写论文，也可以处理日常的各种文档工作，甚至是做幻灯片。相比于Word，LaTeX最大的优势是对于复杂公式的编辑与排版非常漂亮。并且用简单的命令就可以生成脚注、索引、目录和参考文献等复杂的结构。这一切优点都使得世界上众多的“科学家”们不再需要身兼作者与排版工两职，从而将更多的精力集中于文章内容本身。 本文的目的是将上述三种软件综合部署在Mac上。完成之后，你将可以在Sublime Text里面进行LaTeX代码编辑，用Skim预览生成的PDF文件。更重要的是，让你觉得，写论文也可以是一件很优美的事。 准备工作： Mac上至少4GB的空余空间 高速的互联网连接 第一步：安装MacTeX 进入MacTeX官网下载MacTeX.pkg文件。文件大约3GB. 下载完成之后，双击MacTeX.pkg进行安装。 安装完成之后，会看到许多与TeX有关的程序图标。 第二步：安装Sublime Text 进入Sublime Text官网下载最新版本的Sublime Text。这里我下载的是Sublime Text 3. 下载完成之后，将文件拖入应用程序文件夹安装。 第三步：在Sublime Text中安装Package Control我们需要在Sublime Text中下载插件以便能够很好地操作与LaTeX有关的文件。而插件是通过Package Control下载的。 进入Package Control官网复制灰色区块的代码。 打开Sublime Text。 使用快捷键“control+~”（~就在Esc键的下方）打开控制面板Console。你会在Sublime Text的底部看到弹出一个白色窗口。 将刚才复制的代码粘贴到控制面板。 按下“Enter”回车键。然后退出并重启Sublime Text。 第四步：安装LaTeX Tools Sublime Text重启后，按下“Command+Shift+P”打开命令托盘Command pallet，这一步也可以通过Tools下拉菜单完成。 在命令托盘里输入“Install Package”，按下Enter回车建。 完成之后，输入“LaTeX Tools”，找到这一项并回车安装。 退出并重启Sublime Text。 第五步：安装Skim 进Skim下载Skim并安装 打开Skim，在菜单栏中Skim &gt; Preference(选项) &gt; Sync(同步) 在预设菜单中选择Sublime Text 关闭上面这个窗口。 完成现在，我们已经做完了所有的步骤，可以打开Sublime Text，Command+N新建文件并在里面编写LaTeX代码了，完成编辑之后，Command+S保存文件，Command+B编译并运行，这时就可以在Skim里面看到PDF预览了。 此处要注意，如果要使用中文，需要再文档的开头加上 1%!TEX program = xelatex 导言区使用 1\usepackage[UTF8]&#123;ctex&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
@@ -768,6 +768,11 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
+    <url>%2F2017%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[关于uuid库的简介]]></title>
     <url>%2F2017%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Euuid%E5%BA%93%E7%9A%84%E7%AE%80%E4%BB%8B%2F</url>
     <content type="text"><![CDATA[关键字：uuid 12UUID：Universally Unique IDentifier 通用唯一识别码 128位的全局唯一标识符，通常由32字节的字符串表示 它通过MAC地址、时间戳、命名空间、随机数、伪随机数来保证生成ID的唯一性。 UUID主要有五个算法，也就是五种方法来实现，他们的返回结果都是一个uuid.UUID对象： 方法 备注 uuid.uuid1() 由MAC地址、当前时间戳、随机数生成 uuid.uuid2() 把时间戳的前4位置换为POSIX的UID uuid.uuid3() 通过计算名字和命名空间的MD5散列值得到 uuid.uuid4() 由伪随机数得到 uuid.uuid5() 所有的方法都包含以下只读属性，用于生成目标ID 属性 结果 uuid.UUID.bytes &#39;\x124Vx\x124Vx\x124Vx\x124Vx&#39; uuid.UUID.fields (1246390960L, 1260L, 4584L, 169L, 172L, 26824500878585L)数组 uuid.UUID.hex 676821a104ec11e8a972186590d89cf932个字符 uuid.UUID.int 182319468234906306475374206477516971257 128个二进制位的整数表示 其他的查看官方文档]]></content>
@@ -780,9 +785,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[关于datetime与time模块的一个例子]]></title>
-    <url>%2F2017%2F01%2F29%2F%E5%BD%92%E6%A1%A3%2F%E5%85%B3%E4%BA%8Edatetime%E4%B8%8Etime%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：datetime, time 我们使用datetime模块生成的是datetime类型的，他的类型是不能直接转化为json对象的，具体的可以转换为json格式的Python对象如下。 Python JSON dict object list, tuple array str, unicode string int, long, float number True true False false None null 基于这个原因，为了把我们得到的datetime格式正确转换为json格式，我们需要进行一部分的变换，编程表格左侧的格式，在这里我们使用int格式作为目标 方法如下： 12345import datetime, timemy_time = datetime.datetime.now() #获得当前时间，他的类型是datetime.datetimemy_time = my_time.timetuple() #获得一个按年月日时等分割的一个tuple，格式为time.struct_timesec_time = time.mktime(my_time) #time.mktime()方法：它接收struct_time对象作为参数，返回用秒数来表示时间的浮点数。int_time = int(sec_time*1000) #扩大一下sectime的值，然后转化为int即可]]></content>
+    <title><![CDATA[日拱一卒之：Mac下的tree工具]]></title>
+    <url>%2F2017%2F01%2F15%2F%E5%BD%92%E6%A1%A3%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E4%B9%8B%EF%BC%9AMac%E4%B8%8B%E7%9A%84tree%E5%B7%A5%E5%85%B7%2F</url>
+    <content type="text"><![CDATA[Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包 首先安装tree包 1brew install tree 使用方法 123&gt;tree #显示当前目录的目录树&gt;tree -L n #显示当前目录下的n级目录树&gt;tree -L n &gt;README.md #将目录树输出为文件]]></content>
   </entry>
   <entry>
     <title><![CDATA[饶毅老师的知乎粉丝]]></title>
@@ -796,19 +801,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[日拱一卒之：Mac下的tree工具]]></title>
-    <url>%2F2017%2F01%2F15%2F%E5%BD%92%E6%A1%A3%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E4%B9%8B%EF%BC%9AMac%E4%B8%8B%E7%9A%84tree%E5%B7%A5%E5%85%B7%2F</url>
-    <content type="text"><![CDATA[Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包 首先安装tree包 1brew install tree 使用方法 123&gt;tree #显示当前目录的目录树&gt;tree -L n #显示当前目录下的n级目录树&gt;tree -L n &gt;README.md #将目录树输出为文件]]></content>
+    <title><![CDATA[yaml简介与Python上的应用]]></title>
+    <url>%2F2017%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[关键字: yaml, python Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
   </entry>
   <entry>
     <title><![CDATA[pyhon中导入的几点问题]]></title>
     <url>%2F2017%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[yaml简介与Python上的应用]]></title>
-    <url>%2F2017%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fyaml%E7%AE%80%E4%BB%8B%E4%B8%8EPython%E4%B8%8A%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[关键字: yaml, python Yaml 是一种直观的可以被电脑识别的数据序列化格式，容易和脚本语言交互，适合写配置文件 yaml小例子 1234567891011#config.yamlname: Tom Smith age: 37 spouse: name: Jane Smith age: 25 children: - name: Jimmy Smith age: 15 - name1: Jenny Smith age1: 12 使用pyyaml这个库来处理yaml文件，如上 123456789101112131415161718import yaml#读取yaml内的内容file = open('config.yaml','w+r') #如果需要写入，需要wcontent = yaml.load(file)print(content)&#123;'name': 'junxi', 'age': 18, 'spouse': &#123;'name': 'Rui', 'age': 19&#125;, 'children': [&#123;'name': 'Chen You', 'age': 3&#125;, &#123;'name': 'Ruo Xi', 'age': 2&#125;]&#125;------#写入数据到yamldata=&#123;'host': &#123;'ip01': &#123;'two': '192.168.1.254', 'one': '192.168.1.2'&#125;, 'ip00': '192.168.1.1'&#125;, 'soft': &#123;'apache': 2.2, 'php': 5.3, 'mysql': 5.2&#125;&#125;with open('config.yaml', 'w') as file: yaml.dump(data,file) #config.yamlhost: ip00: 192.168.1.1 ip01: &#123;one: 192.168.1.2, two: 192.168.1.254&#125;soft: &#123;apache: 2.2, mysql: 5.2, php: 5.3&#125;]]></content>
   </entry>
   <entry>
     <title><![CDATA[pyhon中导入的几点问题]]></title>
@@ -819,18 +819,6 @@
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
-    <url>%2F2017%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95%E5%92%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[经常见到~/.，来说一说他是什么 首先是.代表当前目录，也可以用./ ..代表上级目录，也可以用../ 注意：如果一个目录或者文件以一个.开始的话，说明这个目录或者文件是一个隐藏的目录或者文件，比如（.bashrc），即以默认方式查找时，不显示该目录或文件（需要使用ls -a来查看） 在Mac中，有一个根目录/，然后根目录下有一个/Users的目录，里面有所有的用户 而~就代表你当前使用的用户名字对应的目录，同样~等价于$HOME，他们两个都代表以你的用户名为命名的目录，比如，我在任意环境下使用cd ~/就代表立即切换到/Users内以我自己的名字命名的目录，比如本机的目录就是fplee，然后就可以在此文件夹内进行操作！但是一般显示的时候显示~ 其中，/代表的是根目录，根目录下有好多的其他的文件夹或文件，在Linux系统中一般的如下： 稍后整理（未完待续……）]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>日拱一卒</tag>
       </tags>
   </entry>
   <entry>
@@ -846,15 +834,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Word字号与磅数对照表]]></title>
-    <url>%2F2017%2F01%2F03%2F%20Word%20%E5%AD%97%E5%8F%B7%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
-    <content type="text"><![CDATA[关键词：Word，字号，磅 介绍下 Word 字号对照表 字号 磅 初号 42 小初 36 一号 26 小一号 24 二号 22 小二号 18 三号 16 小三号 15 四号 14 小四号 12 五号 10.5 小五号 9 六号 7.5 小六号 6.5 七号 5.5 八号 5 度量换算表 英寸(in) 厘米(cm) 毫米(mm) 磅(pt) 像素 inch centimeter millimetre point pixel 1 2.54 25.4 72 96（非固定） ppi(pixels per inch):每英寸像素数量，一般用于电脑行业 dpi(dots per inch):每英寸点数，一般用于印刷行业]]></content>
+    <title><![CDATA[日拱一卒系列：关于目录和路径的一点问题]]></title>
+    <url>%2F2017%2F01%2F09%2F%E6%97%A5%E6%8B%B1%E4%B8%80%E5%8D%92%E7%B3%BB%E5%88%97%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%9B%AE%E5%BD%95%E5%92%8C%E8%B7%AF%E5%BE%84%E7%9A%84%E4%B8%80%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[经常见到~/.，来说一说他是什么 首先是.代表当前目录，也可以用./ ..代表上级目录，也可以用../ 注意：如果一个目录或者文件以一个.开始的话，说明这个目录或者文件是一个隐藏的目录或者文件，比如（.bashrc），即以默认方式查找时，不显示该目录或文件（需要使用ls -a来查看） 在Mac中，有一个根目录/，然后根目录下有一个/Users的目录，里面有所有的用户 而~就代表你当前使用的用户名字对应的目录，同样~等价于$HOME，他们两个都代表以你的用户名为命名的目录，比如，我在任意环境下使用cd ~/就代表立即切换到/Users内以我自己的名字命名的目录，比如本机的目录就是fplee，然后就可以在此文件夹内进行操作！但是一般显示的时候显示~ 其中，/代表的是根目录，根目录下有好多的其他的文件夹或文件，在Linux系统中一般的如下： 稍后整理（未完待续……）]]></content>
       <categories>
-        <category>LaTeX</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>word</tag>
-        <tag>字号</tag>
+        <tag>python</tag>
+        <tag>日拱一卒</tag>
       </tags>
   </entry>
   <entry>
@@ -867,6 +855,18 @@
       <tags>
         <tag>A4</tag>
         <tag>纸张尺寸</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Word字号与磅数对照表]]></title>
+    <url>%2F2017%2F01%2F03%2F%20Word%20%E5%AD%97%E5%8F%B7%E5%AF%B9%E7%85%A7%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[关键词：Word，字号，磅 介绍下 Word 字号对照表 字号 磅 初号 42 小初 36 一号 26 小一号 24 二号 22 小二号 18 三号 16 小三号 15 四号 14 小四号 12 五号 10.5 小五号 9 六号 7.5 小六号 6.5 七号 5.5 八号 5 度量换算表 英寸(in) 厘米(cm) 毫米(mm) 磅(pt) 像素 inch centimeter millimetre point pixel 1 2.54 25.4 72 96（非固定） ppi(pixels per inch):每英寸像素数量，一般用于电脑行业 dpi(dots per inch):每英寸点数，一般用于印刷行业]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>word</tag>
+        <tag>字号</tag>
       </tags>
   </entry>
   <entry>
