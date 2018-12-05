@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Mac 下必备的开发神器一览]]></title>
+    <url>%2F2018%2F12%2F05%2FMac%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%2F</url>
+    <content type="text"><![CDATA[关键词：Mac, 开发, 效率 Mac上必备的开发神器 君子性非异也，善假于物也。——荀子《劝学》 开发类： Pycharm python ide GoLand –&gt; go ide sequel Pro –&gt; mysql client sublime –&gt; 轻量级 vs code –&gt; 适合轻量级代码编写 studio 3T –&gt; mongodb client webstorm –&gt; front-end ide iterm2 spacemacs –&gt; vim + emacs 笔记本: Typora –&gt; normal Quiver –&gt; 技术文件笔记本 Ulysses –&gt; 非技术文档写作 MarginNote X –&gt; 对现有的书籍阅读过程中记性标记，思维导图工具 Reeder 3 –&gt; 其实他不是严格意义的笔记本，是一个RSS阅读器，但是相当于行走的笔记本 工具类： Moom –&gt; adjust windows position and size 欧陆词典 ipic –&gt; 图床 mindnode –&gt; 思维导图 annotate –&gt; 截图工具 textlab –&gt; 格式转换 Karabliner –&gt; 键盘键位设置 bartender 3 –&gt; 图标扩展工具 Airmail –&gt; 优秀的邮件工具 (国内邮箱设置指南 https://www.zhihu.com/question/51539553) Boom 2 –&gt; 音乐增强工具 clear –&gt; 简介的TODO工具（适合规划每天的工作，不适合长期TODO的规划） OmniGraffle Pro –&gt; 流程图绘制工具（常用命令实例与工具学习集合 –&gt; OmniFraffle） NewFileMenu –&gt; 右键增强工具 finder增强技巧 –&gt; 右键一个文件，在新标签页中打开，切一个新的并排的窗口（https://www.jb51.net/os/MAC/404223.html） 效率类: Alfred 3 –&gt; workflow contexts –&gt; 为每一个不同的进程设置一个文字的触发快捷键 Keyboard Maestro –&gt; 提供各种快捷输入，文字字典匹配 unclutter –&gt; 提供屏幕顶部下拉，保存常用的文件和笔记 ghostnote2 –&gt; 提供任意应用的便签, 同步工具 dropbox –&gt; 配合Quiver使用 Google Cloud –&gt; 大文件同步 Transmit –&gt; ftp 工具 其他类： dash –&gt; api document IINA –&gt; 超级播放器 imazing –&gt; 代替iTunes的神器]]></content>
+      <categories>
+        <category>develop</category>
+      </categories>
+      <tags>
+        <tag>coding</tag>
+        <tag>develop</tag>
+        <tag>mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mysql远程连接]]></title>
+    <url>%2F2018%2F12%2F05%2Fmysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[关键词：mysql mysql数据库远程连接 君子性非异也，善假于物也。——荀子《劝学》 一、创建数据库使用root登录后，可以使用 1CREATE DATABASE IF NOT EXISTS db_name DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 创建数据库，该命令的作用，菜鸟教程MySQL： 如果数据库不存在则创建，存在则不创建。 创建名为db_name的数据库，并设定编码集为utf8 二、远程主机创建MySQL用户（User） 首先查看现有的用户和权限 12use mysql;select user, host from user; 返回如下形式的值 user host lierhua % debian-sys-maint localhost mysql.session localhost mysql.sys localhost root localhost user表示现在已有的用户，比如root，就是我们登录时用的用户名，host中localhost表示只允许本地机器连接此数据库，%表示可以任意机器连接（只需要对应的密码输入对了即可）。 新建需要的用户 mysql官方文档 12# a simple demoCREATE USER 'username'@'host' IDENTIFIED BY 'password'; username随便这只你需要的，后面的host有两个可选的值，localhostand%分别代表本地连和任意机器，后面的密码处需要输入你想设置的密码 三、远程主机赋予新建的MySQL用户权限新建好用户和数据库（也可以用已经存在的用户或者数据库）后，进行权限的赋予操作 1GRANT privileges ON databasename.tablename TO 'username'@'host' privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL databasename：数据库名 tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.* 四、如何进行远程连接 ssh 通道连接 12345# 须知mysql服务器安装了ssh-server，并开放了22端口1. ssh配置项中ip为mysql服务器ip 2. 用户名和密码是mysql服务器主机的用户名和密码 3. mysql配置项为mysql的用户名和密码 例子： http 方式连接 123456# 须知mysql服务器搭建了web服务器，以lnmp环境为例。a.把数据库连接工具安装根目录下的ntunnel_mysql.php文件拷贝到mysql服务器的web服务器根目录。 b.通道地址http://mysql服务器ip或域名/ntunnel_mysql.php c.用户名为mysql服务器主机的用户名和密码 d.mysql配置项为mysql的用户名和密码]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>coding</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[诗词小品]]></title>
+    <url>%2F2018%2F07%2F03%2F%E8%AF%97%E8%AF%8D%E5%B0%8F%E5%93%81%2F</url>
+    <content type="text"><![CDATA[欲买桂花同载酒，终不似，少年游 …… 唐诗赠卫八处士 杜甫 人生不相见，动如参与商。今夕复何夕，共此灯烛光。少壮能几时，鬓发各已苍。访旧半为鬼，惊呼热中肠。焉知二十载，重上君子堂。昔别君未婚，儿女忽成行。怡然敬父执，问我来何方。问答未及已，儿女罗酒浆。夜雨剪春韭，新炊间黄粱。主称会面难，一举累十觞。十觞亦不醉，感子故意长。明日隔山岳，世事两茫茫。 宋词唐多令·芦叶满汀洲 刘过 芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。 黄鹤断矶头，故人今在否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。 喜迁莺·霞散绮 夏竦 霞散绮，月沉钩，帘卷未央楼。夜凉河汉截天流，宫阙锁清秋。瑶阶曙，金盘露，凤髓香和烟雾。三千珠翠拥宸游，水殿按凉州。 其他三峡 郦道元-南北朝 ​ 自三峡七百里中，两岸连山，略无阙处。重岩叠嶂，隐天蔽日。自非亭午夜分，不见曦月。 至于夏水襄陵，沿溯阻绝。或王命急宣，有时朝发白帝，暮到江陵，其间千二百里，虽乘奔御风，不以疾也。 春冬之时，则素湍绿潭，回清倒影。绝巘多生怪柏，悬泉瀑布，飞漱其间，清荣峻茂，良多趣味。 每至晴初霜旦，林寒涧肃，常有高猿长啸，属引凄异，空谷传响，哀转久绝。故渔者歌曰：“巴东三峡巫峡长，猿鸣三声泪沾裳。” 与朱元思书 吴均-南北朝 ​ 风烟俱净，天山共色。从流飘荡，任意东西。自富阳至桐庐一百许里，奇山异水，天下独绝。 水皆缥碧，千丈见底。游鱼细石，直视无碍。急湍甚箭，猛浪若奔。 夹岸高山，皆生寒树，负势竞上，互相轩邈，争高直指，千百成峰。 ​ 泉水激石，泠泠作响；好鸟相鸣，嘤嘤成韵。蝉则千转不穷，猿则百叫无绝。 ​ 鸢飞戾天者，望峰息心；经纶世务者，窥谷忘反。横柯上蔽，在昼犹昏；疏条交映，有时见日。]]></content>
+      <categories>
+        <category>essay</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[程序员必备云笔记本：Quiver]]></title>
     <url>%2F2018%2F07%2F03%2F%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9C%AC%EF%BC%9AQuiver%2F</url>
     <content type="text"><![CDATA[关键词：coding, notebook, mac 用Quiver整整三年多了，在这之前用的一直是印象笔记，后来偶然发现了这款神器，然后就发现再也离不开他了，他已经是我Mac开发记事的标配了。如果让我用一句话来形容他就是——我用过的最好用的云笔记！ 每个工具都带有用来创造它的那种精神。——海森堡《物理学与哲学》 人类的需求是在不断的演化的，我们的工具也总是随着我们的需求不断变化。 对科技博客作者来说，代码已经开始成为文章内容不可分割的一部分。对程序员来说，普通的代码注释已经远远不够，加上混合这各种代码的文本图片代办事项等，你需要一款全能的记事本，最好是云笔记本，可以随时同步，并且还有版本控制，那么问题来了，哪一款最好呢？ 这些需求汇聚在一起，最终催生出了这款软件：Quiver。 技术博客写作者的箭囊Quiver 集合了写作软件与笔记软件的特点，它既有着传统 Markdown 写作软件的实时编辑预览，又有着笔记软件的文件逻辑结构。 在它的身上你可以感受到，那种浓浓的为技术写作而生的味道，同时也可以感受到，那种对于学术型知识管理结构的追求，它不是一个为大众用户而设计的软件，它是为那些要求知识索引结构与专注写作的 Power User 创造的工具。 Quiver 就是 —— 一个支持 Markdown、代码编辑器、LaTeX 与知识索引的 利刃。 Quiver的cell概念编辑界面在 Quiver 的 Note 编写界面上有三个按钮，让你能够分别在三种模式中切换，分别是文本编辑，预览查看，实时编辑预览。 如此，你拥有了一款Markdowns实时编辑查看软件。 CellCell 是 Quiver 的写作的核心概念，Quiver 甚至为它专门有一个系统菜单，基于 Cell，Quiver 为我们带来了超越了绝大多数写作软件的编辑体验。 在 Quiver 里每一个 Note 都是由无数个 Cell 组成的，而每个 Cell 都是一个格式独立的片段，针对每个 Cell 你可以选择不同的格式，Text，Code，Markdown，LaTeX 亦或者是 Diagram。通过这样的特性，Quiver 可以将代码和普通的文本高效的组合在一起，让整个写作的流程变得更加的轻松直观。 下面让我们分别来看看不同的 Cell 格式。 Text CellText Cell 即是我们一般所熟知的富文本单元格，Quiver 为它专门提供了格式工具栏，从加粗到图片置入，一应俱全，降低了这款软件对 Markdown 苦手用户的门栏。 Code CellQuiver 的 Code Cell 直接内置了 Ace 代码编辑器，可以直接按照编辑器的格式高亮并展示代码。 代码单元格支持 120 多种语言的语法高亮、20 种以上的主题、自动缩进、代码折叠、多个游标和选择、代码自动补全、Tab 触发，Vim/Emacs 键绑定等。 ——《Quiver快速入门》 好吧，现在你甚至连代码编辑器都不用再买了。 Markdown CellMarkdown Cell 支持标准 Markdown 语法以及 Github Flavored Markdown，在实时编辑预览状态下，Markdown 编辑实在是一种享受。 Latex Cell 和 Diagram Cell这两种格式都是相对比较小众的需求，但是 Quiver 非常贴心的提供了对它们的支持，对经常要在文章里做流程图、写数学公式的人来说，这实在是福音。 LaTeX Cell 支持 LaTeX 公式编辑，让你能优雅的编写数学公式。虽然 Markdown Cell 也内连了 LaTeX 公式编辑，但是单独的使用 LaTeX 能够让排版变得更加容易。并且 Quiver 还支持在设置中添加自定义宏。添加的自定义宏可以在所有 LaTeX Cell 中使用。 Diagram Cell 支持复杂图表的编辑，分别是流程图和序列图，通过单纯的文字格式进行排版，简单易用，图表规整。 高度自由的自定义同时，在支持这么多的 Cell 格式的情况下，Quiver 还支持对每种 Cell 的属性进行单独设置。 与此同时它还支持对编辑界面，预览界面，输出排版的 CSS 文件进行修改自定义，Markdown 专业编辑器也就不过如此了吧？ 程序员们的天堂配置做为一个coder的你是不是还有别的需求呢？对，我们还需要编辑器，我们需要Vim，需要emacs，Quiver为我们完美提供了这两种模式（虽然只是基本的操作，但是已经可以基本告别鼠标了，提高了N多的效率） 由传统笔记本系统带来的笔记体验说完了编辑的部分，让我们来看看 Quiver 做为一个笔记软件的部分。 Quiver 的界面一打开就是经典的 Ulysses 式的 Library 库架构（Inbox + Favorites + Recents + Trash），支持 Tag 标注，并且支持创建多个笔记本对笔记进行整理归类，我们可以自由的把 Note 在各个笔记本之间拖拽移动，非常的灵活。 同时在 Text Cell 下，图片、普通文件等可直接拖拽到文本编辑区，图片可随文档共同保存到本地，普通文件，如 dmg 安装文件则会变为能直接点击来执行安装的文件链接。 Quiver 还支持全资料库的全文关键词搜索，同时对搜索结果进行了频率排序，非常的直观。（PS：美中不足的是 Quiver 对中文词组的搜索支持非常的差，当词组出现在一个连贯的句子里的时候它就无法找到了。） 从这些方面来看，Quiver 做为一个笔记软件已然达标，收集信息和文件的能力与独有的代码显示都让它已经十分优秀，但是，针对笔记系统，Quiver 还有两个特别的功能。 Presentation Mode相信你一定试用过印象笔记吧？印象笔记有一个高级功能叫做「演示模式」，就是把笔记全屏预览出来，让笔记内容可以直接用来进行会议讲解，但是这个功能需要你成为高级会员才能使用。 Quiver 的 Presentation Mode 就是一个和“演示模式”一样概念的功能。但 Quiver 有着比印象笔记更好的格式支持，同时让你直接一步到位，随意使用。 Notelink除了普通的对笔记进行笔记本层级的整理，Quiver 还提供了一种非常有学术风格的整理方法——Notelink。 Quiver 中每个 Note 都是一个单独的文件，有着独立的地址，可以生成一个 Notelink。你可以直接复制一个 Note 的 Notelink 粘贴到其他 Note 里，Quiver 会直接生成一个以该 Note 的标题为名字的超链接，点击这个超链接就可以跳转到对应的笔记。 这意味着我们可以在 Quiver 建立一个高效的资料整理与阅读环境，我们可以把杂乱的资料放在一个 Notebook 里，然后在一个专门用来查看的 Notebook 里建立 Note 来整理归类这些资料，而不需要再去杂乱的资料库一个个查找。 总结Quiver 是我所见过的第一个融合了专业编辑器与知识管理软件特点于一身的软件，甚至它还提供了分享 Notebook 让多个用户共同进行编辑的功能，对技术博客作者和程序员来说，它是你写作与知识整理的上佳选择。 当你使用 Quiver 一段时间之后，你就会沉迷于它多种格式随意切换编辑的快感之中，同时它提供的多层次的笔记整理方法，也会从各个方面让你对笔记整理的需求得到最大的满足。]]></content>
@@ -9,8 +42,8 @@
       </categories>
       <tags>
         <tag>coding</tag>
-        <tag>notebook</tag>
         <tag>mac</tag>
+        <tag>notebook</tag>
       </tags>
   </entry>
   <entry>
@@ -268,19 +301,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
-    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>数学公式</tag>
-        <tag>字体</tag>
-        <tag>间距</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之数学公式之符号备查表]]></title>
     <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B9%8B%E7%AC%A6%E5%8F%B7%E5%A4%87%E6%9F%A5%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[关键词：数学公式,符号 这一节，我们讨论数学公式的符号。 https://pan.baidu.com/disk/home?%23list/path=%252F&amp;vmode=list]]></content>
@@ -301,6 +321,19 @@
       </categories>
       <tags>
         <tag>数学公式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之数学公式字体间距设置]]></title>
+    <url>%2F2017%2F05%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AD%97%E4%BD%93%E9%97%B4%E8%B7%9D%E8%AE%BE%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[关键词：数学公式,字体,间距 这一节，我们讨论数学公式的字体问题。 改变数学公式字体字体的设定数学字体一般和相应的英文字体配合使用，设定的方式如下(需要使用unicode-math宏包)： 1234\usepackage&#123;unicode-math&#125;\setmathfont&#123;数学字体的postscript名称&#125;%注意：%需要注意的是，unicode-math宏包要在fontspec宏包和ctex宏包之前使用！ 例子： 一定注意，unicode-math宏包一定要放在ctex和fontspec的宏包的前面 12345678910111213141516171819202122\documentclass[12pt]&#123;article&#125;\usepackage&#123;amsmath&#125;\usepackage&#123;unicode-math&#125;\usepackage&#123;fontspec&#125;\setmainfont&#123;Cambria&#125;\setmathfont&#123;CambriaMath&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\usepackage&#123;ctex&#125;------\begin&#123;document&#125;就是测试一下。\parI know that we all get one thing, that we all share together. we all get one nice dream we live for. \partest this article&apos;s equation: $a^2+b^2$\begin&#123;equation&#125;\alpha +\beta = \theta\end&#123;equation&#125;\begin&#123;gather&#125;\sqrt&#123;\mathstrut a&#125;+\sqrt&#123;\mathstrut b&#125;=\sqrt&#123;\mathstrut y&#125;\\\int \varGamma(x)\text&#123;d&#125;x = \pm \infty \notag \\\iint_&#123;z_0&#125;^&#123;z_1&#125;\cos(s\pi z)\text&#123;d&#125;z\end&#123;gather&#125;\end&#123;document&#125; 常用的数学字体以及配合的英文字体 字体 对应数学字体 Cambria Cambria Math Latin Modern Roman Latin Modern Math XITS XITS Math Palatino Asana Math Palatino Neo Euler TeX Gyre Pagella TG Pagella Math 改变数学公式字号须知：数学公式的字号受到数学外正文字号的控制。 一般不必须要修改其字体，但是我们也有需要的时候，因此，LaTeX也提供了相应的修改命令 123456789101112\DeclareMathSizes&#123;ds&#125;&#123;ts&#125;&#123;ss&#125;&#123;sss&#125;解释：第一个大括号的ds是代表主要字号(文档设定的)字号(只有在此字号与文档字号一致是此命令才有用)第二个大括号的ts是代表普通公式字号第三个大括号的ss是代表第一级上下标字号第四个大括号的sss是代表第二级上下标字号------\renewcommand\defaultscriptratio&#123;0.6&#125;%设定标号尺寸是正文尺寸的0.6倍------\renewcommand\defaultscriptscriptratio&#123;0.3&#125;%设定小标号尺寸是正文尺寸的0.3s倍]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>数学公式</tag>
+        <tag>字体</tag>
+        <tag>间距</tag>
       </tags>
   </entry>
   <entry>
@@ -403,6 +436,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[LaTeX入门系列之标题]]></title>
+    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%A0%87%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[关键词：标题 这一节，我们讨论一个文档的标题 文章的标题可以分为两部分，一部分是声明标题，一部分是显示输出标题。 每个标题由 标题 作者 时间组成 例子： 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;---或者使用如下方式定义时间的格式\ctexset&#123;today=big&#125;---% \CTEXoptions[today = big]%\CTEXoptions[today = small]\CTEXoptions[today = old]%ctex宏包用来设置中文日期的显示方式\title&#123;八卦\\六十四卦&#125;\author&#123;LiErhua \and 李二花&#125;%用 and 分隔多个作者\date&#123;\today&#125;\begin&#123;document&#125;\maketitle%输出标题项\end&#123;document&#125; 如果像是毕业论文这种文档的标题页建议使用 titlepage 环境进行手动排版 123\begin&#123;titlepage&#125;标题内容\end&#123;titlepage&#125; 更进阶： Wilson宏包文档]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>标题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LaTeX入门系列之多文档编译]]></title>
     <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%A4%9A%E6%96%87%E6%A1%A3%E7%BC%96%E8%AF%91%2F</url>
     <content type="text"><![CDATA[关键词：多文档编译 这一节，我们讨论多文档编译 如果我们排版一篇小文章，几页纸，那么我们使用一个编译文件是OK的，但是如果我们要排版一个几十页甚至上百页的文档，我们使用若干个子文档来进行编译是比较好的选择。按照文件的章节或者逻辑，把文档分成几个层次或者部分，分别在不同的 tex 文件里编写，最后再整合进一个文档里。 方法1： 换页方法：一般使用在不同不同的 part 或者 chapter 123\include&#123;文件名(可以不带.tex后缀)&#125;%注意：这个会前后另起一页其中文件名是要插入的新的模块名称使用这个方式可以导入外部的 tex 文档，并且会在导入的前后另起新的一页 12\includeonly&#123;文档列表(可以是多个)&#125;%放到导言区作用是在正文中引入了好多文档，但是在编译是只想编译需要的，就把需要的文档名字填进去即可 123456789例子：\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\includeonly&#123;1.tex, 2.tex&#125; %只编译1和2\begin&#123;document&#125;\include&#123;1.tex&#125;\include&#123;2.tex&#125;\include&#123;3.tex&#125;\end&#123;document&#125; 方法2： 原样插入，无任何格式影响（不换页） 12\input&#123;文件名&#125;这种方法，可以将大文档中看起来繁杂影响这个文档美观的东西放入其中，比如导言区的配置，比如繁杂的表格]]></content>
@@ -426,14 +470,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之标题]]></title>
-    <url>%2F2017%2F03%2F20%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%A0%87%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[关键词：标题 这一节，我们讨论一个文档的标题 文章的标题可以分为两部分，一部分是声明标题，一部分是显示输出标题。 每个标题由 标题 作者 时间组成 例子： 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;---或者使用如下方式定义时间的格式\ctexset&#123;today=big&#125;---% \CTEXoptions[today = big]%\CTEXoptions[today = small]\CTEXoptions[today = old]%ctex宏包用来设置中文日期的显示方式\title&#123;八卦\\六十四卦&#125;\author&#123;LiErhua \and 李二花&#125;%用 and 分隔多个作者\date&#123;\today&#125;\begin&#123;document&#125;\maketitle%输出标题项\end&#123;document&#125; 如果像是毕业论文这种文档的标题页建议使用 titlepage 环境进行手动排版 123\begin&#123;titlepage&#125;标题内容\end&#123;titlepage&#125; 更进阶： Wilson宏包文档]]></content>
+    <title><![CDATA[LaTeX入门系列之整体文档架构]]></title>
+    <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E6%96%87%E6%A1%A3%E6%9E%B6%E6%9E%84%2F</url>
+    <content type="text"><![CDATA[关键词：整体文档结构 这一节，我们讨论一个文档的整体架构 首先看一个文档整体架构的框图 长度变量对照表： 长度变量 解释 \paperwidth \paperheight 纸张的宽度 \textwidth \textheight 版心的宽和高：常用于图片大小设置 \tomargin 额外的上边缘 \headheight 页眉高 \headsep 页眉与版心 \marginparwidth 边注宽 \marginparsep 边注与版心 \footskip 页脚基线与正文最后一行基线的间距 以上所有的参数都可以直接使用\setlength来设定 1\setlength\textwidth&#123;7in&#125; geometry宏包geometry宏包为我们提供了一个相对简单设置页面的接口，不至于过多的纠结于数值计算 使用geometry，我们使用如下图的长度变量即可很轻松的设置页面了(选自刘海洋的入门) 对于双面的书籍类，有如下的形式： 1234567\documentclass[draft]&#123;book&#125;\usepackage&#123;ctex&#125;\usepackage[bindingoffset = 8mm,top = 30mm, bottom = 30mm, inner = 20mm, outer = 45mm, marginparwidth = 30mm, headheight = 8mm, footskip = 18mm, showframe]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\Large\lipsum\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>标题</tag>
+        <tag>文档结构</tag>
       </tags>
   </entry>
   <entry>
@@ -448,17 +492,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之整体文档架构]]></title>
-    <url>%2F2017%2F03%2F19%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E6%96%87%E6%A1%A3%E6%9E%B6%E6%9E%84%2F</url>
-    <content type="text"><![CDATA[关键词：整体文档结构 这一节，我们讨论一个文档的整体架构 首先看一个文档整体架构的框图 长度变量对照表： 长度变量 解释 \paperwidth \paperheight 纸张的宽度 \textwidth \textheight 版心的宽和高：常用于图片大小设置 \tomargin 额外的上边缘 \headheight 页眉高 \headsep 页眉与版心 \marginparwidth 边注宽 \marginparsep 边注与版心 \footskip 页脚基线与正文最后一行基线的间距 以上所有的参数都可以直接使用\setlength来设定 1\setlength\textwidth&#123;7in&#125; geometry宏包geometry宏包为我们提供了一个相对简单设置页面的接口，不至于过多的纠结于数值计算 使用geometry，我们使用如下图的长度变量即可很轻松的设置页面了(选自刘海洋的入门) 对于双面的书籍类，有如下的形式： 1234567\documentclass[draft]&#123;book&#125;\usepackage&#123;ctex&#125;\usepackage[bindingoffset = 8mm,top = 30mm, bottom = 30mm, inner = 20mm, outer = 45mm, marginparwidth = 30mm, headheight = 8mm, footskip = 18mm, showframe]&#123;geometry&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\Large\lipsum\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>文档结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之段落]]></title>
     <url>%2F2017%2F03%2F17%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AE%B5%E8%90%BD%2F</url>
     <content type="text"><![CDATA[关键词：段落，分栏 这一节，我们讨论段落，段落是几乎所有文档必备的，因此段落的设置是十分重要的。 段落基本属性设置段落格式属性： 段落首行缩进 命令 作用 \parindent 由\setlength命令控制的段落首行固定缩进 \noindent 某段开头临时禁用缩进 \indent 某段开头临时缩进 段落属性 命令 备注 段落间垂直距离 \parskip 由\setlength设置其大小 段落对齐方式（两端均匀对齐） 默认 段落对齐方式（左对齐） \raggedright 声明式命令 段落对齐方式（右对齐） \raggedleft 声明式命令，排版签名日期格言 段落对齐方式（居中对齐） \centering 声明式命令 段落属性 环境 备注 段落对齐方式（左对齐） \begin{flushleft}\end{flushleft} 增加段前后垂直距离 段落对齐方式（右对齐） \begin{flushright}\end{flashright} 增加段前后垂直距离 段落对齐方式（居中对齐） \begin{center}\end{center} 增加段前后垂直距离 两个段落相关的有趣宏包： 12345678910lettrine 宏包 会产生段落首字母大写下沉效果---使用方法\usepackage&#123;lettrine&#125;\lettrine&#123;首字母&#125;&#123;本单词首字母剩下的单词&#125; + 其他---shapepar 宏包 方便排版特定形状的段落---使用方法\usepackage&#123;shapepar&#125;\heartpar&#123;要排版的段落&#125;--- 12345678\documentclass&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;shapepar&#125;\usepackage&#123;lettrine&#125;\begin&#123;document&#125;\lettrine&#123;W&#125;&#123;here&#125; there is a will, there is a way. No Man Is An Island ——John Donn No man is an island, entire of itself; every man is a piece of the continent, a part of the main; \starpar&#123;锦瑟无端五十弦，一弦一柱思华年，庄生晓梦迷蝴蝶，望帝春深托杜鹃，沧海月明珠有泪，蓝田日暖玉生烟，此情可待成追忆，只是当时已惘然。&#125;\end&#123;document&#125; 分栏当然，分栏也是段落中必不可少的部分了，分栏可以使用两种方法 直接在文档类中使用twocolumn来定义双栏 使用multicol宏包来进行多栏定义 文档类内定义： 1234567891011121314151617181920212223对于twocolumn，有几个长度变量需要注意一个是\columnsep是栏间距另一个是\columnwidth是栏宽再一个是栏之间的竖线(默认隐藏)\columnseprule这三者都可以使用\setlength来设置------\documentclass[twocolumn]&#123;article&#125;\usepackage&#123;ctex&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[height = 2cm]&#123;geometry&#125;\setlength&#123;\columnsep&#125;&#123;15mm&#125;\setlength&#123;\columnseprule&#125;&#123;0.4pt&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;锦瑟无端五十弦，一弦一柱思华年，庄生晓梦迷蝴蝶，望帝春深托杜鹃，沧海月明珠有泪，蓝田日暖玉生烟，此情可待成追忆，只是当时已惘然。锦瑟无端五十弦，一弦一柱思华年，庄生晓梦迷蝴蝶，望帝春深托杜鹃，沧海月明珠有泪，蓝田日暖玉生烟，此情可待成追忆，只是当时已惘然。\end&#123;document&#125; 宏包定义： 1234567891011121314\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;multicol&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[height = 4cm]&#123;geometry&#125;\setlength&#123;\columnsep&#125;&#123;15mm&#125;\setlength&#123;\columnseprule&#125;&#123;0.4pt&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;\begin&#123;multicols&#125;&#123;3&#125;(填充文字)\end&#123;multicols&#125;(填充文字)\end&#123;document&#125;]]></content>
@@ -467,19 +500,6 @@
       </categories>
       <tags>
         <tag>段落</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之页码、页眉、页脚]]></title>
-    <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E9%A1%B5%E7%A0%81%E3%80%81%E9%A1%B5%E7%9C%89%E3%80%81%E9%A1%B5%E8%84%9A%2F</url>
-    <content type="text"><![CDATA[关键词：页码,页眉,页脚 这一节，我们讨论页码，页眉与页脚 页码通过前面的学习，我们清楚了，编号类的都是计数器在控制，而页码的控制器是page，\pagenumbering{格式}来控制页码的编号方式，一定要另起新的一页，这个命令会在新的一页开始重新开始进行计数。 1234567891011121314151617%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，故均用其做的示例%但是这是最麻烦的办法，应该使用如下方法：%\usepackage&#123;lipsum&#125;%\lipsum[1-n]%使用lipsum时最简单有效的办法\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;\pagenumbering&#123;roman&#125;%使用罗马数字字体(文本)\newpage\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体(文本)\end&#123;document&#125; 名称 类型 arabic 阿拉伯数字 roman 小写罗马数字 Roman 大写罗马数字 alph 小写字母 Alph 大写字母 页眉页脚预定义LaTeX提供了几个预定义的页眉页脚风格看可以选择，4种 page style 页面风格 解释 empty 无页眉页脚 plain 无页眉，页脚为居中页码 headings 无页脚，页眉为章节名与页码 myheadings 无页脚，页眉为页码等 设定命令 解释 \pagestyle{页面风格} 设定页面风格 \thispagestyle{页面风格} 设定当前页面的风格 名称 作用 \leftmark 应用到页眉页脚设置中，leftMark表示high-level (chapter和section，chapter就是high-level) \rightmark 应用到页眉页脚设置中，rightMark表示low-level(section和subsec，subsec就是low-level) 宏包fancyhdr 这张图截取自fancyhdr的宏包文档 fancyhdr宏包提供的fancy页面风格，将页眉页脚分为了六部分和两条线 对于单页文档（单面文档，一般为article）：1234567891011121314151617181920\documentclass[]&#123;ctexart&#125;\usepackage&#123;fancyhdr&#125; %使用fancyhdr宏包\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125; %使用fancy页面风格\lhead&#123;左边页眉&#125; %设置页眉左侧\chead&#123;中间页眉&#125; %设置页眉中间\rhead&#123;\leftmark&#125; %设置页眉右侧为leftmark\lfoot&#123;\rightmark&#125; %设置页脚左侧为rightmark\cfoot&#123;\thepage&#125; %设置页脚中间为页码\rfoot&#123;右边页脚&#125; %设置页脚右侧为&quot;右边页脚&quot;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 对于双面文档：可以使用如下的方式 123\fancyhead[位置]&#123;内容&#125; %设置页眉，位置可以是E、O与L、C、R的组合\fancyfoot[位置]&#123;内容&#125; %设置页脚，位置可以是E、O与L、C、R的组合\fancyhf[位置]&#123;内容&#125; %设置页眉与页脚，位置可以是H、F与E、O与L、C、R的组合 123%页眉页脚线也可以进行设置，特别注意，页脚线的宽度不是长度变量，而是文本宏，修改定义如下\renewcommand\headrulewidth&#123;0.4pt&#125;\renewcommand\footrulewidth&#123;0.6pt&#125; 123456789101112131415161718192021222324252627\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\usepackage&#123;fancyhdr&#125;\usepackage&#123;anyfontsize&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125;\fancyhf&#123;&#125; %用于清除所有的页眉页脚\fancyhead[CO]&#123;\leftmark&#125; %hight-level\fancyhead[CE]&#123;\rightmark&#125; %low-level\fancyfoot[CO]&#123;\thepage&#125;\fancyhf[FR]&#123;$\spadesuit$&#125;\renewcommand&#123;\headrulewidth&#125;&#123;1pt&#125;\renewcommand&#123;\footrulewidth&#125;&#123;2pt&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>页码</tag>
-        <tag>页眉</tag>
-        <tag>页脚</tag>
       </tags>
   </entry>
   <entry>
@@ -496,14 +516,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
-    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
+    <title><![CDATA[LaTeX入门系列之页码、页眉、页脚]]></title>
+    <url>%2F2017%2F03%2F16%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E9%A1%B5%E7%A0%81%E3%80%81%E9%A1%B5%E7%9C%89%E3%80%81%E9%A1%B5%E8%84%9A%2F</url>
+    <content type="text"><![CDATA[关键词：页码,页眉,页脚 这一节，我们讨论页码，页眉与页脚 页码通过前面的学习，我们清楚了，编号类的都是计数器在控制，而页码的控制器是page，\pagenumbering{格式}来控制页码的编号方式，一定要另起新的一页，这个命令会在新的一页开始重新开始进行计数。 1234567891011121314151617%由于个人喜欢清刻本悦宋字体且喜欢锦瑟，故均用其做的示例%但是这是最麻烦的办法，应该使用如下方法：%\usepackage&#123;lipsum&#125;%\lipsum[1-n]%使用lipsum时最简单有效的办法\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\setCJKfamilyfont&#123;qingsong&#125;&#123;FZQKBYSJW--GB1-0&#125;\usepackage[paperwidth = 52mm, paperheight = 72mm]&#123;geometry&#125;\begin&#123;document&#125;\CJKfamily&#123;qingsong&#125;\pagenumbering&#123;roman&#125;%使用罗马数字字体(文本)\newpage\pagenumbering&#123;arabic&#125;%使用阿拉伯数字字体(文本)\end&#123;document&#125; 名称 类型 arabic 阿拉伯数字 roman 小写罗马数字 Roman 大写罗马数字 alph 小写字母 Alph 大写字母 页眉页脚预定义LaTeX提供了几个预定义的页眉页脚风格看可以选择，4种 page style 页面风格 解释 empty 无页眉页脚 plain 无页眉，页脚为居中页码 headings 无页脚，页眉为章节名与页码 myheadings 无页脚，页眉为页码等 设定命令 解释 \pagestyle{页面风格} 设定页面风格 \thispagestyle{页面风格} 设定当前页面的风格 名称 作用 \leftmark 应用到页眉页脚设置中，leftMark表示high-level (chapter和section，chapter就是high-level) \rightmark 应用到页眉页脚设置中，rightMark表示low-level(section和subsec，subsec就是low-level) 宏包fancyhdr 这张图截取自fancyhdr的宏包文档 fancyhdr宏包提供的fancy页面风格，将页眉页脚分为了六部分和两条线 对于单页文档（单面文档，一般为article）：1234567891011121314151617181920\documentclass[]&#123;ctexart&#125;\usepackage&#123;fancyhdr&#125; %使用fancyhdr宏包\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125; %使用fancy页面风格\lhead&#123;左边页眉&#125; %设置页眉左侧\chead&#123;中间页眉&#125; %设置页眉中间\rhead&#123;\leftmark&#125; %设置页眉右侧为leftmark\lfoot&#123;\rightmark&#125; %设置页脚左侧为rightmark\cfoot&#123;\thepage&#125; %设置页脚中间为页码\rfoot&#123;右边页脚&#125; %设置页脚右侧为&quot;右边页脚&quot;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125; 对于双面文档：可以使用如下的方式 123\fancyhead[位置]&#123;内容&#125; %设置页眉，位置可以是E、O与L、C、R的组合\fancyfoot[位置]&#123;内容&#125; %设置页脚，位置可以是E、O与L、C、R的组合\fancyhf[位置]&#123;内容&#125; %设置页眉与页脚，位置可以是H、F与E、O与L、C、R的组合 123%页眉页脚线也可以进行设置，特别注意，页脚线的宽度不是长度变量，而是文本宏，修改定义如下\renewcommand\headrulewidth&#123;0.4pt&#125;\renewcommand\footrulewidth&#123;0.6pt&#125; 123456789101112131415161718192021222324252627\documentclass[]&#123;book&#125;\usepackage[heading = true]&#123;ctex&#125;\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;\usepackage&#123;fancyhdr&#125;\usepackage&#123;anyfontsize&#125;\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;\pagestyle&#123;fancy&#125;\fancyhf&#123;&#125; %用于清除所有的页眉页脚\fancyhead[CO]&#123;\leftmark&#125; %hight-level\fancyhead[CE]&#123;\rightmark&#125; %low-level\fancyfoot[CO]&#123;\thepage&#125;\fancyhf[FR]&#123;$\spadesuit$&#125;\renewcommand&#123;\headrulewidth&#125;&#123;1pt&#125;\renewcommand&#123;\footrulewidth&#125;&#123;2pt&#125;\usepackage&#123;lipsum&#125;\begin&#123;document&#125;\chapter&#123;锦瑟1&#125;\section&#123;锦瑟无端五十弦&#125;\subsection&#123;一弦一柱思华年&#125;\lipsum[3-5]\newpage\chapter&#123;锦瑟2&#125;\section&#123;庄生晓梦迷蝴蝶&#125;\subsection&#123;望帝春深托杜鹃&#125;\lipsum[3-5]\end&#123;document&#125;]]></content>
       <categories>
         <category>LaTeX</category>
       </categories>
       <tags>
-        <tag>代码环境</tag>
+        <tag>页码</tag>
+        <tag>页眉</tag>
+        <tag>页脚</tag>
       </tags>
   </entry>
   <entry>
@@ -515,6 +537,28 @@
       </categories>
       <tags>
         <tag>文本环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之盒子]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>盒子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之正文环境（五）———— 代码环境]]></title>
+    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%AD%A3%E6%96%87%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%94%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[关键词：抄录 这一节，我们讨论抄录，抄录分为命令和环境。使用宏包listings，对应的环境为lstlisting 123\usepackage&#123;listings&#125;%使用宏包\end&#123;lstlisting&#125;%开始环境\begin&#123;lstlisting&#125;[language = Python] 12345678910\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;listings&#125;\begin&#123;document&#125;\begin&#123;lstlisting&#125;[language = Python]import matplotlib as mplmpl.rcParams[&apos;lines.linewidth&apos;] = 2 #类字典格式，键值对mpl.rcParams[&apos;lines.color&apos;] = &apos;r&apos;\end&#123;lstlisting&#125;\end&#123;document&#125;]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>代码环境</tag>
       </tags>
   </entry>
   <entry>
@@ -548,17 +592,6 @@
       </categories>
       <tags>
         <tag>抄录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LaTeX入门系列之盒子]]></title>
-    <url>%2F2017%2F03%2F15%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E7%9B%92%E5%AD%90%2F</url>
-    <content type="text"><![CDATA[关键词：盒子 这一节，我们讨论盒子，盒子是一个不太好理解的概念，这里，我们可以暂时这么理解： 盒子（box）是LaTeX中的基本的单元了，一个文字，一张图，一张表，一个页面等都可以称作一个盒子 小盒子再构成大盒子，最终成为文章的整体。 水平盒子水平盒子无法在其中进行段落的划分，即无法分行分段 不带边框的盒子12\mbox&#123;文本内容&#125;\makebox[宽度][位置(clrs)]&#123;内容&#125; 带边框的盒子12\fbox&#123;文本&#125;\framebox[宽度][位置]&#123;文本&#125; 垂直盒子垂直盒子就可以有多个段落 垂直盒子命令有两种形式：命令\parbox{宽度}{盒子内容} 与 环境\begin{minipage}{宽度}…… 1234567精简版命令格式\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;------精简版环境格式\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍盒子内容\end&#123;minipage&#125; NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\parbox&#123;0.6\textwidth&#125;&#123; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪&#125;\vskip 1cm\begin&#123;minipage&#125;&#123;0.45\linewidth&#125; 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪 锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪\end&#123;minipage&#125;\end&#123;document&#125; 12\raisebox&#123;距离&#125;&#123;内容&#125;这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走 1234567\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;T\hspace&#123;-0.5em&#125;\raisebox&#123;-0.2em&#125;&#123;E&#125;\hspace&#123;-0.5em&#125;X\end&#123;document&#125;]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>盒子</tag>
       </tags>
   </entry>
   <entry>
@@ -643,18 +676,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之初见LaTeX]]></title>
-    <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%88%9D%E8%A7%81LaTeX%2F</url>
-    <content type="text"><![CDATA[关键词：安装，office 比较 介绍下LaTeX最表象的东西 LaTeX是什么TeX作者高德纳，斯坦福大学教授，于1978年开始编写，直到1989年TeX才停止更改。 LaTeX 是用TeX写的，即 LaTeX 是使用 TeX 这种宏语言所编写的宏集，并作为了一种格式固定了下来。 我们用 C 语言做一个类比，就像 C 语言有不同的编译器，实现 TeX 也有不同的程序，不同的实现我们成为不同的 TeX 引擎。我们现在所说的pdfTeX，XeTeX ，pTeX，ApTeX 等都是 TeX 引擎。 LaTeX的优点&amp;LaTeX与office的差异LaTeX的优点 完全开源免费 是论文排版界标准，国外大量期刊提供模板，并推荐使用。 LaTeX制作文档与幻灯片，令作者专注于内容，一切简洁明了。 Word很容易被修改，显得不够严肃，LaTeX生成的PDF正式，美观。 合格的数学软件都可以转LaTeX，合格的文献管理软件都能生成BibTeX。 LaTeX对比office的差异 LaTeX office 公式输入友好，赏心悦目 公式输入糟糕，需要行内公式难看 全部可以使用键盘输入，降低鼠标的利用，效率提高 希腊字母等需要用鼠标去挑 结构优化的算法好，不容易出现行尾断字 段末容易出现断字 参考文献插入十分友好 参考文献插入有点 图表众多的文档依然十分容易排布 图表众多的文档及其容易崩溃 LaTeX的安装——推荐安装TeX LiveMac下： Mac下的TeX Live 称为 MacTeX 下载地址：https://www.tug.org/mactex/mactex-download.html Windows下： Windows 下称为TeX Live 下载地址：https://www.tug.org/texlive/ 还可以直接从https://mirrors.tuna.tsinghua.edu.cn/CTAN/进行下载使用，下列连接分别为MacTeX，TeXLive，MikTeX https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/mac/mactex/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/win32/miktex/ LaTeX编辑器LaTeX有众多的编辑器可以使用 TeXworks WinEdt Texmaker TeXstudio Mac下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Mac版）》 Windows下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Windows版）》]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>安装</tag>
-        <tag>编辑器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX入门系列之表格绘制（四）：图表的并排]]></title>
     <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%9B%BE%E8%A1%A8%E7%9A%84%E5%B9%B6%E6%8E%92%2F</url>
     <content type="text"><![CDATA[关键词：图表，并排 LaTeX的浮动环境并不对环境的内容限制，因此，把几个图表放在一个浮动体内即可以实现并排或者混排。一般使用 minipage 环境实现此功能。 123\begin&#123;minipage&#125;[position][height][inner-pos]&#123;width&#125;text\end&#123;minipage&#125; 图表并排例子1：两张图片高度一致，caption 可以显示在一行的情况，使用不同的 caption 12345678910111213141516\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\begin&#123;minipage&#125;&#123;0.48\linewidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\caption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\linewidth&#125; \centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\caption&#123; 夜雨秋灯 &#125;\end&#123;minipage&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子2：两张图片高度不一致，caption 按上述方法不可以显示在一行的情况，使用不同的 caption 123456789101112131415161718192021222324252627\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\usepackage&#123;graphics&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htbp]\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\centering\includegraphics[height = 1.5cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\quad\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\centering\includegraphics[height = 6cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\end&#123;minipage&#125;\vskip 5mm\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\caption&#123;夜雨秋灯&#125;\end&#123;minipage&#125;\quad\begin&#123;minipage&#125;&#123;0.45\textwidth&#125;\caption&#123;小波&#125;\end&#123;minipage&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子3：图片或者表格自带小标题，公用大标题，如何设置 使用 caption 以及 subcaption 宏包 12345678910111213141516171819\documentclass[]&#123;article&#125;\usepackage&#123;caption,subcaption&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\subcaption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\textwidth&#125; \centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/yeyuqiudeng.jpg&#125;\subcaption&#123; 夜雨秋灯 &#125;\end&#123;minipage&#125;\centering\caption&#123;两张图&#125;\end&#123;figure&#125;\end&#123;document&#125; 例子4：一图一表混排 1234567891011121314151617181920212223242526272829\documentclass[]&#123;article&#125;\usepackage&#123;caption,subcaption&#125;\usepackage&#123;booktabs&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;figure&#125;[htp]\centering\begin&#123;minipage&#125;&#123;0.48\textwidth&#125;\centering\includegraphics[height = 3cm]&#123;/Users/fplee/blog/public/xiaobo.png&#125;\subcaption&#123; 小波 &#125;\end&#123;minipage&#125;\begin&#123;minipage&#125;&#123;0.48\textwidth&#125; \centering\subcaption&#123; 夜雨秋灯 &#125;\begin&#123;tabular&#125;&#123;c|c|c&#125;\toprule锦瑟&amp;无端&amp;五十弦\\\midrule一弦&amp;一柱&amp;思华年\\庄生&amp;晓梦&amp;迷蝴蝶\\望帝&amp;春深&amp;托杜鹃\\\bottomrule\end&#123;tabular&#125;\end&#123;minipage&#125;\centering\caption&#123;一图一表&#125;\end&#123;figure&#125;\end&#123;document&#125; 参考文章： 并列排图 ​]]></content>
@@ -664,6 +685,18 @@
       <tags>
         <tag>图表</tag>
         <tag>浮动体</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之初见LaTeX]]></title>
+    <url>%2F2017%2F03%2F04%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E5%88%9D%E8%A7%81LaTeX%2F</url>
+    <content type="text"><![CDATA[关键词：安装，office 比较 介绍下LaTeX最表象的东西 LaTeX是什么TeX作者高德纳，斯坦福大学教授，于1978年开始编写，直到1989年TeX才停止更改。 LaTeX 是用TeX写的，即 LaTeX 是使用 TeX 这种宏语言所编写的宏集，并作为了一种格式固定了下来。 我们用 C 语言做一个类比，就像 C 语言有不同的编译器，实现 TeX 也有不同的程序，不同的实现我们成为不同的 TeX 引擎。我们现在所说的pdfTeX，XeTeX ，pTeX，ApTeX 等都是 TeX 引擎。 LaTeX的优点&amp;LaTeX与office的差异LaTeX的优点 完全开源免费 是论文排版界标准，国外大量期刊提供模板，并推荐使用。 LaTeX制作文档与幻灯片，令作者专注于内容，一切简洁明了。 Word很容易被修改，显得不够严肃，LaTeX生成的PDF正式，美观。 合格的数学软件都可以转LaTeX，合格的文献管理软件都能生成BibTeX。 LaTeX对比office的差异 LaTeX office 公式输入友好，赏心悦目 公式输入糟糕，需要行内公式难看 全部可以使用键盘输入，降低鼠标的利用，效率提高 希腊字母等需要用鼠标去挑 结构优化的算法好，不容易出现行尾断字 段末容易出现断字 参考文献插入十分友好 参考文献插入有点 图表众多的文档依然十分容易排布 图表众多的文档及其容易崩溃 LaTeX的安装——推荐安装TeX LiveMac下： Mac下的TeX Live 称为 MacTeX 下载地址：https://www.tug.org/mactex/mactex-download.html Windows下： Windows 下称为TeX Live 下载地址：https://www.tug.org/texlive/ 还可以直接从https://mirrors.tuna.tsinghua.edu.cn/CTAN/进行下载使用，下列连接分别为MacTeX，TeXLive，MikTeX https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/mac/mactex/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/ https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/win32/miktex/ LaTeX编辑器LaTeX有众多的编辑器可以使用 TeXworks WinEdt Texmaker TeXstudio Mac下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Mac版）》 Windows下配置方便的LaTeX编辑器请看《LaTeX入门系列之编辑器sublime的设置（Windows版）》]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>安装</tag>
+        <tag>编辑器</tag>
       </tags>
   </entry>
   <entry>
@@ -690,17 +723,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
-    <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
-    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
-      <categories>
-        <category>LaTeX</category>
-      </categories>
-      <tags>
-        <tag>表格</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[LaTeX习题答案]]></title>
     <url>%2F2017%2F03%2F01%2FLaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88%2F</url>
     <content type="text"><![CDATA[以下是博客内个习题的答案 顺序为乱序，请按照习题图片或者要求或者标注寻找 习题： 答案： 123456789101112131415161718192021222324252627282930\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;\usepackage&#123;multirow&#125;\usepackage&#123;makecell&#125;\usepackage&#123;diagbox&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;\begin&#123;tabular&#125;&#123;|c|cc|c|c|c|c|c|&#125;\hline% \multirow&#123;2&#125;*&#123;\makecell&#123;摩擦副\\配对材料&#125;&#125;&amp; \multicolumn&#123;2&#125;&#123;c|&#125;&#123;\multirow&#123;2&#125;*&#123;\diagbox&#123;锁紧结构&#125;&#123;锁紧力矩&#125;&#125;&#125; &amp;\multicolumn&#123;5&#125;&#123;c|&#125;&#123;供油压力(MPa)&#125;\\\cline&#123;4-8&#125; &amp; &amp; &amp;2&amp;5&amp;7&amp;10&amp;12\\\hline\multirow&#123;5&#125;*&#123;调质钢&#125;&amp;\multirow&#123;5&#125;*&#123;摩擦锥&#125;&amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.3&amp;2.6&amp;2.9&amp;3.5&amp;3.8\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;3-8&#125; &amp; &amp;\multicolumn&#123;1&#125;&#123;|c|&#125;&#123;$\theta = 60^\circ$, 单槽&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\multirow&#123;2&#125;*&#123;H62&#125;&amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;内摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\cline&#123;2-8&#125; &amp;\multicolumn&#123;2&#125;&#123;c|&#125;&#123;外摩擦环&#125;&amp;1.8&amp;2.6&amp;3.9&amp;4.7&amp;5.1\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 关键点：multicolumn不仅可以进行行单元格合并处理，还可以对某个单元格的格式进行重新设置，比如更改边框 的添加等。]]></content>
@@ -709,6 +731,17 @@
       </categories>
       <tags>
         <tag>table,习题答案</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LaTeX入门系列之图表绘制（一）：基础]]></title>
+    <url>%2F2017%2F03%2F01%2FLaTeX%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E8%A1%A8%E6%A0%BC%E7%BB%98%E5%88%B6%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。 表格是一种二维的信息表达形式。 ###基础表格绘制 一般使用 tabular 环境进行表格的排布 使用 array 环境进行包含数学符号等的内容的排布 12345678910\begin&#123;tabular&#125;[对齐(可选有t和b)]&#123;列格式(lcr等三种形式)&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;tabular&#125;其中列格式有如下：l: 左对齐列c: 居中对齐r: 右对齐列p&#123;&#125;: 固定此列的宽度，可自动换行|：列与列之间添加分隔的竖线 1234\begin&#123;array&#125;[对齐]&#123;列格式&#125;内容&amp;内容&amp;……&amp;内容\\……\end&#123;array&#125; 其中，\\表示换行，用&amp;表示不同单元格的分隔。 tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。 一个普通表格例子： 1234567891011121314\documentclass[a4paper]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125; \begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;\hline空&amp;吃&amp;喝&amp;玩&amp;乐\\\hline 张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\李四&amp;肉&amp;水&amp;code&amp;赚钱\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\\hline\end&#123;tabular&#125;\end&#123;document&#125; 一个行列式例子： 12345678910111213\documentclass[]&#123;article&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;$\left( %行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中\begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$%注意两边大括号的书写方式\left(和\right)\end&#123;document&#125; 改变行列间距的方法 列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制 行间距：由宏 \arraystretch 控制 12345678910111213141516171819\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;\usepackage&#123;ctex&#125;\begin&#123;document&#125;%---------------%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数\renewcommand\arraystretch&#123;2&#125;\setlength\tabcolsep&#123;10mm&#125;%\tabcolsep是变量，对应的是具体的数值%---------------$\left( \begin&#123;tabular&#125;&#123;lcc|r&#125; &amp;吃&amp;喝&amp;玩\\张三&amp;鱼&amp;酒&amp;吉他\\李四&amp;肉&amp;水&amp;code\\王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\\end&#123;tabular&#125;\right)$\end&#123;document&#125; NOTICE：\arraystretch是宏，所以用\renewcommand 来设定 ​ \tabcolsep 是变量，用 \setlength 设定]]></content>
+      <categories>
+        <category>LaTeX</category>
+      </categories>
+      <tags>
+        <tag>表格</tag>
       </tags>
   </entry>
   <entry>
@@ -769,11 +802,6 @@
   </entry>
   <entry>
     <title><![CDATA[pyhon中导入的几点问题]]></title>
-    <url>%2F2017%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[pyhon中导入的几点问题]]></title>
     <url>%2F2017%2F01%2F12%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
       <categories>
@@ -782,6 +810,11 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[pyhon中导入的几点问题]]></title>
+    <url>%2F2017%2F01%2F12%2F%E5%BD%92%E6%A1%A3%2Fpyhon%E4%B8%AD%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%82%B9%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[Python的导入方式如下，分别解释 1from . import xxx #当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx 12345#tasklet.pyfrom . import config#__init__.pyfrom .app import AppEnv, init_dockenv 1from .A import xxx #其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块 1234567#__init__.pyfrom .app import AppEnv, init_dockenv#app.pydef init_dockenv(import_name='', config_file="config.yaml"): env = DockEnv(import_name, config_file=config_file) return env 1from ..A import xxx #导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入]]></content>
   </entry>
   <entry>
     <title><![CDATA[yaml简介与Python上的应用]]></title>
@@ -910,17 +943,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[拉勾爬虫输出]]></title>
-    <url>%2F2016%2F10%2F21%2F%E7%88%AC%E5%8F%96%E6%8B%89%E5%8B%BE%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%A0%81%2F</url>
-    <content type="text"><![CDATA[爬取拉勾所有数据代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105import requestsfrom lxml import etreeimport timeimport randomfrom pymongo import MongoClientfrom fake_useragent import UserAgent#IP代理proxiesList = [ 'http://120.32.209.231:8118', 'http://210.82.36.142:80', 'http://123.125.116.151:80', 'http://113.5.80.144:8080', 'http://122.224.227.202:3128', 'http://220.191.214.176:8080']proxies = &#123;'http' : random.choice(proxiesList)&#125;#随机浏览器userAgent = UserAgent().random#headers文件headers = &#123; 'Cookie':'user_trace_token=20171110210441-b6e83f7b-c617-11e7-86f0-525400f775ce; LGUID=20171110210441-b6e847a6-c617-11e7-86f0-525400f775ce; X_HTTP_TOKEN=c2758cd47b96276a5a741c7c8aef7389; TG-TRACK-CODE=index_search; SEARCH_ID=d3457fbe235a4f4c8dd0b8a8e8ce93dd; index_location_city=%E5%85%A8%E5%9B%BD; JSESSIONID=ABAAABAACEBACDGB5AE0EFB5452955E2ED72F2B5D254B8E; Hm_lvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1510319081,1510652275; Hm_lpvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1510665850; _gat=1; _ga=GA1.2.739478823.1510319081; _gid=GA1.2.1539303787.1510652275; LGSID=20171114212410-195b1e64-c93f-11e7-8eeb-525400f775ce; PRE_UTM=; PRE_HOST=; PRE_SITE=https%3A%2F%2Fwww.lagou.com%2F; PRE_LAND=https%3A%2F%2Fwww.lagou.com%2F; LGRID=20171114212410-195b1fe3-c93f-11e7-8eeb-525400f775ce; _putrc=11E3FE8A2D6757DB; login=true; unick=%E6%9D%8E%E4%BA%8C%E8%8A%B1; showExpriedIndex=1; showExpriedCompanyHome=1; showExpriedMyPublish=1; hasDeliver=0', 'Host':'www.lagou.com', 'Referer':'https://www.lagou.com/', 'Upgrade-Insecure-Requests':'1', 'User-Agent':userAgent&#125;#抓取首页所有网址def getAllUrl(): mainPageUrl = 'https://www.lagou.com/' responses = requests.get(mainPageUrl,headers = headers).text lagouHtml = etree.HTML(responses) urlNames = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/text()') urls = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/@href') for urlName,url in zip(urlNames,urls): dict = &#123; 'urlName' : urlName, 'url' : url &#125; yield dict # print(dict)def saveSubUrl(dict): client = MongoClient() db = client.拉勾主站所有网址 sheet = db.网址明细 sheet.insert_one(dict)#对首页抓取的每一个网址进行爬取def urlResp(): for item in getAllUrl(): statusCode = 200 i = 1 while(statusCode == 200): url = item['url'] + str(i) try: responses = requests.get(url,headers = headers, proxies = proxies) except: statusCode = 200 continue statusCode = responses.status_code resp = etree.HTML(responses.text) i = i + 1 if item['urlName'] == '.NET': name = 'NET' else: name = item['urlName'] # yield responseHtml companies = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[1]/a/text()') positions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/h3/text()') places = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/span/em/text()') pays = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[2]/div/span/text()') works = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[2]/text()') descriptions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[2]/text()') needs = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[1]/span/text()') for company,position,place,pay,work,description,need in zip(companies,positions,places,pays,works,descriptions,needs): dict = &#123; '公司' : company.strip(), '职位' : position.strip(), '工作地点' : place.strip(), '薪资' : pay.strip(), '工作职务' : work.strip(), '公司描述' : description.strip(), '能力需要' : [i.strip() for i in need] &#125; storeData(dict,name) time.sleep(1)def storeData(data,DbSheet): client = MongoClient() db = client['拉勾网'] mySet = db[DbSheet] mySet.insert_one(data) print("保存成功")if __name__ == '__main__': urlResp()]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>爬虫</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Python爬虫入门（4）————ajax加载的拉勾网（IP代理，headers随机）]]></title>
     <url>%2F2016%2F10%2F21%2FPython%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%E2%80%94%E2%80%94ajax%E5%8A%A0%E8%BD%BD%E7%9A%84%E6%8B%89%E5%8B%BE%E7%BD%91%EF%BC%88POST%E6%96%B9%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[关键词：爬虫，拉勾网 这一节，我们讨论一下ajax加载且是POST方法的拉勾网如何爬取 先讲一下POST的用法——传递参数 data 通常，你想要发送一些编码为表单形式的数据——非常像一个 HTML 表单。要实现这个，只需简单地传递一个字典给 data 参数。你的数据字典在发出请求时会自动编码为表单形式 1234567891011&gt;&gt;&gt; payload = &#123;'key1': 'value1', 'key2': 'value2'&#125;&gt;&gt;&gt; r = requests.post("http://httpbin.org/post", data=payload)&gt;&gt;&gt; print(r.text)&#123; ... "form": &#123; "key2": "value2", "key1": "value1" &#125;, ...&#125; 我们先去看拉勾网的页面 我们查看源码如下 现在我们就可以根据源码，解析出大概的数据了，下面我讲一下爬取的思路 伪装浏览器伪装浏览器我们使用fake_useragent库，其他的用法请看库的介绍 123from fake_useragent import UserAgentuserAgentInstance = UserAgent() #创建一个useragent对象，并实例化他userAgent = userAgentInstance.random #这个实例的random属性，随机提供不同的useragent 然后把它放到headers里就可以了 123headers = &#123; 'User-Agent' : userAgent,&#125; 简单的IP池首先找到一些免费的代理ip，然后，使用这些IP做一个简单的IP池 12345678proxiesList = [ #随机找一部分好用的即可，只要不是爬取大量的数据，这些够用了 'http://120.32.209.231:8118', 'http://210.82.36.142:80', 'http://123.125.116.151:80', 'http://113.5.80.144:8080', 'http://122.224.227.202:3128', 'http://220.191.214.176:8080'] 制作一个字典格式的proxies 12import randomproxies = &#123;'http' : random.choice(proxiesList)&#125; 放入requests请求即可 1responses = requests.get(url, headers = headers, proxies = proxies) requests里的具体传入参数请查看库文档 解析主页的所有职位对应的URL 1234567891011121314151617181920212223242526def getAllUrl(): #主页URL mainPageUrl = 'https://www.lagou.com/' responses = requests.get(mainPageUrl,headers = headers).text #获取主页的Element对象 lagouHtml = etree.HTML(responses) urlNames = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/text()') urls = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/@href') #把职位与其对应的URL放到字典里，以便存储与后续使用 for urlName,url in zip(urlNames,urls): dict = &#123; 'urlName' : urlName, 'url' : url &#125; yield dict #这里使用了一个yield，使用yield后这个就不再是一个函数了，而是一个生成器！def saveSubUrl(dict): client = MongoClient() db = client.拉勾主站所有网址 sheet = db.网址明细 sheet.insert_one(dict) if __name__ == '__main__': getAllUrl() 根据这些职位与对应的URL找到对应网页，并爬取想要的数据 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657def urlResp(): #for循环，取出getAllUrl()函数里yield的职位网址的字典 for item in getAllUrl(): 设定初始的一个状态码和循环的 i statusCode = 200 i = 1 #对每一个URL进行一个while循环，只要是这个URL拼接出的URL状态码是200(有正确数据返回) #因为一旦URL有错误数据返回，状态码变为4XX等 while(statusCode == 200): #拼接URL，翻页数据 url = item['url'] + str(i) #尝试获取数据，如果不成功，重设状态码，并跳过后面部分再次while循环，直到状态码错误 try: responses = requests.get(url,headers = headers, proxies = proxies) #如果状态码不等于200，这接跳出while循环 if responses.status_code != 200: continue except: statusCode = 200 continue statusCode = responses.status_code resp = etree.HTML(responses.text) i = i + 1 #因为数据库名称不能以'.'开头，所以要规避 if item['urlName'] == '.NET': name = 'NET' else: name = item['urlName'] # yield responseHtml companies = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[1]/a/text()') positions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/h3/text()') places = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/span/em/text()') pays = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[2]/div/span/text()') works = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[2]/text()') descriptions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[2]/text()') needs = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[1]/span/text()') for company,position,place,pay,work,description,need in zip(companies,positions,places,pays,works,descriptions,needs): dict = &#123; '公司' : company.strip(), '职位' : position.strip(), '工作地点' : place.strip(), '薪资' : pay.strip(), '工作职务' : work.strip(), '公司描述' : description.strip(), '能力需要' : need.strip() &#125; storeData(dict,name) #循环一次暂停一秒，多次反爬措施 time.sleep(1)#储存到数据库中的函数定义def storeData(data,DbSheet): client = MongoClient() db = client['拉勾网'] mySet = db[DbSheet] mySet.insert_one(data) print("保存成功")]]></content>
@@ -931,6 +953,17 @@
         <tag>Python</tag>
         <tag>爬虫</tag>
         <tag>拉勾网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[拉勾爬虫输出]]></title>
+    <url>%2F2016%2F10%2F21%2F%E7%88%AC%E5%8F%96%E6%8B%89%E5%8B%BE%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[爬取拉勾所有数据代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105import requestsfrom lxml import etreeimport timeimport randomfrom pymongo import MongoClientfrom fake_useragent import UserAgent#IP代理proxiesList = [ 'http://120.32.209.231:8118', 'http://210.82.36.142:80', 'http://123.125.116.151:80', 'http://113.5.80.144:8080', 'http://122.224.227.202:3128', 'http://220.191.214.176:8080']proxies = &#123;'http' : random.choice(proxiesList)&#125;#随机浏览器userAgent = UserAgent().random#headers文件headers = &#123; 'Cookie':'user_trace_token=20171110210441-b6e83f7b-c617-11e7-86f0-525400f775ce; LGUID=20171110210441-b6e847a6-c617-11e7-86f0-525400f775ce; X_HTTP_TOKEN=c2758cd47b96276a5a741c7c8aef7389; TG-TRACK-CODE=index_search; SEARCH_ID=d3457fbe235a4f4c8dd0b8a8e8ce93dd; index_location_city=%E5%85%A8%E5%9B%BD; JSESSIONID=ABAAABAACEBACDGB5AE0EFB5452955E2ED72F2B5D254B8E; Hm_lvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1510319081,1510652275; Hm_lpvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1510665850; _gat=1; _ga=GA1.2.739478823.1510319081; _gid=GA1.2.1539303787.1510652275; LGSID=20171114212410-195b1e64-c93f-11e7-8eeb-525400f775ce; PRE_UTM=; PRE_HOST=; PRE_SITE=https%3A%2F%2Fwww.lagou.com%2F; PRE_LAND=https%3A%2F%2Fwww.lagou.com%2F; LGRID=20171114212410-195b1fe3-c93f-11e7-8eeb-525400f775ce; _putrc=11E3FE8A2D6757DB; login=true; unick=%E6%9D%8E%E4%BA%8C%E8%8A%B1; showExpriedIndex=1; showExpriedCompanyHome=1; showExpriedMyPublish=1; hasDeliver=0', 'Host':'www.lagou.com', 'Referer':'https://www.lagou.com/', 'Upgrade-Insecure-Requests':'1', 'User-Agent':userAgent&#125;#抓取首页所有网址def getAllUrl(): mainPageUrl = 'https://www.lagou.com/' responses = requests.get(mainPageUrl,headers = headers).text lagouHtml = etree.HTML(responses) urlNames = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/text()') urls = lagouHtml.xpath('//div[@class="sidebar"]/div/div/div[2]/dl/dd/a/@href') for urlName,url in zip(urlNames,urls): dict = &#123; 'urlName' : urlName, 'url' : url &#125; yield dict # print(dict)def saveSubUrl(dict): client = MongoClient() db = client.拉勾主站所有网址 sheet = db.网址明细 sheet.insert_one(dict)#对首页抓取的每一个网址进行爬取def urlResp(): for item in getAllUrl(): statusCode = 200 i = 1 while(statusCode == 200): url = item['url'] + str(i) try: responses = requests.get(url,headers = headers, proxies = proxies) except: statusCode = 200 continue statusCode = responses.status_code resp = etree.HTML(responses.text) i = i + 1 if item['urlName'] == '.NET': name = 'NET' else: name = item['urlName'] # yield responseHtml companies = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[1]/a/text()') positions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/h3/text()') places = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[1]/a/span/em/text()') pays = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[1]/div[2]/div/span/text()') works = resp.xpath('//*[@id="s_position_list"]/ul/li/div[1]/div[2]/div[2]/text()') descriptions = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[2]/text()') needs = resp.xpath('//*[@id="s_position_list"]/ul/li/div[2]/div[1]/span/text()') for company,position,place,pay,work,description,need in zip(companies,positions,places,pays,works,descriptions,needs): dict = &#123; '公司' : company.strip(), '职位' : position.strip(), '工作地点' : place.strip(), '薪资' : pay.strip(), '工作职务' : work.strip(), '公司描述' : description.strip(), '能力需要' : [i.strip() for i in need] &#125; storeData(dict,name) time.sleep(1)def storeData(data,DbSheet): client = MongoClient() db = client['拉勾网'] mySet = db[DbSheet] mySet.insert_one(data) print("保存成功")if __name__ == '__main__': urlResp()]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
       </tags>
   </entry>
   <entry>
@@ -1045,8 +1078,8 @@
         <category>vim</category>
       </categories>
       <tags>
-        <tag>vim</tag>
         <tag>Mac</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
