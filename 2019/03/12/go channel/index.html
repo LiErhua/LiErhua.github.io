@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="go,golang,channel," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键词：go, channel">
+<meta name="keywords" content="go,golang,channel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 golang channel">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/go channel/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键词：go, channel">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-14T16:33:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 golang channel">
+<meta name="twitter:description" content="关键词：go, channel">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/12/go channel/"/>
+
+
+
+
+
+  <title>理解 golang channel | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/go channel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解 golang channel</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T00:00:00+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/golang/" itemprop="url" rel="index">
+                    <span itemprop="name">golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键词：go, channel</p>
+<a id="more"></a>
+<p>goroutine 是一个轻量级的执行单元，相比线程开销更小，完全由 Go 语言负责调度，是 Go 支持并发的核心。开启一个 goroutine 非常简单:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;&#125;() 即可</div></pre></td></tr></table></figure>
+<p><strong>不要通过共享来通信，而要通过通信来共享。</strong></p>
+<p><code>goroutine</code> 运行在相同的地址空间，因此访问共享内存必须做好同步，<code>golang</code>是通过<code>channel</code>来实现的通信的。</p>
+<h4 id="unbufered-channel"><a href="#unbufered-channel" class="headerlink" title="unbufered channel"></a><code>unbufered channel</code></h4><p><code>Channel</code>可以分为两种类型，一种是<code>buffer</code>为0的，一种是<code>buffer</code>不为零的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ch := make(chan int)</div><div class="line">// 这种就是buffer为零的channel的定义方式</div><div class="line">ch := make(chan int, 10)</div><div class="line">// 这种就是buffer不为零的定义方式</div></pre></td></tr></table></figure>
+<p>当<code>channel</code> 的 <code>buffer</code>为零时，由于没有缓存，因此，可以非常容易做到Goroutines的同步.</p>
+<ul>
+<li><code>send</code>语句用来往<code>Channel</code>中发送数据， 如<code>ch &lt;- 3</code></li>
+<li><code>receive</code> 语句 <code>&lt;-ch</code>用来从<code>channel ch</code>中接收数据，这个表达式会一直被<code>block</code>,直到有数据可以接收。</li>
+</ul>
+<p>对<code>unbuffered channel ch</code>进行读操作<code>v := &lt;- ch</code>时（即进行<code>receive</code>时），会一直阻塞，直到有数据<code>send</code>到<code>ch</code>中（即当有<code>ch &lt;- value</code>）时才会发生通讯。</p>
+<p><strong>即：</strong>如果没有设置容量，或者容量设置为0, 说明<code>Channel</code>没有缓存，只有<code>sender</code>和<code>receiver</code>都准备好了后它们的通讯才会发生, 实现<code>goroutine</code> 间的同步（<code>main</code> 函数自身就是一个 <code>goroutine</code>）</p>
+<p>示例代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line"><span class="string">"fmt"</span></div><div class="line">	<span class="string">"time"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">// this test is about unbuffered channel, it contains no element in chan</span></div><div class="line"><span class="comment">//这是 channel 最简单的用法之一：同步，这种类型的 channel 容量是 0，称之为 unbuffered channel。</span></div><div class="line"><span class="comment">// *********** 下面一句很重要 ************</span></div><div class="line"><span class="comment">//对 unbuffered channel 执行读操作 value := &lt;-ch 会一直阻塞直到有数据可接收， 即直到ch里有数据</span></div><div class="line"><span class="comment">//执行写操作 ch &lt;- value 也会一直阻塞直到有 goroutine 对 channel 开始执行接收, 二者必须成对出现</span></div><div class="line"></div><div class="line"><span class="comment">//无缓存的channel只有在receiver准备好后send才被执行。如果有缓存，并且缓存未满，则send会被执行。</span></div><div class="line"><span class="comment">//&lt;-ch用来从channel ch中接收数据，这个表达式会一直被block,直到有数据可以接收</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		fmt.Println(<span class="string">"goroutine message"</span>)</div><div class="line">		time.Sleep(time.Second)</div><div class="line">		c &lt;- <span class="number">1</span> <span class="comment">//1</span></div><div class="line">		fmt.Println(<span class="string">"goroutine message 2"</span>)</div><div class="line">		time.Sleep(time.Second)</div><div class="line">		fmt.Println(<span class="string">"goroutine message 3"</span>)</div><div class="line">	&#125;()</div><div class="line">	&lt;-c <span class="comment">//2</span></div><div class="line">	fmt.Println(<span class="string">"main function message"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line">------</div><div class="line">goroutine message</div><div class="line">goroutine message <span class="number">2</span></div><div class="line">main function message</div></pre></td></tr></table></figure>
+<p>这个示例代码有两个<code>goroutine</code>, 其中一个是<code>main</code>函数的，一个是<code>go</code>出来的函数，通过返回的结果可以看出，<code>main</code>携程进行到<code>&lt;- c</code>时就阻塞了，因为此时<code>c</code>里时空的，没有向<code>c``中发送数据，转而去执行另一个goroutine</code>, 所以会打印出<code>“goroutine message”</code>，之后进行了一次<code>sleep</code>，交出了这个<code>goroutine</code>的控制权，回到<code>main</code>这个<code>goroutine</code>中，发现<code>c</code>还是没有接受到数据，因此这个<code>main</code>的<code>goroutine</code>依旧阻塞着，过了一秒后，控制权重新回到另一个<code>goroutine</code>, 此时发现有数据写入<code>c</code>了，二者发生了通信，实现了同步，因此打印出了<code>&quot;goroutine message 2&quot;</code>和<code>&quot;main function message&quot;</code>， 由于此时<code>main</code>这个<code>goroutine</code>已经结束了，因此整个程序也结束了，所以另一个<code>goroutine</code>的后续操作就没有继续执行。</p>
+<h4 id="buffered-channel"><a href="#buffered-channel" class="headerlink" title="buffered channel"></a><code>buffered channel</code></h4><p>如果 channel 的容量不是 0，此类 channel 称之为 <strong>buffered channel</strong> ，buffered channel 在消息写入个数 <strong>未达到容量的上限之前不会阻塞</strong> ，一旦写入消息个数超过上限，下次输入将会阻塞，直到 channel 有位置可以再写入。</p>
+<p>示例代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"strconv"</span></div><div class="line">	<span class="string">"time"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dealSlice</span><span class="params">(c *<span class="keyword">chan</span> <span class="keyword">int</span>, num *<span class="keyword">int</span>, s *[]<span class="keyword">string</span>)</span></span> &#123;</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</div><div class="line">		*c &lt;- i</div><div class="line">		*num++</div><div class="line">		v := <span class="string">"inner=&gt;"</span> + strconv.Itoa(*num)</div><div class="line">		*s = <span class="built_in">append</span>(*s, v)</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">close</span>(*c)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</div><div class="line">	s := <span class="built_in">make</span>([]<span class="keyword">string</span>, <span class="number">8</span>)</div><div class="line">	num := <span class="number">0</span></div><div class="line">	<span class="keyword">go</span> dealSlice(&amp;c, &amp;num, &amp;s)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</div><div class="line">		time.Sleep(time.Second)</div><div class="line">		&lt;-c</div><div class="line">		num++</div><div class="line">		v := <span class="string">"outer=&gt;"</span> + strconv.Itoa(num)</div><div class="line">		s = <span class="built_in">append</span>(s, v)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(s)</div><div class="line">&#125;</div><div class="line">------</div><div class="line">[inner=&gt;<span class="number">1</span> inner=&gt;<span class="number">2</span> inner=&gt;<span class="number">3</span> outer=&gt;<span class="number">4</span> inner=&gt;<span class="number">5</span> outer=&gt;<span class="number">6</span> outer=&gt;<span class="number">7</span> outer=&gt;<span class="number">8</span>]</div></pre></td></tr></table></figure>
+<p>将 <code>dealSlice</code> <code>go</code>出去后，由于<code>c</code>的容量是3，因此在<code>c</code>达到3的容量前，是不会阻塞的，此时另一个<code>main</code> 的 <code>goroutine</code>正在<code>Sleep</code>，一旦当<code>c</code>的容量到了3之后，这个<code>goroutine</code>就阻塞了，直到<code>main</code>的<code>sleep</code>走完，并且完成从<code>c</code>中取出一个数据，一旦从<code>c</code>中取出一个数据，这个时候<code>c</code>的大小就小于3了，此时不再阻塞，于是dealSlice<code>这个</code>goroutine <code>又开始运行（但是由于两个</code>goroutine<code>都没有阻塞了此时，所以二者谁先</code>append<code>进去是不确定的）但是一旦</code>dealSlice<code>完成后，就使用</code>close<code>将这个</code>c<code>关闭了，此时无法再对</code>c<code>写入任何的数据了，一旦再有数据写入就会引发</code>panic<code>，但是依旧可以从</code>c<code>中读取数据，直到读取完毕，因此，会看到如输出的结果一样的东西。这就是</code>buggered channel<code>的作用，有</code>buffer`，所以在达到容量上限前是不会阻塞的。</p>
+<h4 id="select-—-使用-select-读取多个-channel"><a href="#select-—-使用-select-读取多个-channel" class="headerlink" title="select — 使用 select 读取多个 channel"></a><code>select</code> — 使用 select 读取多个 channel</h4><p>当同时又多个channel时，select 语句可以从多个可读的 channel 中随机选取一个执行，注意是 <strong>随机选取。</strong>但是这个随机选取是有条件的，这个channel是不阻塞的，如果channel阻塞，他会随机选择其他的不阻塞的一个。</p>
+<blockquote>
+<p>我们上面介绍的都是只有一个channel的情况，那么如果存在多个channel的时候，我们该如何操作呢，Go里面提供了一个关键字<code>select</code>，通过<code>select</code>可以监听channel上的数据流动。</p>
+<p><code>select</code>默认是阻塞的，只有当监听的channel中有发送或接收可以进行时才会运行，当多个channel都准备好的时候，select是随机的选择一个执行的。</p>
+</blockquote>
+<p>代码实例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fibonacci</span><span class="params">(c, quit <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</div><div class="line">	x, y := <span class="number">0</span>, <span class="number">1</span></div><div class="line">	<span class="keyword">for</span> &#123;</div><div class="line">		<span class="keyword">select</span> &#123;</div><div class="line">		<span class="keyword">case</span> c &lt;- x:</div><div class="line">			x, y = y, x+y</div><div class="line">		<span class="keyword">case</span> &lt;-quit:</div><div class="line">			fmt.Println(<span class="string">"quit"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</div><div class="line">			fmt.Println(&lt;-c)</div><div class="line">		&#125;</div><div class="line">		quit &lt;- <span class="number">0</span></div><div class="line">	&#125;()</div><div class="line">	fibonacci(c, quit)</div><div class="line">&#125;</div><div class="line">------</div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">5</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">13</span></div><div class="line"><span class="number">21</span></div><div class="line"><span class="number">34</span></div><div class="line">quit</div></pre></td></tr></table></figure>
+<p>根据代码和输出的情况来看，新起的<code>goroutine</code>一开始就会阻塞，因为<code>c</code>里没有数据可以取出，因此，阻塞在这里等待其他<code>goroutine</code>里有数据输入到<code>c</code>中，而f<code>ibonacci</code>所在的<code>main goroutine</code>在<code>select</code>中选择<code>case</code>，两个随机选择，但是<code>&lt;-quit</code>阻塞，因此，只能选择不阻塞的<code>c &lt;- x</code>, 这样两个<code>goroutine``就都可以进行下去，直到func</code>这个 <code>goroutine</code> 的<code>for</code>循环结束，此时<code>fibonacci</code>那里的数据已经被<code>func</code>全部取完了，<code>fibonacci</code>又阻塞了，<code>func</code>这时走到了<code>quit &lt;- 0</code>，阻塞到这里，等待<code>quit</code>有人接收，正好此时<code>select</code>发现<code>case2</code>正好可以实现同步，<code>func</code>这个<code>goroutine</code>先结束，主程序<code>main</code>的<code>goroutine</code>后结束（因为<code>func</code>只有一个<code>channel</code>接收数据，而<code>main</code>这个<code>goroutine</code> 除了和其对接的 <code>&lt;- quit</code> 还有一个打印操作，所以，最后结束点落到<code>main</code>上，让程序正好<code>OK</code>，如果<code>func</code>在<code>quit&lt;-0</code> 后，还有一些其他的阻塞操作，那么，可能就无法执行，因为此时主程序的<code>goroutine</code> 已经结束。示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"time"</span></div><div class="line">)</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fibonacci</span><span class="params">(c, quit <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</div><div class="line">	x, y := <span class="number">0</span>, <span class="number">1</span></div><div class="line">	<span class="keyword">for</span> &#123;</div><div class="line">		<span class="keyword">select</span> &#123;</div><div class="line">		<span class="keyword">case</span> c &lt;- x:</div><div class="line">			x, y = y, x+y</div><div class="line">		<span class="keyword">case</span> &lt;-quit:</div><div class="line">			fmt.Println(<span class="string">"quit"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</div><div class="line">			fmt.Println(&lt;-c)</div><div class="line">		&#125;</div><div class="line">		quit &lt;- <span class="number">0</span></div><div class="line">		fmt.Println(<span class="string">"这个打印还是可以显示的"</span>)</div><div class="line">		time.Sleep(time.Second)</div><div class="line">		fmt.Println(<span class="string">"这个打印应该不会显示了"</span>)</div><div class="line">	&#125;()</div><div class="line">	fibonacci(c, quit)</div><div class="line">&#125;</div><div class="line">------</div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">5</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">13</span></div><div class="line"><span class="number">21</span></div><div class="line"><span class="number">34</span></div><div class="line">这个打印还是可以显示的</div><div class="line">quit</div></pre></td></tr></table></figure>
+<p>正如我们预测的那样。</p>
+<p>在<code>select</code>里面还有default语法，<code>select</code>其实就是类似<code>switch</code>的功能，<code>default</code>就是当监听的<code>channel</code>都没有准备好的时候，默认执行的（<code>select</code>不再阻塞等待<code>channel</code>）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> &#123;</div><div class="line"><span class="keyword">case</span> &lt;-ch:</div><div class="line">	<span class="comment">// 当 ch 不阻塞的时候执行这里</span></div><div class="line"><span class="keyword">default</span>:</div><div class="line">	<span class="comment">// 当 ch 阻塞的时候执行这里</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="timeout-超时的处理"><a href="#timeout-超时的处理" class="headerlink" title="timeout 超时的处理"></a><code>timeout</code> 超时的处理</h4><p>有时候可能会出现goroutine超时的情况，这个时候我们可以使用 select 设置超时的处理，一旦超时超过一段时间，我们就使用 select 选择处理的case，保证程序的正常进行。代码实例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div><div class="line">	o := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		<span class="keyword">for</span> &#123;</div><div class="line">			<span class="keyword">select</span> &#123;</div><div class="line">				<span class="keyword">case</span> v := &lt;- c:</div><div class="line">					<span class="built_in">println</span>(v)</div><div class="line">				<span class="keyword">case</span> &lt;- time.After(<span class="number">5</span> * time.Second):</div><div class="line">					<span class="built_in">println</span>(<span class="string">"timeout"</span>)</div><div class="line">					o &lt;- <span class="literal">true</span></div><div class="line">					<span class="keyword">break</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;()</div><div class="line">	&lt;- o</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到此时一共有两个<code>goroutine</code>, 一个是<code>main</code> 的，一个是<code>go</code> 出的<code>func</code>的，<code>func</code>是一个无限循环，由于两个<code>case</code>在5秒内都不会有任何反应，因此会在<code>select</code>这里阻塞5秒，而<code>main</code>中是从<code>o</code>这个<code>channel</code>中取数据，没有数据的流入因此也阻塞到这里，此时超时就发挥作用了，这个<code>time.After()</code>的返回值是一个<code>channel</code>，当5秒过去后，这个<code>case</code>不阻塞了，于是向下执行，先是打印出 <code>timeout</code>这个字符，然后 向<code>o</code>这个<code>channel</code>写入数据，与此同时 <code>&lt;-o</code>这个阻塞也解除，<code>func</code>跳出循环结束函数，<code>main</code>结束此<code>goroutine</code>。</p>
+<h4 id="close-关闭-channel"><a href="#close-关闭-channel" class="headerlink" title="close 关闭 channel"></a><code>close</code> 关闭 channel</h4><p>Channel 可以被关闭 <code>close</code> ，<strong>channel 关闭之后仍然可以读取</strong>，但是向被关闭的 channel send 会 panic。如果 channel 关闭之前有值写入，关闭之后将依次读取 channel 中的消息，读完完毕之后再次读取将会返回 channel 的类型的 zero value：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		c &lt;- <span class="number">1</span></div><div class="line">		c &lt;- <span class="number">2</span></div><div class="line">		c &lt;- <span class="number">3</span></div><div class="line">		<span class="built_in">close</span>(c)</div><div class="line">	&#125;()</div><div class="line"></div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">	fmt.Println(&lt;-c)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出 1 2 3 0 0 0 ，0 是 int channel c 的 zero value。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</div><div class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">		c &lt;- <span class="number">1</span></div><div class="line">		c &lt;- <span class="number">2</span></div><div class="line">		c &lt;- <span class="number">3</span></div><div class="line">		<span class="built_in">close</span>(c)</div><div class="line">	&#125;()</div><div class="line"></div><div class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> c &#123;</div><div class="line">		fmt.Println(i)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>c 可以进行 range 迭代，如果 channel 没有被关闭 range 会一直等待 channel，但是关闭 channel 之后可以隐式的中断 range 的迭代。</p>
+<p>如何判断<code>channel</code>的关闭与否呢？</p>
+<p>Go 提供了 ok 表达式来判断 channel 的关闭状态。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">value, ok &lt;- c</div></pre></td></tr></table></figure>
+<p>如果 channel 是关闭状态，ok 是 false，value 是 channel 的 zero value，否则 ok 是 true 表示 channel 未关闭，value 表示 channel 中的值。</p>
+<hr>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><p><a href="https://github.com/LiErhua/build-web-application-with-golang/blob/master/zh/02.7.md" target="_blank" rel="external">go web 编程</a></p>
+</li>
+<li><p><a href="https://sanyuesha.com/2017/08/03/go-channel/" target="_blank" rel="external">理解 golang channel</a></p>
+</li>
+<li><a href="https://colobu.com/2016/04/14/Golang-Channels/" target="_blank" rel="external">go channel 详解</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+            <a href="/tags/channel/" rel="tag"># channel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/05/Mac常用开发必备/" rel="next" title="Mac 下必备的开发神器一览">
+                <i class="fa fa-chevron-left"></i> Mac 下必备的开发神器一览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#unbufered-channel"><span class="nav-number">1.</span> <span class="nav-text">unbufered channel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#buffered-channel"><span class="nav-number">2.</span> <span class="nav-text">buffered channel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#select-—-使用-select-读取多个-channel"><span class="nav-number">3.</span> <span class="nav-text">select — 使用 select 读取多个 channel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#timeout-超时的处理"><span class="nav-number">4.</span> <span class="nav-text">timeout 超时的处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#close-关闭-channel"><span class="nav-number">5.</span> <span class="nav-text">close 关闭 channel</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number"></span> <span class="nav-text">参考文档</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
