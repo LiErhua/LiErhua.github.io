@@ -101,7 +101,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="夜雨秋灯">
-<meta property="og:url" content="http://yoursite.com/tags/Vim/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/vim/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Vim/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/vim/"/>
 
 
 
 
 
-  <title>标签: Vim | 夜雨秋灯</title>
+  <title>标签: vim | 夜雨秋灯</title>
   
 
 
@@ -303,7 +303,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Vim<small>标签</small>
+        <h1>vim<small>标签</small>
         </h1>
       </div>
 
@@ -315,9 +315,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/02/14/sublime-插件的安装与Vim模式的设置/" itemprop="url">
+            <a class="post-title-link" href="/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之vim/" itemprop="url">
               
-                <span itemprop="name">sublime 插件的安装与Vim模式的设置</span>
+                <span itemprop="name">Vim & tmux & zsh ——打造IDE之vim</span>
               
             </a>
         
@@ -325,9 +325,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-14T00:00:00+08:00"
-              content="2018-02-14" >
-          02-14
+              datetime="2018-01-18T00:00:00+08:00"
+              content="2018-01-18" >
+          01-18
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/12/17/归档/vim如何配置/" itemprop="url">
+              
+                <span itemprop="name">vim 下的基本配置（带中文解释）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-12-17T00:00:00+08:00"
+              content="2017-12-17" >
+          12-17
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/03/17/归档/Mac下vim的安装与基本使用/" itemprop="url">
+              
+                <span itemprop="name">Mac下vim的安装与基本使用</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-03-17T00:00:00+08:00"
+              content="2016-03-17" >
+          03-17
         </time>
       </div>
 
@@ -386,7 +442,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -450,7 +506,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -898,76 +954,6 @@
             input.addEventListener('keypress', function (event) {
               if (event.keyCode === 13) {
                 inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-     inputEventFunction();
               }
             });
           }
