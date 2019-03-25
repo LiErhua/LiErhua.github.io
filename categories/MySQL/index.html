@@ -101,7 +101,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="夜雨秋灯">
-<meta property="og:url" content="http://yoursite.com/categories/mysql/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/MySQL/index.html">
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/mysql/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/MySQL/"/>
 
 
 
 
 
-  <title>分类: mysql | 夜雨秋灯</title>
+  <title>分类: MySQL | 夜雨秋灯</title>
   
 
 
@@ -303,7 +303,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>mysql<small>分类</small>
+        <h1>MySQL<small>分类</small>
         </h1>
       </div>
 
@@ -315,9 +315,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/12/05/mysql数据库远程连接/" itemprop="url">
+            <a class="post-title-link" href="/2016/09/29/MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）/" itemprop="url">
               
-                <span itemprop="name">mysql远程连接</span>
+                <span itemprop="name">MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）</span>
               
             </a>
         
@@ -325,9 +325,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-05T00:00:00+08:00"
-              content="2017-12-05" >
-          12-05
+              datetime="2016-09-29T00:29:31+08:00"
+              content="2016-09-29" >
+          09-29
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/09/21/如何在Mac下使用命令行登录MySQL/" itemprop="url">
+              
+                <span itemprop="name">如何在Mac下使用命令行登录MySQL</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-09-21T00:00:00+08:00"
+              content="2016-09-21" >
+          09-21
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2016/07/21/如何安装与配置MySQL/" itemprop="url">
+              
+                <span itemprop="name">如何安装与配置MySQL</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-07-21T00:00:00+08:00"
+              content="2016-07-21" >
+          07-21
         </time>
       </div>
 
@@ -387,7 +443,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-count">106</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -409,7 +465,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">96</span>
+                <span class="site-state-item-count">98</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -897,78 +953,6 @@
           } else {
             $('.search-icon').click(inputEventFunction);
             input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-    input.addEventListener('keypress', function (event) {
               if (event.keyCode === 13) {
                 inputEventFunction();
               }
