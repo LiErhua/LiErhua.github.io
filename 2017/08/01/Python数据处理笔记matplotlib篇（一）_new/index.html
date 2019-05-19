@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="matplotlib," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
+<meta name="keywords" content="matplotlib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据处理笔记matplotlib篇（一）">
+<meta property="og:url" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjtkq2h8t0j30it06at90.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:34:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python数据处理笔记matplotlib篇（一）">
+<meta name="twitter:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/"/>
+
+
+
+
+
+  <title>Python数据处理笔记matplotlib篇（一） | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python数据处理笔记matplotlib篇（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T00:00:00+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念</strong></p>
+<a id="more"></a>
+<p><strong>简单的小例子</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">path = <span class="string">""</span></div><div class="line">plt.plot([<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">4</span>])</div><div class="line">	<span class="comment">#绘图，如果只有一个list默认其为Y轴，X轴数据为其索引值</span></div><div class="line">plt.ylabel(<span class="string">"grade"</span>)</div><div class="line">plt.axis([<span class="number">-2</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">12</span>])</div><div class="line">	<span class="comment">#axis函数接收一个list，设定横纵坐标尺度，list各个参数分别代表[X初始刻度，X终止刻度，Y起始刻度，Y终止		刻]</span></div><div class="line">plt.savefig(path,dpi = <span class="number">600</span>)</div><div class="line">	<span class="comment">#savefig函数用来保存图片至path地址，dpi值表示每英寸具有的像素点数</span></div><div class="line">plt.show()</div><div class="line">------</div><div class="line">这个例子的关键词：坐标轴尺度、图像保存</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>plt.plot()简介：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">plt.plot(x, y, format_string, **kwargs)</div><div class="line">    <span class="comment">#这个函数是绘图的关键函数</span></div><div class="line">    <span class="comment">#x ： X轴数据，列表或数组，可选</span></div><div class="line">    <span class="comment">#y ： Y轴数据，列表或数组</span></div><div class="line">    <span class="comment">#format_string ： 控制曲线的格式字符串，可选</span></div><div class="line">    <span class="comment">#**kwargs ：第二组或更多(x,y,format_string)</span></div><div class="line">其中要说明的是format_string，包含的主要类型有</div><div class="line">颜色字符：<span class="string">'b'</span>,<span class="string">'k'</span>等</div><div class="line">风格字符：<span class="string">'-'</span>,<span class="string">'--'</span>等</div><div class="line">标记字符：每个数据点的标志方式,<span class="string">'.'</span>,<span class="string">'*'</span>,<span class="string">'o'</span>等</div><div class="line">还要很多其他的参数值，到时候查文档</div></pre></td></tr></table></figure>
+<hr>
+<p><strong>如何处理坐标轴的密度：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#设置密度之前，需要知道关于axis的一些内容</span></div><div class="line">------</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axis</span>.<span class="title">XAxis</span><span class="params">(axes, pickradius=<span class="number">15</span>)</span></span></div><div class="line"><span class="class"><span class="title">Init</span> <span class="title">the</span> <span class="title">axis</span> <span class="title">with</span> <span class="title">the</span> <span class="title">parent</span> <span class="title">Axes</span> <span class="title">instance</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">class</span> <span class="title">matplotlib</span>.<span class="title">axis</span>.<span class="title">YAxis</span><span class="params">(axes, pickradius=<span class="number">15</span>)</span></span></div><div class="line"><span class="class"><span class="title">Init</span> <span class="title">the</span> <span class="title">axis</span> <span class="title">with</span> <span class="title">the</span> <span class="title">parent</span> <span class="title">Axes</span> <span class="title">instance</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class">需要用父类<span class="title">Axes</span>的实例对<span class="title">matplot</span>.<span class="title">axis</span>.<span class="title">XAxis</span>进行初始化为一个<span class="title">axis</span>实例<span class="params">(xaxis和yaxis都是axis的子类)</span></span></div><div class="line"><span class="class">令<span class="title">axis</span>实例为<span class="title">axes_xaxis</span></span></div><div class="line"><span class="class"></span></div><div class="line">fig,ax = plt.subplots()</div><div class="line">axes_xaxis = matplotlib.axis.XAxis(ax)<span class="comment">#ax是matplotlib.axes.Axes的一个实例</span></div><div class="line">现在axes_xaxis就是一个Axis(XAxis)的实例</div></pre></td></tr></table></figure>
+<p><strong>此处见过好多直接ax.xaxis.set_major……的使用方法，我的理解是，ax是一个父类的实例，可以直接调用任何的关于matplotlib.axis下的东西。</strong>有待考证(可用度不高，测试过，有的可，有的不可)</p>
+<p><strong>得出一个结论，能用plt就用plt，尽量不使用axes</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#方法一：设置间隔法</span></div><div class="line">axes_xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(<span class="number">5</span>))<span class="comment">#5代表每隔5个</span></div><div class="line">------</div><div class="line">    <span class="comment">#也可以不进行实例化，直接使用如下的方式</span></div><div class="line">    ax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(<span class="number">5</span>))</div><div class="line">------</div><div class="line"><span class="comment">#方法二：自动线性调整</span></div><div class="line">ax.xaxis.set_major_locator(ticker.LinearLocator(numticks=<span class="keyword">None</span>, presets=<span class="keyword">None</span>))</div><div class="line">------</div><div class="line">    文档里LinearLocator的介绍</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">ticker</span>.<span class="title">LinearLocator</span><span class="params">(numticks=None, presets=None)</span></span></div><div class="line"><span class="class">    <span class="title">Bases</span>:</span> matplotlib.ticker.Locator</div><div class="line">    Determine the tick locations</div><div class="line">    The first time this function <span class="keyword">is</span> called it will <span class="keyword">try</span> to set the number of ticks to make 		a nice tick partitioning. Thereafter the number of ticks will be fixed so that 			interactive navigation will be nice</div><div class="line">	第一次调用的时候就会根据坐标轴的大小，自动的给设置好留几个tick_label合适</div><div class="line">------</div></pre></td></tr></table></figure>
+<p>关键词：坐标轴，密度</p>
+<hr>
+<p><strong>axes自动填充满figure</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mpl.rc(<span class="string">'figure'</span>,autolayout = <span class="keyword">True</span>)</div><div class="line"><span class="comment">#autolyout使axes自适应整个figure框</span></div></pre></td></tr></table></figure>
+<hr>
+<p><strong>如何令图片文件名称与title一致</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先设定了title的内容</span></div><div class="line">ax.set_title(<span class="string">'一程山路'</span>)</div><div class="line"><span class="comment">#然后保存图片是，图片的名称是这个即可</span></div><div class="line">plt.savefig(<span class="string">'%s.png'</span>%(ax.get_title()),dpi = <span class="number">300</span>)<span class="comment">#其中ax.get_title()即获取title</span></div></pre></td></tr></table></figure>
+<p>NOTICE:当使用了twinx()之后，尽量使用如下方式实现图片的保存</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig,ax = plt.subplots()</div><div class="line">fig.savefig(path,**kwargs)<span class="comment">#使用fig实例进行保存操作</span></div></pre></td></tr></table></figure>
+<hr>
+<p>#####关于matplotlib的<strong>面向对象</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">matplotlib.pyplot.subplots(nrows=<span class="number">1</span>, ncols=<span class="number">1</span>, sharex=<span class="keyword">False</span>, sharey=<span class="keyword">False</span>, squeeze=<span class="keyword">True</span>, subplot_kw=<span class="keyword">None</span>, gridspec_kw=<span class="keyword">None</span>, **fig_kw)</div></pre></td></tr></table></figure>
+<p>上面这个函数有两个返回值，他们分别如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig : matplotlib.figure.Figure object</div><div class="line">ax : matplotlib.axes.Axes object <span class="keyword">or</span> array of Axes objects.</div></pre></td></tr></table></figure>
+<p>他们的关系由下图初见端倪：（fig是一个大面板，ax是这个面板上的区域，fig是由ax和其他一些东西组成的）</p>
+<p><img src="lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
+<p>这两个类分别如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">figure</span>.<span class="title">Figure</span><span class="params">(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=<span class="number">0.0</span>, frameon=None, subplotpars=None, tight_layout=None)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Figure</span>：这个类的实例有很多的方法，如：</span></div><div class="line"><span class="class"><span class="title">add_axes</span><span class="params">(*args, **kwargs)</span>#添加一个<span class="title">axes</span>，返回值是一个<span class="title">Axes</span>实例</span></div><div class="line"><span class="class"><span class="title">add_subplot</span><span class="params">(*args, **kwargs)</span>#添加一个若干个<span class="title">axes</span>，并返回一个<span class="title">Axes</span>实例数组</span></div><div class="line"><span class="class">------</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axes</span>.<span class="title">Axes</span><span class="params">(fig, rect, facecolor=None, frameon=True, sharex=None, sharey=None, label=<span class="string">''</span>, xscale=None, yscale=None, axisbg=None, **kwargs)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Axes</span>:</span>这个类的方法有：</div><div class="line">plot(*args,**kwargs)<span class="comment">#实例使用此方法即能绘制图像,并且十分强大</span></div><div class="line">scatter(*args,**kwargs)</div><div class="line">还有与pyplot中一一对应的方法：</div><div class="line">plt.xlabel()--&gt;ax.set_xlabel()&amp;ax.get_xlabel()#具体查文档</div><div class="line">------</div></pre></td></tr></table></figure>
+<p>所以，小例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fig,ax = matplotlib.pyplot.subplots()</div><div class="line">fig.set_size_inches((w,h))</div><div class="line">ax.plot(x,y)</div><div class="line">ax.set_xlabel(<span class="string">"hello"</span>)</div></pre></td></tr></table></figure>
+<h5 id="如何移轴"><a href="#如何移轴" class="headerlink" title="如何移轴"></a>如何移轴</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">将地轴移到中间</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">把这些边框去掉</div><div class="line"></div><div class="line">ax1.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax1.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">把tick移轴</div></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg" alt=""></p>
+<h5 id="添加注释"><a href="#添加注释" class="headerlink" title="添加注释"></a>添加注释</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"></div><div class="line">mpl.rcParams[<span class="string">'font.family'</span>] = <span class="string">'STFangsong'</span></div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line"><span class="comment"># bagua = [乾兑离震巽坎艮坤]</span></div><div class="line">------</div><div class="line">bagua = [<span class="string">'乾'</span>,<span class="string">'坤'</span>,<span class="string">'兑'</span>,<span class="string">'艮'</span>,<span class="string">'离'</span>,<span class="string">'坎'</span>,<span class="string">'震'</span>,<span class="string">'巽'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</div><div class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">0.5</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">-0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">-0.5</span>))</div><div class="line">------</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fjtkq2h8t0j30it06at90.jpg" alt=""></p>
+<p>###理论概念</p>
+<hr>
+<p>绘图区域设置</p>
+<p>绘图区域概念如下：</p>
+<p>在matplotlib中，一个独立的图像（不管有多少小图像）是一个Figure对象，一个Figure对象中可以包含一个或者多个Axes对象，每个Axes对象都是一个拥有自己独立坐标系统的绘图区域，如下：</p>
+<p><img src="lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
+<p>因此，可以在全局绘图区域中创建一个分区体系，并定位到一个子绘图区域</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">plt.subplot(nrows,ncols,plot_number)</div><div class="line"><span class="comment">#区域分为nrows行，ncols列，现在绘制第plot_number个子图</span></div><div class="line">plt.subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>)</div><div class="line"><span class="comment">#3行2列，选择第4个绘图区域，然后再使用plt.plot(参数)即可进行绘图了</span></div></pre></td></tr></table></figure>
+<p>一个Figure对应一张图片。Title为标题。Axis为坐标轴，Label为坐标轴标注。Tick为刻度线，Tick Label为刻度注释。</p>
+<p><img src="lierhua.top/img/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg" alt=""></p>
+<!-- ![](lierhua.top/img/006tNc79ly1fjj0mcjwljj30dm0e2wfi.jpg) -->
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/Python数据处理笔记matplotlib篇（一）/" rel="next" title="Python数据处理笔记matplotlib篇（一）">
+                <i class="fa fa-chevron-left"></i> Python数据处理笔记matplotlib篇（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/10/yaml简介与Python上的应用/" rel="prev" title="yaml简介与Python上的应用">
+                yaml简介与Python上的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何移轴"><span class="nav-number">1.</span> <span class="nav-text">如何移轴</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加注释"><span class="nav-number">2.</span> <span class="nav-text">添加注释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

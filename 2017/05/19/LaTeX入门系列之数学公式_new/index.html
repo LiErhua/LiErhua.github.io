@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数学公式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键词：数学公式">
+<meta name="keywords" content="数学公式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX入门系列之数学公式具体实现">
+<meta property="og:url" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键词：数学公式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tKfTcly1fkkf340ndhj31ke0bi775.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fkl2onuu3ij31ka0byahv.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fkl4vpyoamj31ko0n4add.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fklb6tykezj317005ugm8.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fklbwfktqmj31e208gq43.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fklcd1t5d8j31dk06qgm9.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fklciwu5aqj317u04aaae.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fklcsljxf3j31du042dgc.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fkldjcgumhj31f40nwtcx.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tNc79ly1fkle9i96lxj317e0qomzf.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:29:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LaTeX入门系列之数学公式具体实现">
+<meta name="twitter:description" content="关键词：数学公式">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/lierhua.top/img/006tKfTcly1fkkf340ndhj31ke0bi775.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/"/>
+
+
+
+
+
+  <title>LaTeX入门系列之数学公式具体实现 | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/LaTeX入门系列之数学公式_new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LaTeX入门系列之数学公式具体实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T00:00:00+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LaTeX/" itemprop="url" rel="index">
+                    <span itemprop="name">LaTeX</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键词：数学公式</p>
+<a id="more"></a>
+<p>这一节，我们讨论数学公式。</p>
+<h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><p>数学公式与符号，可以说是LaTeX最令人称道的功能了！其中我们必备的宏包为\usepackage{amsmath}</p>
+<p>数学公式分为</p>
+<ul>
+<li>行内公式（inline equation)        <ul>
+<li>使用两个$符号，形如$公式$</li>
+</ul>
+</li>
+<li>行间公式   (display equation)<ul>
+<li>不带标号的行间公式：<ul>
+<li>$$……$$</li>
+<li>\[     ……    \ ]</li>
+<li>\begin{displaymath}  ……   \end{displaymath}</li>
+</ul>
+</li>
+<li>带标号的行间公式：<ul>
+<li>\begin{equation}   ……   \end{equation}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">勾股定理是$a^2 + b^2 = c^2$，如果我不想给行间公式编号，那么，我可以这么办：</div><div class="line">\[a^2 + b^2 = r^2\]</div><div class="line">我要是使用带有编号的公式呢？要这样；</div><div class="line">\begin&#123;equation&#125;</div><div class="line">a^2 + b^2 = c^2</div><div class="line">\end&#123;equation&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tKfTcly1fkkf340ndhj31ke0bi775.jpg" alt=""></p>
+<h3 id="公式内实现中文"><a href="#公式内实现中文" class="headerlink" title="公式内实现中文"></a>公式内实现中文</h3><p>实现公式内中文的方法：</p>
+<ul>
+<li>\text{中文}   推荐</li>
+<li>\mbox{中文}  并不推荐</li>
+</ul>
+<h3 id="分数形式"><a href="#分数形式" class="headerlink" title="分数形式"></a>分数形式</h3><p>行内的分数与行间的分数表达形式上略有不同，具体采用哪种形式，看例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">我是最普通的行内式子，我叫$\frac&#123;1&#125;&#123;2&#125;$,其实$\frac&#123;1&#125;&#123;a+b&#125;$也是行内比较小的公式.\par</div><div class="line">当然我们其实是可以使用行内比较大的公式的，但是要使用宏包\textsf&#123;amsmath&#125;	%无衬线字体族</div><div class="line">提供的命令\texttt&#123;dfrac&#125;											%打字机字体</div><div class="line">形如$\dfrac&#123;1&#125;&#123;a+b&#125;$，确实在行内使用时比较难看的。\par</div><div class="line">如果有必要，我可以不采用分式结构，而是选择$1/(a+b)$的形式，这种形式也是比较好看的。\par</div><div class="line">当然，我们暂时把二项式系数当做分数来排版，其形式是$\binom&#123;n&#125;&#123;k&#125;$，他们对应的所有行间公式都如下</div><div class="line">\begin&#123;equation&#125; %行间分数排布</div><div class="line">\frac&#123;1&#125;&#123;2&#125;,\frac&#123;1&#125;&#123;a+b&#125;,1&#123;&#125;/&#123;&#125;(a+b),\binom&#123;n&#125;&#123;k&#125;</div><div class="line">\end&#123;equation&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fkl2onuu3ij31ka0byahv.jpg" alt=""></p>
+<h3 id="上下标"><a href="#上下标" class="headerlink" title="上下标"></a>上下标</h3><p>LaTeX数学公式的上下标可以说的非常的精彩了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;anyfontsize&#125;</div><div class="line">\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage&#123;mathtools&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\bigsize</div><div class="line">\centering</div><div class="line">%------</div><div class="line">%最普通的上下标举例——行内公式，行内公式的上下标为了美观一般放在右上右下脚</div><div class="line">$10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n$ \par</div><div class="line">%------</div><div class="line">%最普通的上下标举例——行间公式</div><div class="line">\begin&#123;equation&#125;</div><div class="line">10^n \quad a_i \quad \int_D \quad \sum_&#123;i=1&#125;^n</div><div class="line">\end&#123;equation&#125;	</div><div class="line">%-------</div><div class="line">%几个特殊符号(度数，求导符号)举例——行内公式</div><div class="line">$f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;$ \par</div><div class="line">%------</div><div class="line">%几个特殊符号(度数，求导符号)举例——行间公式</div><div class="line">\begin&#123;equation&#125;</div><div class="line">f(x) = x^2 \longrightarrow f&apos;(x) = 2x \quad 90^&#123;\circ&#125; = \frac&#123;\pi&#125;&#123;2&#125;</div><div class="line">\end&#123;equation&#125;	</div><div class="line">%------</div><div class="line">%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行内公式</div><div class="line">$\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad  %前置角标</div><div class="line">\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125; $     %四周角标</div><div class="line">%------</div><div class="line">%如果要在左上角或者左下角添加时（要使用mathtools宏包）——行间公式</div><div class="line">\begin&#123;equation&#125;</div><div class="line">\prescript&#123;n&#125;&#123;m&#125;&#123;H&#125;_&#123;ij&#125;^&#123;\text&#123;中文&#125;&#125; \quad</div><div class="line">\sideset&#123;_2^1&#125;&#123;_3^4&#125;\sum_&#123;i=1&#125;^&#123;\text&#123;中文&#125;&#125;</div><div class="line">\end&#123;equation&#125;	</div><div class="line">%------</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fkl4vpyoamj31ko0n4add.jpg" alt=""></p>
+<h3 id="化学公式"><a href="#化学公式" class="headerlink" title="化学公式"></a>化学公式</h3><p>使用宏包mhchem 的\ce{ }命令，另外不需要数学公式环境的支持，即只需要宏包与命令即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\ce&#123;这里面填化学式或者化学元素即可&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;anyfontsize&#125;</div><div class="line">\newcommand&#123;\bigsize&#125;&#123;\fontsize&#123;12pt&#125;&#123;\baselineskip&#125;\selectfont&#125;</div><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\bigsize</div><div class="line">\centering</div><div class="line">%这是水</div><div class="line">\ce&#123;H2O&#125;\par</div><div class="line">%这是乙酸乙酯</div><div class="line">\ce&#123;2AgNO3 + CaCl2 -&gt; 2AgCl + Ca(NO3)2&#125;	</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fklb6tykezj317005ugm8.jpg" alt=""></p>
+<h3 id="上下线以及上下括号"><a href="#上下线以及上下括号" class="headerlink" title="上下线以及上下括号"></a>上下线以及上下括号</h3><p>使用amsmath宏包提供的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\overline&#123;内容&#125;								%上端划线</div><div class="line">\underline&#123;内容&#125;								%下端划线</div><div class="line">\overbrace&#123;内容&#125;^&#123;上端花括号注释&#125;				%上端花括号</div><div class="line">\underbrace&#123;内容&#125;_&#123;下端花括号注释&#125;				%下端花括号</div><div class="line">还有若干加箭头的命令形如：</div><div class="line">\over(under)left(right)arrow&#123;内容&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">\documentclass[12pt]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">------</div><div class="line">\begin&#123;gather&#125;		%gather环境也是常用的排版多行公式的环境</div><div class="line">%上下线和上下箭头</div><div class="line">\overline&#123;a+b&#125; = \underline&#123;\overrightarrow&#123;c&#125;+\overline&#123;d&#125;&#125; \\</div><div class="line">%上下括号</div><div class="line">\underbrace&#123;x+y+z&#125;_&#123;\text&#123;三个未知数&#125;&#125; = \overbrace&#123;1+2+3&#125;^&#123;\text&#123;三个常数&#125;&#125;</div><div class="line">\end&#123;gather&#125;</div><div class="line">------</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fklbwfktqmj31e208gq43.jpg" alt=""></p>
+<h3 id="平方根实现形式"><a href="#平方根实现形式" class="headerlink" title="平方根实现形式"></a>平方根实现形式</h3><p>\sqrt[开放次数]{被开方数}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">\documentclass[12pt]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage&#123;mathtools&#125;</div><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">------%\uproot&#123;16&#125;实现向上平移16个单位</div><div class="line">\begin&#123;equation&#125;</div><div class="line">\sqrt[\uproot&#123;16&#125;11]&#123;\dfrac&#123;\pi&#125;&#123;15-\sqrt&#123;3&#125;&#125;\times \sum_&#123;i=0&#125;^n \overline&#123;x_iy_i&#125;&#125;</div><div class="line">\end&#123;equation&#125;</div><div class="line">------</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fklcd1t5d8j31dk06qgm9.jpg" alt=""></p>
+<p>几个根式并列，想统一他们的高度时，可以使用\vphantom进行占位处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\sqrt&#123;\frac12&#125; &lt; \sqrt&#123;\vphantom&#123;\frac12&#125;2&#125;</div><div class="line">即使用\vphantom&#123;\frac12&#125;它，另根2获得与根下二分之一一样的高度</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fklciwu5aqj317u04aaae.jpg" alt=""></p>
+<p>但是，由于一些字母，我们以a,b,y为例，他们大小是不一样的，所以这式如果开平方时，就显得高低不平，我们要用一个方式来解决：<strong>使用\mathstrut  这个表示一个圆括号高度与深度的支架</strong>，相当于为不同的字母撑起了相同的支架，开平方时符号就一致大小了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\begin&#123;equation&#125;</div><div class="line">%单独开平方</div><div class="line">\sqrt&#123;a&#125;\ \sqrt&#123;b&#125; \ \sqrt&#123;y&#125;  \qquad </div><div class="line">%使用\mathstrut支架来平衡不同高度与深度</div><div class="line">\sqrt&#123;\mathstrut a&#125; \ \sqrt&#123;\mathstrut b&#125; \ \sqrt&#123;\mathstrut y&#125;</div><div class="line">\end&#123;equation&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fklcsljxf3j31du042dgc.jpg" alt=""></p>
+<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p>同样的，我们排版矩阵使用的是amsmath宏包提供的命令与环境，一般是环境居多。</p>
+<ul>
+<li>矩阵是一个公式，所以必须在公式环境内，然后再使用矩环境</li>
+<li>矩阵环境内的排布与表格基本一致，使用&amp;换单元，使用\\换行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">\documentclass[12pt]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage&#123;mathtools&#125;</div><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;align&#125;</div><div class="line">\text&#123;matrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;matrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;matrix&#125;\\</div><div class="line">\text&#123;bmatrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;pmatrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;pmatrix&#125;\\</div><div class="line">\text&#123;vmatrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;vmatrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;vmatrix&#125;\\</div><div class="line">\text&#123;bmatrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;bmatrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;bmatrix&#125;\\</div><div class="line">\text&#123;Bmatrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;Bmatrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;Bmatrix&#125;\\</div><div class="line">\text&#123;Vmatrix环境&#125;&amp;\colon\quad</div><div class="line">\begin&#123;Vmatrix&#125;</div><div class="line">a&amp;b\\</div><div class="line">c&amp;d</div><div class="line">\end&#123;Vmatrix&#125;</div><div class="line">\end&#123;align&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fkldjcgumhj31f40nwtcx.jpg" alt=""></p>
+<p>矩阵中比较容易出现点点点的形式，来补充我们没有填充的内容，我们使用\dots,\vdots,\ddots来实现水平点点点，斜点点点，竖直点点点</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\dots</td>
+<td>水平点点点</td>
+</tr>
+<tr>
+<td>\vdots</td>
+<td>竖直点点点</td>
+</tr>
+<tr>
+<td>\ddots</td>
+<td>斜点点点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多行公式-实现，对齐，编号"><a href="#多行公式-实现，对齐，编号" class="headerlink" title="多行公式(实现，对齐，编号)"></a>多行公式(实现，对齐，编号)</h3><table>
+<thead>
+<tr>
+<th>多行公式</th>
+<th>实现</th>
+<th>对齐</th>
+<th>编号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>\begin{gather*}</td>
+<td>居中</td>
+<td>无编号</td>
+</tr>
+<tr>
+<td></td>
+<td>\begin{gather}</td>
+<td>居中</td>
+<td>编号，可用\notag来删除某行公式编号</td>
+</tr>
+<tr>
+<td></td>
+<td>\begin{align*}</td>
+<td>使用&amp;对某符号竖直对齐</td>
+<td>无编号</td>
+</tr>
+<tr>
+<td></td>
+<td>\begin{align}</td>
+<td>使用&amp;对某符号竖直对齐</td>
+<td>编号，可用\notag来删除某行公式编号</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">\documentclass[12pt]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\usepackage&#123;amsmath&#125;</div><div class="line">\usepackage&#123;mathtools&#125;</div><div class="line">\usepackage&#123;mhchem&#125;</div><div class="line">\usepackage[paperwidth = 200mm,paperheight = 150mm,top = 0mm,bottom = 0mm]&#123;geometry&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">------</div><div class="line">%使用\\换行居中排布公式</div><div class="line">\begin&#123;gather*&#125;(a+b)^2\\</div><div class="line">=a^2 + b^2 + 2ab \\</div><div class="line">=12</div><div class="line">\end&#123;gather*&#125;</div><div class="line">------</div><div class="line">\begin&#123;gather&#125;(a+b)^2	\notag		\\</div><div class="line">=a^2 + b^2 + 2ab 				\\</div><div class="line">=12						\notag</div><div class="line">\end&#123;gather&#125;</div><div class="line">------</div><div class="line">%align环境可以允许按照关系符对齐，需要再关系符号前加&amp;</div><div class="line">\begin&#123;align*&#125;</div><div class="line">&amp;\phantom&#123;=&#125;(a+b)^2\\%使用幻影来假设提供出一个等号</div><div class="line">&amp;=a^2 + b^2 + 2ab \\</div><div class="line">&amp;=12</div><div class="line">\end&#123;align*&#125;</div><div class="line">------</div><div class="line">\begin&#123;align&#125;</div><div class="line">&amp;\phantom&#123;=&#125;(a+b)^2			\\%使用幻影来假设提供出一个等号</div><div class="line">&amp;=a^2 + b^2 + 2ab 	\notag		\\</div><div class="line">&amp;=12\qquad\text&#123;易得&#125;\notag</div><div class="line">\end&#123;align&#125;</div><div class="line">------</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
+<p><img src="lierhua.top/img/006tNc79ly1fkle9i96lxj317e0qomzf.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学公式/" rel="tag"># 数学公式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/19/LaTeX入门系列之数学公式字体间距设置_new/" rel="next" title="LaTeX入门系列之数学公式字体间距设置">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之数学公式字体间距设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/19/LaTeX入门系列之数学公式之符号备查表/" rel="prev" title="LaTeX入门系列之数学公式之符号备查表">
+                LaTeX入门系列之数学公式之符号备查表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公式内实现中文"><span class="nav-number">2.</span> <span class="nav-text">公式内实现中文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分数形式"><span class="nav-number">3.</span> <span class="nav-text">分数形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下标"><span class="nav-number">4.</span> <span class="nav-text">上下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#化学公式"><span class="nav-number">5.</span> <span class="nav-text">化学公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下线以及上下括号"><span class="nav-number">6.</span> <span class="nav-text">上下线以及上下括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平方根实现形式"><span class="nav-number">7.</span> <span class="nav-text">平方根实现形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵"><span class="nav-number">8.</span> <span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多行公式-实现，对齐，编号"><span class="nav-number">9.</span> <span class="nav-text">多行公式(实现，对齐，编号)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

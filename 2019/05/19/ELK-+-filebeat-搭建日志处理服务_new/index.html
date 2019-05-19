@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="日志,elasticsearch,logstash,kibana,filebear," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键字：elasticsearch, logstash, kibana, filebeat">
+<meta name="keywords" content="日志,elasticsearch,logstash,kibana,filebear">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK + filebeat 搭建日志处理服务">
+<meta property="og:url" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键字：elasticsearch, logstash, kibana, filebeat">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24as57uncj30yg0i4dk5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24goadto5j31320kldjy.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24gr1zt2tj312n0inwjh.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24gturjwbj312w0kl79z.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24hfjtraij30mw04q0tr.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:27:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ELK + filebeat 搭建日志处理服务">
+<meta name="twitter:description" content="关键字：elasticsearch, logstash, kibana, filebeat">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/lierhua.top/img/006tNc79ly1g24as57uncj30yg0i4dk5.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/"/>
+
+
+
+
+
+  <title>ELK + filebeat 搭建日志处理服务 | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/19/ELK-+-filebeat-搭建日志处理服务_new/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ELK + filebeat 搭建日志处理服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T23:27:26+08:00">
+                2019-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/日志/" itemprop="url" rel="index">
+                    <span itemprop="name">日志</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键字：<code>elasticsearch</code>, <code>logstash</code>, <code>kibana</code>, <code>filebeat</code></p>
+<a id="more"></a>
+<h3 id="整体框架介绍"><a href="#整体框架介绍" class="headerlink" title="整体框架介绍"></a>整体框架介绍</h3><ul>
+<li><p><code>Elasticsearch</code><br> 一个近乎实时查询的全文搜索引擎。<code>Elasticsearch</code> 的设计目标就是要能够处理和搜索巨量的日志数据。</p>
+</li>
+<li><p><code>Logstash</code><br> 读取原始日志，并对其进行分析和过滤，然后将其转发给其他组件（比如 <code>Elasticsearch</code>）进行索引或存储。<code>Logstash</code> 支持丰富的 <code>Input</code> 和 <code>Output</code> 类型，能够处理各种应用的日志。</p>
+</li>
+<li><p><code>Kibana</code><br> 一个基于 <code>JavaScript</code> 的 <code>Web</code> 图形界面程序，专门用于可视化 <code>Elasticsearch</code> 的数据。<code>Kibana</code> 能够查询 <code>Elasticsearch</code> 并通过丰富的图表展示结果。用户可以创建 <code>Dashboard</code> 来监控系统的日志。</p>
+</li>
+<li><p><code>Filebeat</code><br> 引入<code>Filebeat</code>作为日志搜集器，主要是为了解决<code>Logstash</code>开销大的问题。相比<code>Logstash</code>，<code>Filebeat</code>所占系统的 <code>CPU</code> 和内存几乎可以忽略不计。</p>
+</li>
+</ul>
+<p><strong>Filebeat 日志数据采集，Logstash 过滤，Elasticsearch 存储，Kibana 展示</strong></p>
+<p>主要的架构图如下：</p>
+<p><img src="lierhua.top/img/006tNc79ly1g24as57uncj30yg0i4dk5.jpg" alt=""></p>
+<p>其中日志的收集过程，也就<code>filebeat</code>部分是安装在需要收集日志的机器上的（比如，你有一个<code>console</code>服务，需要收集这个服务的日志，就需要将<code>filebeat</code>安装到<code>console</code>机器上。</p>
+<p>整个后面的这一部分，对于处理量不大的服务，可以直接使用现成的<code>docker</code>镜像<code>sebp/elk</code>，一是部署简单，而是集成度高，不需要过分关心后三者之间的通信，镜像内都给处理好了，镜像内提供的服务都是最基础的服务，也就是一些进阶需求可能没有包含进去，所以，我们也可以在现有的这个<code>sebp/elk</code>镜像的基础上，自己二次开发，运行新的容器来达到我们更高的需求的目的。</p>
+<p><code>docker</code>上镜像的地址：<a href="https://hub.docker.com/r/sebp/elk" target="_blank" rel="external">dockerhub  elk</a></p>
+<p><code>elk-docker doc</code>地址：<a href="https://elk-docker.readthedocs.io/" target="_blank" rel="external">elk-docker</a></p>
+<p><code>github</code>上的开源项目：<a href="https://github.com/deviantony/docker-elk" target="_blank" rel="external">github/elk-docker</a></p>
+<h3 id="满足的需求"><a href="#满足的需求" class="headerlink" title="满足的需求"></a>满足的需求</h3><p>现在手头的项目有多个<code>test</code>环境和<code>debug</code>环境，同时部署了若干个服务，如果服务出现问题，可能需要去不同机器去排查，费时费力，需要一个集中管理平台，一旦需要查看日志，又可以开箱即用的<code>web</code>界面满足需求。</p>
+<h3 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h3><h3 id="环境说明-1"><a href="#环境说明-1" class="headerlink" title="环境说明"></a>环境说明</h3><ul>
+<li><code>linux</code>: <code>Ubuntu 16.04</code></li>
+<li><code>docker</code>: <code>Docker version 18.09.5</code></li>
+<li><code>elk</code>:  <code>sebp/elk latest</code></li>
+<li><code>filebeat</code>: <code>filebeat-7.0.0</code></li>
+</ul>
+<p><code>elk</code>跟<code>filebeat</code>在不同一台机器上</p>
+<h3 id="安装与配置（主线）："><a href="#安装与配置（主线）：" class="headerlink" title="安装与配置（主线）："></a>安装与配置（主线）：</h3><h4 id="filebeat的安装与配置"><a href="#filebeat的安装与配置" class="headerlink" title="filebeat的安装与配置"></a><code>filebeat</code>的安装与配置</h4><p>上面说过，<code>filebeat</code>是安装部署到需要收集服务的机器上的，然后配置好对应的输入与输出，就可以工作了，一般输入就是对应的需要收集的<code>log</code>文件的地址，而输出可以是<code>logstash</code>或者<code>Elasticache</code>（可以部署在本机的，也可以是部署在其他机器上的）。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p><code>filebeat</code>安装地址，<a href="https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-installation.html" target="_blank" rel="external">点击对应页面</a></p>
+<p>推荐使用<code>deb</code>或者<code>rpm</code>在<code>Linux</code>机器上安装</p>
+<p><code>deb</code>安装方式，直接在<code>Ubuntu</code>机器上运行如下命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-amd64.deb</div><div class="line">sudo dpkg -i filebeat-7.0.0-amd64.deb</div></pre></td></tr></table></figure>
+<p><code>rpm</code>安装方式。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-x86_64.rpm</div><div class="line">sudo rpm -vi filebeat-7.0.0-x86_64.rpm</div></pre></td></tr></table></figure>
+<p><code>Mac</code>上的安装方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.0-darwin-x86_64.tar.gz</div><div class="line">tar xzvf filebeat-7.0.0-darwin-x86_64.tar.gz</div></pre></td></tr></table></figure>
+<h5 id="服务的启动等操作"><a href="#服务的启动等操作" class="headerlink" title="服务的启动等操作"></a>服务的启动等操作</h5><p>安装后，默认是由<code>systemctl</code>来管理的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl restart filebeat.service   # 重启服务</div></pre></td></tr></table></figure>
+<p>查看服务的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sudo systemctl restart filebeat.service</div><div class="line"><span class="meta">#</span><span class="bash"> 返回的部分信息如下， 通过下面的信息，我们可以看到状态是active正在运行</span></div><div class="line">● filebeat.service - Filebeat sends log files to Logstash or directly to Elasticsearch.</div><div class="line">   Loaded: loaded (/lib/systemd/system/filebeat.service; disabled; vendor preset: enabled)</div><div class="line">   Active: active (running) since Tue 2019-04-16 05:08:29 UTC; 1min 41s ago</div><div class="line">     Docs: https://www.elastic.co/products/beats/filebeat</div><div class="line"> Main PID: 19811 (filebeat)</div><div class="line">    Tasks: 8</div><div class="line">   Memory: 5.5M</div><div class="line">      CPU: 33ms</div><div class="line">   CGroup: /system.slice/filebeat.service</div><div class="line">           └─19811 /usr/share/filebeat/bin/filebeat -e -c /etc/filebeat/filebeat.yml -path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat</div></pre></td></tr></table></figure>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>安装完<code>filebeat</code>并能够启动和查看状态之后，我们就需要对其进行基础的配置，来和我们的<code>elk</code>配合。</p>
+<p>下面是一个最基础的配置信息，如果再有更高的需求，可以查阅对应的文档来修改:</p>
+<p>配置文件的地址<code>/etc/filebeat/filebeat.yml</code>, 可能需要<code>sudo</code>权限， 详细的配置信息请参考<a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.cnblogs.com%2Fxishuai%2Fp%2Fspring-boot-log4j2-and-elk-logstash-filebeat.html%2F" target="_blank" rel="external">这里</a>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 输入区配置</span></div><div class="line">filebeat.inputs:</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash"> Each - is an input. Most options can be <span class="built_in">set</span> at the input level, so</span></div><div class="line"><span class="meta">#</span><span class="bash"> you can use different inputs <span class="keyword">for</span> various configurations.</span></div><div class="line"><span class="meta">#</span><span class="bash"> Below are the input specific configurations.</span></div><div class="line"></div><div class="line">- type: log</div><div class="line"></div><div class="line"><span class="meta">  #</span><span class="bash"> Change to <span class="literal">true</span> to <span class="built_in">enable</span> this input configuration.</span></div><div class="line">  enabled: false   # 需要把这个false改成true，不然无法开启日志的输入</div><div class="line"></div><div class="line"><span class="meta">  #</span><span class="bash"> Paths that should be crawled and fetched. Glob based paths.</span></div><div class="line">  paths:</div><div class="line"><span class="meta">  	#</span><span class="bash"> 这里是你需要日常监控的日志的地址，例子：- /opt/console/project_name/*.<span class="built_in">log</span></span></div><div class="line">    - /var/log/*.log</div><div class="line">    #- c:\programdata\elasticsearch\logs\*</div><div class="line">    </div><div class="line"><span class="meta">#</span><span class="bash"> 输出区配置   可以输出到Elasticache或者Logstash</span></div><div class="line"><span class="meta">#</span><span class="bash"> 只能使用一行输出，其它的注掉即可</span></div><div class="line"><span class="meta">#</span><span class="bash"> 如果要输出到Elasticache，需要配置他的信息，主要就是host信息</span></div><div class="line">output.elasticsearch:</div><div class="line"><span class="meta">  #</span><span class="bash"> Array of hosts to connect to.</span></div><div class="line"><span class="meta">  #</span><span class="bash"> 这里可以填多个host信息，可以是本地的服务，也可以是其他机器的服务</span></div><div class="line"><span class="meta">  #</span><span class="bash"> 例子 [<span class="string">"2.88.20.211:9200"</span>] 这个是部署了Elasticache服务的机器的地址，并开放9200端口</span></div><div class="line">  hosts: ["localhost:9200"]</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash"> 输出到Logstash，如果需要配置SSL信息情况会复杂一些，我们这里为了简单，不用SSL，按照如下配置即可</span></div><div class="line">output.logstash:</div><div class="line"><span class="meta">  #</span><span class="bash"> The Logstash hosts</span></div><div class="line"><span class="meta">  #</span><span class="bash"> 一般logstash的端口是5044，确保提供服务的机器(本机或者其他机器)开放了5044端口</span></div><div class="line">  hosts: ["localhost:5044"]</div></pre></td></tr></table></figure>
+<p>基本上配置好了这个信息后，就可以重新启动服务了，重启后，如果<code>elk</code>那边运行时正常的，那么这边的日志会源源不断的扔到Elasticache或者logstash中去，<code>kibana</code>上就可以看到对应的日志信息了。</p>
+<h4 id="ELK的安装与配置"><a href="#ELK的安装与配置" class="headerlink" title="ELK的安装与配置"></a><code>ELK</code>的安装与配置</h4><p><code>ELK</code>是<code>Logstash</code>，<code>Elasticsearch</code>，<code>Kibana</code>的组合体，他们三个单独安装适用于大的集群，稍微中等或者小一点的服务，可以直接使用集成好的<code>docker</code>的<code>elk</code>镜像来安装。</p>
+<p>总的介绍文档可以看<a href="https://elk-docker.readthedocs.io/" target="_blank" rel="external">这一篇</a></p>
+<h5 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h5><p>首先保证已经安装好了<code>docker</code>环境</p>
+<p>由于<code>elk</code>比较消耗资源，因此需要令这个<code>docker</code>进程的虚拟内存大一些，我们需要首先修改<code>max_map_count</code>这个参数，这个参数的具体指的是：</p>
+<blockquote>
+<p><strong>max_map_count </strong>: 文件包含限制一个进程可以拥有的VMA(虚拟内存区域)的数量。虚拟内存区域是一个连续的虚拟地址空间区域。在进程的生命周期中，每当程序尝试在内存中映射文件，链接到共享内存段，或者分配堆空间的时候，这些区域将被创建。调优这个值将限制进程可拥有VMA的数量。限制一个进程拥有VMA的总数可能导致应用程序出错，因为当进程达到了VMA上线但又只能释放少量的内存给其他的内核进程使用时，操作系统会抛出内存不足的错误。如果你的操作系统在NORMAL区域仅占用少量的内存，那么调低这个值可以帮助释放内存给内核用。</p>
+</blockquote>
+<p>需要运行如下的命令，调高vma的大小，不然会出现安装好<code>elk</code>之后，容器自动停止运行的现象， 即运行这个镜像至少需要262144的内存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sysctl -w vm.max_map_count=262144</div></pre></td></tr></table></figure>
+<p>然后就是<code>docker</code>的一系列操作了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 从docker hub拉下 sebp/elk的最新镜像</span></div><div class="line">sudo docker pull sebp/elk</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 运行以这个镜像为基础的容器，命名为elk, 并且设定好对应的端口映射</span></div><div class="line">sudo docker run -p 5601:5601 -p 9200:9200 -p 5044:5044 -it --name elk sebp/elk</div></pre></td></tr></table></figure>
+<p>这一步会花点时间，耐心等待。</p>
+<p>启动之后我们去配置对应的<code>logstash</code>信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo docker ps -a   # 查看这个容器的信息</div><div class="line">sudo docker exec -it elk(这里也可以用容器的ID) bash  # 进入容器内容，并使用交互shell</div><div class="line">cd /etc/logstash/conf.d/   # 进入并修改02-beats-input.conf</div><div class="line">vim 02-beats-input.conf</div></pre></td></tr></table></figure>
+<p>将这个配置文件修改文如下, 即删除了SSL的配置信息，因为我们在<code>filebeat</code>中也没有使用<code>SSL</code>，因此这里必须将配置信息的东西关掉:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 需要留下的配置</span></div><div class="line"><span class="string">input</span> <span class="string">&#123;</span></div><div class="line">  <span class="string">beats</span> <span class="string">&#123;</span></div><div class="line">    <span class="string">port</span> <span class="string">=&gt;</span> <span class="number">5044</span></div><div class="line">  <span class="string">&#125;</span></div><div class="line"><span class="string">&#125;</span></div></pre></td></tr></table></figure>
+<p>然后重启<code>docker</code>服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker restart elk(或者容器ID）</div></pre></td></tr></table></figure>
+<p>此时已经基本完成了部署，为了提供可查看的<code>kibana</code>界面，我们需要配置一下NGINX地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">cd /etc/nginx/sites-enabled # 进入NGINX配置文件地址</div><div class="line"><span class="meta">#</span><span class="bash"> 修改为如下</span></div><div class="line">server &#123;</div><div class="line">    listen    80;</div><div class="line">    server_name jiangxuetang206.top(这里是你自己的域名，或者可以不用域名);</div><div class="line">    proxy_buffers 8 16k;</div><div class="line">    proxy_buffer_size 32k;</div><div class="line">    fastcgi_buffers 8 16k;</div><div class="line">    fastcgi_buffer_size 32k;</div><div class="line">    client_max_body_size 30M;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        include proxy_params;</div><div class="line">        #proxy_pass http://127.0.0.1:9200(这个是Elasticache的服务，提供可请求的API);</div><div class="line">        proxy_pass http://127.0.0.1:5601(这个是kibana的web界面服务);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们打开<code>kibana</code>的NGINX配置之后，就可以访问 <code>http://nideyuming</code>来访问<code>kibana</code>服务了。</p>
+<h5 id="kibana界面的一些设置"><a href="#kibana界面的一些设置" class="headerlink" title="kibana界面的一些设置"></a><code>kibana</code>界面的一些设置</h5><p>登陆对应的地址后，会看到一个<code>kibana</code>的界面。</p>
+<p><img src="lierhua.top/img/006tNc79ly1g24goadto5j31320kldjy.jpg" alt=""></p>
+<p>然后一步步的设置（具体的设置这里不想详细谈了，找其他的教程来看即可）</p>
+<p><img src="lierhua.top/img/006tNc79ly1g24gr1zt2tj312n0inwjh.jpg" alt=""></p>
+<p><img src="lierhua.top/img/006tNc79ly1g24gturjwbj312w0kl79z.jpg" alt=""></p>
+<p>基本已经完成了主线的介绍，后面会在介绍一些非常主线的内容。</p>
+<h3 id="安装与配置（非主线）"><a href="#安装与配置（非主线）" class="headerlink" title="安装与配置（非主线）"></a>安装与配置（非主线）</h3><h4 id="关于SSL的一些东西"><a href="#关于SSL的一些东西" class="headerlink" title="关于SSL的一些东西"></a>关于SSL的一些东西</h4><p>以下信息供选择性查看，关于<code>logstash</code>配置删除的内容的</p>
+<p>将以下三行删除掉。这三行的意思是是否使用证书，本例是不使用证书的，如果你需要使用证书，将<code>logstash.crt</code>拷贝到客户端，然后在<code>filebeat.yml</code>里面添加路径即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssl =&gt; true </div><div class="line">ssl_certificate =&gt; "/pki/tls/certs/logstash.crt"</div><div class="line">ssl_key =&gt; "/pki/tls/private/logstash.key"</div></pre></td></tr></table></figure>
+<p>注意：<code>sebp/elk docker</code>是自建立了一个证书<code>logstash.crt</code>，默认使用*通配配符，如果你使用证书，<code>filebeat.yml</code>使用的服务器地址必须使用域名，不能使用IP地址，否则会报错</p>
+<p>这里如果不去掉这三行配置的话，在后面启动filebeat时，会提示如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2018-09-12T10:01:29.770+0800	ERROR	logstash/async.go:252	Failed to publish events caused by: lumberjack protocol error</div><div class="line">2018-09-12T10:01:29.775+0800	ERROR	logstash/async.go:252	Failed to publish events caused by: client is not connected</div><div class="line">2018-09-12T10:01:30.775+0800	ERROR	pipeline/output.go:109	Failed to publish events: client is not connected</div></pre></td></tr></table></figure>
+<h4 id="如何测试docker内的logstash是否正常工作"><a href="#如何测试docker内的logstash是否正常工作" class="headerlink" title="如何测试docker内的logstash是否正常工作"></a>如何测试<code>docker</code>内的<code>logstash</code>是否正常工作</h4><p>进入容器, 然后运行一下命令，然后可以查看对应的交互信息，或者直接看<code>kibana</code>的日志收集<code>index-pattern</code>有没有匹配的项目即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/opt/logstash/bin/logstash --path.data /tmp/logstash/data \</div><div class="line">    -e 'input &#123; stdin &#123; &#125; &#125; output &#123; elasticsearch &#123; hosts =&gt; ["localhost"] &#125; &#125;'</div></pre></td></tr></table></figure>
+<h4 id="具体的logstash过滤filter机制如何进行"><a href="#具体的logstash过滤filter机制如何进行" class="headerlink" title="具体的logstash过滤filter机制如何进行"></a>具体的<code>logstash</code>过滤<code>filter</code>机制如何进行</h4><p>进入容器，修改如下的文件即可</p>
+<p><img src="lierhua.top/img/006tNc79ly1g24hfjtraij30mw04q0tr.jpg" alt=""></p>
+<p>如果想增加更多的配置文件，可以新建<code>dockerfile</code>自己制作镜像来使用，比如如下的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> Dockerfile</span></div><div class="line">FROM sebp/elk</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash"> overwrite existing file</span></div><div class="line">ADD /path/to/your-30-output.conf /etc/logstash/conf.d/30-output.conf</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash"> add new file</span></div><div class="line">ADD /path/to/new-12-some-filter.conf /etc/logstash/conf.d/12-some-filter.conf</div></pre></td></tr></table></figure>
+<p>然后执行<code>build</code>等一系列操作生成我们新的镜像，然后就可以使用这个镜像，开启新的容器进行服务了。</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><hr>
+<ul>
+<li><a href="https://juejin.im/post/5ba4c8ef6fb9a05d082a1f53" target="_blank" rel="external">Docker ELK+Filebeat安装与配置</a>（推荐）</li>
+<li><a href="https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-installation.html" target="_blank" rel="external">elastic.io filebeat install</a></li>
+<li><a href="http://blog.51cto.com/zero01/2082794" target="_blank" rel="external">搭建ELK日志分析平台（下）—— 搭建kibana和logstash服务器</a>（<strong>推荐</strong>）</li>
+<li><a href="http://blog.51cto.com/zero01/2079879" target="_blank" rel="external">搭建ELK日志分析平台（上）—— ELK介绍及搭建 Elasticsearch 分布式集群</a>（<strong>推荐</strong>）</li>
+<li><a href="https://renwole.com/archives/661" target="_blank" rel="external">Logstash Filebeat 安装配置之使用 Kibana 分析日志数据</a>（<strong>推荐</strong>）</li>
+<li><a href="https://linux.cn/article-8460-1.html" target="_blank" rel="external">如何在 CentOS 7 上安装 Elastic Stack</a>（<strong>推荐</strong>）</li>
+<li><a href="https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html" target="_blank" rel="external">https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/beats/filebeat/current/config-filebeat-logstash.html" target="_blank" rel="external">https://www.elastic.co/guide/en/beats/filebeat/current/config-filebeat-logstash.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/logstash/7.0/use-ingest-pipelines.html" target="_blank" rel="external">https://www.elastic.co/guide/en/logstash/7.0/use-ingest-pipelines.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/elastic-stack-get-started/7.0/get-started-elastic-stack.html" target="_blank" rel="external">https://www.elastic.co/guide/en/elastic-stack-get-started/7.0/get-started-elastic-stack.html</a></li>
+<li><a href="https://www.elastic.co/guide/en/logstash/7.0/logstash-config-for-filebeat-modules.html" target="_blank" rel="external">https://www.elastic.co/guide/en/logstash/7.0/logstash-config-for-filebeat-modules.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/日志/" rel="tag"># 日志</a>
+          
+            <a href="/tags/elasticsearch/" rel="tag"># elasticsearch</a>
+          
+            <a href="/tags/logstash/" rel="tag"># logstash</a>
+          
+            <a href="/tags/kibana/" rel="tag"># kibana</a>
+          
+            <a href="/tags/filebear/" rel="tag"># filebear</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/ELK-+-filebeat-搭建日志处理服务/" rel="next" title="ELK + filebeat 搭建日志处理服务">
+                <i class="fa fa-chevron-left"></i> ELK + filebeat 搭建日志处理服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体框架介绍"><span class="nav-number">1.</span> <span class="nav-text">整体框架介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#满足的需求"><span class="nav-number">2.</span> <span class="nav-text">满足的需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境说明"><span class="nav-number">3.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境说明-1"><span class="nav-number">4.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装与配置（主线）："><span class="nav-number">5.</span> <span class="nav-text">安装与配置（主线）：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filebeat的安装与配置"><span class="nav-number">5.1.</span> <span class="nav-text">filebeat的安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">5.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务的启动等操作"><span class="nav-number">5.1.2.</span> <span class="nav-text">服务的启动等操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ELK的安装与配置"><span class="nav-number">5.2.</span> <span class="nav-text">ELK的安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装与配置"><span class="nav-number">5.2.1.</span> <span class="nav-text">安装与配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#kibana界面的一些设置"><span class="nav-number">5.2.2.</span> <span class="nav-text">kibana界面的一些设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装与配置（非主线）"><span class="nav-number">6.</span> <span class="nav-text">安装与配置（非主线）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于SSL的一些东西"><span class="nav-number">6.1.</span> <span class="nav-text">关于SSL的一些东西</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何测试docker内的logstash是否正常工作"><span class="nav-number">6.2.</span> <span class="nav-text">如何测试docker内的logstash是否正常工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体的logstash过滤filter机制如何进行"><span class="nav-number">6.3.</span> <span class="nav-text">具体的logstash过滤filter机制如何进行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
