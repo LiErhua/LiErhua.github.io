@@ -107,13 +107,13 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：参考文献">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/19/LaTeX入门系列之参考文献_new/lierhua.top/img/006tNc79ly1fknajh5z2oj30na05mmxr.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/19/LaTeX入门系列之参考文献_new/lierhua.top/img/006tNc79ly1fkndky39pwj31hk0dqae5.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:27:40.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknajh5z2oj30na05mmxr.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fkndky39pwj31hk0dqae5.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:45:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之参考文献">
 <meta name="twitter:description" content="关键词：参考文献">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/19/LaTeX入门系列之参考文献_new/lierhua.top/img/006tNc79ly1fknajh5z2oj30na05mmxr.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknajh5z2oj30na05mmxr.jpg">
 
 
 
@@ -419,7 +419,7 @@
 <ol>
 <li>参考文献格式:</li>
 </ol>
-<p><img src="lierhua.top/img/006tNc79ly1fknajh5z2oj30na05mmxr.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknajh5z2oj30na05mmxr.jpg" alt=""></p>
 <ol>
 <li><p>bib数据库的结构（一般我们使用jabref软件生成）</p>
 <p>我们可以在Google schoolar 中挑选我们的文章，然后复制 bibtex 形式的引用，添加到我们自己要使用的数据库中，或者直接在 jebref 中进行手动编辑。</p>
@@ -430,7 +430,7 @@
 <p><code>bib</code> 是一个数据库，其中的内容并不一定等于 LaTeX 排版参考文献列表时的内容。也就是说，如果 <code>bib</code> 数据库中有 10 条文献信息，并不一定说 LaTeX 排版出来的 PDF 文件中，参考文献列表里也一定有 10 条。实际排版出来的参考文献列表中有多少条文献，实际是哪几条，具体由文中使用的 <code>\cite</code> 命令（以及 <code>\nocite</code> 命令）指定。如果没有使用 <code>\cite</code> 命令调取文献信息，那么即使在 <code>bib</code> 文件中定义了文献信息，也不会展现在参考文献列表中。很多人对此误解甚深，于是经常有人问道「为什么我在 <code>bib</code> 文件里写的文献，不出现在参考文献中」之类的问题。</p>
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">%myarticle.bib</div><div class="line">@article&#123;hedrick1992supercritical,</div><div class="line">title=&#123;Supercritical fluid extraction&#125;,</div><div class="line">author=&#123;Hedrick, Joseph L and Mulcahey, Leah J and Taylor, Larry T&#125;,</div><div class="line">journal=&#123;Mikrochimica Acta&#125;,</div><div class="line">volume=&#123;108&#125;,</div><div class="line">pages=&#123;115--132&#125;,</div><div class="line">year=&#123;1992&#125;&#125;</div><div class="line"></div><div class="line">@article&#123;higham1994bibtex,</div><div class="line">  title=&#123;BibTEX: A versatile tool for LaTEX users&#125;,</div><div class="line">  author=&#123;Higham, Nicholas J&#125;,</div><div class="line">  journal=&#123;SIAM News&#125;,</div><div class="line">  volume=&#123;27&#125;,</div><div class="line">  number=&#123;1&#125;,</div><div class="line">  pages=&#123;10&#125;,</div><div class="line">  year=&#123;1994&#125;</div><div class="line">&#125;</div><div class="line">------</div><div class="line">%XXX.tex</div><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\bibliographystyle&#123;unsrt&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">我是一个粉刷匠啊，哈哈哈哈我来自超高周疲劳星球\cite&#123;hedrick1992supercritical,higham1994bibtex&#125;</div><div class="line">\bibliography&#123;myarticle&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fkndky39pwj31hk0dqae5.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fkndky39pwj31hk0dqae5.jpg" alt=""></p>
 <p>延伸阅读：</p>
 <ul>
 <li><a href="https://liam0205.me/2014/05/09/gbt7714-2005-bibtex-style/" target="_blank" rel="external">符合 GBT7714-2005 标准的 BibTeX Style</a></li>
@@ -506,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/LaTeX入门系列文档架构/" rel="next" title="LaTeX入门系列之整体文档架构">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之整体文档架构
+              <a href="/2017/03/17/LaTeX入门系列之段落_new/" rel="next" title="LaTeX入门系列之段落">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之段落
               </a>
             
           </div>
@@ -516,8 +516,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/19/LaTeX入门系列之参考文献/" rel="prev" title="LaTeX入门系列之参考文献">
-                LaTeX入门系列之参考文献 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/19/LaTeX入门系列文档架构_new/" rel="prev" title="LaTeX入门系列之整体文档架构">
+                LaTeX入门系列之整体文档架构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,7 +620,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

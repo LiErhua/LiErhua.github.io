@@ -107,17 +107,17 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="[TOC] 关键词：单元格合并与分割，定宽表格">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/02/LaTeX入门系列之表格绘制（二）：进阶_new/lierhua.top/img/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/02/LaTeX入门系列之表格绘制（二）：进阶_new/lierhua.top/img/006tKfTcly1fjny8qk84cj313y0abta8.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjny8qk84cj313y0abta8.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fjo3uvzcr4j31il0hxn2c.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fjptqikbkxj31i00a175g.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fjpunnee71j31400a4q40.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fjpsd3oo6pj31kw0faac0.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:32:10.000Z">
+<meta property="og:updated_time" content="2019-05-19T15:49:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之表格绘制（二）：进阶">
 <meta name="twitter:description" content="[TOC] 关键词：单元格合并与分割，定宽表格">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/02/LaTeX入门系列之表格绘制（二）：进阶_new/lierhua.top/img/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg">
 
 
 
@@ -421,7 +421,7 @@
 <li>对于<strong>同列不同单元格</strong>合并使用宏包 \multirow{行数}<em>{内容}，注意\</em>一定要在</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3mm 30mm 3pt&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;multirow&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|r|&#125;</div><div class="line">\hline</div><div class="line">\multirow&#123;2&#125;*&#123;姓名&#125;&amp;\multicolumn&#123;3&#125;&#123;|c|&#125;&#123;项目&#125;\\</div><div class="line">\cline&#123;2-4&#125;</div><div class="line">	&amp;吃&amp;喝&amp;玩\\</div><div class="line">\hline</div><div class="line">张三&amp;鱼&amp;酒&amp;吉他\\</div><div class="line">李四&amp;肉&amp;水&amp;code\\</div><div class="line">王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\</div><div class="line">\hline</div><div class="line"></div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnxk9cdvpj311d0ayabg.jpg" alt=""></p>
 <p>关键点：</p>
 <p>这个图的关键点有如下几个：</p>
 <ul>
@@ -437,7 +437,7 @@
 <li>\diagbox{左}{中}{右}</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3pt 30mm 3pt&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;multirow&#125;</div><div class="line">\usepackage&#123;diagbox&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\begin&#123;tabular&#125;&#123;|l|c|c|r|&#125;</div><div class="line">\hline</div><div class="line">\diagbox&#123;姓名&#125;&#123;项目&#125;	&amp;吃&amp;喝&amp;玩\\</div><div class="line">\hline</div><div class="line">张三&amp;鱼&amp;酒&amp;吉他\\</div><div class="line">李四&amp;肉&amp;水&amp;code\\</div><div class="line">王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\</div><div class="line">\hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tKfTcly1fjny8qk84cj313y0abta8.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjny8qk84cj313y0abta8.jpg" alt=""></p>
 <p>练习题（习题来自于刘海洋老师的《LaTeX入门》一书的298页：</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fjo3uvzcr4j31il0hxn2c.jpg" alt=""></p>
 <p>解答请见这里<a href="http://lierhua.top/2017/03/01/LaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88/" target="_blank" rel="external">http://lierhua.top/2017/03/01/LaTeX%E4%B9%A0%E9%A2%98%E7%AD%94%E6%A1%88/</a></p>
@@ -514,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/02/LaTeX入门系列之表格绘制（二）：进阶/" rel="next" title="LaTeX入门系列之表格绘制（二）：进阶">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之表格绘制（二）：进阶
+              <a href="/2017/03/01/LaTeX习题答案_new/" rel="next" title="LaTeX习题答案">
+                <i class="fa fa-chevron-left"></i> LaTeX习题答案
               </a>
             
           </div>
@@ -628,7 +628,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

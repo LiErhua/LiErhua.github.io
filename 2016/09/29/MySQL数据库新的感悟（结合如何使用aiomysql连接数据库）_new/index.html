@@ -106,12 +106,12 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="首先要装好MySQL">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2016/09/29/MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）_new/lierhua.top/img/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:33:50.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:50:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）">
 <meta name="twitter:description" content="首先要装好MySQL">
-<meta name="twitter:image" content="http://yoursite.com/2016/09/29/MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）_new/lierhua.top/img/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg">
 
 
 
@@ -407,7 +407,7 @@
       
         <p>首先要装好MySQL</p>
 <a id="more"></a>
-<p><img src="lierhua.top/img/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fm7b71fa9uj30yi0lkwmr.jpg" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> asyncio</div><div class="line"><span class="keyword">import</span> aiomysql</div><div class="line"><span class="comment">#导入我们需要使用的协程库</span></div><div class="line">loop = asyncio.get_event_loop()</div><div class="line"><span class="comment">#建立一个协程循环</span></div><div class="line"></div><div class="line"><span class="comment">#建立一个测试文件</span></div><div class="line"><span class="meta">@asyncio.coroutine</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_example</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#里面是我们必填的文件，一定注意db的名字是上图对应的哪里，纠结了一下午。。。</span></div><div class="line">    conn = <span class="keyword">yield</span> <span class="keyword">from</span> aiomysql.connect(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">3306</span>,</div><div class="line">                                       user=<span class="string">'root'</span>, password=<span class="string">'0000'</span>, db=<span class="string">'demo'</span>,</div><div class="line">                                       loop=loop)</div><div class="line"></div><div class="line">    cur = <span class="keyword">yield</span> <span class="keyword">from</span> conn.cursor()</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> cur.execute(<span class="string">"SELECT * FROM users"</span>)</div><div class="line">    print(cur.description)</div><div class="line">    r = <span class="keyword">yield</span> <span class="keyword">from</span> cur.fetchall()</div><div class="line">    print(r)</div><div class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> cur.close()</div><div class="line">    conn.close()</div><div class="line"></div><div class="line">loop.run_until_complete(test_example())</div><div class="line">loop.run_forever()</div></pre></td></tr></table></figure>
 
       
@@ -462,7 +462,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/21/如何在Mac下使用命令行登录MySQL/" rel="next" title="如何在Mac下使用命令行登录MySQL">
+              <a href="/2016/09/21/如何在Mac下使用命令行登录MySQL_new/" rel="next" title="如何在Mac下使用命令行登录MySQL">
                 <i class="fa fa-chevron-left"></i> 如何在Mac下使用命令行登录MySQL
               </a>
             
@@ -472,8 +472,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/29/MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）/" rel="prev" title="MySQL数据库新的感悟（结合如何使用aiomysql连接数据库）">
-                MySQL数据库新的感悟（结合如何使用aiomysql连接数据库） <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/10/豆瓣爬虫输出_new/" rel="prev" title="豆瓣爬虫输出">
+                豆瓣爬虫输出 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +567,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

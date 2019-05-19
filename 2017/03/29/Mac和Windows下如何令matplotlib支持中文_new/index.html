@@ -107,13 +107,13 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="matplotlib支持中文：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/29/Mac和Windows下如何令matplotlib支持中文_new/lierhua.top/img/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/29/Mac和Windows下如何令matplotlib支持中文_new/lierhua.top/img/006tNc79ly1fm8c0mgvrvj31b60pkdlx.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:33:43.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fm8c0mgvrvj31b60pkdlx.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:50:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac和Windows下如何令matplotlib支持中文">
 <meta name="twitter:description" content="matplotlib支持中文：">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/29/Mac和Windows下如何令matplotlib支持中文_new/lierhua.top/img/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg">
 
 
 
@@ -425,8 +425,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#首先导入需要的matplotlib.font_manager包</span></div><div class="line"><span class="keyword">from</span> matplotlib.font_manager <span class="keyword">import</span> *</div><div class="line"><span class="comment">#设定好我们的小众字体，后面的PATH就是你电脑中字体的位置</span></div><div class="line">myfont = FontProperties(fname=<span class="string">'/Users/fplee/Library/Fonts/方正清刻本悦宋简体.TTF'</span>)</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">x = np.arange(<span class="number">0</span>,<span class="number">10</span>)</div><div class="line">y = np.sin(x)</div><div class="line"><span class="comment">#然后再需要用的地方，就可以这样调用fontproperties=myfont</span></div><div class="line">plt.title(<span class="string">'你好'</span>,fontproperties=myfont)</div><div class="line">plt.plot(x,y, label = <span class="string">'测试'</span>)</div><div class="line">plt.legend(prop=myfont)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
 <h4 id="比较麻烦的方法："><a href="#比较麻烦的方法：" class="headerlink" title="比较麻烦的方法："></a>比较麻烦的方法：</h4><p>首先获得matplotlib的包位置</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib</div><div class="line">matplotlib.matplotlib_fname() <span class="comment">#将会获得matplotlib包所在文件夹</span></div><div class="line"><span class="comment">#比如我的是：/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/matplotlib/mpl-data/matplotlibrc</span></div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg" alt=""></p>
-<p><img src="lierhua.top/img/006tNc79ly1fm8c0mgvrvj31b60pkdlx.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fm8byfzhe5j31b60pk44u.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fm8c0mgvrvj31b60pkdlx.jpg" alt=""></p>
 <p>然后打开matplotlib.matplotlib_fname()地址的上一个文件夹</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Library/Frameworks/Python.framework/Versions/<span class="number">3.5</span>/lib/python3<span class="number">.5</span>/site-packages/matplotlib/mpl-data/</div></pre></td></tr></table></figure>
 <p>发现里面的fonts文件夹，将你需要的字体拷贝进这个文件夹里的一个中，修改为一个这个文件夹中存在的名字，然后相当于替换掉他。</p>
@@ -493,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/29/Mac和Windows下如何令matplotlib支持中文/" rel="next" title="Mac和Windows下如何令matplotlib支持中文">
-                <i class="fa fa-chevron-left"></i> Mac和Windows下如何令matplotlib支持中文
+              <a href="/2017/03/21/LaTeX入门系列之命令与环境的定义_new/" rel="next" title="LaTeX入门系列之命令与环境的定义">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之命令与环境的定义
               </a>
             
           </div>
@@ -607,7 +607,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

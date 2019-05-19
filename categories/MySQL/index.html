@@ -315,7 +315,7 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/12/05/mysql数据库远程连接/" itemprop="url">
+            <a class="post-title-link" href="/2017/12/05/mysql数据库远程连接_new/" itemprop="url">
               
                 <span itemprop="name">mysql远程连接</span>
               
@@ -387,7 +387,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -968,25 +968,6 @@
 
 </body>
 </html>
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
             input.addEventListener('keypress', function (event) {
               if (event.keyCode === 13) {
                 inputEventFunction();

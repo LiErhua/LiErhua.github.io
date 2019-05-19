@@ -315,7 +315,7 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/03/10/跟着廖大学写Python-web框架（0）————-Python易忘易混梳理/" itemprop="url">
+            <a class="post-title-link" href="/2017/03/10/跟着廖大学写Python-web框架（0）————-Python易忘易混梳理_new/" itemprop="url">
               
                 <span itemprop="name">Python易忘易混梳理</span>
               
@@ -343,7 +343,7 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2016/12/26/Python简单操作MongoDB/" itemprop="url">
+            <a class="post-title-link" href="/2016/12/26/Python简单操作MongoDB_new/" itemprop="url">
               
                 <span itemprop="name">Python简单操作MongoDB</span>
               
@@ -371,7 +371,7 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2016/10/27/Python爬虫入门（5）————-selenium与PhantomJS爬虫/" itemprop="url">
+            <a class="post-title-link" href="/2016/10/27/Python爬虫入门（5）————-selenium与PhantomJS爬虫_new/" itemprop="url">
               
                 <span itemprop="name">Python爬虫入门（5）———— selenium与PhantomJS爬虫</span>
               
@@ -399,7 +399,7 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2016/10/21/Python爬虫入门（4）————ajax加载的拉勾网（POST方法）/" itemprop="url">
+            <a class="post-title-link" href="/2016/10/21/Python爬虫入门（4）————ajax加载的拉勾网（POST方法）_new/" itemprop="url">
               
                 <span itemprop="name">Python爬虫入门（4）————ajax加载的拉勾网（IP代理，headers随机）</span>
               
@@ -412,34 +412,6 @@
               datetime="2016-10-21T00:00:00+08:00"
               content="2016-10-21" >
           10-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/15/Python爬虫入门（3）————ajax加载的知乎/" itemprop="url">
-              
-                <span itemprop="name">Python爬虫入门（3）————ajax加载的知乎（GET方法）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-15T00:00:00+08:00"
-              content="2016-10-15" >
-          10-15
         </time>
       </div>
 
@@ -484,34 +456,6 @@
       <h2 class="post-title">
         
             <a class="post-title-link" href="/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫_new/" itemprop="url">
-              
-                <span itemprop="name">Python爬虫入门（2）————最易上手的豆瓣爬虫</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-10T00:00:00+08:00"
-              content="2016-10-10" >
-          10-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫/" itemprop="url">
               
                 <span itemprop="name">Python爬虫入门（2）————最易上手的豆瓣爬虫</span>
               
@@ -582,7 +526,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1163,7 +1107,50 @@
 
 </body>
 </html>
-pup window;
+] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
       if (isfetched === false) {

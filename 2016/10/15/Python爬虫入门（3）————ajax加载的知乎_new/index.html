@@ -107,13 +107,13 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：爬虫，知乎">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2016/10/15/Python爬虫入门（3）————ajax加载的知乎_new/lierhua.top/img/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg">
-<meta property="og:image" content="http://yoursite.com/2016/10/15/Python爬虫入门（3）————ajax加载的知乎_new/lierhua.top/img/006tKfTcly1flhm1sobw5j30yq0ltthi.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:34:24.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1flhm1sobw5j30yq0ltthi.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:51:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫入门（3）————ajax加载的知乎（GET方法）">
 <meta name="twitter:description" content="关键词：爬虫，知乎">
-<meta name="twitter:image" content="http://yoursite.com/2016/10/15/Python爬虫入门（3）————ajax加载的知乎_new/lierhua.top/img/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg">
 
 
 
@@ -417,9 +417,9 @@
 </ul>
 <p>我们知道，知乎的反爬措施做的还是可以的，使用<code>ajax</code>加载，并且需要<code>cookie</code>模拟登录</p>
 <p>我们以饶毅老师的关注者为例子</p>
-<p><img src="lierhua.top/img/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1flhlykpry7j30yq0ltqg2.jpg" alt=""></p>
 <p>双击<code>network</code>里的follower之后，会出现如下页面</p>
-<p><img src="lierhua.top/img/006tKfTcly1flhm1sobw5j30yq0ltthi.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1flhm1sobw5j30yq0ltthi.jpg" alt=""></p>
 <p>简单的一页数据的爬取</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</div><div class="line"><span class="keyword">import</span> json</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#要爬取的URL</span></div><div class="line">url = <span class="string">'https://www.zhihu.com/api/v4/members/zhi-shi-fen-zi-2015/followers?include=data%5B*%5D.answer_count%2Carticles_count%2Cgender%2Cfollower_count%2Cis_followed%2Cis_following%2Cbadge%5B%3F(type%3Dbest_answerer)%5D.topics&amp;offset=20&amp;limit=20'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#使用cookie等模拟登录，headers的格式是字典格式</span></div><div class="line">headers = &#123;</div><div class="line">    <span class="string">'Cookie'</span>:<span class="string">'_zap=5e5da3cd-545c-4642-8392-534f021f53b1; d_c0="AFCCWQOIuQuPTlmLLuby8TEFDROSBhQJEio=|1494209355"; r_cap_id="ODg2OWQ5MGIyMjdkNDkwMDgzNzY1OTE5ZWYzODBhMDE=|1508471442|9a0726321ff2ff543d47c12b9554f6eb4dcff47d"; cap_id="NzEzNGQ3NTVhYjdiNGY5MGEzNzcxZTE0OWY5Nzk2YTM=|1508471442|bf83c58212c39c654e693236611272f7d007cc73"; z_c0=Mi4xQ01rZEFBQUFBQUFBVUlKWkE0aTVDeGNBQUFCaEFsVk5tY0RXV2dEMXZGbTZpbGJzX2tma0Itamh2RWhWdVdPQzhR|1508471449|a86d19990d47a31f3a9e9024bb1d1a15e8f9a53e; q_c1=7a8336678f744f338ba84397145d8ce1|1508746676000|1492264806000; q_c1=7a8336678f744f338ba84397145d8ce1|1508746676000|1492264806000; aliyungf_tc=AQAAAOcCB0GUxAAAlRet3gc99cDV6Npw; s-t=autocomplete; s-q=%E9%A5%B6%E6%AF%85; s-i=1; sid=j2258eo5; __utma=51854390.612755380.1510317297.1510317297.1510637147.2; __utmb=51854390.0.10.1510637147; __utmc=51854390; __utmz=51854390.1510637147.2.2.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20131026=1^3=entry_date=20131026=1; _xsrf=13004504-77ba-4731-9350-da5c5580eb20'</span>,</div><div class="line">    <span class="string">'Host'</span>:<span class="string">'www.zhihu.com'</span>,</div><div class="line">    <span class="string">'Referer'</span>:<span class="string">'https://www.zhihu.com/people/zhi-shi-fen-zi-2015/followers?page=2'</span>,</div><div class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'</span>,</div><div class="line">    <span class="string">'X-UDID'</span>:<span class="string">'AFCCWQOIuQuPTlmLLuby8TEFDROSBhQJEio='</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#使用requests库获取网页信息，因为是ajax的，所以数据内容是json不需要使用xpath进行解析</span></div><div class="line">zhihuHtml = requests.get(url,headers = headers)</div><div class="line">zhihuDict = zhihuHtml.json() <span class="comment">#经过.json()之后返回的是一个字典。</span></div><div class="line">zhihuData = zhihuDict[<span class="string">'data'</span>]<span class="comment">#因为zhihuDict是一个字典，所以可以使用键来选择</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(zhihuData)): <span class="comment">#使用for循环输出所有的人名</span></div><div class="line">    print(zhihuData[i][<span class="string">'name'</span>])</div></pre></td></tr></table></figure>
 <p>一个完整的例子</p>
@@ -487,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/15/Python爬虫入门（3）————ajax加载的知乎/" rel="next" title="Python爬虫入门（3）————ajax加载的知乎（GET方法）">
-                <i class="fa fa-chevron-left"></i> Python爬虫入门（3）————ajax加载的知乎（GET方法）
+              <a href="/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫_new/" rel="next" title="Python爬虫入门（2）————最易上手的豆瓣爬虫">
+                <i class="fa fa-chevron-left"></i> Python爬虫入门（2）————最易上手的豆瓣爬虫
               </a>
             
           </div>
@@ -497,8 +497,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/21/爬取拉勾所有数据代码/" rel="prev" title="拉勾爬虫输出">
-                拉勾爬虫输出 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/21/Python爬虫入门（4）————ajax加载的拉勾网（POST方法）_new/" rel="prev" title="Python爬虫入门（4）————ajax加载的拉勾网（IP代理，headers随机）">
+                Python爬虫入门（4）————ajax加载的拉勾网（IP代理，headers随机） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +592,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

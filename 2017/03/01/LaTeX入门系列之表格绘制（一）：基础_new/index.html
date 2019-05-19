@@ -107,14 +107,14 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/01/LaTeX入门系列之表格绘制（一）：基础_new/lierhua.top/img/006tKfTcly1fjnsfb9uamj315u0dw422.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/01/LaTeX入门系列之表格绘制（一）：基础_new/lierhua.top/img/006tKfTcly1fjntkwymy1j311g09ctai.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/01/LaTeX入门系列之表格绘制（一）：基础_new/lierhua.top/img/006tKfTcly1fjnvi1t0erj31kw0fg763.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:31:54.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnsfb9uamj315u0dw422.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjntkwymy1j311g09ctai.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnvi1t0erj31kw0fg763.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:49:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之图表绘制（一）：基础">
 <meta name="twitter:description" content="LaTeX的图表因为其缺乏直观的代码对初学者不甚友好，我在这里对LaTeX中的基本的图表绘制做一个综述，方便各种图表绘制时的备查。">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/01/LaTeX入门系列之表格绘制（一）：基础_new/lierhua.top/img/006tKfTcly1fjnsfb9uamj315u0dw422.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnsfb9uamj315u0dw422.jpg">
 
 
 
@@ -422,16 +422,16 @@
 <p>tabular 和 array 表示的都是一个普通的盒子，因此是直接与其他的文字或公式混合在一起的，我们可以将其置于一个浮动体中来规避。</p>
 <p>一个普通表格例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">\documentclass[a4paper]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line"></div><div class="line">\begin&#123;document&#125;	</div><div class="line">\begin&#123;tabular&#125;&#123;|c|ccc|p&#123;3cm&#125;|&#125;</div><div class="line">\hline</div><div class="line">空&amp;吃&amp;喝&amp;玩&amp;乐\\</div><div class="line">\hline </div><div class="line">张三&amp;鱼&amp;酒&amp;吉他&amp;赚钱\\</div><div class="line">李四&amp;肉&amp;水&amp;code&amp;赚钱\\</div><div class="line">王麻子&amp;海鲜&amp;饮料&amp;羽毛球&amp;赚钱\\</div><div class="line">\hline</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tKfTcly1fjnsfb9uamj315u0dw422.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnsfb9uamj315u0dw422.jpg" alt=""></p>
 <p>一个行列式例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line"></div><div class="line">$\left(	%行列式中大部分都会含有数学成分，因此需要使用将其全部加入$$公式环境中</div><div class="line">\begin&#123;tabular&#125;&#123;lcc|r&#125;</div><div class="line">    &amp;吃&amp;喝&amp;玩\\</div><div class="line">张三&amp;鱼&amp;酒&amp;吉他\\</div><div class="line">李四&amp;肉&amp;水&amp;code\\</div><div class="line">王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\</div><div class="line">\end&#123;tabular&#125;</div><div class="line">\right)$%注意两边大括号的书写方式\left(和\right)</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tKfTcly1fjntkwymy1j311g09ctai.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjntkwymy1j311g09ctai.jpg" alt=""></p>
 <hr>
 <p><strong>改变行列间距的方法</strong></p>
 <p>列间距：最小距离的一半由变量 \tabcolsep 和 \arraycolsep 控制</p>
 <p>行间距：由宏 \arraystretch 控制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">\documentclass[border=&#123;30mm 3mm 30mm 3mm&#125;]&#123;standalone&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">%---------------</div><div class="line">%\arraystretch是宏，默认值是1，通过如下修改可以改变其间隔的倍数</div><div class="line">\renewcommand\arraystretch&#123;2&#125;</div><div class="line">\setlength\tabcolsep&#123;10mm&#125;</div><div class="line">%\tabcolsep是变量，对应的是具体的数值</div><div class="line">%---------------</div><div class="line">$\left(	</div><div class="line">\begin&#123;tabular&#125;&#123;lcc|r&#125;</div><div class="line">    &amp;吃&amp;喝&amp;玩\\</div><div class="line">张三&amp;鱼&amp;酒&amp;吉他\\</div><div class="line">李四&amp;肉&amp;水&amp;code\\</div><div class="line">王麻子&amp;海鲜&amp;饮料&amp;羽毛球\\</div><div class="line"></div><div class="line">\end&#123;tabular&#125;</div><div class="line">\right)$</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tKfTcly1fjnvi1t0erj31kw0fg763.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tKfTcly1fjnvi1t0erj31kw0fg763.jpg" alt=""></p>
 <p><strong>NOTICE：</strong>\arraystretch是宏，所以用\renewcommand 来设定</p>
 <p>​          \tabcolsep 是变量，用 \setlength 设定</p>
 <hr>
@@ -494,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/01/LaTeX习题答案_new/" rel="next" title="LaTeX习题答案">
-                <i class="fa fa-chevron-left"></i> LaTeX习题答案
+              <a href="/2017/02/14/如何修改Mac的键盘映射_new/" rel="next" title="如何修改Mac的键盘映射">
+                <i class="fa fa-chevron-left"></i> 如何修改Mac的键盘映射
               </a>
             
           </div>
@@ -504,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/02/LaTeX入门系列之表格绘制（二）：进阶/" rel="prev" title="LaTeX入门系列之表格绘制（二）：进阶">
-                LaTeX入门系列之表格绘制（二）：进阶 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/01/LaTeX习题答案_new/" rel="prev" title="LaTeX习题答案">
+                LaTeX习题答案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,7 +599,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

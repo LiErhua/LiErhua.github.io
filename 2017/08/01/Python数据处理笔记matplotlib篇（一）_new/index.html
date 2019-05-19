@@ -107,16 +107,16 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjtkq2h8t0j30it06at90.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:34:07.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjtkq2h8t0j30it06at90.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:50:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python数据处理笔记matplotlib篇（一）">
 <meta name="twitter:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/01/Python数据处理笔记matplotlib篇（一）_new/lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
 
 
 
@@ -438,7 +438,7 @@
 <p>上面这个函数有两个返回值，他们分别如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fig : matplotlib.figure.Figure object</div><div class="line">ax : matplotlib.axes.Axes object <span class="keyword">or</span> array of Axes objects.</div></pre></td></tr></table></figure>
 <p>他们的关系由下图初见端倪：（fig是一个大面板，ax是这个面板上的区域，fig是由ax和其他一些东西组成的）</p>
-<p><img src="lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
 <p>这两个类分别如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">figure</span>.<span class="title">Figure</span><span class="params">(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=<span class="number">0.0</span>, frameon=None, subplotpars=None, tight_layout=None)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Figure</span>：这个类的实例有很多的方法，如：</span></div><div class="line"><span class="class"><span class="title">add_axes</span><span class="params">(*args, **kwargs)</span>#添加一个<span class="title">axes</span>，返回值是一个<span class="title">Axes</span>实例</span></div><div class="line"><span class="class"><span class="title">add_subplot</span><span class="params">(*args, **kwargs)</span>#添加一个若干个<span class="title">axes</span>，并返回一个<span class="title">Axes</span>实例数组</span></div><div class="line"><span class="class">------</span></div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">matplotlib</span>.<span class="title">axes</span>.<span class="title">Axes</span><span class="params">(fig, rect, facecolor=None, frameon=True, sharex=None, sharey=None, label=<span class="string">''</span>, xscale=None, yscale=None, axisbg=None, **kwargs)</span></span></div><div class="line"><span class="class">------</span></div><div class="line"><span class="class"><span class="title">Axes</span>:</span>这个类的方法有：</div><div class="line">plot(*args,**kwargs)<span class="comment">#实例使用此方法即能绘制图像,并且十分强大</span></div><div class="line">scatter(*args,**kwargs)</div><div class="line">还有与pyplot中一一对应的方法：</div><div class="line">plt.xlabel()--&gt;ax.set_xlabel()&amp;ax.get_xlabel()#具体查文档</div><div class="line">------</div></pre></td></tr></table></figure>
@@ -447,20 +447,20 @@
 <h5 id="如何移轴"><a href="#如何移轴" class="headerlink" title="如何移轴"></a>如何移轴</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">将地轴移到中间</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">把这些边框去掉</div><div class="line"></div><div class="line">ax1.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax1.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">把tick移轴</div></pre></td></tr></table></figure>
 <p>例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjtjpmk0m7j30j306bweq.jpg" alt=""></p>
 <h5 id="添加注释"><a href="#添加注释" class="headerlink" title="添加注释"></a>添加注释</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"></div><div class="line">mpl.rcParams[<span class="string">'font.family'</span>] = <span class="string">'STFangsong'</span></div><div class="line"></div><div class="line">x = np.linspace(<span class="number">0</span>,<span class="number">8</span>*np.pi,<span class="number">1000</span>)</div><div class="line">y = np.sin(x)</div><div class="line">y1 = (x-x)</div><div class="line"></div><div class="line">fig,ax = plt.subplots()</div><div class="line">ax.spines[<span class="string">'right'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'top'</span>].set_visible(<span class="keyword">False</span>)</div><div class="line">ax.spines[<span class="string">'bottom'</span>].set_position(<span class="string">'center'</span>)</div><div class="line">ax.yaxis.set_ticks_position(<span class="string">'left'</span>)</div><div class="line">ax.xaxis.set_ticks_position(<span class="string">'bottom'</span>)</div><div class="line"><span class="comment"># bagua = [乾兑离震巽坎艮坤]</span></div><div class="line">------</div><div class="line">bagua = [<span class="string">'乾'</span>,<span class="string">'坤'</span>,<span class="string">'兑'</span>,<span class="string">'艮'</span>,<span class="string">'离'</span>,<span class="string">'坎'</span>,<span class="string">'震'</span>,<span class="string">'巽'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</div><div class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">0.5</span>))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        ax.annotate(bagua[i],(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.5</span>,<span class="number">-0.5</span>),(i*np.pi+np.pi/<span class="number">2</span><span class="number">-0.4</span>,<span class="number">-0.5</span>))</div><div class="line">------</div><div class="line">ax.plot(x,y,x,y1)</div><div class="line">fig.set_size_inches((<span class="number">8</span>,<span class="number">2.5</span>))</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjtkq2h8t0j30it06at90.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjtkq2h8t0j30it06at90.jpg" alt=""></p>
 <p>###理论概念</p>
 <hr>
 <p>绘图区域设置</p>
 <p>绘图区域概念如下：</p>
 <p>在matplotlib中，一个独立的图像（不管有多少小图像）是一个Figure对象，一个Figure对象中可以包含一个或者多个Axes对象，每个Axes对象都是一个拥有自己独立坐标系统的绘图区域，如下：</p>
-<p><img src="lierhua.top/img/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg" alt=""></p>
 <p>因此，可以在全局绘图区域中创建一个分区体系，并定位到一个子绘图区域</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">plt.subplot(nrows,ncols,plot_number)</div><div class="line"><span class="comment">#区域分为nrows行，ncols列，现在绘制第plot_number个子图</span></div><div class="line">plt.subplot(<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>)</div><div class="line"><span class="comment">#3行2列，选择第4个绘图区域，然后再使用plt.plot(参数)即可进行绘图了</span></div></pre></td></tr></table></figure>
 <p>一个Figure对应一张图片。Title为标题。Axis为坐标轴，Label为坐标轴标注。Tick为刻度线，Tick Label为刻度注释。</p>
-<p><img src="lierhua.top/img/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg" alt=""></p>
-<!-- ![](lierhua.top/img/006tNc79ly1fjj0mcjwljj30dm0e2wfi.jpg) -->
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg" alt=""></p>
+<!-- ![](https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0mcjwljj30dm0e2wfi.jpg) -->
 
       
     </div>
@@ -520,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/01/Python数据处理笔记matplotlib篇（一）/" rel="next" title="Python数据处理笔记matplotlib篇（一）">
-                <i class="fa fa-chevron-left"></i> Python数据处理笔记matplotlib篇（一）
+              <a href="/2017/06/16/同一台机器，如何配置多个github账户信息_new/" rel="next" title="同一台机器，如何配置多个github账户信息">
+                <i class="fa fa-chevron-left"></i> 同一台机器，如何配置多个github账户信息
               </a>
             
           </div>
@@ -530,7 +530,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/10/yaml简介与Python上的应用/" rel="prev" title="yaml简介与Python上的应用">
+              <a href="/2017/08/10/yaml简介与Python上的应用_new/" rel="prev" title="yaml简介与Python上的应用">
                 yaml简介与Python上的应用 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -634,7 +634,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

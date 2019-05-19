@@ -107,12 +107,12 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：爬虫，豆瓣">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫_new/lierhua.top/img/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:34:14.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:50:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫入门（2）————最易上手的豆瓣爬虫">
 <meta name="twitter:description" content="关键词：爬虫，豆瓣">
-<meta name="twitter:image" content="http://yoursite.com/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫_new/lierhua.top/img/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg">
 
 
 
@@ -410,7 +410,7 @@
 <a id="more"></a>
 <p>这一节，我们讨论一下最简单的如何爬取豆瓣上的数据。</p>
 <p>豆瓣的网页页面因为十分简单，因此，没有必要提供  <code>cookie</code> 以及其他一些选项，直接爬取即可：</p>
-<p><img src="lierhua.top/img/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1flhfvqy8k5j30yq0lttig.jpg" alt=""></p>
 <p>这段代码使用没有使用函数，直接一步步爬取了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import the necessary modules</span></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</div><div class="line"></div><div class="line"><span class="comment"># //*[@id="item7553978"]//div/div[2]/div[3]/a</span></div><div class="line"><span class="comment"># //*[@id="item7553977"]/div/div[2]/div[3]/a</span></div><div class="line"><span class="comment"># //*[@id="item7553978"]/div/div[2]/div[4]/span[2]</span></div><div class="line"><span class="comment"># //*[@id="item7553978"]/div/div[2]/div[5]/text()[1]</span></div><div class="line"><span class="comment"># //*[@id="item7553978"]/div/div[2]/div[5]/text()[2]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#etree.HTML()返回一个HTML对象，xpath返回一个列表</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</div><div class="line">    url_test = <span class="string">'https://www.douban.com/doulist/1355508/?start=%d&amp;sort=time&amp;sub_type='</span>%(i*<span class="number">25</span>)</div><div class="line">    douBanHtml = requests.get(url_test) <span class="comment">#获得所有的网页信息，包括状态码等</span></div><div class="line">    douBanHtmlContent = douBanHtml.text <span class="comment"># 获取所有的HTML内容</span></div><div class="line">    douBanEleObj = etree.HTML(douBanHtmlContent) <span class="comment">#返回一个HTML的Element对象</span></div><div class="line">    names = douBanEleObj.xpath(<span class="string">'//div/div[2]/div[3]/a/text()'</span>) <span class="comment">#获取电视名字,返回值是一个列表</span></div><div class="line">    stars = douBanEleObj.xpath(<span class="string">'//div/div[2]/div[4]/span[2]/text()'</span>) <span class="comment">#获取电视星级，返回列表</span></div><div class="line">    info = [<span class="string">'directors'</span>,<span class="string">'mainActors'</span>,<span class="string">'types'</span>,<span class="string">'countrys'</span>,<span class="string">'years'</span>]</div><div class="line">    detailDict = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">5</span>):</div><div class="line">        detailDict[info[num]] = douBanEleObj.xpath(<span class="string">'//div/div[2]/div[5]/text()[num+1]'</span>)</div><div class="line">    <span class="keyword">for</span> name,star,director,mainActor,typed,country,year <span class="keyword">in</span> zip(names,stars,detailDict[info[<span class="number">0</span>]],detailDict[info[<span class="number">1</span>]],detailDict[info[<span class="number">2</span>]],detailDict[info[<span class="number">3</span>]],detailDict[info[<span class="number">4</span>]]):</div><div class="line">        dict = &#123;</div><div class="line">          <span class="string">'name'</span> : name,</div><div class="line">          <span class="string">'star'</span> : star,</div><div class="line">          <span class="string">'director'</span> : director,</div><div class="line">          <span class="string">'mainActor'</span> : mainActor,</div><div class="line">          <span class="string">'type'</span> : typed,</div><div class="line">          <span class="string">'country'</span> : country,</div><div class="line">          <span class="string">'year'</span> : year</div><div class="line">        &#125;</div><div class="line">        print(dict)</div></pre></td></tr></table></figure>
 <p>函数版</p>
@@ -482,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/10/Python爬虫入门（2）————最易上手的豆瓣爬虫/" rel="next" title="Python爬虫入门（2）————最易上手的豆瓣爬虫">
-                <i class="fa fa-chevron-left"></i> Python爬虫入门（2）————最易上手的豆瓣爬虫
+              <a href="/2016/10/10/豆瓣爬虫输出_new/" rel="next" title="豆瓣爬虫输出">
+                <i class="fa fa-chevron-left"></i> 豆瓣爬虫输出
               </a>
             
           </div>
@@ -492,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/10/豆瓣爬虫输出/" rel="prev" title="豆瓣爬虫输出">
-                豆瓣爬虫输出 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/15/Python爬虫入门（3）————ajax加载的知乎_new/" rel="prev" title="Python爬虫入门（3）————ajax加载的知乎（GET方法）">
+                Python爬虫入门（3）————ajax加载的知乎（GET方法） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +587,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -107,15 +107,15 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：章节，定制章节">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/20/LaTeX入门系列之章节与定制章节_new/lierhua.top/img/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/20/LaTeX入门系列之章节与定制章节_new/lierhua.top/img/006tNc79ly1fjzbsyt0dej30w407c3zs.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/20/LaTeX入门系列之章节与定制章节_new/lierhua.top/img/006tNc79ly1fknugxlgdlj315w0a6jt4.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/20/LaTeX入门系列之章节与定制章节_new/lierhua.top/img/006tNc79ly1fknuq0yx6sj30rs0grtav.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:30:58.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjzbsyt0dej30w407c3zs.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknugxlgdlj315w0a6jt4.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknuq0yx6sj30rs0grtav.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:48:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之章节与定制章节">
 <meta name="twitter:description" content="关键词：章节，定制章节">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/20/LaTeX入门系列之章节与定制章节_new/lierhua.top/img/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg">
 
 
 
@@ -413,18 +413,18 @@
 <a id="more"></a>
 <p>这一节，我们讨论一个文档的章节</p>
 <h4 id="LaTeX提供的章节"><a href="#LaTeX提供的章节" class="headerlink" title="LaTeX提供的章节"></a>LaTeX提供的章节</h4><p>LaTeX的划分章节层次如下：</p>
-<p><img src="lierhua.top/img/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjyg6xsb9rj30pm0a6acd.jpg" alt=""></p>
 <p>这些章节层次都会自动的编号，但是如果使用※，就可以不用编号，不用编排目录的章节</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\chapter*&#123;章的名字&#125;</div><div class="line">\section*&#123;节的名字&#125;</div><div class="line">都不会编号和目录展示</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\secnumdepth %计数器控制对章节进行编号的曾侧</div><div class="line">\tocdepth %控制章节编入目录的层次数</div><div class="line">可在导言区修改默认值</div></pre></td></tr></table></figure>
 <h4 id="章节的定制"><a href="#章节的定制" class="headerlink" title="章节的定制"></a>章节的定制</h4><h5 id="对于中文，ctex-宏包提供了-ctexset-或者-CTEXsetup-命令来设置章节标题的格式"><a href="#对于中文，ctex-宏包提供了-ctexset-或者-CTEXsetup-命令来设置章节标题的格式" class="headerlink" title="对于中文，ctex 宏包提供了 \ctexset 或者 \CTEXsetup 命令来设置章节标题的格式"></a>对于中文，ctex 宏包提供了 \ctexset 或者 \CTEXsetup 命令来设置章节标题的格式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">------</div><div class="line">\usepackage[heading = true]&#123;ctex&#125;</div><div class="line">\ctexset&#123;section = &#123; 可选项 = 值， 可选项 = 值 ……&#125;，subsection = &#123;&#125;，……&#125;</div><div class="line">------</div><div class="line">\CTEXsetup[可选项 = 值，可选项 = 值，……]&#123;chapter,section,subsection……&#125;</div><div class="line">这是设置的形式。其中部分 可选项与对应的值 如下(更多的请查阅文档ctex.pdf第八章)</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage[heading=true]&#123;ctex&#125;%一定注意将heading设置为true</div><div class="line">\usepackage[left = 30mm,right = 30mm]&#123;geometry&#125;</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\ctexset&#123;section=&#123;name=&#123;第,节&#125;,titleformat = &#123;\qingsong&#125;&#125;&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\section&#123;锦瑟无端五十弦&#125;</div><div class="line">\section&#123;一弦一柱思华年&#125;</div><div class="line">\section&#123;庄生晓梦迷蝴蝶&#125;</div><div class="line">\section&#123;望帝春深托杜鹃&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjzbsyt0dej30w407c3zs.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjzbsyt0dej30w407c3zs.jpg" alt=""></p>
 <h5 id="除了ctex宏包外，还可以使用titlesec宏包来进行设置"><a href="#除了ctex宏包外，还可以使用titlesec宏包来进行设置" class="headerlink" title="除了ctex宏包外，还可以使用titlesec宏包来进行设置"></a>除了ctex宏包外，还可以使用titlesec宏包来进行设置</h5><h4 id="章节定制补充"><a href="#章节定制补充" class="headerlink" title="章节定制补充"></a>章节定制补充</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">具体的使用请查看ctex宏包18页</div><div class="line">\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;&#125;&#125;%定制自己的mysection类型方式</div><div class="line">\newcommand&#123;\mysection&#125;[1]&#123;mysection的具体表现形式&#125;</div></pre></td></tr></table></figure>
 <p>%一定注意设置的内部一定不能手动换行！！！！！<br>%尽量保持一项一项的设定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage[heading = true]&#123;ctex&#125;</div><div class="line">%一定注意设置的内部一定不能手动换行！！！！！</div><div class="line">\ctexset&#123;section = &#123;name = &#123;第,回&#125;,titleformat = &#123;\mysection&#125;,nameformat = &#123;\qingsong\Huge&#125;,numberformat = &#123;\Huge&#125;&#125;,&#125;%定制自己的mysection类型方式</div><div class="line">\newcommand&#123;\mysection&#125;[1]&#123;\Huge\qingsong #1&#125;</div><div class="line">%尽量保持一项一项的设定</div><div class="line">\ctexset&#123;subsection = &#123;name = &#123;第,项&#125;,titleformat = &#123;\mysubsection&#125;,nameformat = &#123;\large&#125;&#125;&#125;</div><div class="line">\newcommand&#123;\mysubsection&#125;[1]&#123;\large\qingsong #1&#125;</div><div class="line"></div><div class="line">\usepackage&#123;anyfontsize&#125;</div><div class="line">\usepackage&#123;fontspec&#125;</div><div class="line">\newCJKfontfamily\qingsong&#123;FZQKBYSJW--GB1-0&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\section&#123;我试试&#125;</div><div class="line">\subsection&#123;试试就试试&#125;</div><div class="line">试试就试试</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="lierhua.top/img/006tNc79ly1fknugxlgdlj315w0a6jt4.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknugxlgdlj315w0a6jt4.jpg" alt=""></p>
 <p>注意下如下：</p>
-<p><img src="lierhua.top/img/006tNc79ly1fknuq0yx6sj30rs0grtav.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fknuq0yx6sj30rs0grtav.jpg" alt=""></p>
 <p>$$<br>\lg[\text{D}]_t = \lg\text{K} + n\lg[\text{D}]_s<br>$$</p>
 <p>$$<br>[\text{D}]_f = \text{K}[\text{D}]_f<br>$$</p>
 <p>$$<br>\frac{1}{[\text{D}]_f} = \frac{1}{\text{K}[\text{D}]_s[\text{S}]}+\frac{1}{[\text{S}]}<br>$$</p>
@@ -489,7 +489,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/LaTeX入门系列之多文档编译/" rel="next" title="LaTeX入门系列之多文档编译">
+              <a href="/2017/03/20/LaTeX入门系列之多文档编译_new/" rel="next" title="LaTeX入门系列之多文档编译">
                 <i class="fa fa-chevron-left"></i> LaTeX入门系列之多文档编译
               </a>
             
@@ -499,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/20/LaTeX入门系列之多文档编译_new/" rel="prev" title="LaTeX入门系列之多文档编译">
-                LaTeX入门系列之多文档编译 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/20/LaTeX入门系列之标题_new/" rel="prev" title="LaTeX入门系列之标题">
+                LaTeX入门系列之标题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -603,7 +603,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -107,14 +107,14 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：盒子">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/15/LaTeX入门系列之盒子_new/lierhua.top/img/006tNc79ly1fjvtzsqizkj318c0683zv.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/15/LaTeX入门系列之盒子_new/lierhua.top/img/006tNc79ly1fjxb15lc7vj30rm09ugpu.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/15/LaTeX入门系列之盒子_new/lierhua.top/img/006tNc79ly1fjxbd6xb4kj30e401sq2v.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:30:41.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjvtzsqizkj318c0683zv.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjxb15lc7vj30rm09ugpu.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjxbd6xb4kj30e401sq2v.jpg">
+<meta property="og:updated_time" content="2019-05-19T15:48:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LaTeX入门系列之盒子">
 <meta name="twitter:description" content="关键词：盒子">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/15/LaTeX入门系列之盒子_new/lierhua.top/img/006tNc79ly1fjvtzsqizkj318c0683zv.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjvtzsqizkj318c0683zv.jpg">
 
 
 
@@ -416,16 +416,16 @@
 <h4 id="水平盒子"><a href="#水平盒子" class="headerlink" title="水平盒子"></a>水平盒子</h4><p>水平盒子无法在其中进行段落的划分，即无法分行分段</p>
 <h5 id="不带边框的盒子"><a href="#不带边框的盒子" class="headerlink" title="不带边框的盒子"></a>不带边框的盒子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\mbox&#123;文本内容&#125;</div><div class="line">\makebox[宽度][位置(clrs)]&#123;内容&#125;</div></pre></td></tr></table></figure>
 <h5 id="带边框的盒子"><a href="#带边框的盒子" class="headerlink" title="带边框的盒子"></a>带边框的盒子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\fbox&#123;文本&#125;</div><div class="line">\framebox[宽度][位置]&#123;文本&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjvtzsqizkj318c0683zv.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjvtzsqizkj318c0683zv.jpg" alt=""></p>
 <h4 id="垂直盒子"><a href="#垂直盒子" class="headerlink" title="垂直盒子"></a>垂直盒子</h4><p>垂直盒子就可以有多个段落</p>
 <p>垂直盒子命令有两种形式：<strong>命令</strong>\parbox{宽度}{盒子内容} 与 <strong>环境</strong>\begin{minipage}{宽度}……</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">精简版命令格式</div><div class="line">\parbox&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;&#123;盒子内容&#125;</div><div class="line">------</div><div class="line">精简版环境格式</div><div class="line">\begin&#123;minipage&#125;&#123;宽度(一般用0.48\textwidth 的形式表示)&#125;%表示这个盒子宽度是\textwidth的0.48倍</div><div class="line">盒子内容</div><div class="line">\end&#123;minipage&#125;</div></pre></td></tr></table></figure>
 <p>NOTICE: 宽度参数必须有，表示内容的宽度，超出这个宽度自动换行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">\parbox&#123;0.6\textwidth&#125;&#123;</div><div class="line">	锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪</div><div class="line">	锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪</div><div class="line">&#125;</div><div class="line">\vskip 1cm</div><div class="line">\begin&#123;minipage&#125;&#123;0.45\linewidth&#125;</div><div class="line">	锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪</div><div class="line">	锦瑟无端五十弦一弦一柱思华年庄生晓梦迷蝴蝶望帝春深托杜鹃，沧海月明珠有泪</div><div class="line">\end&#123;minipage&#125;</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjxb15lc7vj30rm09ugpu.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjxb15lc7vj30rm09ugpu.jpg" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\raisebox&#123;距离&#125;&#123;内容&#125;</div><div class="line">这个盒子的是用来控制上下的，距离正表示往上走，距离负表示往下走</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">\documentclass[]&#123;article&#125;</div><div class="line">\usepackage&#123;ctex&#125;</div><div class="line">\begin&#123;document&#125;</div><div class="line">T\hspace&#123;-0.5em&#125;</div><div class="line">\raisebox&#123;-0.2em&#125;&#123;E&#125;</div><div class="line">\hspace&#123;-0.5em&#125;X</div><div class="line">\end&#123;document&#125;</div></pre></td></tr></table></figure>
-<p><img src="lierhua.top/img/006tNc79ly1fjxbd6xb4kj30e401sq2v.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjxbd6xb4kj30e401sq2v.jpg" alt=""></p>
 
       
     </div>
@@ -485,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（一）————列表环境/" rel="next" title="LaTeX入门系列之正文环境（二）———— 列表环境">
-                <i class="fa fa-chevron-left"></i> LaTeX入门系列之正文环境（二）———— 列表环境
+              <a href="/2017/03/13/LaTeX入门系列之文字强调_new/" rel="next" title="LaTeX入门系列之文字强调">
+                <i class="fa fa-chevron-left"></i> LaTeX入门系列之文字强调
               </a>
             
           </div>
@@ -495,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/15/LaTeX入门系列之正文环境（四）————-抄录命令与环境_new/" rel="prev" title="LaTeX入门系列之正文环境（四）———— 抄录命令与环境">
-                LaTeX入门系列之正文环境（四）———— 抄录命令与环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/15/LaTeX入门系列之正文环境（五）————-代码环境_new/" rel="prev" title="LaTeX入门系列之正文环境（五）———— 代码环境">
+                LaTeX入门系列之正文环境（五）———— 代码环境 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,7 +599,7 @@ var jiathis_config={
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">159</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
