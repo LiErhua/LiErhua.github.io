@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="夜雨秋灯" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="关键词：scoped_session， threading.local()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlalchemy中scoped_session与threading.local()的关系">
+<meta property="og:url" content="http://yoursite.com/2019/05/20/sqlalchemy中scoped_session与threading.local()的关系/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="关键词：scoped_session， threading.local()">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-20T14:11:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlalchemy中scoped_session与threading.local()的关系">
+<meta name="twitter:description" content="关键词：scoped_session， threading.local()">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/sqlalchemy中scoped_session与threading.local()的关系/"/>
+
+
+
+
+
+  <title>sqlalchemy中scoped_session与threading.local()的关系 | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/20/sqlalchemy中scoped_session与threading.local()的关系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqlalchemy中scoped_session与threading.local()的关系</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T00:00:00+08:00">
+                2019-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关键词：<code>scoped_session</code>， <code>threading.local()</code></p>
+<a id="more"></a>
+<p>下面是一段操作 MySQL 连接的代码，今天来分析下里面 get_dbsession 这个函数牵扯到的一些关于线程的知识。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</div><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> scoped_session, sessionmaker</div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> log</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="keyword">from</span> greenlet <span class="keyword">import</span> getcurrent <span class="keyword">as</span> get_ident</div><div class="line"><span class="keyword">except</span> ImportError:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">from</span> thread <span class="keyword">import</span> get_ident</div><div class="line">    <span class="keyword">except</span> ImportError:</div><div class="line">        <span class="keyword">from</span> _thread <span class="keyword">import</span> get_ident</div><div class="line"></div><div class="line"></div><div class="line">BaseModel = declarative_base()</div><div class="line"></div><div class="line">dbsession_cache = &#123;&#125;</div><div class="line">dbsession_used = &#123;&#125;</div><div class="line"></div><div class="line">logger = log.get_logger(<span class="string">'dock.sqldb'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_sqldb_engine</span><span class="params">(url, options=&#123;&#125;)</span>:</span></div><div class="line">    kwargs = &#123;</div><div class="line">        <span class="string">'pool_size'</span>: <span class="number">20</span>,</div><div class="line">        <span class="string">'max_overflow'</span>: <span class="number">0</span>,</div><div class="line">        <span class="string">'pool_recycle'</span>: <span class="number">3600</span></div><div class="line">    &#125;</div><div class="line">    kwargs.update(options <span class="keyword">or</span> &#123;&#125;)</div><div class="line">    <span class="keyword">return</span> create_engine(url, **kwargs)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_dbsession_used</span><span class="params">(name)</span>:</span></div><div class="line">    ident = get_ident()</div><div class="line">    used = dbsession_used.setdefault(ident, set())</div><div class="line">    used.add(name)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_dbsession</span><span class="params">(name=<span class="string">'default'</span>)</span>:</span></div><div class="line">    <span class="keyword">from</span> .globals <span class="keyword">import</span> config</div><div class="line">    <span class="keyword">if</span> name <span class="keyword">not</span> <span class="keyword">in</span> dbsession_cache:</div><div class="line">        conf = config.sqldb.get(name, &#123;&#125;)</div><div class="line">        engine = create_sqldb_engine(conf[<span class="string">'url'</span>], conf.get(<span class="string">'options'</span>, &#123;&#125;))</div><div class="line">        <span class="comment"># threading safe</span></div><div class="line">        <span class="comment"># scoped_session 接收的参数是一个 sessionmaker ，这个是确保的前提</span></div><div class="line">        dbsession = scoped_session(sessionmaker(autocommit=<span class="keyword">False</span>,</div><div class="line">                        autoflush=<span class="keyword">False</span>, bind=engine))</div><div class="line">        dbsession_cache[name] = dbsession</div><div class="line">    dbsession_class = dbsession_cache[name]</div><div class="line">    update_dbsession_used(name)</div><div class="line">    dbsession_class()</div><div class="line">    <span class="keyword">return</span> dbsession_class</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">clear_dbsession</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">global</span> dbsession_used</div><div class="line">    ident = get_ident()</div><div class="line">    dbsessions = dbsession_used.pop(ident, [])</div><div class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> dbsessions:</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            dbsession_class = dbsession_cache.get(name)</div><div class="line">            dbsession_class.remove()</div><div class="line">        <span class="keyword">except</span>:</div><div class="line">            logger.error(<span class="string">'error while clear dbsession'</span>)</div><div class="line">            logger.traceback()</div></pre></td></tr></table></figure>
+<p>我们看来看这个 get_dbsession 涉及到的一些东西 :</p>
+<p>前提： 当我们已经拿到了一个 dbsession_class 对象，并使用对应的 key 存储到了 dbsession_cache 中去。</p>
+<p>当我们根据这个 key，拿出了这个 dbsession_class 对象之后，我们看到 dbsession_class 调用了一个 call 方法（括号方法），dbsession_class 是 scoped_session 的一个对象，也就是说，调用了如下代码中的 <code>def __call__(self, **kw):</code> 这个方法，而这个方法最后做的事情是返回了 <code>self.registry()</code> 这个东西，也就是相当于调用了 <code>self.registry</code> 这个属性的 call 方法（括号方法），那我们看到 <code>self.registry</code> 这个属性值是一个对象的实例 <code>ThreadLocalRegistry(session_factory)</code>。 （下一段开始讲这个实例，下方代码是这段话的代码展示）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">scoped_session</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""Provides scoped management of :class:`.Session` objects.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    See :ref:`unitofwork_contextual` for a tutorial.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    """</span></div><div class="line"></div><div class="line">    session_factory = <span class="keyword">None</span></div><div class="line">    <span class="string">"""The `session_factory` provided to `__init__` is stored in this</span></div><div class="line"><span class="string">    attribute and may be accessed at a later time.  This can be useful when</span></div><div class="line"><span class="string">    a new non-scoped :class:`.Session` or :class:`.Connection` to the</span></div><div class="line"><span class="string">    database is needed."""</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, session_factory, scopefunc=None)</span>:</span></div><div class="line">        <span class="string">"""Construct a new :class:`.scoped_session`.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">        :param session_factory: a factory to create new :class:`.Session`</span></div><div class="line"><span class="string">         instances. This is usually, but not necessarily, an instance</span></div><div class="line"><span class="string">         of :class:`.sessionmaker`.</span></div><div class="line"><span class="string">        :param scopefunc: optional function which defines</span></div><div class="line"><span class="string">         the current scope.   If not passed, the :class:`.scoped_session`</span></div><div class="line"><span class="string">         object assumes "thread-local" scope, and will use</span></div><div class="line"><span class="string">         a Python ``threading.local()`` in order to maintain the current</span></div><div class="line"><span class="string">         :class:`.Session`.  If passed, the function should return</span></div><div class="line"><span class="string">         a hashable token; this token will be used as the key in a</span></div><div class="line"><span class="string">         dictionary in order to store and retrieve the current</span></div><div class="line"><span class="string">         :class:`.Session`.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">        """</span></div><div class="line">        self.session_factory = session_factory</div><div class="line"></div><div class="line">        <span class="keyword">if</span> scopefunc:</div><div class="line">            self.registry = ScopedRegistry(session_factory, scopefunc)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.registry = ThreadLocalRegistry(session_factory)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, **kw)</span>:</span></div><div class="line">        <span class="string">r"""Return the current :class:`.Session`, creating it</span></div><div class="line"><span class="string">        using the :attr:`.scoped_session.session_factory` if not present.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">        :param \**kw: Keyword arguments will be passed to the</span></div><div class="line"><span class="string">         :attr:`.scoped_session.session_factory` callable, if an existing</span></div><div class="line"><span class="string">         :class:`.Session` is not present.  If the :class:`.Session` is present</span></div><div class="line"><span class="string">         and keyword arguments have been passed,</span></div><div class="line"><span class="string">         :exc:`~sqlalchemy.exc.InvalidRequestError` is raised.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">        """</span></div><div class="line">        <span class="keyword">if</span> kw:</div><div class="line">            <span class="keyword">if</span> self.registry.has():</div><div class="line">                <span class="keyword">raise</span> sa_exc.InvalidRequestError(</div><div class="line">                    <span class="string">"Scoped session is already present; "</span></div><div class="line">                    <span class="string">"no new arguments may be specified."</span></div><div class="line">                )</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                sess = self.session_factory(**kw)</div><div class="line">                self.registry.set(sess)</div><div class="line">                <span class="keyword">return</span> sess</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.registry()</div></pre></td></tr></table></figure>
+<p>这个 <code>ThreadLocalRegistry(session_factory)</code> 对象参考如下代码的实现， 发现他同样具有 <code>def __call__(self):</code> 方法，因此，我们上一段里的 <code>self.registry</code> 才能调用这个 call 方法。到这里一切都没有问题（下面代码是这一段的代码展示）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalRegistry</span><span class="params">(ScopedRegistry)</span>:</span></div><div class="line">    <span class="string">"""A :class:`.ScopedRegistry` that uses a ``threading.local()``</span></div><div class="line"><span class="string">    variable for storage.</span></div><div class="line"><span class="string"></span></div><div class="line"><span class="string">    """</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, createfunc)</span>:</span></div><div class="line">        self.createfunc = createfunc</div><div class="line">        self.registry = threading.local()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">return</span> self.registry.value</div><div class="line">        <span class="keyword">except</span> AttributeError:</div><div class="line">            val = self.registry.value = self.createfunc()</div><div class="line">            <span class="keyword">return</span> val</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> hasattr(self.registry, <span class="string">"value"</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, obj)</span>:</span></div><div class="line">        self.registry.value = obj</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clear</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="keyword">del</span> self.registry.value</div><div class="line">        <span class="keyword">except</span> AttributeError:</div><div class="line">            <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p>当我们开始调用 call 方法的时候，容易让人迷惑的地方出现了，他需要返回这个东西的值 <code>self.registry.value</code> , 但是这个 <code>self.registry</code> 是一个 <code>threading.local()</code> （在最开始的大前提我们已经说过了，这个 dbsession_class 对象已经被初始化过，作为了一个对象保存在了 cache 中，因此在各个阶段，他被初始化的属性都是可以直接拿到的，当然包括这个 <code>threading_local</code> 也是可以直接拿到的属性）, 而这个对象存储的值在不同的线程或者协程（如果使用了 gevent , 线程会被协程劫持，就会变成协程）内是不一定一致的，下面的代码会显示这个 <code>threading.local()</code> 对象内数据的存储</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_patch</span><span class="params">(self)</span>:</span></div><div class="line">    key = object.__getattribute__(self, <span class="string">'_local__key'</span>)</div><div class="line">    d = current_thread().__dict__.get(key)</div><div class="line">    <span class="keyword">if</span> d <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        d = &#123;&#125;</div><div class="line">        current_thread().__dict__[key] = d</div><div class="line">        object.__setattr__(self, <span class="string">'__dict__'</span>, d)</div><div class="line"></div><div class="line">        <span class="comment"># we have a new instance dict, so call out __init__ if we have</span></div><div class="line">        <span class="comment"># one</span></div><div class="line">        cls = type(self)</div><div class="line">        <span class="keyword">if</span> cls.__init__ <span class="keyword">is</span> <span class="keyword">not</span> object.__init__:</div><div class="line">            args, kw = object.__getattribute__(self, <span class="string">'_local__args'</span>)</div><div class="line">            cls.__init__(self, *args, **kw)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        object.__setattr__(self, <span class="string">'__dict__'</span>, d)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">local</span><span class="params">(_localbase)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span><span class="params">(self, name)</span>:</span></div><div class="line">        lock = object.__getattribute__(self, <span class="string">'_local__lock'</span>)</div><div class="line">        lock.acquire()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            _patch(self)</div><div class="line">            <span class="keyword">return</span> object.__getattribute__(self, name)</div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            lock.release()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name, value)</span>:</span></div><div class="line">        <span class="keyword">if</span> name == <span class="string">'__dict__'</span>:</div><div class="line">            <span class="keyword">raise</span> AttributeError(</div><div class="line">                <span class="string">"%r object attribute '__dict__' is read-only"</span></div><div class="line">                % self.__class__.__name__)</div><div class="line">        lock = object.__getattribute__(self, <span class="string">'_local__lock'</span>)</div><div class="line">        lock.acquire()</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            _patch(self)</div><div class="line">            <span class="keyword">return</span> object.__setattr__(self, name, value)</div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            lock.release()</div></pre></td></tr></table></figure>
+<p>我们能看到当执行 <code>self.registry.value</code> 时，因为 <code>self.registry</code> 已经是 <code>threading.local()</code> 对象了，因此他的属性的调用应该走的是被复写了的 <code>__getattribute__</code> 方法，我们从上述代码中看到，他其实是调用了 <code>_patch(self)</code> 函数，这个函数里我们发现每次调用的时候都需要经过一个 <code>current_thread()</code> 的变量，这个变量代表了当前的线程或者协程对象，而不再是我们文章开始时 dbsession_class 这个变量当时的那个线程和协程对象，因此拿不到之前存在那个线程或者协程里存储的变量的值了。因此， 这就解释了为什么我们拿到的是 cache 里的对象，但是还是线程安全的问题。因为，这个对象在使用时如果已经已经进入了一个新的线程或者协程，那么这时从 <code>current_thread()</code> 里获取的属性其实已经是当前线程或者协程的属性了，之前线程或者协程存储的属性不会再这里起作用</p>
+<hr>
+<ul>
+<li><p>再回到我们最开始的那个处理 MySQL 的 session 的代码，这时我们就能很清晰的进行判断了，我们会根据名字提前缓存一个 dbsession 对象，如果这个对象恰巧又在同一个线程或者协程内使用（同一个请求内包含了多次 get_dbsession 方法），那么这时，就相当于直接复用了这个对象。</p>
+</li>
+<li><p>如果这个对象没有被同一个线程或者协程使用，那么她被放到 cache 中，一旦 get_dbsession 根据同样的名字又拿到了这个对象，从里面取值的时候，由于此时的线程或者协程已经改变了，因此，不会取到之前的那个线程或者携程内存储的信息，做到了线程安全。</p>
+</li>
+</ul>
+<hr>
+<p><code>threading.local()</code> 是一个全局的变量，可以认为他的形式是如下这样的，这个对象会存储当前正在共存的线程的编号和他对应的值的信息（当然这些值都是赋值上去的），一旦这个线程被销毁，这个字典里对应的 key 和他的值也会被删除，只保留正在共存的键值对。在我们自己的线程或者协程去取对应的值的时候，其实是现根据 <code>current_thread</code> 拿到当前线程的编号或者直接拿到这个线程的对象，然后根据这个线程的线程号，按图索骥，拿到对应的属性的值，因此我们讲在不同的线程中，实例的值会不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    threading_id1: all_this_threading_attr, </div><div class="line">    threading_id2: all_this_threading_attr, </div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/19/诗词小品_new/" rel="next" title="诗词小品">
+                <i class="fa fa-chevron-left"></i> 诗词小品
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/20/picGo迁移微博图床到github上/" rel="prev" title="使用 picGo 迁移微博图床到 github 上">
+                使用 picGo 迁移微博图床到 github 上 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">122</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">105</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
