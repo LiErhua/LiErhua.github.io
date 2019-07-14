@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="golang,go," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+<meta name="keywords" content="golang,go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go bufio">
+<meta property="og:url" content="http://yoursite.com/2018/06/19/Go bufio/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-14T13:17:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go bufio">
+<meta name="twitter:description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/19/Go bufio/"/>
+
+
+
+
+
+  <title>Go bufio | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/19/Go bufio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go bufio</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-19T00:00:00+08:00">
+                2018-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对 golang 的标准库进行一个系列性的总结，备查更加方便</p>
+<a id="more"></a>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div></pre></td><td class="code"><pre><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// bufio 包实现了带缓存的 I/O 操作</span></div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="keyword">type</span> Reader <span class="keyword">struct</span> &#123; ... &#125;</div><div class="line"></div><div class="line"><span class="comment">// NewReaderSize 将 rd 封装成一个带缓存的 bufio.Reader 对象，</span></div><div class="line"><span class="comment">// 缓存大小由 size 指定（如果小于 16 则会被设置为 16）。</span></div><div class="line"><span class="comment">// 如果 rd 的基类型就是有足够缓存的 bufio.Reader 类型，则直接将</span></div><div class="line"><span class="comment">// rd 转换为基类型返回。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewReaderSize</span><span class="params">(rd io.Reader, size <span class="keyword">int</span>)</span> *<span class="title">Reader</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">NewReader</span> 相当于 <span class="title">NewReaderSize</span><span class="params">(rd, 4096)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">NewReader</span><span class="params">(rd io.Reader)</span> *<span class="title">Reader</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">bufio</span>.<span class="title">Reader</span> 实现了如下接口：</span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">Reader</span></span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">WriterTo</span></span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">ByteScanner</span></span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">RuneScanner</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Peek</span> 返回缓存的一个切片，该切片引用缓存中前 <span class="title">n</span> 个字节的数据，</span></div><div class="line"><span class="function">// 该操作不会将数据读出，只是引用，引用的数据在下一次读取操作之</span></div><div class="line"><span class="function">// 前是有效的。如果切片长度小于 <span class="title">n</span>，则返回一个错误信息说明原因。</span></div><div class="line"><span class="function">// 如果 <span class="title">n</span> 大于缓存的总大小，则返回 <span class="title">ErrBufferFull</span>。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Read</span> 从 <span class="title">b</span> 中读出数据到 <span class="title">p</span> 中，返回读出的字节数和遇到的错误。</span></div><div class="line"><span class="function">// 如果缓存不为空，则只能读出缓存中的数据，不会从底层 <span class="title">io</span>.<span class="title">Reader</span></span></div><div class="line"><span class="function">// 中提取数据，如果缓存为空，则：</span></div><div class="line"><span class="function">// 1、<span class="title">len</span><span class="params">(p)</span> &gt;= 缓存大小，则跳过缓存，直接从底层 <span class="title">io</span>.<span class="title">Reader</span> 中读</span></div><div class="line"><span class="function">// 出到 <span class="title">p</span> 中。</span></div><div class="line"><span class="function">// 2、<span class="title">len</span><span class="params">(p)</span> &lt; 缓存大小，则先将数据从底层 <span class="title">io</span>.<span class="title">Reader</span> 中读取到缓存</span></div><div class="line"><span class="function">// 中，再从缓存读取到 <span class="title">p</span> 中。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Read</span><span class="params">(p []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Buffered</span> 返回缓存中未读取的数据的长度。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Buffered</span><span class="params">()</span> <span class="title">int</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Discard</span> 跳过后续的 <span class="title">n</span> 个字节的数据，返回跳过的字节数。</span></div><div class="line"><span class="function">// 如果结果小于 <span class="title">n</span>，将返回错误信息。</span></div><div class="line"><span class="function">// 如果 <span class="title">n</span> 小于缓存中的数据长度，则不会从底层提取数据。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Discard</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">(discarded <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ReadSlice</span> 在 <span class="title">b</span> 中查找 <span class="title">delim</span> 并返回 <span class="title">delim</span> 及其之前的所有数据。</span></div><div class="line"><span class="function">// 该操作会读出数据，返回的切片是已读出的数据的引用，切片中的数据</span></div><div class="line"><span class="function">// 在下一次读取操作之前是有效的。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 如果找到 <span class="title">delim</span>，则返回查找结果，<span class="title">err</span> 返回 <span class="title">nil</span>。</span></div><div class="line"><span class="function">// 如果未找到 <span class="title">delim</span>，则：</span></div><div class="line"><span class="function">// 1、缓存不满，则将缓存填满后再次查找。</span></div><div class="line"><span class="function">// 2、缓存是满的，则返回整个缓存，<span class="title">err</span> 返回 <span class="title">ErrBufferFull</span>。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 如果未找到 <span class="title">delim</span> 且遇到错误（通常是 <span class="title">io</span>.<span class="title">EOF</span>），则返回缓存中的所</span></div><div class="line"><span class="function">// 有数据和遇到的错误。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 因为返回的数据有可能被下一次的读写操作修改，所以大多数操作应该</span></div><div class="line"><span class="function">// 使用 <span class="title">ReadBytes</span> 或 <span class="title">ReadString</span>，它们返回的是数据的拷贝。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadSlice</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ReadLine</span> 是一个低水平的行读取原语，大多数情况下，应该使用</span></div><div class="line">// ReadBytes('\n') 或 ReadString('\n')，或者使用一个 Scanner。</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// ReadLine 通过调用 ReadSlice 方法实现，返回的也是缓存的切片。用于</span></div><div class="line"><span class="comment">// 读取一行数据，不包括行尾标记（\n 或 \r\n）。</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 只要能读出数据，err 就为 nil。如果没有数据可读，则 isPrefix 返回</span></div><div class="line"><span class="comment">// false，err 返回 io.EOF。</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 如果找到行尾标记，则返回查找结果，isPrefix 返回 false。</span></div><div class="line"><span class="comment">// 如果未找到行尾标记，则：</span></div><div class="line"><span class="comment">// 1、缓存不满，则将缓存填满后再次查找。</span></div><div class="line"><span class="comment">// 2、缓存是满的，则返回整个缓存，isPrefix 返回 true。</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 整个数据尾部“有一个换行标记”和“没有换行标记”的读取结果是一样。</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// 如果 ReadLine 读取到换行标记，则调用 UnreadByte 撤销的是换行标记，</span></div><div class="line"><span class="comment">// 而不是返回的数据。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadLine</span><span class="params">()</span> <span class="params">(line []<span class="keyword">byte</span>, isPrefix <span class="keyword">bool</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ReadBytes</span> 功能同 <span class="title">ReadSlice</span>，只不过返回的是缓存的拷贝。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadBytes</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ReadString</span> 功能同 <span class="title">ReadBytes</span>，只不过返回的是字符串。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">ReadString</span><span class="params">(delim <span class="keyword">byte</span>)</span> <span class="params">(line <span class="keyword">string</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Reset</span> 将 <span class="title">b</span> 的底层 <span class="title">Reader</span> 重新指定为 <span class="title">r</span>，同时丢弃缓存中的所有数据，复位</span></div><div class="line"><span class="function">// 所有标记和错误信息。 <span class="title">bufio</span>.<span class="title">Reader</span>。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Reader)</span> <span class="title">Reset</span><span class="params">(r io.Reader)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例：<span class="title">Peek</span>、<span class="title">Read</span>、<span class="title">Discard</span>、<span class="title">Buffered</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	sr := strings.NewReader(<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span>)</div><div class="line">	buf := bufio.NewReaderSize(sr, <span class="number">0</span>)</div><div class="line">	b := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</div><div class="line"></div><div class="line">	fmt.Println(buf.Buffered()) <span class="comment">// 0</span></div><div class="line">	s, _ := buf.Peek(<span class="number">5</span>)</div><div class="line">	s[<span class="number">0</span>], s[<span class="number">1</span>], s[<span class="number">2</span>] = <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span></div><div class="line">	fmt.Printf(<span class="string">"%d   %q\n"</span>, buf.Buffered(), s) <span class="comment">// 16   "abcDE"</span></div><div class="line"></div><div class="line">	buf.Discard(<span class="number">1</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> n, err := <span class="number">0</span>, error(<span class="literal">nil</span>); err == <span class="literal">nil</span>; &#123;</div><div class="line">		n, err = buf.Read(b)</div><div class="line">		fmt.Printf(<span class="string">"%d   %q   %v\n"</span>, buf.Buffered(), b[:n], err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 5   "bcDEFGHIJK"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// 0   "LMNOP"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// 6   "QRSTUVWXYZ"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// 0   "123456"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// 0   "7890"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// 0   ""   EOF</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------</div><div class="line"></div><div class="line"><span class="comment">// 示例：ReadLine</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	sr := strings.NewReader(<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ\n1234567890"</span>)</div><div class="line">	buf := bufio.NewReaderSize(sr, <span class="number">0</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> line, isPrefix, err := []<span class="keyword">byte</span>&#123;<span class="number">0</span>&#125;, <span class="literal">false</span>, error(<span class="literal">nil</span>); <span class="built_in">len</span>(line) &gt; <span class="number">0</span> &amp;&amp; err == <span class="literal">nil</span>; &#123;</div><div class="line">		line, isPrefix, err = buf.ReadLine()</div><div class="line">		fmt.Printf(<span class="string">"%q   %t   %v\n"</span>, line, isPrefix, err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// "ABCDEFGHIJKLMNOP"   true   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// "QRSTUVWXYZ"   false   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// "1234567890"   false   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// ""   false   EOF</span></div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"----------"</span>)</div><div class="line"></div><div class="line">	<span class="comment">// 尾部有一个换行标记</span></div><div class="line">	buf = bufio.NewReaderSize(strings.NewReader(<span class="string">"ABCDEFG\n"</span>), <span class="number">0</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> line, isPrefix, err := []<span class="keyword">byte</span>&#123;<span class="number">0</span>&#125;, <span class="literal">false</span>, error(<span class="literal">nil</span>); <span class="built_in">len</span>(line) &gt; <span class="number">0</span> &amp;&amp; err == <span class="literal">nil</span>; &#123;</div><div class="line">		line, isPrefix, err = buf.ReadLine()</div><div class="line">		fmt.Printf(<span class="string">"%q   %t   %v\n"</span>, line, isPrefix, err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// "ABCDEFG"   false   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// ""   false   EOF</span></div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"----------"</span>)</div><div class="line"></div><div class="line">	<span class="comment">// 尾部没有换行标记</span></div><div class="line">	buf = bufio.NewReaderSize(strings.NewReader(<span class="string">"ABCDEFG"</span>), <span class="number">0</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> line, isPrefix, err := []<span class="keyword">byte</span>&#123;<span class="number">0</span>&#125;, <span class="literal">false</span>, error(<span class="literal">nil</span>); <span class="built_in">len</span>(line) &gt; <span class="number">0</span> &amp;&amp; err == <span class="literal">nil</span>; &#123;</div><div class="line">		line, isPrefix, err = buf.ReadLine()</div><div class="line">		fmt.Printf(<span class="string">"%q   %t   %v\n"</span>, line, isPrefix, err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// "ABCDEFG"   false   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// ""   false   EOF</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------</div><div class="line"></div><div class="line"><span class="comment">// 示例：ReadSlice</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="comment">// 尾部有换行标记</span></div><div class="line">	buf := bufio.NewReaderSize(strings.NewReader(<span class="string">"ABCDEFG\n"</span>), <span class="number">0</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> line, err := []<span class="keyword">byte</span>&#123;<span class="number">0</span>&#125;, error(<span class="literal">nil</span>); <span class="built_in">len</span>(line) &gt; <span class="number">0</span> &amp;&amp; err == <span class="literal">nil</span>; &#123;</div><div class="line">		line, err = buf.ReadSlice(<span class="string">'\n'</span>)</div><div class="line">		fmt.Printf(<span class="string">"%q   %v\n"</span>, line, err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// "ABCDEFG\n"   &lt;nil&gt;</span></div><div class="line">	<span class="comment">// ""   EOF</span></div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"----------"</span>)</div><div class="line"></div><div class="line">	<span class="comment">// 尾部没有换行标记</span></div><div class="line">	buf = bufio.NewReaderSize(strings.NewReader(<span class="string">"ABCDEFG"</span>), <span class="number">0</span>)</div><div class="line"></div><div class="line">	<span class="keyword">for</span> line, err := []<span class="keyword">byte</span>&#123;<span class="number">0</span>&#125;, error(<span class="literal">nil</span>); <span class="built_in">len</span>(line) &gt; <span class="number">0</span> &amp;&amp; err == <span class="literal">nil</span>; &#123;</div><div class="line">		line, err = buf.ReadSlice(<span class="string">'\n'</span>)</div><div class="line">		fmt.Printf(<span class="string">"%q   %v\n"</span>, line, err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// "ABCDEFG"   EOF</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="keyword">type</span> Writer <span class="keyword">struct</span> &#123; ... &#125;</div><div class="line"></div><div class="line"><span class="comment">// NewWriterSize 将 wr 封装成一个带缓存的 bufio.Writer 对象，</span></div><div class="line"><span class="comment">// 缓存大小由 size 指定（如果小于 4096 则会被设置为 4096）。</span></div><div class="line"><span class="comment">// 如果 wr 的基类型就是有足够缓存的 bufio.Writer 类型，则直接将</span></div><div class="line"><span class="comment">// wr 转换为基类型返回。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewWriterSize</span><span class="params">(wr io.Writer, size <span class="keyword">int</span>)</span> *<span class="title">Writer</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">NewWriter</span> 相当于 <span class="title">NewWriterSize</span><span class="params">(wr, 4096)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">NewWriter</span><span class="params">(wr io.Writer)</span> *<span class="title">Writer</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">bufio</span>.<span class="title">Writer</span> 实现了如下接口：</span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">Writer</span></span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">ReaderFrom</span></span></div><div class="line"><span class="function">// <span class="title">io</span>.<span class="title">ByteWriter</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">WriteString</span> 功能同 <span class="title">Write</span>，只不过写入的是字符串</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">WriteRune</span> 向 <span class="title">b</span> 写入 <span class="title">r</span> 的 <span class="title">UTF</span>-8 编码，返回 <span class="title">r</span> 的编码长度。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">WriteRune</span><span class="params">(r <span class="keyword">rune</span>)</span> <span class="params">(size <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Flush</span> 将缓存中的数据提交到底层的 <span class="title">io</span>.<span class="title">Writer</span> 中</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Flush</span><span class="params">()</span> <span class="title">error</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Available</span> 返回缓存中未使用的空间的长度</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Available</span><span class="params">()</span> <span class="title">int</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Buffered</span> 返回缓存中未提交的数据的长度</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Buffered</span><span class="params">()</span> <span class="title">int</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Reset</span> 将 <span class="title">b</span> 的底层 <span class="title">Writer</span> 重新指定为 <span class="title">w</span>，同时丢弃缓存中的所有数据，复位</span></div><div class="line"><span class="function">// 所有标记和错误信息。相当于创建了一个新的 <span class="title">bufio</span>.<span class="title">Writer</span>。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(b *Writer)</span> <span class="title">Reset</span><span class="params">(w io.Writer)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例：<span class="title">Available</span>、<span class="title">Buffered</span>、<span class="title">WriteString</span>、<span class="title">Flush</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	buf := bufio.NewWriterSize(os.Stdout, <span class="number">0</span>)</div><div class="line">	fmt.Println(buf.Available(), buf.Buffered()) <span class="comment">// 4096 0</span></div><div class="line"></div><div class="line">	buf.WriteString(<span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>)</div><div class="line">	fmt.Println(buf.Available(), buf.Buffered()) <span class="comment">// 4070 26</span></div><div class="line"></div><div class="line">	<span class="comment">// 缓存后统一输出，避免终端频繁刷新，影响速度</span></div><div class="line">	buf.Flush() <span class="comment">// ABCDEFGHIJKLMNOPQRSTUVWXYZ</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// ReadWriter 集成了 bufio.Reader 和 bufio.Writer</span></div><div class="line"><span class="keyword">type</span> ReadWriter <span class="keyword">struct</span> &#123;</div><div class="line">	*Reader</div><div class="line">	*Writer</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// NewReadWriter 将 r 和 w 封装成一个 bufio.ReadWriter 对象</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewReadWriter</span><span class="params">(r *Reader, w *Writer)</span> *<span class="title">ReadWriter</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Scanner</span> 提供了一个方便的接口来读取数据，例如遍历多行文本中的行。<span class="title">Scan</span> 方法会通过</span></div><div class="line"><span class="function">// 一个“匹配函数”读取数据中符合要求的部分，跳过不符合要求的部分。“匹配函数”由调</span></div><div class="line"><span class="function">// 用者指定。本包中提供的匹配函数有“行匹配函数”、“字节匹配函数”、“字符匹配函数”</span></div><div class="line"><span class="function">// 和“单词匹配函数”，用户也可以自定义“匹配函数”。默认的“匹配函数”为“行匹配函</span></div><div class="line"><span class="function">// 数”，用于获取数据中的一行内容（不包括行尾标记）</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// <span class="title">Scanner</span> 使用了缓存，所以匹配部分的长度不能超出缓存的容量。默认缓存容量为 4096 -</span></div><div class="line"><span class="function">// <span class="title">bufio</span>.<span class="title">MaxScanTokenSize</span>，用户可以通过 <span class="title">Buffer</span> 方法指定自定义缓存及其最大容量。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// <span class="title">Scan</span> 在遇到下面的情况时会终止扫描并返回 <span class="title">false</span>（扫描一旦终止，将无法再继续）：</span></div><div class="line"><span class="function">// 1、遇到 <span class="title">io</span>.<span class="title">EOF</span></span></div><div class="line"><span class="function">// 2、遇到读写错误</span></div><div class="line"><span class="function">// 3、“匹配部分”的长度超过了缓存的长度</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 如果需要对错误进行更多的控制，或“匹配部分”超出缓存容量，或需要连续扫描，则应该</span></div><div class="line"><span class="function">// 使用 <span class="title">bufio</span>.<span class="title">Reader</span></span></div><div class="line"><span class="function"><span class="title">type</span> <span class="title">Scanner</span> <span class="title">struct</span></span> &#123; ... &#125;</div><div class="line"></div><div class="line"><span class="comment">// NewScanner 创建一个 Scanner 来扫描 r，默认匹配函数为 ScanLines。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewScanner</span><span class="params">(r io.Reader)</span> *<span class="title">Scanner</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Buffer</span> 用于设置自定义缓存及其可扩展范围，如果 <span class="title">max</span> 小于 <span class="title">len</span><span class="params">(buf)</span>，则 <span class="title">buf</span> 的尺寸将</span></div><div class="line"><span class="function">// 固定不可调。<span class="title">Buffer</span> 必须在第一次 <span class="title">Scan</span> 之前设置，否则会引发 <span class="title">panic</span>。</span></div><div class="line"><span class="function">// 默认情况下，<span class="title">Scanner</span> 会使用一个 4096 - <span class="title">bufio</span>.<span class="title">MaxScanTokenSize</span> 大小的内部缓存。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Buffer</span><span class="params">(buf []<span class="keyword">byte</span>, max <span class="keyword">int</span>)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Split</span> 用于设置“匹配函数”，这个函数必须在调用 <span class="title">Scan</span> 前执行。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Split</span><span class="params">(split SplitFunc)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">SplitFunc</span> 用来定义“匹配函数”，<span class="title">data</span> 是缓存中的数据。<span class="title">atEOF</span> 标记数据是否读完。</span></div><div class="line"><span class="function">// <span class="title">advance</span> 返回 <span class="title">data</span> 中已处理的数据的长度。<span class="title">token</span> 返回找到的“匹配部分”，“匹配</span></div><div class="line"><span class="function">// 部分”可以是缓存的切片，也可以是自己新建的数据（比如 <span class="title">bufio</span>.<span class="title">errorRune</span>）。“匹</span></div><div class="line"><span class="function">// 配部分”将在 <span class="title">Scan</span> 之后通过 <span class="title">Bytes</span> 和 <span class="title">Text</span> 反馈给用户。<span class="title">err</span> 返回错误信息。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 如果在 <span class="title">data</span> 中无法找到一个完整的“匹配部分”则应返回 <span class="params">(0, <span class="literal">nil</span>, <span class="literal">nil</span>)</span>，以便告诉</span></div><div class="line"><span class="function">// <span class="title">Scanner</span> 向缓存中填充更多数据，然后再次扫描（<span class="title">Scan</span> 会自动重新扫描）。如果缓存已</span></div><div class="line"><span class="function">// 经达到最大容量还没有找到，则 <span class="title">Scan</span> 会终止并返回 <span class="title">false</span>。</span></div><div class="line"><span class="function">// 如果 <span class="title">data</span> 为空，则“匹配函数”将不会被调用，意思是在“匹配函数”中不必考虑</span></div><div class="line"><span class="function">// <span class="title">data</span> 为空的情况。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// 如果 <span class="title">err</span> != <span class="title">nil</span>，扫描将终止，如果 <span class="title">err</span> == <span class="title">ErrFinalToken</span>，则 <span class="title">Scan</span> 将返回 <span class="title">true</span>，</span></div><div class="line"><span class="function">// 表示扫描正常结束，如果 <span class="title">err</span> 是其它错误，则 <span class="title">Scan</span> 将返回 <span class="title">false</span>，表示扫描出错。错误</span></div><div class="line"><span class="function">// 信息可以在 <span class="title">Scan</span> 之后通过 <span class="title">Err</span> 方法获取。</span></div><div class="line"><span class="function">//</span></div><div class="line"><span class="function">// <span class="title">SplitFunc</span> 的作用很简单，从 <span class="title">data</span> 中找出你感兴趣的数据，然后返回，同时返回已经处理</span></div><div class="line"><span class="function">// 的数据的长度。</span></div><div class="line"><span class="function"><span class="title">type</span> <span class="title">SplitFunc</span> <span class="title">func</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Scan</span> 开始一次扫描过程，如果匹配成功，可以通过 <span class="title">Bytes</span><span class="params">()</span> 或 <span class="title">Text</span><span class="params">()</span> 方法取出结果，</span></div><div class="line"><span class="function">// 如果遇到错误，则终止扫描，并返回 <span class="title">false</span>。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Scan</span><span class="params">()</span> <span class="title">bool</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Bytes</span> 将最后一次扫描出的“匹配部分”作为一个切片引用返回，下一次的 <span class="title">Scan</span> 操作会覆</span></div><div class="line"><span class="function">// 盖本次引用的内容。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Bytes</span><span class="params">()</span> []<span class="title">byte</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Text</span> 将最后一次扫描出的“匹配部分”作为字符串返回（返回副本）。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Text</span><span class="params">()</span> <span class="title">string</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Err</span> 返回扫描过程中遇到的非 <span class="title">EOF</span> 错误，供用户调用，以便获取错误信息。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(s *Scanner)</span> <span class="title">Err</span><span class="params">()</span> <span class="title">error</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ScanBytes</span> 是一个“匹配函数”用来找出 <span class="title">data</span> 中的单个字节并返回。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">ScanBytes</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ScanRunes</span> 是一个“匹配函数”，用来找出 <span class="title">data</span> 中单个 <span class="title">UTF8</span> 字符的编码。如果 <span class="title">UTF8</span> 编</span></div><div class="line"><span class="function">// 码错误，则 <span class="title">token</span> 会返回 "\<span class="title">xef</span>\<span class="title">xbf</span>\<span class="title">xbd</span>"（即：<span class="title">U</span>+<span class="title">FFFD</span>），但只消耗 <span class="title">data</span> 中的一个字节。</span></div><div class="line"><span class="function">// 这使得调用者无法区分“真正的<span class="title">U</span>+<span class="title">FFFD</span>字符”和“解码错误的返回值”。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">ScanRunes</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ScanLines</span> 是一个“匹配函数”，用来找出 <span class="title">data</span> 中的单行数据并返回（包括空行）。</span></div><div class="line"><span class="function">// 行尾标记可以是 \<span class="title">n</span> 或 \<span class="title">r</span>\<span class="title">n</span>（返回值不包含行尾标记）</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">ScanLines</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">ScanWords</span> 是一个“匹配函数”，用来找出 <span class="title">data</span> 中以空白字符分隔的单词。</span></div><div class="line"><span class="function">// 空白字符由 <span class="title">unicode</span>.<span class="title">IsSpace</span> 定义。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">ScanWords</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例：扫描</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="comment">// 逗号分隔的字符串，最后一项为空</span></div><div class="line">	<span class="keyword">const</span> input = <span class="string">"1,2,3,4,"</span></div><div class="line">	scanner := bufio.NewScanner(strings.NewReader(input))</div><div class="line">	<span class="comment">// 定义匹配函数（查找逗号分隔的字符串）</span></div><div class="line">	onComma := <span class="function"><span class="keyword">func</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span> &#123;</div><div class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(data); i++ &#123;</div><div class="line">			<span class="keyword">if</span> data[i] == <span class="string">','</span> &#123;</div><div class="line">				<span class="keyword">return</span> i + <span class="number">1</span>, data[:i], <span class="literal">nil</span></div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> atEOF &#123;</div><div class="line">			<span class="comment">// 告诉 Scanner 扫描结束。</span></div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>, data, bufio.ErrFinalToken</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// 告诉 Scanner 没找到匹配项，让 Scan 填充缓存后再次扫描。</span></div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>, <span class="literal">nil</span>, <span class="literal">nil</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 指定匹配函数</span></div><div class="line">	scanner.Split(onComma)</div><div class="line">	<span class="comment">// 开始扫描</span></div><div class="line">	<span class="keyword">for</span> scanner.Scan() &#123;</div><div class="line">		fmt.Printf(<span class="string">"%q "</span>, scanner.Text())</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 检查是否因为遇到错误而结束</span></div><div class="line">	<span class="keyword">if</span> err := scanner.Err(); err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Fprintln(os.Stderr, <span class="string">"reading input:"</span>, err)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------</div><div class="line"></div><div class="line"><span class="comment">// 示例：带检查扫描</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">const</span> input = <span class="string">"1234 5678 1234567901234567890 90"</span></div><div class="line">	scanner := bufio.NewScanner(strings.NewReader(input))</div><div class="line">	<span class="comment">// 自定义匹配函数</span></div><div class="line">	split := <span class="function"><span class="keyword">func</span><span class="params">(data []<span class="keyword">byte</span>, atEOF <span class="keyword">bool</span>)</span> <span class="params">(advance <span class="keyword">int</span>, token []<span class="keyword">byte</span>, err error)</span></span> &#123;</div><div class="line">		<span class="comment">// 获取一个单词</span></div><div class="line">		advance, token, err = bufio.ScanWords(data, atEOF)</div><div class="line">		<span class="comment">// 判断其能否转换为整数，如果不能则返回错误</span></div><div class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &amp;&amp; token != <span class="literal">nil</span> &#123;</div><div class="line">			_, err = strconv.ParseInt(<span class="keyword">string</span>(token), <span class="number">10</span>, <span class="number">32</span>)</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 这里包含了 return 0, nil, nil 的情况</span></div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 设置匹配函数</span></div><div class="line">	scanner.Split(split)</div><div class="line">	<span class="comment">// 开始扫描</span></div><div class="line">	<span class="keyword">for</span> scanner.Scan() &#123;</div><div class="line">		fmt.Printf(<span class="string">"%s\n"</span>, scanner.Text())</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> err := scanner.Err(); err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Printf(<span class="string">"Invalid input: %s"</span>, err)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/16/同一台机器，如何配置多个github账户信息_new/" rel="next" title="同一台机器，如何配置多个github账户信息">
+                <i class="fa fa-chevron-left"></i> 同一台机器，如何配置多个github账户信息
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/22/Go strings/" rel="prev" title="Go strings">
+                Go strings <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">134</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">109</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

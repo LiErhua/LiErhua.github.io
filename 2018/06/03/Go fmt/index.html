@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="0DRcHuzff0kYRBJppmjVew3eF2ns_0C9Rr8wUQRVfy0" />
+
+
+
+  <meta name="msvalidate.01" content="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="golang,go," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yeyuqiudeng.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+<meta name="keywords" content="golang,go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go fmt">
+<meta property="og:url" content="http://yoursite.com/2018/06/03/Go fmt/index.html">
+<meta property="og:site_name" content="夜雨秋灯">
+<meta property="og:description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-14T13:18:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go fmt">
+<meta name="twitter:description" content="对 golang 的标准库进行一个系列性的总结，备查更加方便">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/03/Go fmt/"/>
+
+
+
+
+
+  <title>Go fmt | 夜雨秋灯</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b167d593994b682cfefa154c5ee25e34";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夜雨秋灯</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">应感激生命未尽，我们还有热泪可流</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+            小札
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/Go fmt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go fmt</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T00:00:00+08:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对 golang 的标准库进行一个系列性的总结，备查更加方便</p>
+<a id="more"></a>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div></pre></td><td class="code"><pre><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// Print 将参数列表 a 中的各个参数转换为字符串并写入到标准输出中。</span></div><div class="line"><span class="comment">// 非字符串参数之间会添加空格，返回写入的字节数。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Print</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Println</span> 功能类似 <span class="title">Print</span>，只不过最后会添加一个换行符。</span></div><div class="line"><span class="function">// 所有参数之间会添加空格，返回写入的字节数。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Println</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Printf</span> 将参数列表 <span class="title">a</span> 填写到格式字符串 <span class="title">format</span> 的占位符中。</span></div><div class="line"><span class="function">// 填写后的结果写入到标准输出中，返回写入的字节数。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Printf</span><span class="params">(format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 功能同上面三个函数，只不过将转换结果写入到 <span class="title">w</span> 中。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fprint</span><span class="params">(w io.Writer, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fprintln</span><span class="params">(w io.Writer, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fprintf</span><span class="params">(w io.Writer, format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 功能同上面三个函数，只不过将转换结果以字符串形式返回。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sprint</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">string</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sprintln</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">string</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sprintf</span><span class="params">(format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">string</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 功能同 <span class="title">Sprintf</span>，只不过结果字符串被包装成了 <span class="title">error</span> 类型。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Errorf</span><span class="params">(format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="title">error</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Print(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"\n"</span>)</div><div class="line">	fmt.Println(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">"c"</span>, <span class="string">"d"</span>)</div><div class="line">	fmt.Printf(<span class="string">"ab %d %d %d cd\n"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line">	<span class="comment">// ab1 2 3cd</span></div><div class="line">	<span class="comment">// a b 1 2 3 c d</span></div><div class="line">	<span class="comment">// ab 1 2 3 cd</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> err := percent(<span class="number">30</span>, <span class="number">70</span>, <span class="number">90</span>, <span class="number">160</span>); err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(err)</div><div class="line">	&#125;</div><div class="line">	<span class="comment">// 30%</span></div><div class="line">	<span class="comment">// 70%</span></div><div class="line">	<span class="comment">// 90%</span></div><div class="line">	<span class="comment">// 数值 160 超出范围（100）</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">percent</span><span class="params">(i ...<span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</div><div class="line">	<span class="keyword">for</span> _, n := <span class="keyword">range</span> i &#123;</div><div class="line">		<span class="keyword">if</span> n &gt; <span class="number">100</span> &#123;</div><div class="line">			<span class="keyword">return</span> fmt.Errorf(<span class="string">"数值 %d 超出范围（100）"</span>, n)</div><div class="line">		&#125;</div><div class="line">		fmt.Print(n, <span class="string">"%\n"</span>)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// Formatter 由自定义类型实现，用于实现该类型的自定义格式化过程。</span></div><div class="line"><span class="comment">// 当格式化器需要格式化该类型的变量时，会调用其 Format 方法。</span></div><div class="line"><span class="keyword">type</span> Formatter <span class="keyword">interface</span> &#123;</div><div class="line">	<span class="comment">// f 用于获取占位符的旗标、宽度、精度等信息，也用于输出格式化的结果</span></div><div class="line">	<span class="comment">// c 是占位符中的动词</span></div><div class="line">	Format(f State, c <span class="keyword">rune</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 由格式化器（Print 之类的函数）实现，用于给自定义格式化过程提供信息</span></div><div class="line"><span class="keyword">type</span> State <span class="keyword">interface</span> &#123;</div><div class="line">	<span class="comment">// Formatter 通过 Write 方法将格式化结果写入格式化器中，以便输出。</span></div><div class="line">	Write(b []<span class="keyword">byte</span>) (ret <span class="keyword">int</span>, err error)</div><div class="line">	<span class="comment">// Formatter 通过 Width 方法获取占位符中的宽度信息及其是否被设置。</span></div><div class="line">	Width() (wid <span class="keyword">int</span>, ok <span class="keyword">bool</span>)</div><div class="line">	<span class="comment">// Formatter 通过 Precision 方法获取占位符中的精度信息及其是否被设置。</span></div><div class="line">	Precision() (prec <span class="keyword">int</span>, ok <span class="keyword">bool</span>)</div><div class="line">	<span class="comment">// Formatter 通过 Flag 方法获取占位符中的旗标[+- 0#]是否被设置。</span></div><div class="line">	Flag(c <span class="keyword">int</span>) <span class="keyword">bool</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Stringer 由自定义类型实现，用于实现该类型的自定义格式化过程。</span></div><div class="line"><span class="comment">// 当格式化器需要输出该类型的字符串格式时就会调用其 String 方法。</span></div><div class="line"><span class="keyword">type</span> Stringer <span class="keyword">interface</span> &#123;</div><div class="line">	String() <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Stringer 由自定义类型实现，用于实现该类型的自定义格式化过程。</span></div><div class="line"><span class="comment">// 当格式化器需要输出该类型的 Go 语法字符串（%#v）时就会调用其 String 方法。</span></div><div class="line"><span class="keyword">type</span> GoStringer <span class="keyword">interface</span> &#123;</div><div class="line">	GoString() <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------</div><div class="line"></div><div class="line"><span class="comment">// 示例</span></div><div class="line"><span class="keyword">type</span> Ustr <span class="keyword">string</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(us Ustr)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> strings.ToUpper(<span class="keyword">string</span>(us))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(us Ustr)</span> <span class="title">GoString</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">`"`</span> + strings.ToUpper(<span class="keyword">string</span>(us)) + <span class="string">`"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u Ustr)</span> <span class="title">Format</span><span class="params">(f fmt.State, c <span class="keyword">rune</span>)</span></span> &#123;</div><div class="line">	write := <span class="function"><span class="keyword">func</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</div><div class="line">		f.Write([]<span class="keyword">byte</span>(s))</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span> c &#123;</div><div class="line">	<span class="keyword">case</span> <span class="string">'m'</span>, <span class="string">'M'</span>:</div><div class="line">		write(<span class="string">"旗标：["</span>)</div><div class="line">		<span class="keyword">for</span> s := <span class="string">"+- 0#"</span>; <span class="built_in">len</span>(s) &gt; <span class="number">0</span>; s = s[<span class="number">1</span>:] &#123;</div><div class="line">			<span class="keyword">if</span> f.Flag(<span class="keyword">int</span>(s[<span class="number">0</span>])) &#123;</div><div class="line">				write(s[:<span class="number">1</span>])</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		write(<span class="string">"]"</span>)</div><div class="line">		<span class="keyword">if</span> v, ok := f.Width(); ok &#123;</div><div class="line">			write(<span class="string">" | 宽度："</span> + strconv.FormatInt(<span class="keyword">int64</span>(v), <span class="number">10</span>))</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> v, ok := f.Precision(); ok &#123;</div><div class="line">			write(<span class="string">" | 精度："</span> + strconv.FormatInt(<span class="keyword">int64</span>(v), <span class="number">10</span>))</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">case</span> <span class="string">'s'</span>, <span class="string">'v'</span>: <span class="comment">// 如果使用 Format 函数，则必须自己处理所有格式，包括 %#v</span></div><div class="line">		<span class="keyword">if</span> c == <span class="string">'v'</span> &amp;&amp; f.Flag(<span class="string">'#'</span>) &#123;</div><div class="line">			write(u.GoString())</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			write(u.String())</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">default</span>: <span class="comment">// 如果使用 Format 函数，则必须自己处理默认输出</span></div><div class="line">		write(<span class="string">"无效格式："</span> + <span class="keyword">string</span>(c))</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	u := Ustr(<span class="string">"Hello World!"</span>)</div><div class="line">	<span class="comment">// "-" 标记和 "0" 标记不能同时存在</span></div><div class="line">	fmt.Printf(<span class="string">"%-+ 0#8.5m\n"</span>, u) <span class="comment">// 旗标：[+- #] | 宽度：8 | 精度：5</span></div><div class="line">	fmt.Printf(<span class="string">"%+ 0#8.5M\n"</span>, u)  <span class="comment">// 旗标：[+ 0#] | 宽度：8 | 精度：5</span></div><div class="line">	fmt.Println(u)                <span class="comment">// HELLO WORLD!</span></div><div class="line">	fmt.Printf(<span class="string">"%s\n"</span>, u)         <span class="comment">// HELLO WORLD!</span></div><div class="line">	fmt.Printf(<span class="string">"%#v\n"</span>, u)        <span class="comment">// "HELLO WORLD!"</span></div><div class="line">	fmt.Printf(<span class="string">"%d\n"</span>, u)         <span class="comment">// 无效格式：d</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// Scan 从标准输入中读取数据，并将数据用空白分割并解析后存入 a 提供</span></div><div class="line"><span class="comment">// 的变量中（换行符会被当作空白处理），变量必须以指针传入。</span></div><div class="line"><span class="comment">// 当读到 EOF 或所有变量都填写完毕则停止扫描。</span></div><div class="line"><span class="comment">// 返回成功解析的参数数量。</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Scan</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Scanln</span> 和 <span class="title">Scan</span> 类似，只不过遇到换行符就停止扫描。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Scanln</span><span class="params">(a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// <span class="title">Scanf</span> 从标准输入中读取数据，并根据格式字符串 <span class="title">format</span> 对数据进行解析，</span></div><div class="line"><span class="function">// 将解析结果存入参数 <span class="title">a</span> 所提供的变量中，变量必须以指针传入。</span></div><div class="line"><span class="function">// 输入端的换行符必须和 <span class="title">format</span> 中的换行符相对应（如果格式字符串中有换行</span></div><div class="line"><span class="function">// 符，则输入端必须输入相应的换行符）。</span></div><div class="line"><span class="function">// 占位符 %<span class="title">c</span> 总是匹配下一个字符，包括空白，比如空格符、制表符、换行符。</span></div><div class="line"><span class="function">// 返回成功解析的参数数量。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Scanf</span><span class="params">(format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 功能同上面三个函数，只不过从 <span class="title">r</span> 中读取数据。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fscan</span><span class="params">(r io.Reader, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fscanln</span><span class="params">(r io.Reader, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Fscanf</span><span class="params">(r io.Reader, format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 功能同上面三个函数，只不过从 <span class="title">str</span> 中读取数据。</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sscan</span><span class="params">(str <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sscanln</span><span class="params">(str <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">Sscanf</span><span class="params">(str <span class="keyword">string</span>, format <span class="keyword">string</span>, a ...<span class="keyword">interface</span>&#123;&#125;)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 对于 <span class="title">Scan</span> 而言，回车视为空白</span></div><div class="line"><span class="function"><span class="title">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	a, b, c := <span class="string">""</span>, <span class="number">0</span>, <span class="literal">false</span></div><div class="line">	fmt.Scan(&amp;a, &amp;b, &amp;c)</div><div class="line">	fmt.Println(a, b, c)</div><div class="line">	<span class="comment">// 在终端执行后，输入 abc 1 回车 true 回车</span></div><div class="line">	<span class="comment">// 结果 abc 1 true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 对于 Scanln 而言，回车结束扫描</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	a, b, c := <span class="string">""</span>, <span class="number">0</span>, <span class="literal">false</span></div><div class="line">	fmt.Scanln(&amp;a, &amp;b, &amp;c)</div><div class="line">	fmt.Println(a, b, c)</div><div class="line">	<span class="comment">// 在终端执行后，输入 abc 1 true 回车</span></div><div class="line">	<span class="comment">// 结果 abc 1 true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 格式字符串可以指定宽度</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	a, b, c := <span class="string">""</span>, <span class="number">0</span>, <span class="literal">false</span></div><div class="line">	fmt.Scanf(<span class="string">"%4s%d%t"</span>, &amp;a, &amp;b, &amp;c)</div><div class="line">	fmt.Println(a, b, c)</div><div class="line">	<span class="comment">// 在终端执行后，输入 1234567true 回车</span></div><div class="line">	<span class="comment">// 结果 1234 567 true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div><div class="line"></div><div class="line"><span class="comment">// Scanner 由自定义类型实现，用于实现该类型的自定义扫描过程。</span></div><div class="line"><span class="comment">// 当扫描器需要解析该类型的数据时，会调用其 Scan 方法。</span></div><div class="line"><span class="keyword">type</span> Scanner <span class="keyword">interface</span> &#123;</div><div class="line">	<span class="comment">// state 用于获取占位符中的宽度信息，也用于从扫描器中读取数据进行解析。</span></div><div class="line">	<span class="comment">// verb 是占位符中的动词</span></div><div class="line">	Scan(state ScanState, verb <span class="keyword">rune</span>) error</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 由扫描器（Scan 之类的函数）实现，用于给自定义扫描过程提供数据和信息。</span></div><div class="line"><span class="keyword">type</span> ScanState <span class="keyword">interface</span> &#123;</div><div class="line">	<span class="comment">// ReadRune 从扫描器中读取一个字符，如果用在 Scanln 类的扫描器中，</span></div><div class="line">	<span class="comment">// 则该方法会在读到第一个换行符之后或读到指定宽度之后返回 EOF。</span></div><div class="line">	<span class="comment">// 返回“读取的字符”和“字符编码所占用的字节数”</span></div><div class="line">	ReadRune() (r <span class="keyword">rune</span>, size <span class="keyword">int</span>, err error)</div><div class="line">	<span class="comment">// UnreadRune 撤消最后一次的 ReadRune 操作，</span></div><div class="line">	<span class="comment">// 使下次的 ReadRune 操作得到与前一次 ReadRune 相同的结果。</span></div><div class="line">	UnreadRune() error</div><div class="line">	<span class="comment">// SkipSpace 为 Scan 方法提供跳过开头空白的能力。</span></div><div class="line">	<span class="comment">// 根据扫描器的不同（Scan 或 Scanln）决定是否跳过换行符。</span></div><div class="line">	SkipSpace()</div><div class="line">	<span class="comment">// Token 用于从扫描器中读取符合要求的字符串，</span></div><div class="line">	<span class="comment">// Token 从扫描器中读取连续的符合 f(c) 的字符 c，准备解析。</span></div><div class="line">	<span class="comment">// 如果 f 为 nil，则使用 !unicode.IsSpace(c) 代替 f(c)。</span></div><div class="line">	<span class="comment">// skipSpace：是否跳过开头的连续空白。返回读取到的数据。</span></div><div class="line">	<span class="comment">// 注意：token 指向共享的数据，下次的 Token 操作可能会覆盖本次的结果。</span></div><div class="line">	Token(skipSpace <span class="keyword">bool</span>, f <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">rune</span>)</span> <span class="title">bool</span>) <span class="params">(token []<span class="keyword">byte</span>, err error)</span></span></div><div class="line"><span class="function">	// <span class="title">Width</span> 返回占位符中的宽度值以及宽度值是否被设置</span></div><div class="line"><span class="function">	<span class="title">Width</span><span class="params">()</span> <span class="params">(wid <span class="keyword">int</span>, ok <span class="keyword">bool</span>)</span></span></div><div class="line"><span class="function">	// 因为上面实现了 <span class="title">ReadRune</span> 方法，所以 <span class="title">Read</span> 方法永远不应该被调用。</span></div><div class="line"><span class="function">	// 一个好的 <span class="title">ScanState</span> 应该让 <span class="title">Read</span> 直接返回相应的错误信息。</span></div><div class="line"><span class="function">	<span class="title">Read</span><span class="params">(buf []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span></div><div class="line"><span class="function">&#125;</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">------------------------------</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">// 示例</span></div><div class="line"><span class="function"><span class="title">type</span> <span class="title">Ustr</span> <span class="title">string</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">func</span> <span class="params">(u *Ustr)</span> <span class="title">Scan</span><span class="params">(state fmt.ScanState, verb <span class="keyword">rune</span>)</span> <span class="params">(err error)</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> s []<span class="keyword">byte</span></div><div class="line">	<span class="keyword">switch</span> verb &#123;</div><div class="line">	<span class="keyword">case</span> <span class="string">'S'</span>:</div><div class="line">		s, err = state.Token(<span class="literal">true</span>, <span class="function"><span class="keyword">func</span><span class="params">(c <span class="keyword">rune</span>)</span> <span class="title">bool</span></span> &#123; <span class="keyword">return</span> <span class="string">'A'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'Z'</span> &#125;)</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">	<span class="keyword">case</span> <span class="string">'s'</span>, <span class="string">'v'</span>:</div><div class="line">		s, err = state.Token(<span class="literal">true</span>, <span class="function"><span class="keyword">func</span><span class="params">(c <span class="keyword">rune</span>)</span> <span class="title">bool</span></span> &#123; <span class="keyword">return</span> <span class="string">'a'</span> &lt;= c &amp;&amp; c &lt;= <span class="string">'z'</span> &#125;)</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		<span class="keyword">return</span> fmt.Errorf(<span class="string">"无效格式：%c"</span>, verb)</div><div class="line">	&#125;</div><div class="line">	*u = Ustr(s)</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> a, b, c, d, e Ustr</div><div class="line">	n, err := fmt.Scanf(<span class="string">"%3S%S%3s%2v%x"</span>, &amp;a, &amp;b, &amp;c, &amp;d, &amp;e)</div><div class="line">	fmt.Println(a, b, c, d, e)</div><div class="line">	fmt.Println(n, err)</div><div class="line">	<span class="comment">// 在终端执行后，输入 ABCDEFGabcdefg 回车</span></div><div class="line">	<span class="comment">// 结果：</span></div><div class="line">	<span class="comment">// ABC DEFG abc de</span></div><div class="line">	<span class="comment">// 4 无效格式：x</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">------------------------------------------------------------</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay.jpg" alt="LiErhua 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay.jpg" alt="LiErhua 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/golang/" rel="tag"># golang</a>
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/17/如何搭建合适的指标监控系统_new/" rel="next" title="监控系统的组成与搭建">
+                <i class="fa fa-chevron-left"></i> 监控系统的组成与搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/05/Go bytes/" rel="prev" title="Go bytes">
+                Go bytes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">LiErhua</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">134</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">109</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiErhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+<span class="post-meta-divider">|</span>
+
+<!-- 引入不蒜子脚本和标签 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    
+<span id="busuanzi_container_site_pv" style='display:none'>本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script >
+    $(document).ready(function() {
+        var int = setInterval(fixCount, 30);  // 50ms周期检测函数
+        var countOffset = 389167;  // 初始化首次数据
+       function fixCount() {                   
+         if ($("#busuanzi_container_site_pv").css("display") != "none")
+           {
+              $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); // 加上初始数据 
+              clearInterval(int); // 停止检测
+         }  
+     }           
+    });
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
