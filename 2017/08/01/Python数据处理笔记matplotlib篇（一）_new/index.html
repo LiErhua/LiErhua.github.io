@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjtkq2h8t0j30it06at90.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj0luu6ruj309v06oa9y.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LiErhua/cloudpic/master/img2/006tNc79ly1fjj2oluazuj315o0p0n0g.jpg">
-<meta property="og:updated_time" content="2019-05-19T15:50:51.000Z">
+<meta property="og:updated_time" content="2019-07-14T13:36:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python数据处理笔记matplotlib篇（一）">
 <meta name="twitter:description" content="关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念">
@@ -373,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -413,7 +413,7 @@
         <p><strong>关键词：坐标轴范围，图像保存，坐标轴密度，axes自适应figure，matplotlib面向对象，部分理论概念</strong></p>
 <a id="more"></a>
 <p><strong>简单的小例子</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">path = <span class="string">""</span></div><div class="line">plt.plot([<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">4</span>])</div><div class="line">	<span class="comment">#绘图，如果只有一个list默认其为Y轴，X轴数据为其索引值</span></div><div class="line">plt.ylabel(<span class="string">"grade"</span>)</div><div class="line">plt.axis([<span class="number">-2</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">12</span>])</div><div class="line">	<span class="comment">#axis函数接收一个list，设定横纵坐标尺度，list各个参数分别代表[X初始刻度，X终止刻度，Y起始刻度，Y终止		刻]</span></div><div class="line">plt.savefig(path,dpi = <span class="number">600</span>)</div><div class="line">	<span class="comment">#savefig函数用来保存图片至path地址，dpi值表示每英寸具有的像素点数</span></div><div class="line">plt.show()</div><div class="line">------</div><div class="line">这个例子的关键词：坐标轴尺度、图像保存</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line">path = <span class="string">""</span></div><div class="line">plt.plot([<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">4</span>])</div><div class="line">	<span class="comment">#绘图，如果只有一个list默认其为Y轴，X轴数据为其索引值</span></div><div class="line">plt.ylabel(<span class="string">"grade"</span>)</div><div class="line">plt.axis([<span class="number">-2</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">12</span>])</div><div class="line">	<span class="comment">#axis函数接收一个list，设定横纵坐标尺度，list各个参数分别代表[X初始刻度，X终止刻度，Y起始刻度，Y终止		刻]</span></div><div class="line">plt.savefig(path,dpi = <span class="number">600</span>)</div><div class="line">	<span class="comment">#savefig函数用来保存图片至path地址，dpi值表示每英寸具有的像素点数</span></div><div class="line">plt.show()</div><div class="line">------</div><div class="line">这个例子的关键词：坐标轴尺度、图像保存</div></pre></td></tr></table></figure>
 <hr>
 <p><strong>plt.plot()简介：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">plt.plot(x, y, format_string, **kwargs)</div><div class="line">    <span class="comment">#这个函数是绘图的关键函数</span></div><div class="line">    <span class="comment">#x ： X轴数据，列表或数组，可选</span></div><div class="line">    <span class="comment">#y ： Y轴数据，列表或数组</span></div><div class="line">    <span class="comment">#format_string ： 控制曲线的格式字符串，可选</span></div><div class="line">    <span class="comment">#**kwargs ：第二组或更多(x,y,format_string)</span></div><div class="line">其中要说明的是format_string，包含的主要类型有</div><div class="line">颜色字符：<span class="string">'b'</span>,<span class="string">'k'</span>等</div><div class="line">风格字符：<span class="string">'-'</span>,<span class="string">'--'</span>等</div><div class="line">标记字符：每个数据点的标志方式,<span class="string">'.'</span>,<span class="string">'*'</span>,<span class="string">'o'</span>等</div><div class="line">还要很多其他的参数值，到时候查文档</div></pre></td></tr></table></figure>
@@ -645,7 +645,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
