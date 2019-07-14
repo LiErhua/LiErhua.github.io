@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="夜雨秋灯">
 <meta property="og:description" content="关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-19T15:53:53.000Z">
+<meta property="og:updated_time" content="2019-07-14T13:53:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqlalchemy中的types.TypeDecortor类">
 <meta name="twitter:description" content="关键词：数据库文件存储的前处理与后处理 我们在把数据通过sqlalchenmy写入数据库的时候，有时候我们需要一些自己的格式，比如dict或者list，我们想在传入数据库之前把他们转化成数据库可以存储的json字符串格式，从数据库取出来的时候，我们又希望可以把json格式转化成其对应的python格式！sqlalchemy给我们提供了一个途径。">
@@ -367,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -415,7 +415,7 @@
 <li>存储到数据库中的是<code>json</code>字符串（数据库中格式，用<code>impl</code>的格式来存储</li>
 <li>然后从数据库中取出来之后的格式是原始的<code>python</code>格式（比如<code>dict</code>或者<code>list</code>）</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sqlalchemy.types <span class="keyword">as</span> types</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyType</span><span class="params">(types.TypeDecorator)</span>:</span></div><div class="line">    <span class="comment">#impl变量规定了存储到数据库中的存储形式</span></div><div class="line">    impl = types.TEXT</div><div class="line">    </div><div class="line">    <span class="comment">#复写process_bind_param方法，此方法用于传入数据库的前处理</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_bind_param</span><span class="params">(self, value, dialect)</span>:</span></div><div class="line">        <span class="keyword">return</span> json.dumps(value)</div><div class="line">    </div><div class="line">    <span class="comment">#复写process_result_value方法,对从数据库中取出的数据进行后处理</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_result_value</span><span class="params">(self, value, dialect)</span>:</span></div><div class="line">        <span class="keyword">return</span> json.loads(value)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sqlalchemy.types <span class="keyword">as</span> types</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyType</span><span class="params">(types.TypeDecorator)</span>:</span></div><div class="line">    <span class="comment">#impl变量规定了存储到数据库中的存储形式</span></div><div class="line">    impl = types.TEXT</div><div class="line"></div><div class="line">    <span class="comment">#复写process_bind_param方法，此方法用于传入数据库的前处理</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_bind_param</span><span class="params">(self, value, dialect)</span>:</span></div><div class="line">        <span class="keyword">return</span> json.dumps(value)</div><div class="line"></div><div class="line">    <span class="comment">#复写process_result_value方法,对从数据库中取出的数据进行后处理</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_result_value</span><span class="params">(self, value, dialect)</span>:</span></div><div class="line">        <span class="keyword">return</span> json.loads(value)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -477,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/18/Vim-&-tmux-&-zsh-——打造IDE之vim_new/" rel="next" title="Vim & tmux & zsh ——打造IDE之vim">
-                <i class="fa fa-chevron-left"></i> Vim & tmux & zsh ——打造IDE之vim
+              <a href="/2018/01/29/归档/sqlalchemy数据库文件存储的前处理与后处理/" rel="next" title="sqlalchemy中的types.TypeDecortor类">
+                <i class="fa fa-chevron-left"></i> sqlalchemy中的types.TypeDecortor类
               </a>
             
           </div>
@@ -487,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/29/归档/sqlalchemy数据库文件存储的前处理与后处理/" rel="prev" title="sqlalchemy中的types.TypeDecortor类">
-                sqlalchemy中的types.TypeDecortor类 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/05/Mac常用开发必备_new/" rel="prev" title="Mac 下必备的开发神器一览">
+                Mac 下必备的开发神器一览 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -593,7 +593,7 @@ var jiathis_config={
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

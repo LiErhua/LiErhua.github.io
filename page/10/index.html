@@ -759,8 +759,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -997,6 +997,130 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/15/归档/日拱一卒之：Mac下的tree工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiErhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜雨秋灯">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/15/归档/日拱一卒之：Mac下的tree工具/" itemprop="url">日拱一卒之：Mac下的tree工具</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-15T00:00:00+08:00">
+                2017-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/15/归档/日拱一卒之：Mac下的tree工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/15/归档/日拱一卒之：Mac下的tree工具_new/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1121,7 +1245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/15/归档/日拱一卒之：Mac下的tree工具/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/12/归档/pyhon中导入的几点问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiErhua">
@@ -1140,7 +1264,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/15/归档/日拱一卒之：Mac下的tree工具/" itemprop="url">日拱一卒之：Mac下的tree工具</a></h1>
+                <a class="post-title-link" href="/2017/01/12/归档/pyhon中导入的几点问题/" itemprop="url">pyhon中导入的几点问题</a></h1>
         
 
         <div class="post-meta">
@@ -1152,8 +1276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-15T00:00:00+08:00">
-                2017-01-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-12T00:00:00+08:00">
+                2017-01-12
               </time>
             
 
@@ -1191,14 +1315,23 @@
 
       
         
-          <p>Mac下我们有时需要用到Linux下的tree命令去显示文件树，但是Mac又没有这个命令，于是我们需要安装一个tree包</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/15/归档/日拱一卒之：Mac下的tree工具/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>Python的导入方式如下，分别解释</p>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> xxx   <span class="comment">#当前程序所在的文件夹里的__init__.py中写好的或者导好的xxx</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#tasklet.py</span></div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> .A <span class="keyword">import</span> xxx  <span class="comment">#其中A表示同目录下名字为A的Python文件，xxx是A文件中的模块</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#__init__.py</span></div><div class="line"><span class="keyword">from</span> .app <span class="keyword">import</span> AppEnv, init_dockenv</div><div class="line"></div><div class="line"><span class="comment">#app.py</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_dockenv</span><span class="params">(import_name=<span class="string">''</span>, config_file=<span class="string">"config.yaml"</span>)</span>:</span></div><div class="line">    env = DockEnv(import_name, config_file=config_file)</div><div class="line">    <span class="keyword">return</span> env</div></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ..A <span class="keyword">import</span> xxx    <span class="comment">#导入的文件不在当前文件夹，使用 .. 或者 ..A 来实现导入</span></div></pre></td></tr></table></figure></li>
+</ul>
+
+          
         
       
     </div>
@@ -1489,130 +1622,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/12/归档/yaml简介与Python上的应用_new/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LiErhua">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夜雨秋灯">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/12/归档/yaml简介与Python上的应用_new/" itemprop="url">yaml简介与Python上的应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-12T00:00:00+08:00">
-                2017-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>关键字: yaml, python<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/12/归档/yaml简介与Python上的应用_new/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1673,7 +1682,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
